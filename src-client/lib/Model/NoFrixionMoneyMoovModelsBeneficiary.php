@@ -357,6 +357,7 @@ class NoFrixionMoneyMoovModelsBeneficiary implements ModelInterface, ArrayAccess
     public const CURRENCY_NONE = 'NONE';
     public const CURRENCY_GBP = 'GBP';
     public const CURRENCY_EUR = 'EUR';
+    public const CURRENCY_USD = 'USD';
     public const CURRENCY_BTC = 'BTC';
     public const AUTHENTICATION_METHODS_NONE = 'None';
     public const AUTHENTICATION_METHODS_WEB_AUTHN = 'WebAuthn';
@@ -373,6 +374,7 @@ class NoFrixionMoneyMoovModelsBeneficiary implements ModelInterface, ArrayAccess
             self::CURRENCY_NONE,
             self::CURRENCY_GBP,
             self::CURRENCY_EUR,
+            self::CURRENCY_USD,
             self::CURRENCY_BTC,
         ];
     }

@@ -107,6 +107,15 @@ class NoFrixionMoneyMoovModelsPayrunUpdateSourceAccountsTest extends TestCase
     }
 
     /**
+     * Test attribute "usd"
+     */
+    public function testPropertyUsd()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "btc"
      */
     public function testPropertyBtc()

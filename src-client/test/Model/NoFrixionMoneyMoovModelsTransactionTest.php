@@ -249,4 +249,22 @@ class NoFrixionMoneyMoovModelsTransactionTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "account_sequence_number"
+     */
+    public function testPropertyAccountSequenceNumber()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "payment_request_id"
+     */
+    public function testPropertyPaymentRequestId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

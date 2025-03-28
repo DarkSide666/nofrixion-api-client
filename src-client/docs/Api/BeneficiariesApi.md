@@ -315,7 +315,7 @@ try {
 ## `getBeneficiaries()`
 
 ```php
-getBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse
+getBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort)
 ```
 
 Gets a list of all beneficiaries.
@@ -348,8 +348,7 @@ $include_disabled = false; // bool | If set to true will include disabled benefi
 $sort = 'sort_example'; // string | Optional expression to sort the order of the beneficiaries.
 
 try {
-    $result = $apiInstance->getBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort);
-    print_r($result);
+    $apiInstance->getBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort);
 } catch (Exception $e) {
     echo 'Exception when calling BeneficiariesApi->getBeneficiaries: ', $e->getMessage(), PHP_EOL;
 }
@@ -369,7 +368,7 @@ try {
 
 ### Return type
 
-[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse**](../Model/NoFrixionMoneyMoovModelsBeneficiaryPageResponse.md)
+void (empty response body)
 
 ### Authorization
 
@@ -378,7 +377,7 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: `text/plain`, `application/json`, `text/json`
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)

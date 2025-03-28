@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionMoneyMoovModelsBeneficiaryPageResponse
+ * NoFrixionMoneyMoovModelsRolesUserRoleWithScope
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Nofrixion\Client\ObjectSerializer;
 
 /**
- * NoFrixionMoneyMoovModelsBeneficiaryPageResponse Class Doc Comment
+ * NoFrixionMoneyMoovModelsRolesUserRoleWithScope Class Doc Comment
  *
  * @category Class
  * @package  Nofrixion\Client
@@ -40,7 +40,7 @@ use \Nofrixion\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class NoFrixionMoneyMoovModelsBeneficiaryPageResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class NoFrixionMoneyMoovModelsRolesUserRoleWithScope implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class NoFrixionMoneyMoovModelsBeneficiaryPageResponse implements ModelInterface,
       *
       * @var string
       */
-    protected static $openAPIModelName = 'NoFrixion.MoneyMoov.Models.BeneficiaryPageResponse';
+    protected static $openAPIModelName = 'NoFrixion.MoneyMoov.Models.Roles.UserRoleWithScope';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,11 +57,12 @@ class NoFrixionMoneyMoovModelsBeneficiaryPageResponse implements ModelInterface,
       * @var string[]
       */
     protected static $openAPITypes = [
-        'content' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiary[]',
-        'page_number' => 'int',
-        'page_size' => 'int',
-        'total_pages' => 'int',
-        'total_size' => 'int'
+        'user_id' => 'string',
+        'role_id' => 'string',
+        'merchant_id' => 'string',
+        'role_name' => 'string',
+        'scope' => 'string',
+        'assigned_at' => '\DateTime'
     ];
 
     /**
@@ -72,11 +73,12 @@ class NoFrixionMoneyMoovModelsBeneficiaryPageResponse implements ModelInterface,
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'content' => null,
-        'page_number' => 'int32',
-        'page_size' => 'int32',
-        'total_pages' => 'int32',
-        'total_size' => 'int64'
+        'user_id' => 'uuid',
+        'role_id' => 'uuid',
+        'merchant_id' => 'uuid',
+        'role_name' => null,
+        'scope' => null,
+        'assigned_at' => 'date-time'
     ];
 
     /**
@@ -85,11 +87,12 @@ class NoFrixionMoneyMoovModelsBeneficiaryPageResponse implements ModelInterface,
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'content' => true,
-        'page_number' => false,
-        'page_size' => false,
-        'total_pages' => false,
-        'total_size' => false
+        'user_id' => false,
+        'role_id' => false,
+        'merchant_id' => false,
+        'role_name' => true,
+        'scope' => true,
+        'assigned_at' => false
     ];
 
     /**
@@ -178,11 +181,12 @@ class NoFrixionMoneyMoovModelsBeneficiaryPageResponse implements ModelInterface,
      * @var string[]
      */
     protected static $attributeMap = [
-        'content' => 'content',
-        'page_number' => 'pageNumber',
-        'page_size' => 'pageSize',
-        'total_pages' => 'totalPages',
-        'total_size' => 'totalSize'
+        'user_id' => 'userID',
+        'role_id' => 'roleID',
+        'merchant_id' => 'merchantID',
+        'role_name' => 'roleName',
+        'scope' => 'scope',
+        'assigned_at' => 'assignedAt'
     ];
 
     /**
@@ -191,11 +195,12 @@ class NoFrixionMoneyMoovModelsBeneficiaryPageResponse implements ModelInterface,
      * @var string[]
      */
     protected static $setters = [
-        'content' => 'setContent',
-        'page_number' => 'setPageNumber',
-        'page_size' => 'setPageSize',
-        'total_pages' => 'setTotalPages',
-        'total_size' => 'setTotalSize'
+        'user_id' => 'setUserId',
+        'role_id' => 'setRoleId',
+        'merchant_id' => 'setMerchantId',
+        'role_name' => 'setRoleName',
+        'scope' => 'setScope',
+        'assigned_at' => 'setAssignedAt'
     ];
 
     /**
@@ -204,11 +209,12 @@ class NoFrixionMoneyMoovModelsBeneficiaryPageResponse implements ModelInterface,
      * @var string[]
      */
     protected static $getters = [
-        'content' => 'getContent',
-        'page_number' => 'getPageNumber',
-        'page_size' => 'getPageSize',
-        'total_pages' => 'getTotalPages',
-        'total_size' => 'getTotalSize'
+        'user_id' => 'getUserId',
+        'role_id' => 'getRoleId',
+        'merchant_id' => 'getMerchantId',
+        'role_name' => 'getRoleName',
+        'scope' => 'getScope',
+        'assigned_at' => 'getAssignedAt'
     ];
 
     /**
@@ -268,11 +274,12 @@ class NoFrixionMoneyMoovModelsBeneficiaryPageResponse implements ModelInterface,
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('content', $data ?? [], null);
-        $this->setIfExists('page_number', $data ?? [], null);
-        $this->setIfExists('page_size', $data ?? [], null);
-        $this->setIfExists('total_pages', $data ?? [], null);
-        $this->setIfExists('total_size', $data ?? [], null);
+        $this->setIfExists('user_id', $data ?? [], null);
+        $this->setIfExists('role_id', $data ?? [], null);
+        $this->setIfExists('merchant_id', $data ?? [], null);
+        $this->setIfExists('role_name', $data ?? [], null);
+        $this->setIfExists('scope', $data ?? [], null);
+        $this->setIfExists('assigned_at', $data ?? [], null);
     }
 
     /**
@@ -302,6 +309,15 @@ class NoFrixionMoneyMoovModelsBeneficiaryPageResponse implements ModelInterface,
     {
         $invalidProperties = [];
 
+        if ($this->container['role_name'] === null) {
+            $invalidProperties[] = "'role_name' can't be null";
+        }
+        if ($this->container['scope'] === null) {
+            $invalidProperties[] = "'scope' can't be null";
+        }
+        if ($this->container['assigned_at'] === null) {
+            $invalidProperties[] = "'assigned_at' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -318,143 +334,177 @@ class NoFrixionMoneyMoovModelsBeneficiaryPageResponse implements ModelInterface,
 
 
     /**
-     * Gets content
+     * Gets user_id
      *
-     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiary[]|null
+     * @return string|null
      */
-    public function getContent()
+    public function getUserId()
     {
-        return $this->container['content'];
+        return $this->container['user_id'];
     }
 
     /**
-     * Sets content
+     * Sets user_id
      *
-     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiary[]|null $content content
+     * @param string|null $user_id The ID of the user.
      *
      * @return self
      */
-    public function setContent($content)
+    public function setUserId($user_id)
     {
-        if (is_null($content)) {
-            array_push($this->openAPINullablesSetToNull, 'content');
+        if (is_null($user_id)) {
+            throw new \InvalidArgumentException('non-nullable user_id cannot be null');
+        }
+        $this->container['user_id'] = $user_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets role_id
+     *
+     * @return string|null
+     */
+    public function getRoleId()
+    {
+        return $this->container['role_id'];
+    }
+
+    /**
+     * Sets role_id
+     *
+     * @param string|null $role_id The ID of the role the user has.
+     *
+     * @return self
+     */
+    public function setRoleId($role_id)
+    {
+        if (is_null($role_id)) {
+            throw new \InvalidArgumentException('non-nullable role_id cannot be null');
+        }
+        $this->container['role_id'] = $role_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets merchant_id
+     *
+     * @return string|null
+     */
+    public function getMerchantId()
+    {
+        return $this->container['merchant_id'];
+    }
+
+    /**
+     * Sets merchant_id
+     *
+     * @param string|null $merchant_id The ID of the merchant the role is in.
+     *
+     * @return self
+     */
+    public function setMerchantId($merchant_id)
+    {
+        if (is_null($merchant_id)) {
+            throw new \InvalidArgumentException('non-nullable merchant_id cannot be null');
+        }
+        $this->container['merchant_id'] = $merchant_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets role_name
+     *
+     * @return string
+     */
+    public function getRoleName()
+    {
+        return $this->container['role_name'];
+    }
+
+    /**
+     * Sets role_name
+     *
+     * @param string $role_name The name of the role the user has.
+     *
+     * @return self
+     */
+    public function setRoleName($role_name)
+    {
+        if (is_null($role_name)) {
+            array_push($this->openAPINullablesSetToNull, 'role_name');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('content', $nullablesSetToNull);
+            $index = array_search('role_name', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['content'] = $content;
+        $this->container['role_name'] = $role_name;
 
         return $this;
     }
 
     /**
-     * Gets page_number
+     * Gets scope
      *
-     * @return int|null
+     * @return string
      */
-    public function getPageNumber()
+    public function getScope()
     {
-        return $this->container['page_number'];
+        return $this->container['scope'];
     }
 
     /**
-     * Sets page_number
+     * Sets scope
      *
-     * @param int|null $page_number Current page number. Its 1 based. i.e firstpage is 1, secondpage is 2
+     * @param string $scope The number of accounts the user has access to in the merchant for the role.
      *
      * @return self
      */
-    public function setPageNumber($page_number)
+    public function setScope($scope)
     {
-        if (is_null($page_number)) {
-            throw new \InvalidArgumentException('non-nullable page_number cannot be null');
+        if (is_null($scope)) {
+            array_push($this->openAPINullablesSetToNull, 'scope');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('scope', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['page_number'] = $page_number;
+        $this->container['scope'] = $scope;
 
         return $this;
     }
 
     /**
-     * Gets page_size
+     * Gets assigned_at
      *
-     * @return int|null
+     * @return \DateTime
      */
-    public function getPageSize()
+    public function getAssignedAt()
     {
-        return $this->container['page_size'];
+        return $this->container['assigned_at'];
     }
 
     /**
-     * Sets page_size
+     * Sets assigned_at
      *
-     * @param int|null $page_size Page size
+     * @param \DateTime $assigned_at The date the role was assigned to the user on the merchant.
      *
      * @return self
      */
-    public function setPageSize($page_size)
+    public function setAssignedAt($assigned_at)
     {
-        if (is_null($page_size)) {
-            throw new \InvalidArgumentException('non-nullable page_size cannot be null');
+        if (is_null($assigned_at)) {
+            throw new \InvalidArgumentException('non-nullable assigned_at cannot be null');
         }
-        $this->container['page_size'] = $page_size;
-
-        return $this;
-    }
-
-    /**
-     * Gets total_pages
-     *
-     * @return int|null
-     */
-    public function getTotalPages()
-    {
-        return $this->container['total_pages'];
-    }
-
-    /**
-     * Sets total_pages
-     *
-     * @param int|null $total_pages Total pages
-     *
-     * @return self
-     */
-    public function setTotalPages($total_pages)
-    {
-        if (is_null($total_pages)) {
-            throw new \InvalidArgumentException('non-nullable total_pages cannot be null');
-        }
-        $this->container['total_pages'] = $total_pages;
-
-        return $this;
-    }
-
-    /**
-     * Gets total_size
-     *
-     * @return int|null
-     */
-    public function getTotalSize()
-    {
-        return $this->container['total_size'];
-    }
-
-    /**
-     * Sets total_size
-     *
-     * @param int|null $total_size Total count
-     *
-     * @return self
-     */
-    public function setTotalSize($total_size)
-    {
-        if (is_null($total_size)) {
-            throw new \InvalidArgumentException('non-nullable total_size cannot be null');
-        }
-        $this->container['total_size'] = $total_size;
+        $this->container['assigned_at'] = $assigned_at;
 
         return $this;
     }

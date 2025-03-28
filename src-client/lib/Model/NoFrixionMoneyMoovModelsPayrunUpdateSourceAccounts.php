@@ -60,6 +60,7 @@ class NoFrixionMoneyMoovModelsPayrunUpdateSourceAccounts implements ModelInterfa
         'none' => 'string',
         'gbp' => 'string',
         'eur' => 'string',
+        'usd' => 'string',
         'btc' => 'string'
     ];
 
@@ -74,6 +75,7 @@ class NoFrixionMoneyMoovModelsPayrunUpdateSourceAccounts implements ModelInterfa
         'none' => 'uuid',
         'gbp' => 'uuid',
         'eur' => 'uuid',
+        'usd' => 'uuid',
         'btc' => 'uuid'
     ];
 
@@ -86,6 +88,7 @@ class NoFrixionMoneyMoovModelsPayrunUpdateSourceAccounts implements ModelInterfa
         'none' => false,
         'gbp' => false,
         'eur' => false,
+        'usd' => false,
         'btc' => false
     ];
 
@@ -178,6 +181,7 @@ class NoFrixionMoneyMoovModelsPayrunUpdateSourceAccounts implements ModelInterfa
         'none' => 'NONE',
         'gbp' => 'GBP',
         'eur' => 'EUR',
+        'usd' => 'USD',
         'btc' => 'BTC'
     ];
 
@@ -190,6 +194,7 @@ class NoFrixionMoneyMoovModelsPayrunUpdateSourceAccounts implements ModelInterfa
         'none' => 'setNone',
         'gbp' => 'setGbp',
         'eur' => 'setEur',
+        'usd' => 'setUsd',
         'btc' => 'setBtc'
     ];
 
@@ -202,6 +207,7 @@ class NoFrixionMoneyMoovModelsPayrunUpdateSourceAccounts implements ModelInterfa
         'none' => 'getNone',
         'gbp' => 'getGbp',
         'eur' => 'getEur',
+        'usd' => 'getUsd',
         'btc' => 'getBtc'
     ];
 
@@ -265,6 +271,7 @@ class NoFrixionMoneyMoovModelsPayrunUpdateSourceAccounts implements ModelInterfa
         $this->setIfExists('none', $data ?? [], null);
         $this->setIfExists('gbp', $data ?? [], null);
         $this->setIfExists('eur', $data ?? [], null);
+        $this->setIfExists('usd', $data ?? [], null);
         $this->setIfExists('btc', $data ?? [], null);
     }
 
@@ -387,6 +394,33 @@ class NoFrixionMoneyMoovModelsPayrunUpdateSourceAccounts implements ModelInterfa
             throw new \InvalidArgumentException('non-nullable eur cannot be null');
         }
         $this->container['eur'] = $eur;
+
+        return $this;
+    }
+
+    /**
+     * Gets usd
+     *
+     * @return string|null
+     */
+    public function getUsd()
+    {
+        return $this->container['usd'];
+    }
+
+    /**
+     * Sets usd
+     *
+     * @param string|null $usd usd
+     *
+     * @return self
+     */
+    public function setUsd($usd)
+    {
+        if (is_null($usd)) {
+            throw new \InvalidArgumentException('non-nullable usd cannot be null');
+        }
+        $this->container['usd'] = $usd;
 
         return $this;
     }

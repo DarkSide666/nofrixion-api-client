@@ -63,10 +63,10 @@ class NoFrixionMoneyMoovModelsAccountIdentifier implements ModelInterface, Array
         'iban' => 'string',
         'sort_code' => 'string',
         'account_number' => 'string',
-        'bitcoin_address' => 'string',
         'summary' => 'string',
         'display_summary' => 'string',
-        'display_scan_summary' => 'string'
+        'display_scan_summary' => 'string',
+        'display_bic_summary' => 'string'
     ];
 
     /**
@@ -83,10 +83,10 @@ class NoFrixionMoneyMoovModelsAccountIdentifier implements ModelInterface, Array
         'iban' => null,
         'sort_code' => null,
         'account_number' => null,
-        'bitcoin_address' => null,
         'summary' => null,
         'display_summary' => null,
-        'display_scan_summary' => null
+        'display_scan_summary' => null,
+        'display_bic_summary' => null
     ];
 
     /**
@@ -101,10 +101,10 @@ class NoFrixionMoneyMoovModelsAccountIdentifier implements ModelInterface, Array
         'iban' => true,
         'sort_code' => true,
         'account_number' => true,
-        'bitcoin_address' => true,
         'summary' => true,
         'display_summary' => true,
-        'display_scan_summary' => true
+        'display_scan_summary' => true,
+        'display_bic_summary' => true
     ];
 
     /**
@@ -199,10 +199,10 @@ class NoFrixionMoneyMoovModelsAccountIdentifier implements ModelInterface, Array
         'iban' => 'iban',
         'sort_code' => 'sortCode',
         'account_number' => 'accountNumber',
-        'bitcoin_address' => 'bitcoinAddress',
         'summary' => 'summary',
         'display_summary' => 'displaySummary',
-        'display_scan_summary' => 'displayScanSummary'
+        'display_scan_summary' => 'displayScanSummary',
+        'display_bic_summary' => 'displayBicSummary'
     ];
 
     /**
@@ -217,10 +217,10 @@ class NoFrixionMoneyMoovModelsAccountIdentifier implements ModelInterface, Array
         'iban' => 'setIban',
         'sort_code' => 'setSortCode',
         'account_number' => 'setAccountNumber',
-        'bitcoin_address' => 'setBitcoinAddress',
         'summary' => 'setSummary',
         'display_summary' => 'setDisplaySummary',
-        'display_scan_summary' => 'setDisplayScanSummary'
+        'display_scan_summary' => 'setDisplayScanSummary',
+        'display_bic_summary' => 'setDisplayBicSummary'
     ];
 
     /**
@@ -235,10 +235,10 @@ class NoFrixionMoneyMoovModelsAccountIdentifier implements ModelInterface, Array
         'iban' => 'getIban',
         'sort_code' => 'getSortCode',
         'account_number' => 'getAccountNumber',
-        'bitcoin_address' => 'getBitcoinAddress',
         'summary' => 'getSummary',
         'display_summary' => 'getDisplaySummary',
-        'display_scan_summary' => 'getDisplayScanSummary'
+        'display_scan_summary' => 'getDisplayScanSummary',
+        'display_bic_summary' => 'getDisplayBicSummary'
     ];
 
     /**
@@ -287,9 +287,11 @@ class NoFrixionMoneyMoovModelsAccountIdentifier implements ModelInterface, Array
     public const TYPE_IBAN = 'IBAN';
     public const TYPE_DD = 'DD';
     public const TYPE_BTC = 'BTC';
+    public const TYPE_BIC = 'BIC';
     public const CURRENCY_NONE = 'NONE';
     public const CURRENCY_GBP = 'GBP';
     public const CURRENCY_EUR = 'EUR';
+    public const CURRENCY_USD = 'USD';
     public const CURRENCY_BTC = 'BTC';
 
     /**
@@ -305,6 +307,7 @@ class NoFrixionMoneyMoovModelsAccountIdentifier implements ModelInterface, Array
             self::TYPE_IBAN,
             self::TYPE_DD,
             self::TYPE_BTC,
+            self::TYPE_BIC,
         ];
     }
 
@@ -319,6 +322,7 @@ class NoFrixionMoneyMoovModelsAccountIdentifier implements ModelInterface, Array
             self::CURRENCY_NONE,
             self::CURRENCY_GBP,
             self::CURRENCY_EUR,
+            self::CURRENCY_USD,
             self::CURRENCY_BTC,
         ];
     }
@@ -344,10 +348,10 @@ class NoFrixionMoneyMoovModelsAccountIdentifier implements ModelInterface, Array
         $this->setIfExists('iban', $data ?? [], null);
         $this->setIfExists('sort_code', $data ?? [], null);
         $this->setIfExists('account_number', $data ?? [], null);
-        $this->setIfExists('bitcoin_address', $data ?? [], null);
         $this->setIfExists('summary', $data ?? [], null);
         $this->setIfExists('display_summary', $data ?? [], null);
         $this->setIfExists('display_scan_summary', $data ?? [], null);
+        $this->setIfExists('display_bic_summary', $data ?? [], null);
     }
 
     /**
@@ -624,40 +628,6 @@ class NoFrixionMoneyMoovModelsAccountIdentifier implements ModelInterface, Array
     }
 
     /**
-     * Gets bitcoin_address
-     *
-     * @return string|null
-     */
-    public function getBitcoinAddress()
-    {
-        return $this->container['bitcoin_address'];
-    }
-
-    /**
-     * Sets bitcoin_address
-     *
-     * @param string|null $bitcoin_address bitcoin_address
-     *
-     * @return self
-     */
-    public function setBitcoinAddress($bitcoin_address)
-    {
-        if (is_null($bitcoin_address)) {
-            array_push($this->openAPINullablesSetToNull, 'bitcoin_address');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('bitcoin_address', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['bitcoin_address'] = $bitcoin_address;
-
-        return $this;
-    }
-
-    /**
      * Gets summary
      *
      * @return string|null
@@ -755,6 +725,40 @@ class NoFrixionMoneyMoovModelsAccountIdentifier implements ModelInterface, Array
             }
         }
         $this->container['display_scan_summary'] = $display_scan_summary;
+
+        return $this;
+    }
+
+    /**
+     * Gets display_bic_summary
+     *
+     * @return string|null
+     */
+    public function getDisplayBicSummary()
+    {
+        return $this->container['display_bic_summary'];
+    }
+
+    /**
+     * Sets display_bic_summary
+     *
+     * @param string|null $display_bic_summary display_bic_summary
+     *
+     * @return self
+     */
+    public function setDisplayBicSummary($display_bic_summary)
+    {
+        if (is_null($display_bic_summary)) {
+            array_push($this->openAPINullablesSetToNull, 'display_bic_summary');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('display_bic_summary', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['display_bic_summary'] = $display_bic_summary;
 
         return $this;
     }

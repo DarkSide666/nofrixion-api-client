@@ -81,11 +81,11 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'created_by' => 'string',
         'created_by_email_address' => 'string',
         'inserted' => '\DateTime',
+        'last_updated' => '\DateTime',
         'source_account_name' => 'string',
         'source_account_iban' => 'string',
         'source_account_number' => 'string',
         'source_account_sortcode' => 'string',
-        'source_bitcoin_address' => 'string',
         'source_account_identifier' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsAccountIdentifier',
         'source_account_available_balance' => 'float',
         'formatted_source_account_available_balance' => 'string',
@@ -96,9 +96,6 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'schedule_date' => '\DateTime',
         'formatted_schedule_day_only' => 'string',
         'formatted_schedule' => 'string',
-        'bitcoin_subtract_fee_from_amount' => 'bool',
-        'bitcoin_fee_sats_per_vbyte' => 'int',
-        'formatted_bitcoin_fee' => 'string',
         'authorisers_required_count' => 'int',
         'authorisers_completed_count' => 'int',
         'can_authorise' => 'bool',
@@ -113,7 +110,10 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'rule' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsRuleMinimal',
         'payment_rail' => 'string',
         'nonce' => 'string',
-        'documents' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayoutDocument[]'
+        'documents' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayoutDocument[]',
+        'is_submitted' => 'bool',
+        'is_failed' => 'bool',
+        'is_settled' => 'bool'
     ];
 
     /**
@@ -148,11 +148,11 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'created_by' => null,
         'created_by_email_address' => null,
         'inserted' => 'date-time',
+        'last_updated' => 'date-time',
         'source_account_name' => null,
         'source_account_iban' => null,
         'source_account_number' => null,
         'source_account_sortcode' => null,
-        'source_bitcoin_address' => null,
         'source_account_identifier' => null,
         'source_account_available_balance' => 'double',
         'formatted_source_account_available_balance' => null,
@@ -163,9 +163,6 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'schedule_date' => 'date-time',
         'formatted_schedule_day_only' => null,
         'formatted_schedule' => null,
-        'bitcoin_subtract_fee_from_amount' => null,
-        'bitcoin_fee_sats_per_vbyte' => 'int32',
-        'formatted_bitcoin_fee' => null,
         'authorisers_required_count' => 'int32',
         'authorisers_completed_count' => 'int32',
         'can_authorise' => null,
@@ -180,7 +177,10 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'rule' => null,
         'payment_rail' => null,
         'nonce' => null,
-        'documents' => null
+        'documents' => null,
+        'is_submitted' => null,
+        'is_failed' => null,
+        'is_settled' => null
     ];
 
     /**
@@ -213,11 +213,11 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'created_by' => true,
         'created_by_email_address' => true,
         'inserted' => false,
+        'last_updated' => false,
         'source_account_name' => true,
         'source_account_iban' => true,
         'source_account_number' => true,
         'source_account_sortcode' => true,
-        'source_bitcoin_address' => true,
         'source_account_identifier' => false,
         'source_account_available_balance' => true,
         'formatted_source_account_available_balance' => true,
@@ -228,9 +228,6 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'schedule_date' => true,
         'formatted_schedule_day_only' => true,
         'formatted_schedule' => true,
-        'bitcoin_subtract_fee_from_amount' => false,
-        'bitcoin_fee_sats_per_vbyte' => false,
-        'formatted_bitcoin_fee' => true,
         'authorisers_required_count' => false,
         'authorisers_completed_count' => false,
         'can_authorise' => false,
@@ -245,7 +242,10 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'rule' => false,
         'payment_rail' => false,
         'nonce' => true,
-        'documents' => true
+        'documents' => true,
+        'is_submitted' => false,
+        'is_failed' => false,
+        'is_settled' => false
     ];
 
     /**
@@ -358,11 +358,11 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'created_by' => 'createdBy',
         'created_by_email_address' => 'createdByEmailAddress',
         'inserted' => 'inserted',
+        'last_updated' => 'lastUpdated',
         'source_account_name' => 'sourceAccountName',
         'source_account_iban' => 'sourceAccountIban',
         'source_account_number' => 'sourceAccountNumber',
         'source_account_sortcode' => 'sourceAccountSortcode',
-        'source_bitcoin_address' => 'sourceBitcoinAddress',
         'source_account_identifier' => 'sourceAccountIdentifier',
         'source_account_available_balance' => 'sourceAccountAvailableBalance',
         'formatted_source_account_available_balance' => 'formattedSourceAccountAvailableBalance',
@@ -373,9 +373,6 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'schedule_date' => 'scheduleDate',
         'formatted_schedule_day_only' => 'formattedScheduleDayOnly',
         'formatted_schedule' => 'formattedSchedule',
-        'bitcoin_subtract_fee_from_amount' => 'bitcoinSubtractFeeFromAmount',
-        'bitcoin_fee_sats_per_vbyte' => 'bitcoinFeeSatsPerVbyte',
-        'formatted_bitcoin_fee' => 'formattedBitcoinFee',
         'authorisers_required_count' => 'authorisersRequiredCount',
         'authorisers_completed_count' => 'authorisersCompletedCount',
         'can_authorise' => 'canAuthorise',
@@ -390,7 +387,10 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'rule' => 'rule',
         'payment_rail' => 'paymentRail',
         'nonce' => 'nonce',
-        'documents' => 'documents'
+        'documents' => 'documents',
+        'is_submitted' => 'isSubmitted',
+        'is_failed' => 'isFailed',
+        'is_settled' => 'isSettled'
     ];
 
     /**
@@ -423,11 +423,11 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'created_by' => 'setCreatedBy',
         'created_by_email_address' => 'setCreatedByEmailAddress',
         'inserted' => 'setInserted',
+        'last_updated' => 'setLastUpdated',
         'source_account_name' => 'setSourceAccountName',
         'source_account_iban' => 'setSourceAccountIban',
         'source_account_number' => 'setSourceAccountNumber',
         'source_account_sortcode' => 'setSourceAccountSortcode',
-        'source_bitcoin_address' => 'setSourceBitcoinAddress',
         'source_account_identifier' => 'setSourceAccountIdentifier',
         'source_account_available_balance' => 'setSourceAccountAvailableBalance',
         'formatted_source_account_available_balance' => 'setFormattedSourceAccountAvailableBalance',
@@ -438,9 +438,6 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'schedule_date' => 'setScheduleDate',
         'formatted_schedule_day_only' => 'setFormattedScheduleDayOnly',
         'formatted_schedule' => 'setFormattedSchedule',
-        'bitcoin_subtract_fee_from_amount' => 'setBitcoinSubtractFeeFromAmount',
-        'bitcoin_fee_sats_per_vbyte' => 'setBitcoinFeeSatsPerVbyte',
-        'formatted_bitcoin_fee' => 'setFormattedBitcoinFee',
         'authorisers_required_count' => 'setAuthorisersRequiredCount',
         'authorisers_completed_count' => 'setAuthorisersCompletedCount',
         'can_authorise' => 'setCanAuthorise',
@@ -455,7 +452,10 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'rule' => 'setRule',
         'payment_rail' => 'setPaymentRail',
         'nonce' => 'setNonce',
-        'documents' => 'setDocuments'
+        'documents' => 'setDocuments',
+        'is_submitted' => 'setIsSubmitted',
+        'is_failed' => 'setIsFailed',
+        'is_settled' => 'setIsSettled'
     ];
 
     /**
@@ -488,11 +488,11 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'created_by' => 'getCreatedBy',
         'created_by_email_address' => 'getCreatedByEmailAddress',
         'inserted' => 'getInserted',
+        'last_updated' => 'getLastUpdated',
         'source_account_name' => 'getSourceAccountName',
         'source_account_iban' => 'getSourceAccountIban',
         'source_account_number' => 'getSourceAccountNumber',
         'source_account_sortcode' => 'getSourceAccountSortcode',
-        'source_bitcoin_address' => 'getSourceBitcoinAddress',
         'source_account_identifier' => 'getSourceAccountIdentifier',
         'source_account_available_balance' => 'getSourceAccountAvailableBalance',
         'formatted_source_account_available_balance' => 'getFormattedSourceAccountAvailableBalance',
@@ -503,9 +503,6 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'schedule_date' => 'getScheduleDate',
         'formatted_schedule_day_only' => 'getFormattedScheduleDayOnly',
         'formatted_schedule' => 'getFormattedSchedule',
-        'bitcoin_subtract_fee_from_amount' => 'getBitcoinSubtractFeeFromAmount',
-        'bitcoin_fee_sats_per_vbyte' => 'getBitcoinFeeSatsPerVbyte',
-        'formatted_bitcoin_fee' => 'getFormattedBitcoinFee',
         'authorisers_required_count' => 'getAuthorisersRequiredCount',
         'authorisers_completed_count' => 'getAuthorisersCompletedCount',
         'can_authorise' => 'getCanAuthorise',
@@ -520,7 +517,10 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'rule' => 'getRule',
         'payment_rail' => 'getPaymentRail',
         'nonce' => 'getNonce',
-        'documents' => 'getDocuments'
+        'documents' => 'getDocuments',
+        'is_submitted' => 'getIsSubmitted',
+        'is_failed' => 'getIsFailed',
+        'is_settled' => 'getIsSettled'
     ];
 
     /**
@@ -569,9 +569,11 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
     public const TYPE_IBAN = 'IBAN';
     public const TYPE_DD = 'DD';
     public const TYPE_BTC = 'BTC';
+    public const TYPE_BIC = 'BIC';
     public const CURRENCY_NONE = 'NONE';
     public const CURRENCY_GBP = 'GBP';
     public const CURRENCY_EUR = 'EUR';
+    public const CURRENCY_USD = 'USD';
     public const CURRENCY_BTC = 'BTC';
     public const STATUS_UNKNOWN = 'UNKNOWN';
     public const STATUS_REJECTED = 'REJECTED';
@@ -608,7 +610,6 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
     public const PAYMENT_PROCESSOR_LIGHTNING = 'Lightning';
     public const PAYMENT_PROCESSOR_LIGHTNING_TESTNET = 'LightningTestnet';
     public const PAYMENT_PROCESSOR_BANKING_CIRCLE_DIRECT_DEBIT = 'BankingCircleDirectDebit';
-    public const PAYMENT_PROCESSOR_TRIBE = 'Tribe';
     public const PAYMENT_RAIL__DEFAULT = 'Default';
     public const PAYMENT_RAIL_SEPA_CT = 'SEPA_CT';
     public const PAYMENT_RAIL_SEPA_INST = 'SEPA_INST';
@@ -627,6 +628,7 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
             self::TYPE_IBAN,
             self::TYPE_DD,
             self::TYPE_BTC,
+            self::TYPE_BIC,
         ];
     }
 
@@ -641,6 +643,7 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
             self::CURRENCY_NONE,
             self::CURRENCY_GBP,
             self::CURRENCY_EUR,
+            self::CURRENCY_USD,
             self::CURRENCY_BTC,
         ];
     }
@@ -721,7 +724,6 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
             self::PAYMENT_PROCESSOR_LIGHTNING,
             self::PAYMENT_PROCESSOR_LIGHTNING_TESTNET,
             self::PAYMENT_PROCESSOR_BANKING_CIRCLE_DIRECT_DEBIT,
-            self::PAYMENT_PROCESSOR_TRIBE,
         ];
     }
 
@@ -779,11 +781,11 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('created_by', $data ?? [], null);
         $this->setIfExists('created_by_email_address', $data ?? [], null);
         $this->setIfExists('inserted', $data ?? [], null);
+        $this->setIfExists('last_updated', $data ?? [], null);
         $this->setIfExists('source_account_name', $data ?? [], null);
         $this->setIfExists('source_account_iban', $data ?? [], null);
         $this->setIfExists('source_account_number', $data ?? [], null);
         $this->setIfExists('source_account_sortcode', $data ?? [], null);
-        $this->setIfExists('source_bitcoin_address', $data ?? [], null);
         $this->setIfExists('source_account_identifier', $data ?? [], null);
         $this->setIfExists('source_account_available_balance', $data ?? [], null);
         $this->setIfExists('formatted_source_account_available_balance', $data ?? [], null);
@@ -794,9 +796,6 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('schedule_date', $data ?? [], null);
         $this->setIfExists('formatted_schedule_day_only', $data ?? [], null);
         $this->setIfExists('formatted_schedule', $data ?? [], null);
-        $this->setIfExists('bitcoin_subtract_fee_from_amount', $data ?? [], null);
-        $this->setIfExists('bitcoin_fee_sats_per_vbyte', $data ?? [], null);
-        $this->setIfExists('formatted_bitcoin_fee', $data ?? [], null);
         $this->setIfExists('authorisers_required_count', $data ?? [], null);
         $this->setIfExists('authorisers_completed_count', $data ?? [], null);
         $this->setIfExists('can_authorise', $data ?? [], null);
@@ -812,6 +811,9 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('payment_rail', $data ?? [], null);
         $this->setIfExists('nonce', $data ?? [], null);
         $this->setIfExists('documents', $data ?? [], null);
+        $this->setIfExists('is_submitted', $data ?? [], null);
+        $this->setIfExists('is_failed', $data ?? [], null);
+        $this->setIfExists('is_settled', $data ?? [], null);
     }
 
     /**
@@ -1704,6 +1706,33 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
     }
 
     /**
+     * Gets last_updated
+     *
+     * @return \DateTime|null
+     */
+    public function getLastUpdated()
+    {
+        return $this->container['last_updated'];
+    }
+
+    /**
+     * Sets last_updated
+     *
+     * @param \DateTime|null $last_updated last_updated
+     *
+     * @return self
+     */
+    public function setLastUpdated($last_updated)
+    {
+        if (is_null($last_updated)) {
+            throw new \InvalidArgumentException('non-nullable last_updated cannot be null');
+        }
+        $this->container['last_updated'] = $last_updated;
+
+        return $this;
+    }
+
+    /**
      * Gets source_account_name
      *
      * @return string|null
@@ -1835,40 +1864,6 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
             }
         }
         $this->container['source_account_sortcode'] = $source_account_sortcode;
-
-        return $this;
-    }
-
-    /**
-     * Gets source_bitcoin_address
-     *
-     * @return string|null
-     */
-    public function getSourceBitcoinAddress()
-    {
-        return $this->container['source_bitcoin_address'];
-    }
-
-    /**
-     * Sets source_bitcoin_address
-     *
-     * @param string|null $source_bitcoin_address The current Bitcoin address of the account the payout is being made from.
-     *
-     * @return self
-     */
-    public function setSourceBitcoinAddress($source_bitcoin_address)
-    {
-        if (is_null($source_bitcoin_address)) {
-            array_push($this->openAPINullablesSetToNull, 'source_bitcoin_address');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('source_bitcoin_address', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['source_bitcoin_address'] = $source_bitcoin_address;
 
         return $this;
     }
@@ -2195,94 +2190,6 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
             }
         }
         $this->container['formatted_schedule'] = $formatted_schedule;
-
-        return $this;
-    }
-
-    /**
-     * Gets bitcoin_subtract_fee_from_amount
-     *
-     * @return bool|null
-     */
-    public function getBitcoinSubtractFeeFromAmount()
-    {
-        return $this->container['bitcoin_subtract_fee_from_amount'];
-    }
-
-    /**
-     * Sets bitcoin_subtract_fee_from_amount
-     *
-     * @param bool|null $bitcoin_subtract_fee_from_amount For Bitcoin payouts, when this flag is set the network fee will be deducted from the send amount.  THis is particularly useful for sweeps where it can be difficult to calculate the exact fee required.
-     *
-     * @return self
-     */
-    public function setBitcoinSubtractFeeFromAmount($bitcoin_subtract_fee_from_amount)
-    {
-        if (is_null($bitcoin_subtract_fee_from_amount)) {
-            throw new \InvalidArgumentException('non-nullable bitcoin_subtract_fee_from_amount cannot be null');
-        }
-        $this->container['bitcoin_subtract_fee_from_amount'] = $bitcoin_subtract_fee_from_amount;
-
-        return $this;
-    }
-
-    /**
-     * Gets bitcoin_fee_sats_per_vbyte
-     *
-     * @return int|null
-     */
-    public function getBitcoinFeeSatsPerVbyte()
-    {
-        return $this->container['bitcoin_fee_sats_per_vbyte'];
-    }
-
-    /**
-     * Sets bitcoin_fee_sats_per_vbyte
-     *
-     * @param int|null $bitcoin_fee_sats_per_vbyte The Bitcoin fee rate to apply in Satoshis per virtual byte.
-     *
-     * @return self
-     */
-    public function setBitcoinFeeSatsPerVbyte($bitcoin_fee_sats_per_vbyte)
-    {
-        if (is_null($bitcoin_fee_sats_per_vbyte)) {
-            throw new \InvalidArgumentException('non-nullable bitcoin_fee_sats_per_vbyte cannot be null');
-        }
-        $this->container['bitcoin_fee_sats_per_vbyte'] = $bitcoin_fee_sats_per_vbyte;
-
-        return $this;
-    }
-
-    /**
-     * Gets formatted_bitcoin_fee
-     *
-     * @return string|null
-     */
-    public function getFormattedBitcoinFee()
-    {
-        return $this->container['formatted_bitcoin_fee'];
-    }
-
-    /**
-     * Sets formatted_bitcoin_fee
-     *
-     * @param string|null $formatted_bitcoin_fee formatted_bitcoin_fee
-     *
-     * @return self
-     */
-    public function setFormattedBitcoinFee($formatted_bitcoin_fee)
-    {
-        if (is_null($formatted_bitcoin_fee)) {
-            array_push($this->openAPINullablesSetToNull, 'formatted_bitcoin_fee');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('formatted_bitcoin_fee', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['formatted_bitcoin_fee'] = $formatted_bitcoin_fee;
 
         return $this;
     }
@@ -2759,6 +2666,87 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
             }
         }
         $this->container['documents'] = $documents;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_submitted
+     *
+     * @return bool|null
+     */
+    public function getIsSubmitted()
+    {
+        return $this->container['is_submitted'];
+    }
+
+    /**
+     * Sets is_submitted
+     *
+     * @param bool|null $is_submitted Indicates whether the payout has been submitted for processing. Once submitted the payout  amount is reserved until the payout is marked as failed or settled.
+     *
+     * @return self
+     */
+    public function setIsSubmitted($is_submitted)
+    {
+        if (is_null($is_submitted)) {
+            throw new \InvalidArgumentException('non-nullable is_submitted cannot be null');
+        }
+        $this->container['is_submitted'] = $is_submitted;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_failed
+     *
+     * @return bool|null
+     */
+    public function getIsFailed()
+    {
+        return $this->container['is_failed'];
+    }
+
+    /**
+     * Sets is_failed
+     *
+     * @param bool|null $is_failed Set to true if a submitted payout subsequently fails. If a payout fails the amount is  remvoed from the account's reserved balance.
+     *
+     * @return self
+     */
+    public function setIsFailed($is_failed)
+    {
+        if (is_null($is_failed)) {
+            throw new \InvalidArgumentException('non-nullable is_failed cannot be null');
+        }
+        $this->container['is_failed'] = $is_failed;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_settled
+     *
+     * @return bool|null
+     */
+    public function getIsSettled()
+    {
+        return $this->container['is_settled'];
+    }
+
+    /**
+     * Sets is_settled
+     *
+     * @param bool|null $is_settled Set to true if a payout was successfully processed and the corresponding transaction has been  recorded on the ledger.
+     *
+     * @return self
+     */
+    public function setIsSettled($is_settled)
+    {
+        if (is_null($is_settled)) {
+            throw new \InvalidArgumentException('non-nullable is_settled cannot be null');
+        }
+        $this->container['is_settled'] = $is_settled;
 
         return $this;
     }

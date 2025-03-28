@@ -23,5 +23,7 @@ Name | Type | Description | Notes
 **payout_id** | **string** | ID of the payout that resulted in the transaction. | [optional]
 **virtual_iban** | **string** | If set it indicates the  payin was to a virtual IBAN. | [optional]
 **tags** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTag[]**](NoFrixionMoneyMoovModelsTag.md) | An optional list of descriptive tags attached to the transaction. | [optional]
+**account_sequence_number** | **int** | The sequence number of transaction on a per account basis. This sequence number is guaranteed to be an arithemtic sequence   number for all transactions belonging to the same account. | [optional]
+**payment_request_id** | **string** | For Pay by Bank and Direct Debit transactions this will contain the ID of the payment request. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

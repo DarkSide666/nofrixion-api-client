@@ -62,7 +62,6 @@ class NoFrixionMoneyMoovModelsAccountIdentifierCreate implements ModelInterface,
         'iban' => 'string',
         'sort_code' => 'string',
         'account_number' => 'string',
-        'bitcoin_address' => 'string',
         'summary' => 'string'
     ];
 
@@ -79,7 +78,6 @@ class NoFrixionMoneyMoovModelsAccountIdentifierCreate implements ModelInterface,
         'iban' => null,
         'sort_code' => null,
         'account_number' => null,
-        'bitcoin_address' => null,
         'summary' => null
     ];
 
@@ -94,7 +92,6 @@ class NoFrixionMoneyMoovModelsAccountIdentifierCreate implements ModelInterface,
         'iban' => true,
         'sort_code' => true,
         'account_number' => true,
-        'bitcoin_address' => true,
         'summary' => true
     ];
 
@@ -189,7 +186,6 @@ class NoFrixionMoneyMoovModelsAccountIdentifierCreate implements ModelInterface,
         'iban' => 'iban',
         'sort_code' => 'sortCode',
         'account_number' => 'accountNumber',
-        'bitcoin_address' => 'bitcoinAddress',
         'summary' => 'summary'
     ];
 
@@ -204,7 +200,6 @@ class NoFrixionMoneyMoovModelsAccountIdentifierCreate implements ModelInterface,
         'iban' => 'setIban',
         'sort_code' => 'setSortCode',
         'account_number' => 'setAccountNumber',
-        'bitcoin_address' => 'setBitcoinAddress',
         'summary' => 'setSummary'
     ];
 
@@ -219,7 +214,6 @@ class NoFrixionMoneyMoovModelsAccountIdentifierCreate implements ModelInterface,
         'iban' => 'getIban',
         'sort_code' => 'getSortCode',
         'account_number' => 'getAccountNumber',
-        'bitcoin_address' => 'getBitcoinAddress',
         'summary' => 'getSummary'
     ];
 
@@ -267,6 +261,7 @@ class NoFrixionMoneyMoovModelsAccountIdentifierCreate implements ModelInterface,
     public const CURRENCY_NONE = 'NONE';
     public const CURRENCY_GBP = 'GBP';
     public const CURRENCY_EUR = 'EUR';
+    public const CURRENCY_USD = 'USD';
     public const CURRENCY_BTC = 'BTC';
 
     /**
@@ -280,6 +275,7 @@ class NoFrixionMoneyMoovModelsAccountIdentifierCreate implements ModelInterface,
             self::CURRENCY_NONE,
             self::CURRENCY_GBP,
             self::CURRENCY_EUR,
+            self::CURRENCY_USD,
             self::CURRENCY_BTC,
         ];
     }
@@ -304,7 +300,6 @@ class NoFrixionMoneyMoovModelsAccountIdentifierCreate implements ModelInterface,
         $this->setIfExists('iban', $data ?? [], null);
         $this->setIfExists('sort_code', $data ?? [], null);
         $this->setIfExists('account_number', $data ?? [], null);
-        $this->setIfExists('bitcoin_address', $data ?? [], null);
         $this->setIfExists('summary', $data ?? [], null);
     }
 
@@ -535,40 +530,6 @@ class NoFrixionMoneyMoovModelsAccountIdentifierCreate implements ModelInterface,
             }
         }
         $this->container['account_number'] = $account_number;
-
-        return $this;
-    }
-
-    /**
-     * Gets bitcoin_address
-     *
-     * @return string|null
-     */
-    public function getBitcoinAddress()
-    {
-        return $this->container['bitcoin_address'];
-    }
-
-    /**
-     * Sets bitcoin_address
-     *
-     * @param string|null $bitcoin_address bitcoin_address
-     *
-     * @return self
-     */
-    public function setBitcoinAddress($bitcoin_address)
-    {
-        if (is_null($bitcoin_address)) {
-            array_push($this->openAPINullablesSetToNull, 'bitcoin_address');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('bitcoin_address', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['bitcoin_address'] = $bitcoin_address;
 
         return $this;
     }

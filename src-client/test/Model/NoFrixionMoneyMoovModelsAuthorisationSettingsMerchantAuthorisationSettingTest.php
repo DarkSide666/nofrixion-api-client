@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionMoneyMoovModelsSweepDestinationTest
+ * NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationSettingTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Nofrixion\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * NoFrixionMoneyMoovModelsSweepDestinationTest Class Doc Comment
+ * NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationSettingTest Class Doc Comment
  *
  * @category    Class
- * @description NoFrixionMoneyMoovModelsSweepDestination
+ * @description NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationSetting
  * @package     Nofrixion\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class NoFrixionMoneyMoovModelsSweepDestinationTest extends TestCase
+class NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationSettingTest extends TestCase
 {
 
     /**
@@ -71,126 +71,108 @@ class NoFrixionMoneyMoovModelsSweepDestinationTest extends TestCase
     }
 
     /**
-     * Test "NoFrixionMoneyMoovModelsSweepDestination"
+     * Test "NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationSetting"
      */
-    public function testNoFrixionMoneyMoovModelsSweepDestination()
+    public function testNoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationSetting()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "sweep_percentage"
+     * Test attribute "id"
      */
-    public function testPropertySweepPercentage()
+    public function testPropertyId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "sweep_amount"
+     * Test attribute "merchant_id"
      */
-    public function testPropertySweepAmount()
+    public function testPropertyMerchantId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "priority"
+     * Test attribute "amount_lower"
      */
-    public function testPropertyPriority()
+    public function testPropertyAmountLower()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "is_disabled"
+     * Test attribute "amount_upper"
      */
-    public function testPropertyIsDisabled()
+    public function testPropertyAmountUpper()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "account_id"
+     * Test attribute "beneficiaries_only"
      */
-    public function testPropertyAccountId()
+    public function testPropertyBeneficiariesOnly()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "internal_account_name"
+     * Test attribute "number_of_authorisers"
      */
-    public function testPropertyInternalAccountName()
+    public function testPropertyNumberOfAuthorisers()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "beneficiary_id"
+     * Test attribute "last_editor_cant_authorise"
      */
-    public function testPropertyBeneficiaryId()
+    public function testPropertyLastEditorCantAuthorise()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "name"
+     * Test attribute "authorisation_type"
      */
-    public function testPropertyName()
+    public function testPropertyAuthorisationType()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "email_address"
+     * Test attribute "role_settings"
      */
-    public function testPropertyEmailAddress()
+    public function testPropertyRoleSettings()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "phone_number"
+     * Test attribute "inserted"
      */
-    public function testPropertyPhoneNumber()
+    public function testPropertyInserted()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "country_code"
+     * Test attribute "last_updated"
      */
-    public function testPropertyCountryCode()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "identifier"
-     */
-    public function testPropertyIdentifier()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "summary"
-     */
-    public function testPropertySummary()
+    public function testPropertyLastUpdated()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

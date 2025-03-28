@@ -461,6 +461,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestEvent implements ModelInterface, Arr
     public const CURRENCY_NONE = 'NONE';
     public const CURRENCY_GBP = 'GBP';
     public const CURRENCY_EUR = 'EUR';
+    public const CURRENCY_USD = 'USD';
     public const CURRENCY_BTC = 'BTC';
     public const PAYMENT_PROCESSOR_NAME_NONE = 'None';
     public const PAYMENT_PROCESSOR_NAME_CYBER_SOURCE = 'CyberSource';
@@ -478,7 +479,6 @@ class NoFrixionMoneyMoovModelsPaymentRequestEvent implements ModelInterface, Arr
     public const PAYMENT_PROCESSOR_NAME_LIGHTNING = 'Lightning';
     public const PAYMENT_PROCESSOR_NAME_LIGHTNING_TESTNET = 'LightningTestnet';
     public const PAYMENT_PROCESSOR_NAME_BANKING_CIRCLE_DIRECT_DEBIT = 'BankingCircleDirectDebit';
-    public const PAYMENT_PROCESSOR_NAME_TRIBE = 'Tribe';
     public const WALLET_NAME_APPLE_PAY = 'ApplePay';
     public const WALLET_NAME_GOOGLE_PAY = 'GooglePay';
 
@@ -530,6 +530,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestEvent implements ModelInterface, Arr
             self::CURRENCY_NONE,
             self::CURRENCY_GBP,
             self::CURRENCY_EUR,
+            self::CURRENCY_USD,
             self::CURRENCY_BTC,
         ];
     }
@@ -558,7 +559,6 @@ class NoFrixionMoneyMoovModelsPaymentRequestEvent implements ModelInterface, Arr
             self::PAYMENT_PROCESSOR_NAME_LIGHTNING,
             self::PAYMENT_PROCESSOR_NAME_LIGHTNING_TESTNET,
             self::PAYMENT_PROCESSOR_NAME_BANKING_CIRCLE_DIRECT_DEBIT,
-            self::PAYMENT_PROCESSOR_NAME_TRIBE,
         ];
     }
 

@@ -60,7 +60,7 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         'id' => 'string',
         'merchant_id' => 'string',
         'description' => 'string',
-        'permissions' => 'string',
+        'permission_types' => 'string[]',
         'inserted' => '\DateTime',
         'last_updated' => '\DateTime',
         'token' => 'string',
@@ -68,7 +68,14 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         'shared_secret_algorithm' => 'string',
         'shared_secret_base64' => 'string',
         'request_signature_version' => 'int',
-        'expires_at' => '\DateTime'
+        'expires_at' => '\DateTime',
+        'authorisations' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsApproveAuthorisation[]',
+        'can_authorise' => 'bool',
+        'has_current_user_authorised' => 'bool',
+        'authorisers_required_count' => 'int',
+        'authorisers_completed_count' => 'int',
+        'authentication_methods' => 'string[]',
+        'last_authorised' => '\DateTime'
     ];
 
     /**
@@ -82,7 +89,7 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         'id' => 'uuid',
         'merchant_id' => 'uuid',
         'description' => null,
-        'permissions' => null,
+        'permission_types' => null,
         'inserted' => 'date-time',
         'last_updated' => 'date-time',
         'token' => null,
@@ -90,7 +97,14 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         'shared_secret_algorithm' => null,
         'shared_secret_base64' => null,
         'request_signature_version' => 'int32',
-        'expires_at' => 'date-time'
+        'expires_at' => 'date-time',
+        'authorisations' => null,
+        'can_authorise' => null,
+        'has_current_user_authorised' => null,
+        'authorisers_required_count' => 'int32',
+        'authorisers_completed_count' => 'int32',
+        'authentication_methods' => null,
+        'last_authorised' => 'date-time'
     ];
 
     /**
@@ -102,7 +116,7 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         'id' => false,
         'merchant_id' => false,
         'description' => true,
-        'permissions' => false,
+        'permission_types' => true,
         'inserted' => false,
         'last_updated' => false,
         'token' => true,
@@ -110,7 +124,14 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         'shared_secret_algorithm' => false,
         'shared_secret_base64' => true,
         'request_signature_version' => false,
-        'expires_at' => true
+        'expires_at' => true,
+        'authorisations' => true,
+        'can_authorise' => false,
+        'has_current_user_authorised' => false,
+        'authorisers_required_count' => false,
+        'authorisers_completed_count' => false,
+        'authentication_methods' => true,
+        'last_authorised' => true
     ];
 
     /**
@@ -202,7 +223,7 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         'id' => 'id',
         'merchant_id' => 'merchantID',
         'description' => 'description',
-        'permissions' => 'permissions',
+        'permission_types' => 'permissionTypes',
         'inserted' => 'inserted',
         'last_updated' => 'lastUpdated',
         'token' => 'token',
@@ -210,7 +231,14 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         'shared_secret_algorithm' => 'sharedSecretAlgorithm',
         'shared_secret_base64' => 'sharedSecretBase64',
         'request_signature_version' => 'requestSignatureVersion',
-        'expires_at' => 'expiresAt'
+        'expires_at' => 'expiresAt',
+        'authorisations' => 'authorisations',
+        'can_authorise' => 'canAuthorise',
+        'has_current_user_authorised' => 'hasCurrentUserAuthorised',
+        'authorisers_required_count' => 'authorisersRequiredCount',
+        'authorisers_completed_count' => 'authorisersCompletedCount',
+        'authentication_methods' => 'authenticationMethods',
+        'last_authorised' => 'lastAuthorised'
     ];
 
     /**
@@ -222,7 +250,7 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         'id' => 'setId',
         'merchant_id' => 'setMerchantId',
         'description' => 'setDescription',
-        'permissions' => 'setPermissions',
+        'permission_types' => 'setPermissionTypes',
         'inserted' => 'setInserted',
         'last_updated' => 'setLastUpdated',
         'token' => 'setToken',
@@ -230,7 +258,14 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         'shared_secret_algorithm' => 'setSharedSecretAlgorithm',
         'shared_secret_base64' => 'setSharedSecretBase64',
         'request_signature_version' => 'setRequestSignatureVersion',
-        'expires_at' => 'setExpiresAt'
+        'expires_at' => 'setExpiresAt',
+        'authorisations' => 'setAuthorisations',
+        'can_authorise' => 'setCanAuthorise',
+        'has_current_user_authorised' => 'setHasCurrentUserAuthorised',
+        'authorisers_required_count' => 'setAuthorisersRequiredCount',
+        'authorisers_completed_count' => 'setAuthorisersCompletedCount',
+        'authentication_methods' => 'setAuthenticationMethods',
+        'last_authorised' => 'setLastAuthorised'
     ];
 
     /**
@@ -242,7 +277,7 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         'id' => 'getId',
         'merchant_id' => 'getMerchantId',
         'description' => 'getDescription',
-        'permissions' => 'getPermissions',
+        'permission_types' => 'getPermissionTypes',
         'inserted' => 'getInserted',
         'last_updated' => 'getLastUpdated',
         'token' => 'getToken',
@@ -250,7 +285,14 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         'shared_secret_algorithm' => 'getSharedSecretAlgorithm',
         'shared_secret_base64' => 'getSharedSecretBase64',
         'request_signature_version' => 'getRequestSignatureVersion',
-        'expires_at' => 'getExpiresAt'
+        'expires_at' => 'getExpiresAt',
+        'authorisations' => 'getAuthorisations',
+        'can_authorise' => 'getCanAuthorise',
+        'has_current_user_authorised' => 'getHasCurrentUserAuthorised',
+        'authorisers_required_count' => 'getAuthorisersRequiredCount',
+        'authorisers_completed_count' => 'getAuthorisersCompletedCount',
+        'authentication_methods' => 'getAuthenticationMethods',
+        'last_authorised' => 'getLastAuthorised'
     ];
 
     /**
@@ -294,62 +336,65 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         return self::$openAPIModelName;
     }
 
-    public const PERMISSIONS_DENY = 'Deny';
-    public const PERMISSIONS_CREATE_PAYMENT_REQUEST = 'CreatePaymentRequest';
-    public const PERMISSIONS_EDIT_PAYMENT_REQUEST = 'EditPaymentRequest';
-    public const PERMISSIONS_DELETE_PAYMENT_REQUEST = 'DeletePaymentRequest';
-    public const PERMISSIONS_CREATE_RULE = 'CreateRule';
-    public const PERMISSIONS_EDIT_RULE = 'EditRule';
-    public const PERMISSIONS_DELETE_RULE = 'DeleteRule';
-    public const PERMISSIONS_CREATE_PAYOUT = 'CreatePayout';
-    public const PERMISSIONS_EDIT_PAYOUT = 'EditPayout';
-    public const PERMISSIONS_DELETE_PAYOUT = 'DeletePayout';
-    public const PERMISSIONS_CREATE_REPORT = 'CreateReport';
-    public const PERMISSIONS_EDIT_REPORT = 'EditReport';
-    public const PERMISSIONS_DELETE_REPORT = 'DeleteReport';
-    public const PERMISSIONS_EXECUTE_REPORT = 'ExecuteReport';
-    public const PERMISSIONS_CREATE_PAYMENT_ACCOUNT = 'CreatePaymentAccount';
-    public const PERMISSIONS_EDIT_PAYMENT_ACCOUNT = 'EditPaymentAccount';
-    public const PERMISSIONS_TRUSTED_SUBMIT_PAYOUT = 'TrustedSubmitPayout';
-    public const PERMISSIONS_OPEN_BANKING_ACCOUNT_INFORMATION = 'OpenBankingAccountInformation';
-    public const PERMISSIONS_CREATE_DIRECT_DEBIT_MANDATE = 'CreateDirectDebitMandate';
-    public const PERMISSIONS_SUBMIT_DIRECT_DEBIT_PAYMENT = 'SubmitDirectDebitPayment';
-    public const PERMISSIONS_VIEW_TRANSACTIONS = 'ViewTransactions';
+    public const PERMISSION_TYPES_DENY = 'Deny';
+    public const PERMISSION_TYPES_CREATE_PAYMENT_REQUEST = 'CreatePaymentRequest';
+    public const PERMISSION_TYPES_EDIT_PAYMENT_REQUEST = 'EditPaymentRequest';
+    public const PERMISSION_TYPES_DELETE_PAYMENT_REQUEST = 'DeletePaymentRequest';
+    public const PERMISSION_TYPES_CREATE_RULE = 'CreateRule';
+    public const PERMISSION_TYPES_EDIT_RULE = 'EditRule';
+    public const PERMISSION_TYPES_DELETE_RULE = 'DeleteRule';
+    public const PERMISSION_TYPES_CREATE_PAYOUT = 'CreatePayout';
+    public const PERMISSION_TYPES_EDIT_PAYOUT = 'EditPayout';
+    public const PERMISSION_TYPES_DELETE_PAYOUT = 'DeletePayout';
+    public const PERMISSION_TYPES_CREATE_REPORT = 'CreateReport';
+    public const PERMISSION_TYPES_EDIT_REPORT = 'EditReport';
+    public const PERMISSION_TYPES_DELETE_REPORT = 'DeleteReport';
+    public const PERMISSION_TYPES_EXECUTE_REPORT = 'ExecuteReport';
+    public const PERMISSION_TYPES_CREATE_PAYMENT_ACCOUNT = 'CreatePaymentAccount';
+    public const PERMISSION_TYPES_EDIT_PAYMENT_ACCOUNT = 'EditPaymentAccount';
+    public const PERMISSION_TYPES_TRUSTED_SUBMIT_PAYOUT = 'TrustedSubmitPayout';
+    public const PERMISSION_TYPES_OPEN_BANKING_ACCOUNT_INFORMATION = 'OpenBankingAccountInformation';
+    public const PERMISSION_TYPES_CREATE_DIRECT_DEBIT_MANDATE = 'CreateDirectDebitMandate';
+    public const PERMISSION_TYPES_SUBMIT_DIRECT_DEBIT_PAYMENT = 'SubmitDirectDebitPayment';
+    public const PERMISSION_TYPES_VIEW_TRANSACTIONS = 'ViewTransactions';
     public const SHARED_SECRET_ALGORITHM_NONE = 'None';
     public const SHARED_SECRET_ALGORITHM_HMAC_SHA1 = 'HMAC_SHA1';
     public const SHARED_SECRET_ALGORITHM_HMAC_SHA256 = 'HMAC_SHA256';
     public const SHARED_SECRET_ALGORITHM_HMAC_SHA384 = 'HMAC_SHA384';
     public const SHARED_SECRET_ALGORITHM_HMAC_SHA512 = 'HMAC_SHA512';
+    public const AUTHENTICATION_METHODS_NONE = 'None';
+    public const AUTHENTICATION_METHODS_WEB_AUTHN = 'WebAuthn';
+    public const AUTHENTICATION_METHODS_ONE_TIME_PASSWORD = 'OneTimePassword';
 
     /**
      * Gets allowable values of the enum
      *
      * @return string[]
      */
-    public function getPermissionsAllowableValues()
+    public function getPermissionTypesAllowableValues()
     {
         return [
-            self::PERMISSIONS_DENY,
-            self::PERMISSIONS_CREATE_PAYMENT_REQUEST,
-            self::PERMISSIONS_EDIT_PAYMENT_REQUEST,
-            self::PERMISSIONS_DELETE_PAYMENT_REQUEST,
-            self::PERMISSIONS_CREATE_RULE,
-            self::PERMISSIONS_EDIT_RULE,
-            self::PERMISSIONS_DELETE_RULE,
-            self::PERMISSIONS_CREATE_PAYOUT,
-            self::PERMISSIONS_EDIT_PAYOUT,
-            self::PERMISSIONS_DELETE_PAYOUT,
-            self::PERMISSIONS_CREATE_REPORT,
-            self::PERMISSIONS_EDIT_REPORT,
-            self::PERMISSIONS_DELETE_REPORT,
-            self::PERMISSIONS_EXECUTE_REPORT,
-            self::PERMISSIONS_CREATE_PAYMENT_ACCOUNT,
-            self::PERMISSIONS_EDIT_PAYMENT_ACCOUNT,
-            self::PERMISSIONS_TRUSTED_SUBMIT_PAYOUT,
-            self::PERMISSIONS_OPEN_BANKING_ACCOUNT_INFORMATION,
-            self::PERMISSIONS_CREATE_DIRECT_DEBIT_MANDATE,
-            self::PERMISSIONS_SUBMIT_DIRECT_DEBIT_PAYMENT,
-            self::PERMISSIONS_VIEW_TRANSACTIONS,
+            self::PERMISSION_TYPES_DENY,
+            self::PERMISSION_TYPES_CREATE_PAYMENT_REQUEST,
+            self::PERMISSION_TYPES_EDIT_PAYMENT_REQUEST,
+            self::PERMISSION_TYPES_DELETE_PAYMENT_REQUEST,
+            self::PERMISSION_TYPES_CREATE_RULE,
+            self::PERMISSION_TYPES_EDIT_RULE,
+            self::PERMISSION_TYPES_DELETE_RULE,
+            self::PERMISSION_TYPES_CREATE_PAYOUT,
+            self::PERMISSION_TYPES_EDIT_PAYOUT,
+            self::PERMISSION_TYPES_DELETE_PAYOUT,
+            self::PERMISSION_TYPES_CREATE_REPORT,
+            self::PERMISSION_TYPES_EDIT_REPORT,
+            self::PERMISSION_TYPES_DELETE_REPORT,
+            self::PERMISSION_TYPES_EXECUTE_REPORT,
+            self::PERMISSION_TYPES_CREATE_PAYMENT_ACCOUNT,
+            self::PERMISSION_TYPES_EDIT_PAYMENT_ACCOUNT,
+            self::PERMISSION_TYPES_TRUSTED_SUBMIT_PAYOUT,
+            self::PERMISSION_TYPES_OPEN_BANKING_ACCOUNT_INFORMATION,
+            self::PERMISSION_TYPES_CREATE_DIRECT_DEBIT_MANDATE,
+            self::PERMISSION_TYPES_SUBMIT_DIRECT_DEBIT_PAYMENT,
+            self::PERMISSION_TYPES_VIEW_TRANSACTIONS,
         ];
     }
 
@@ -366,6 +411,20 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
             self::SHARED_SECRET_ALGORITHM_HMAC_SHA256,
             self::SHARED_SECRET_ALGORITHM_HMAC_SHA384,
             self::SHARED_SECRET_ALGORITHM_HMAC_SHA512,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getAuthenticationMethodsAllowableValues()
+    {
+        return [
+            self::AUTHENTICATION_METHODS_NONE,
+            self::AUTHENTICATION_METHODS_WEB_AUTHN,
+            self::AUTHENTICATION_METHODS_ONE_TIME_PASSWORD,
         ];
     }
 
@@ -387,7 +446,7 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('merchant_id', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
-        $this->setIfExists('permissions', $data ?? [], null);
+        $this->setIfExists('permission_types', $data ?? [], null);
         $this->setIfExists('inserted', $data ?? [], null);
         $this->setIfExists('last_updated', $data ?? [], null);
         $this->setIfExists('token', $data ?? [], null);
@@ -396,6 +455,13 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         $this->setIfExists('shared_secret_base64', $data ?? [], null);
         $this->setIfExists('request_signature_version', $data ?? [], null);
         $this->setIfExists('expires_at', $data ?? [], null);
+        $this->setIfExists('authorisations', $data ?? [], null);
+        $this->setIfExists('can_authorise', $data ?? [], null);
+        $this->setIfExists('has_current_user_authorised', $data ?? [], null);
+        $this->setIfExists('authorisers_required_count', $data ?? [], null);
+        $this->setIfExists('authorisers_completed_count', $data ?? [], null);
+        $this->setIfExists('authentication_methods', $data ?? [], null);
+        $this->setIfExists('last_authorised', $data ?? [], null);
     }
 
     /**
@@ -424,15 +490,6 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        $allowedValues = $this->getPermissionsAllowableValues();
-        if (!is_null($this->container['permissions']) && !in_array($this->container['permissions'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'permissions', must be one of '%s'",
-                $this->container['permissions'],
-                implode("', '", $allowedValues)
-            );
-        }
 
         $allowedValues = $this->getSharedSecretAlgorithmAllowableValues();
         if (!is_null($this->container['shared_secret_algorithm']) && !in_array($this->container['shared_secret_algorithm'], $allowedValues, true)) {
@@ -547,38 +604,44 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
     }
 
     /**
-     * Gets permissions
+     * Gets permission_types
      *
-     * @return string|null
+     * @return string[]|null
      */
-    public function getPermissions()
+    public function getPermissionTypes()
     {
-        return $this->container['permissions'];
+        return $this->container['permission_types'];
     }
 
     /**
-     * Sets permissions
+     * Sets permission_types
      *
-     * @param string|null $permissions permissions
+     * @param string[]|null $permission_types The permissions that the merchant token supports.
      *
      * @return self
      */
-    public function setPermissions($permissions)
+    public function setPermissionTypes($permission_types)
     {
-        if (is_null($permissions)) {
-            throw new \InvalidArgumentException('non-nullable permissions cannot be null');
+        if (is_null($permission_types)) {
+            array_push($this->openAPINullablesSetToNull, 'permission_types');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('permission_types', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $allowedValues = $this->getPermissionsAllowableValues();
-        if (!in_array($permissions, $allowedValues, true)) {
+        $allowedValues = $this->getPermissionTypesAllowableValues();
+        if (!is_null($permission_types) && array_diff($permission_types, $allowedValues)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Invalid value '%s' for 'permissions', must be one of '%s'",
-                    $permissions,
+                    "Invalid value for 'permission_types', must be one of '%s'",
                     implode("', '", $allowedValues)
                 )
             );
         }
-        $this->container['permissions'] = $permissions;
+        $this->container['permission_types'] = $permission_types;
 
         return $this;
     }
@@ -826,6 +889,225 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
             }
         }
         $this->container['expires_at'] = $expires_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets authorisations
+     *
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsApproveAuthorisation[]|null
+     */
+    public function getAuthorisations()
+    {
+        return $this->container['authorisations'];
+    }
+
+    /**
+     * Sets authorisations
+     *
+     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsApproveAuthorisation[]|null $authorisations A list of users who have successfully authorised the latest version of the beneficiary.
+     *
+     * @return self
+     */
+    public function setAuthorisations($authorisations)
+    {
+        if (is_null($authorisations)) {
+            array_push($this->openAPINullablesSetToNull, 'authorisations');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('authorisations', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['authorisations'] = $authorisations;
+
+        return $this;
+    }
+
+    /**
+     * Gets can_authorise
+     *
+     * @return bool|null
+     */
+    public function getCanAuthorise()
+    {
+        return $this->container['can_authorise'];
+    }
+
+    /**
+     * Sets can_authorise
+     *
+     * @param bool|null $can_authorise True if the merchant token can be authorised by the user who loaded it.
+     *
+     * @return self
+     */
+    public function setCanAuthorise($can_authorise)
+    {
+        if (is_null($can_authorise)) {
+            throw new \InvalidArgumentException('non-nullable can_authorise cannot be null');
+        }
+        $this->container['can_authorise'] = $can_authorise;
+
+        return $this;
+    }
+
+    /**
+     * Gets has_current_user_authorised
+     *
+     * @return bool|null
+     */
+    public function getHasCurrentUserAuthorised()
+    {
+        return $this->container['has_current_user_authorised'];
+    }
+
+    /**
+     * Sets has_current_user_authorised
+     *
+     * @param bool|null $has_current_user_authorised True if the beneficiary was loaded for a user and that user has already authorised the latest version of the beneficiary.
+     *
+     * @return self
+     */
+    public function setHasCurrentUserAuthorised($has_current_user_authorised)
+    {
+        if (is_null($has_current_user_authorised)) {
+            throw new \InvalidArgumentException('non-nullable has_current_user_authorised cannot be null');
+        }
+        $this->container['has_current_user_authorised'] = $has_current_user_authorised;
+
+        return $this;
+    }
+
+    /**
+     * Gets authorisers_required_count
+     *
+     * @return int|null
+     */
+    public function getAuthorisersRequiredCount()
+    {
+        return $this->container['authorisers_required_count'];
+    }
+
+    /**
+     * Sets authorisers_required_count
+     *
+     * @param int|null $authorisers_required_count The number of authorisers required for this merchant token. Is determined by business settings  on the source account and/or merchant.
+     *
+     * @return self
+     */
+    public function setAuthorisersRequiredCount($authorisers_required_count)
+    {
+        if (is_null($authorisers_required_count)) {
+            throw new \InvalidArgumentException('non-nullable authorisers_required_count cannot be null');
+        }
+        $this->container['authorisers_required_count'] = $authorisers_required_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets authorisers_completed_count
+     *
+     * @return int|null
+     */
+    public function getAuthorisersCompletedCount()
+    {
+        return $this->container['authorisers_completed_count'];
+    }
+
+    /**
+     * Sets authorisers_completed_count
+     *
+     * @param int|null $authorisers_completed_count The number of distinct authorisers that have authorised the merchant token.
+     *
+     * @return self
+     */
+    public function setAuthorisersCompletedCount($authorisers_completed_count)
+    {
+        if (is_null($authorisers_completed_count)) {
+            throw new \InvalidArgumentException('non-nullable authorisers_completed_count cannot be null');
+        }
+        $this->container['authorisers_completed_count'] = $authorisers_completed_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets authentication_methods
+     *
+     * @return string[]|null
+     */
+    public function getAuthenticationMethods()
+    {
+        return $this->container['authentication_methods'];
+    }
+
+    /**
+     * Sets authentication_methods
+     *
+     * @param string[]|null $authentication_methods A list of authentication types allowed to authorise the merchant token.
+     *
+     * @return self
+     */
+    public function setAuthenticationMethods($authentication_methods)
+    {
+        if (is_null($authentication_methods)) {
+            array_push($this->openAPINullablesSetToNull, 'authentication_methods');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('authentication_methods', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $allowedValues = $this->getAuthenticationMethodsAllowableValues();
+        if (!is_null($authentication_methods) && array_diff($authentication_methods, $allowedValues)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'authentication_methods', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['authentication_methods'] = $authentication_methods;
+
+        return $this;
+    }
+
+    /**
+     * Gets last_authorised
+     *
+     * @return \DateTime|null
+     */
+    public function getLastAuthorised()
+    {
+        return $this->container['last_authorised'];
+    }
+
+    /**
+     * Sets last_authorised
+     *
+     * @param \DateTime|null $last_authorised last_authorised
+     *
+     * @return self
+     */
+    public function setLastAuthorised($last_authorised)
+    {
+        if (is_null($last_authorised)) {
+            array_push($this->openAPINullablesSetToNull, 'last_authorised');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('last_authorised', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['last_authorised'] = $last_authorised;
 
         return $this;
     }

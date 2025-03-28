@@ -110,6 +110,7 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
         'formatted_amount' => 'string',
         'lightning_invoice_expires_at' => '\DateTime',
         'destination_account' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount',
+        'sandbox_settle_delay_in_seconds' => 'int',
         'customer_name' => 'string'
     ];
 
@@ -174,6 +175,7 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
         'formatted_amount' => null,
         'lightning_invoice_expires_at' => 'date-time',
         'destination_account' => null,
+        'sandbox_settle_delay_in_seconds' => 'int32',
         'customer_name' => null
     ];
 
@@ -236,6 +238,7 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
         'formatted_amount' => true,
         'lightning_invoice_expires_at' => true,
         'destination_account' => false,
+        'sandbox_settle_delay_in_seconds' => true,
         'customer_name' => true
     ];
 
@@ -378,6 +381,7 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
         'formatted_amount' => 'formattedAmount',
         'lightning_invoice_expires_at' => 'lightningInvoiceExpiresAt',
         'destination_account' => 'destinationAccount',
+        'sandbox_settle_delay_in_seconds' => 'sandboxSettleDelayInSeconds',
         'customer_name' => 'customerName'
     ];
 
@@ -440,6 +444,7 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
         'formatted_amount' => 'setFormattedAmount',
         'lightning_invoice_expires_at' => 'setLightningInvoiceExpiresAt',
         'destination_account' => 'setDestinationAccount',
+        'sandbox_settle_delay_in_seconds' => 'setSandboxSettleDelayInSeconds',
         'customer_name' => 'setCustomerName'
     ];
 
@@ -502,6 +507,7 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
         'formatted_amount' => 'getFormattedAmount',
         'lightning_invoice_expires_at' => 'getLightningInvoiceExpiresAt',
         'destination_account' => 'getDestinationAccount',
+        'sandbox_settle_delay_in_seconds' => 'getSandboxSettleDelayInSeconds',
         'customer_name' => 'getCustomerName'
     ];
 
@@ -549,6 +555,7 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
     public const CURRENCY_NONE = 'NONE';
     public const CURRENCY_GBP = 'GBP';
     public const CURRENCY_EUR = 'EUR';
+    public const CURRENCY_USD = 'USD';
     public const CURRENCY_BTC = 'BTC';
     public const PAYMENT_METHODS_NONE = 'None';
     public const PAYMENT_METHODS_CARD = 'card';
@@ -577,7 +584,6 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
     public const PAYMENT_PROCESSOR_LIGHTNING = 'Lightning';
     public const PAYMENT_PROCESSOR_LIGHTNING_TESTNET = 'LightningTestnet';
     public const PAYMENT_PROCESSOR_BANKING_CIRCLE_DIRECT_DEBIT = 'BankingCircleDirectDebit';
-    public const PAYMENT_PROCESSOR_TRIBE = 'Tribe';
     public const STATUS_NONE = 'None';
     public const STATUS_FULLY_PAID = 'FullyPaid';
     public const STATUS_PARTIALLY_PAID = 'PartiallyPaid';
@@ -598,6 +604,7 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
             self::CURRENCY_NONE,
             self::CURRENCY_GBP,
             self::CURRENCY_EUR,
+            self::CURRENCY_USD,
             self::CURRENCY_BTC,
         ];
     }
@@ -659,7 +666,6 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
             self::PAYMENT_PROCESSOR_LIGHTNING,
             self::PAYMENT_PROCESSOR_LIGHTNING_TESTNET,
             self::PAYMENT_PROCESSOR_BANKING_CIRCLE_DIRECT_DEBIT,
-            self::PAYMENT_PROCESSOR_TRIBE,
         ];
     }
 
@@ -761,6 +767,7 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
         $this->setIfExists('formatted_amount', $data ?? [], null);
         $this->setIfExists('lightning_invoice_expires_at', $data ?? [], null);
         $this->setIfExists('destination_account', $data ?? [], null);
+        $this->setIfExists('sandbox_settle_delay_in_seconds', $data ?? [], null);
         $this->setIfExists('customer_name', $data ?? [], null);
     }
 
@@ -2554,6 +2561,40 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
             throw new \InvalidArgumentException('non-nullable destination_account cannot be null');
         }
         $this->container['destination_account'] = $destination_account;
+
+        return $this;
+    }
+
+    /**
+     * Gets sandbox_settle_delay_in_seconds
+     *
+     * @return int|null
+     */
+    public function getSandboxSettleDelayInSeconds()
+    {
+        return $this->container['sandbox_settle_delay_in_seconds'];
+    }
+
+    /**
+     * Sets sandbox_settle_delay_in_seconds
+     *
+     * @param int|null $sandbox_settle_delay_in_seconds Sandbox only. Optional. If set, simulated settlements will be delayed by the specified number of seconds.
+     *
+     * @return self
+     */
+    public function setSandboxSettleDelayInSeconds($sandbox_settle_delay_in_seconds)
+    {
+        if (is_null($sandbox_settle_delay_in_seconds)) {
+            array_push($this->openAPINullablesSetToNull, 'sandbox_settle_delay_in_seconds');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('sandbox_settle_delay_in_seconds', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['sandbox_settle_delay_in_seconds'] = $sandbox_settle_delay_in_seconds;
 
         return $this;
     }

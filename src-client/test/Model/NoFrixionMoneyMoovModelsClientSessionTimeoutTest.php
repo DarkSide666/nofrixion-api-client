@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionBizBizModelsPagingPaymentRequestPageResponseTest
+ * NoFrixionMoneyMoovModelsClientSessionTimeoutTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Nofrixion\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * NoFrixionBizBizModelsPagingPaymentRequestPageResponseTest Class Doc Comment
+ * NoFrixionMoneyMoovModelsClientSessionTimeoutTest Class Doc Comment
  *
  * @category    Class
- * @description NoFrixionBizBizModelsPagingPaymentRequestPageResponse
+ * @description NoFrixionMoneyMoovModelsClientSessionTimeout
  * @package     Nofrixion\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class NoFrixionBizBizModelsPagingPaymentRequestPageResponseTest extends TestCase
+class NoFrixionMoneyMoovModelsClientSessionTimeoutTest extends TestCase
 {
 
     /**
@@ -71,54 +71,27 @@ class NoFrixionBizBizModelsPagingPaymentRequestPageResponseTest extends TestCase
     }
 
     /**
-     * Test "NoFrixionBizBizModelsPagingPaymentRequestPageResponse"
+     * Test "NoFrixionMoneyMoovModelsClientSessionTimeout"
      */
-    public function testNoFrixionBizBizModelsPagingPaymentRequestPageResponse()
+    public function testNoFrixionMoneyMoovModelsClientSessionTimeout()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "content"
+     * Test attribute "merchant_id"
      */
-    public function testPropertyContent()
+    public function testPropertyMerchantId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "page_number"
+     * Test attribute "timeout_seconds"
      */
-    public function testPropertyPageNumber()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "page_size"
-     */
-    public function testPropertyPageSize()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "total_pages"
-     */
-    public function testPropertyTotalPages()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "total_size"
-     */
-    public function testPropertyTotalSize()
+    public function testPropertyTimeoutSeconds()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

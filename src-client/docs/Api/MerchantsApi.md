@@ -8,6 +8,8 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 | [**createMerchantUserRole()**](MerchantsApi.md#createMerchantUserRole) | **POST** /api/v1/merchants/userroles | Assigns role to user. |
 | [**deleteMerchantTag()**](MerchantsApi.md#deleteMerchantTag) | **DELETE** /api/v1/merchants/{merchantID}/tags/{tagID} | Deletes a tag from a merchant |
 | [**deleteMerchantUserRole()**](MerchantsApi.md#deleteMerchantUserRole) | **DELETE** /api/v1/merchants/userroles/{id} | Deletes user role. |
+| [**deleteUserFromMerchant()**](MerchantsApi.md#deleteUserFromMerchant) | **DELETE** /api/v1/merchants/{merchantId}/users/{userId} | Deletes all roles for a user in a merchant. |
+| [**getAuthorisationSettings()**](MerchantsApi.md#getAuthorisationSettings) | **GET** /api/v1/merchants/{merchantID}/authorisationsettings | Gets a list of merchant authorisation settings for a merchant |
 | [**getMerchant()**](MerchantsApi.md#getMerchant) | **GET** /api/v1/merchants/{merchantID} | Get&#39;s a merchant. |
 | [**getMerchantAccount()**](MerchantsApi.md#getMerchantAccount) | **GET** /api/v1/merchants/{merchantID}/accounts/{accountID} | Get an account. |
 | [**getMerchantAccounts()**](MerchantsApi.md#getMerchantAccounts) | **GET** /api/v1/merchants/{merchantID}/accounts | Get a list of merchant&#39;s payment accounts. |
@@ -17,6 +19,7 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 | [**getMerchantBeneficiaryGroups()**](MerchantsApi.md#getMerchantBeneficiaryGroups) | **GET** /api/v1/merchants/{merchantID}/beneficiarygroups | Gets a list of all beneficiary groups. |
 | [**getMerchantPayoutsPaged()**](MerchantsApi.md#getMerchantPayoutsPaged) | **GET** /api/v1/merchants/{merchantID}/payouts | Gets a list of all payouts for a specific merchant. |
 | [**getMerchantTags()**](MerchantsApi.md#getMerchantTags) | **GET** /api/v1/merchants/{merchantID}/tags | Get a list of merchant tags |
+| [**getMerchantToken()**](MerchantsApi.md#getMerchantToken) | **GET** /api/v1/merchants/tokens/{id} | Gets the details of a merchant API token. |
 | [**getMerchantTokens()**](MerchantsApi.md#getMerchantTokens) | **GET** /api/v1/merchants/{merchantID}/tokens | Gets a list of a merchant&#39;s issued API tokens. |
 | [**getMerchantTransactionsPaged()**](MerchantsApi.md#getMerchantTransactionsPaged) | **GET** /api/v1/merchants/{merchantID}/transactions | Gets a list of transactions for all a merchant&#39;s accounts. |
 | [**getMerchantUserInvites()**](MerchantsApi.md#getMerchantUserInvites) | **GET** /api/v1/merchants/{merchantID}/userinvites | Gets user invites associated with merchant. |
@@ -25,6 +28,7 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 | [**getMerchantWebhooks()**](MerchantsApi.md#getMerchantWebhooks) | **GET** /api/v1/merchants/{merchantID}/webhooks | Get all configured webhooks for a merchant. |
 | [**getMerchants()**](MerchantsApi.md#getMerchants) | **GET** /api/v1/merchants | Get&#39;s a list of merchants the caller has access to. |
 | [**getMerchantsPaged()**](MerchantsApi.md#getMerchantsPaged) | **GET** /api/v1/merchants/paged | Get a paged list of all the merchants the caller has access to. |
+| [**suspendMerchant()**](MerchantsApi.md#suspendMerchant) | **PUT** /api/v1/merchants/{merchantId}/suspend | Suspends a merchant |
 
 
 ## `createMerchantTag()`
@@ -269,6 +273,127 @@ void (empty response body)
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `deleteUserFromMerchant()`
+
+```php
+deleteUserFromMerchant($merchant_id, $user_id)
+```
+
+Deletes all roles for a user in a merchant.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\MerchantsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$merchant_id = 'merchant_id_example'; // string | The merchant id
+$user_id = 'user_id_example'; // string | The user id
+
+try {
+    $apiInstance->deleteUserFromMerchant($merchant_id, $user_id);
+} catch (Exception $e) {
+    echo 'Exception when calling MerchantsApi->deleteUserFromMerchant: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **merchant_id** | **string**| The merchant id | |
+| **user_id** | **string**| The user id | |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getAuthorisationSettings()`
+
+```php
+getAuthorisationSettings($merchant_id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationSetting[]
+```
+
+Gets a list of merchant authorisation settings for a merchant
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\MerchantsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$merchant_id = 'merchant_id_example'; // string | The merchant id
+
+try {
+    $result = $apiInstance->getAuthorisationSettings($merchant_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling MerchantsApi->getAuthorisationSettings: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **merchant_id** | **string**| The merchant id | |
+
+### Return type
+
+[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationSetting[]**](../Model/NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationSetting.md)
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `text/plain`, `application/json`, `text/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `getMerchant()`
 
 ```php
@@ -394,7 +519,7 @@ try {
 ## `getMerchantAccounts()`
 
 ```php
-getMerchantAccounts($merchant_id, $connected_accounts): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]
+getMerchantAccounts($merchant_id, $connected_accounts)
 ```
 
 Get a list of merchant's payment accounts.
@@ -422,8 +547,7 @@ $merchant_id = 'merchant_id_example'; // string | The ID of the merchant to get 
 $connected_accounts = false; // bool | Optional include connected accounts along with payment accounts.
 
 try {
-    $result = $apiInstance->getMerchantAccounts($merchant_id, $connected_accounts);
-    print_r($result);
+    $apiInstance->getMerchantAccounts($merchant_id, $connected_accounts);
 } catch (Exception $e) {
     echo 'Exception when calling MerchantsApi->getMerchantAccounts: ', $e->getMessage(), PHP_EOL;
 }
@@ -438,7 +562,7 @@ try {
 
 ### Return type
 
-[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]**](../Model/NoFrixionMoneyMoovModelsPaymentAccount.md)
+void (empty response body)
 
 ### Authorization
 
@@ -447,7 +571,7 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: `text/plain`, `application/json`, `text/json`
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)
@@ -520,7 +644,7 @@ try {
 ## `getMerchantBeneficiaries()`
 
 ```php
-getMerchantBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse
+getMerchantBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort)
 ```
 
 Gets a list of all beneficiaries.
@@ -553,8 +677,7 @@ $include_disabled = false; // bool | If set to true will include disabled benefi
 $sort = 'sort_example'; // string | Optional expression to sort the order of the beneficiaries.
 
 try {
-    $result = $apiInstance->getMerchantBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort);
-    print_r($result);
+    $apiInstance->getMerchantBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort);
 } catch (Exception $e) {
     echo 'Exception when calling MerchantsApi->getMerchantBeneficiaries: ', $e->getMessage(), PHP_EOL;
 }
@@ -574,7 +697,7 @@ try {
 
 ### Return type
 
-[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse**](../Model/NoFrixionMoneyMoovModelsBeneficiaryPageResponse.md)
+void (empty response body)
 
 ### Authorization
 
@@ -583,7 +706,7 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: `text/plain`, `application/json`, `text/json`
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)
@@ -718,7 +841,7 @@ try {
 ## `getMerchantPayoutsPaged()`
 
 ```php
-getMerchantPayoutsPaged($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort): \Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPayoutPageResponse
+getMerchantPayoutsPaged($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort)
 ```
 
 Gets a list of all payouts for a specific merchant.
@@ -756,8 +879,7 @@ $tags = array('tags_example'); // string[] | The tag filter to apply to retrieve
 $sort = 'sort_example'; // string | Optional expression to sort the order of the payouts.
 
 try {
-    $result = $apiInstance->getMerchantPayoutsPaged($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort);
-    print_r($result);
+    $apiInstance->getMerchantPayoutsPaged($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort);
 } catch (Exception $e) {
     echo 'Exception when calling MerchantsApi->getMerchantPayoutsPaged: ', $e->getMessage(), PHP_EOL;
 }
@@ -782,7 +904,7 @@ try {
 
 ### Return type
 
-[**\Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPayoutPageResponse**](../Model/NoFrixionBizBizModelsPagingPayoutPageResponse.md)
+void (empty response body)
 
 ### Authorization
 
@@ -791,7 +913,7 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: `text/plain`, `application/json`, `text/json`
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)
@@ -843,6 +965,66 @@ try {
 ### Return type
 
 [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTag[]**](../Model/NoFrixionMoneyMoovModelsTag.md)
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `text/plain`, `application/json`, `text/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getMerchantToken()`
+
+```php
+getMerchantToken($id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsMerchantToken
+```
+
+Gets the details of a merchant API token.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\MerchantsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 'id_example'; // string | The ID of the merchant token to delete.
+
+try {
+    $result = $apiInstance->getMerchantToken($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling MerchantsApi->getMerchantToken: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **string**| The ID of the merchant token to delete. | |
+
+### Return type
+
+[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsMerchantToken**](../Model/NoFrixionMoneyMoovModelsMerchantToken.md)
 
 ### Authorization
 
@@ -1347,6 +1529,67 @@ try {
 
 - **Content-Type**: Not defined
 - **Accept**: `text/plain`, `application/json`, `text/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `suspendMerchant()`
+
+```php
+suspendMerchant($merchant_id, $no_frixion_money_moov_models_merchant_suspend)
+```
+
+Suspends a merchant
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\MerchantsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$merchant_id = 'merchant_id_example'; // string | The merchant id
+$no_frixion_money_moov_models_merchant_suspend = new \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsMerchantSuspend(); // \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsMerchantSuspend | The suspension details
+
+try {
+    $apiInstance->suspendMerchant($merchant_id, $no_frixion_money_moov_models_merchant_suspend);
+} catch (Exception $e) {
+    echo 'Exception when calling MerchantsApi->suspendMerchant: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **merchant_id** | **string**| The merchant id | |
+| **no_frixion_money_moov_models_merchant_suspend** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsMerchantSuspend**](../Model/NoFrixionMoneyMoovModelsMerchantSuspend.md)| The suspension details | [optional] |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)

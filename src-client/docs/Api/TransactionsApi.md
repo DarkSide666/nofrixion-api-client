@@ -136,7 +136,7 @@ void (empty response body)
 ## `getTransactionsForAccountPaged()`
 
 ```php
-getTransactionsForAccountPaged($account_id, $from_date, $page_number, $page_size, $to_date, $credit_type, $search, $sort): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTransactionPageResponse
+getTransactionsForAccountPaged($account_id, $from_date, $page_number, $page_size, $to_date, $credit_type, $search, $sort, $min_amount, $max_amount)
 ```
 
 Get a list of the transactions for a single payment account.
@@ -170,10 +170,11 @@ $to_date = new \DateTime("2013-10-20T19:20:30+01:00"); // \DateTime | The end da
 $credit_type = 'credit_type_example'; // string | A credit filter to apply to the transactions to retrieve.
 $search = 'search_example'; // string | The text filter to apply to retrieve transactions with a similar account name, description, their reference, your reference, etc.
 $sort = 'sort_example'; // string | Optional expression to sort the order of the transactions. Example \"Amount desc,Inserted asc\".
+$min_amount = 3.4; // float | The amount filter to apply to retrieve transactions that exceed this amount.
+$max_amount = 3.4; // float | The amount filter to apply to retrieve transactions that don't exceed this amount.
 
 try {
-    $result = $apiInstance->getTransactionsForAccountPaged($account_id, $from_date, $page_number, $page_size, $to_date, $credit_type, $search, $sort);
-    print_r($result);
+    $apiInstance->getTransactionsForAccountPaged($account_id, $from_date, $page_number, $page_size, $to_date, $credit_type, $search, $sort, $min_amount, $max_amount);
 } catch (Exception $e) {
     echo 'Exception when calling TransactionsApi->getTransactionsForAccountPaged: ', $e->getMessage(), PHP_EOL;
 }
@@ -191,10 +192,12 @@ try {
 | **credit_type** | **string**| A credit filter to apply to the transactions to retrieve. | [optional] |
 | **search** | **string**| The text filter to apply to retrieve transactions with a similar account name, description, their reference, your reference, etc. | [optional] |
 | **sort** | **string**| Optional expression to sort the order of the transactions. Example \&quot;Amount desc,Inserted asc\&quot;. | [optional] |
+| **min_amount** | **float**| The amount filter to apply to retrieve transactions that exceed this amount. | [optional] |
+| **max_amount** | **float**| The amount filter to apply to retrieve transactions that don&#39;t exceed this amount. | [optional] |
 
 ### Return type
 
-[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTransactionPageResponse**](../Model/NoFrixionMoneyMoovModelsTransactionPageResponse.md)
+void (empty response body)
 
 ### Authorization
 
@@ -203,7 +206,7 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: `text/plain`, `application/json`, `text/json`
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)

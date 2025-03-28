@@ -134,15 +134,6 @@ class NoFrixionMoneyMoovModelsAccountIdentifierTest extends TestCase
     }
 
     /**
-     * Test attribute "bitcoin_address"
-     */
-    public function testPropertyBitcoinAddress()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "summary"
      */
     public function testPropertySummary()
@@ -164,6 +155,15 @@ class NoFrixionMoneyMoovModelsAccountIdentifierTest extends TestCase
      * Test attribute "display_scan_summary"
      */
     public function testPropertyDisplayScanSummary()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "display_bic_summary"
+     */
+    public function testPropertyDisplayBicSummary()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

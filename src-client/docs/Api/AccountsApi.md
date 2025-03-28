@@ -463,7 +463,7 @@ void (empty response body)
 ## `getAccountTransactionsPaged()`
 
 ```php
-getAccountTransactionsPaged($account_id, $from_date, $page_number, $page_size, $to_date, $credit_type, $search, $sort): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTransactionPageResponse
+getAccountTransactionsPaged($account_id, $from_date, $page_number, $page_size, $to_date, $credit_type, $search, $sort, $min_amount, $max_amount)
 ```
 
 Get a list of the transactions for a single payment account.
@@ -495,10 +495,11 @@ $to_date = new \DateTime("2013-10-20T19:20:30+01:00"); // \DateTime | The end da
 $credit_type = 'credit_type_example'; // string | The type of transactions to retrieve from.
 $search = 'search_example'; // string | The text filter to apply to retrieve transactions with a similar title, description, merchant name.
 $sort = 'sort_example'; // string | Optional expression to sort the order of the transactions. Example \"Amount desc,Inserted asc\".
+$min_amount = 3.4; // float | The amount filter to apply to retrieve transactions that exceed this amount.
+$max_amount = 3.4; // float | The amount filter to apply to retrieve transactions that don't exceed this amount.
 
 try {
-    $result = $apiInstance->getAccountTransactionsPaged($account_id, $from_date, $page_number, $page_size, $to_date, $credit_type, $search, $sort);
-    print_r($result);
+    $apiInstance->getAccountTransactionsPaged($account_id, $from_date, $page_number, $page_size, $to_date, $credit_type, $search, $sort, $min_amount, $max_amount);
 } catch (Exception $e) {
     echo 'Exception when calling AccountsApi->getAccountTransactionsPaged: ', $e->getMessage(), PHP_EOL;
 }
@@ -516,10 +517,12 @@ try {
 | **credit_type** | **string**| The type of transactions to retrieve from. | [optional] |
 | **search** | **string**| The text filter to apply to retrieve transactions with a similar title, description, merchant name. | [optional] |
 | **sort** | **string**| Optional expression to sort the order of the transactions. Example \&quot;Amount desc,Inserted asc\&quot;. | [optional] |
+| **min_amount** | **float**| The amount filter to apply to retrieve transactions that exceed this amount. | [optional] |
+| **max_amount** | **float**| The amount filter to apply to retrieve transactions that don&#39;t exceed this amount. | [optional] |
 
 ### Return type
 
-[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTransactionPageResponse**](../Model/NoFrixionMoneyMoovModelsTransactionPageResponse.md)
+void (empty response body)
 
 ### Authorization
 
@@ -528,7 +531,7 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: `text/plain`, `application/json`, `text/json`
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)
@@ -537,7 +540,7 @@ try {
 ## `getAccounts()`
 
 ```php
-getAccounts($merchant_id, $connected_accounts, $only_connect_accounts): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]
+getAccounts($merchant_id, $connected_accounts, $only_connect_accounts, $include_archived)
 ```
 
 Get a list of all payment accounts the user has access to.
@@ -564,10 +567,10 @@ $apiInstance = new Nofrixion\Client\Api\AccountsApi(
 $merchant_id = 'merchant_id_example'; // string | The merchantID of the accounts to retrieve.
 $connected_accounts = false; // bool | Optional include connected accounts along with payment accounts.
 $only_connect_accounts = false; // bool | Only return connected accounts
+$include_archived = false; // bool | Flag that indicates whether to fetch archived accounts or not.
 
 try {
-    $result = $apiInstance->getAccounts($merchant_id, $connected_accounts, $only_connect_accounts);
-    print_r($result);
+    $apiInstance->getAccounts($merchant_id, $connected_accounts, $only_connect_accounts, $include_archived);
 } catch (Exception $e) {
     echo 'Exception when calling AccountsApi->getAccounts: ', $e->getMessage(), PHP_EOL;
 }
@@ -580,10 +583,11 @@ try {
 | **merchant_id** | **string**| The merchantID of the accounts to retrieve. | [optional] |
 | **connected_accounts** | **bool**| Optional include connected accounts along with payment accounts. | [optional] [default to false] |
 | **only_connect_accounts** | **bool**| Only return connected accounts | [optional] [default to false] |
+| **include_archived** | **bool**| Flag that indicates whether to fetch archived accounts or not. | [optional] [default to false] |
 
 ### Return type
 
-[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]**](../Model/NoFrixionMoneyMoovModelsPaymentAccount.md)
+void (empty response body)
 
 ### Authorization
 
@@ -592,7 +596,7 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: `text/plain`, `application/json`, `text/json`
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)
@@ -601,7 +605,7 @@ try {
 ## `getAccountsPaged()`
 
 ```php
-getAccountsPaged($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse
+getAccountsPaged($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $include_archived)
 ```
 
 Get a paged list of all payment accounts the user has access to for a specific merchant.
@@ -634,10 +638,10 @@ $search = 'search_example'; // string | The text filter to apply to retrieve acc
 $sort = 'sort_example'; // string | Optional expression to sort the order of the accounts. Example \"AvailableBalance desc,Inserted asc\".
 $only_connect_accounts = false; // bool | Only return connected accounts
 $only_archived = false; // bool | Flag that indicates whether to fetch only archived accounts or not.
+$include_archived = false; // bool | Flag that indicates whether to fetch archived accounts or not.
 
 try {
-    $result = $apiInstance->getAccountsPaged($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived);
-    print_r($result);
+    $apiInstance->getAccountsPaged($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $include_archived);
 } catch (Exception $e) {
     echo 'Exception when calling AccountsApi->getAccountsPaged: ', $e->getMessage(), PHP_EOL;
 }
@@ -656,10 +660,11 @@ try {
 | **sort** | **string**| Optional expression to sort the order of the accounts. Example \&quot;AvailableBalance desc,Inserted asc\&quot;. | [optional] |
 | **only_connect_accounts** | **bool**| Only return connected accounts | [optional] [default to false] |
 | **only_archived** | **bool**| Flag that indicates whether to fetch only archived accounts or not. | [optional] [default to false] |
+| **include_archived** | **bool**| Flag that indicates whether to fetch archived accounts or not. | [optional] [default to false] |
 
 ### Return type
 
-[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse**](../Model/NoFrixionMoneyMoovModelsPaymentAccountPageResponse.md)
+void (empty response body)
 
 ### Authorization
 
@@ -668,7 +673,7 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: `text/plain`, `application/json`, `text/json`
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)

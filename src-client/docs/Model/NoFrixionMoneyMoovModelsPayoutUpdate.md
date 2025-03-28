@@ -16,8 +16,6 @@ Name | Type | Description | Notes
 **tag_ids** | **string[]** | An optional list of tag ids to add to the payout. | [optional]
 **scheduled** | **bool** | Should this payout be scheduled for a future date? | [optional]
 **schedule_date** | **\DateTime** | The date the payout should be submitted. | [optional]
-**bitcoin_subtract_fee_from_amount** | **bool** | For Bitcoin payouts, when this flag is set the network fee will be deducted from the send amount.  This is particularly useful for sweeps where it can be difficult to calculate the exact fee required. | [optional]
-**bitcoin_fee_sats_per_vbyte** | **int** | The Bitcoin fee rate to apply in Satoshis per virtual byte. | [optional]
 **payment_rail** | **string** | Optional field to indicate the payment rail to use for the payout. Currrently only  supports choosing between SEPA-CT and SEPA-INST for EUR payments. If not set, for a EUR  payment, the default behaviour is to attempt SEPA-INST and fallback to SEPA-CT if rejected. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

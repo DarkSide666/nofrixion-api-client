@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionMoneyMoovModelsUserRolePermissions
+ * NoFrixionMoneyMoovModelsMerchantSuspend
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Nofrixion\Client\ObjectSerializer;
 
 /**
- * NoFrixionMoneyMoovModelsUserRolePermissions Class Doc Comment
+ * NoFrixionMoneyMoovModelsMerchantSuspend Class Doc Comment
  *
  * @category Class
  * @package  Nofrixion\Client
@@ -40,7 +40,7 @@ use \Nofrixion\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class NoFrixionMoneyMoovModelsUserRolePermissions implements ModelInterface, ArrayAccess, \JsonSerializable
+class NoFrixionMoneyMoovModelsMerchantSuspend implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class NoFrixionMoneyMoovModelsUserRolePermissions implements ModelInterface, Arr
       *
       * @var string
       */
-    protected static $openAPIModelName = 'NoFrixion.MoneyMoov.Models.UserRolePermissions';
+    protected static $openAPIModelName = 'NoFrixion.MoneyMoov.Models.MerchantSuspend';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,7 @@ class NoFrixionMoneyMoovModelsUserRolePermissions implements ModelInterface, Arr
       * @var string[]
       */
     protected static $openAPITypes = [
-        'merchant_permissions' => 'array<string,string[]>',
-        'account_permissions' => 'array<string,string[]>'
+        'reason' => 'string'
     ];
 
     /**
@@ -69,8 +68,7 @@ class NoFrixionMoneyMoovModelsUserRolePermissions implements ModelInterface, Arr
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'merchant_permissions' => null,
-        'account_permissions' => null
+        'reason' => null
     ];
 
     /**
@@ -79,8 +77,7 @@ class NoFrixionMoneyMoovModelsUserRolePermissions implements ModelInterface, Arr
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'merchant_permissions' => true,
-        'account_permissions' => true
+        'reason' => true
     ];
 
     /**
@@ -169,8 +166,7 @@ class NoFrixionMoneyMoovModelsUserRolePermissions implements ModelInterface, Arr
      * @var string[]
      */
     protected static $attributeMap = [
-        'merchant_permissions' => 'merchantPermissions',
-        'account_permissions' => 'accountPermissions'
+        'reason' => 'reason'
     ];
 
     /**
@@ -179,8 +175,7 @@ class NoFrixionMoneyMoovModelsUserRolePermissions implements ModelInterface, Arr
      * @var string[]
      */
     protected static $setters = [
-        'merchant_permissions' => 'setMerchantPermissions',
-        'account_permissions' => 'setAccountPermissions'
+        'reason' => 'setReason'
     ];
 
     /**
@@ -189,8 +184,7 @@ class NoFrixionMoneyMoovModelsUserRolePermissions implements ModelInterface, Arr
      * @var string[]
      */
     protected static $getters = [
-        'merchant_permissions' => 'getMerchantPermissions',
-        'account_permissions' => 'getAccountPermissions'
+        'reason' => 'getReason'
     ];
 
     /**
@@ -250,8 +244,7 @@ class NoFrixionMoneyMoovModelsUserRolePermissions implements ModelInterface, Arr
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('merchant_permissions', $data ?? [], null);
-        $this->setIfExists('account_permissions', $data ?? [], null);
+        $this->setIfExists('reason', $data ?? [], null);
     }
 
     /**
@@ -297,69 +290,35 @@ class NoFrixionMoneyMoovModelsUserRolePermissions implements ModelInterface, Arr
 
 
     /**
-     * Gets merchant_permissions
+     * Gets reason
      *
-     * @return array<string,string[]>|null
+     * @return string|null
      */
-    public function getMerchantPermissions()
+    public function getReason()
     {
-        return $this->container['merchant_permissions'];
+        return $this->container['reason'];
     }
 
     /**
-     * Sets merchant_permissions
+     * Sets reason
      *
-     * @param array<string,string[]>|null $merchant_permissions merchant_permissions
+     * @param string|null $reason The reason for the suspension.
      *
      * @return self
      */
-    public function setMerchantPermissions($merchant_permissions)
+    public function setReason($reason)
     {
-        if (is_null($merchant_permissions)) {
-            array_push($this->openAPINullablesSetToNull, 'merchant_permissions');
+        if (is_null($reason)) {
+            array_push($this->openAPINullablesSetToNull, 'reason');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('merchant_permissions', $nullablesSetToNull);
+            $index = array_search('reason', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['merchant_permissions'] = $merchant_permissions;
-
-        return $this;
-    }
-
-    /**
-     * Gets account_permissions
-     *
-     * @return array<string,string[]>|null
-     */
-    public function getAccountPermissions()
-    {
-        return $this->container['account_permissions'];
-    }
-
-    /**
-     * Sets account_permissions
-     *
-     * @param array<string,string[]>|null $account_permissions account_permissions
-     *
-     * @return self
-     */
-    public function setAccountPermissions($account_permissions)
-    {
-        if (is_null($account_permissions)) {
-            array_push($this->openAPINullablesSetToNull, 'account_permissions');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('account_permissions', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['account_permissions'] = $account_permissions;
+        $this->container['reason'] = $reason;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionMoneyMoovModelsLightningInvoiceTest
+ * NoFrixionMoneyMoovModelsMerchantSuspendTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Nofrixion\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * NoFrixionMoneyMoovModelsLightningInvoiceTest Class Doc Comment
+ * NoFrixionMoneyMoovModelsMerchantSuspendTest Class Doc Comment
  *
  * @category    Class
- * @description NoFrixionMoneyMoovModelsLightningInvoice
+ * @description NoFrixionMoneyMoovModelsMerchantSuspend
  * @package     Nofrixion\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class NoFrixionMoneyMoovModelsLightningInvoiceTest extends TestCase
+class NoFrixionMoneyMoovModelsMerchantSuspendTest extends TestCase
 {
 
     /**
@@ -71,45 +71,18 @@ class NoFrixionMoneyMoovModelsLightningInvoiceTest extends TestCase
     }
 
     /**
-     * Test "NoFrixionMoneyMoovModelsLightningInvoice"
+     * Test "NoFrixionMoneyMoovModelsMerchantSuspend"
      */
-    public function testNoFrixionMoneyMoovModelsLightningInvoice()
+    public function testNoFrixionMoneyMoovModelsMerchantSuspend()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "description"
+     * Test attribute "reason"
      */
-    public function testPropertyDescription()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "payment_request"
-     */
-    public function testPropertyPaymentRequest()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "r_hash"
-     */
-    public function testPropertyRHash()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "expires_at"
-     */
-    public function testPropertyExpiresAt()
+    public function testPropertyReason()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

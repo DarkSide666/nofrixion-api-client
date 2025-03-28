@@ -42,6 +42,7 @@ Name | Type | Description | Notes
 **title** | **string** | A generic field to contain any additional data that the merchant wishes to store against the payment request.  E.g. product or service information. | [optional]
 **partial_payment_steps** | **string** | An optional comma separated list of partial payment amounts. The amounts represent guidance, or suggestions, as to  how the payer will be requested to make partial payments. | [optional]
 **payrun_id** | **string** | Optional, if set it indicates that this payment request will be used to top up a payment account for a pay run. | [optional]
+**sandbox_settle_delay_in_seconds** | **int** | Sandbox only. Optional. If set, the simulated Direct Debit settlement will be delayed by the specified number of seconds.  Must be greater than 0 and less than 600. Otherwise, the default value will be used. | [optional]
 **tag_ids** | **string[]** | An optional list of tag ids to add to the payment request | [optional]
 **tags** | **string[]** | An optional list of tag values to set on the payment request. If no matching  tag exists it will be created. | [optional]
 

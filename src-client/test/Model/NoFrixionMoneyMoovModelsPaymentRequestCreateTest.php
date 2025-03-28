@@ -422,6 +422,15 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreateTest extends TestCase
     }
 
     /**
+     * Test attribute "sandbox_settle_delay_in_seconds"
+     */
+    public function testPropertySandboxSettleDelayInSeconds()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "tag_ids"
      */
     public function testPropertyTagIds()

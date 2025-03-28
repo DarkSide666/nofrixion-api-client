@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** |  | [optional]
-**type** | **string** |  | [optional]
+**resource_types** | **string[]** | The resource types that the webhook will be generated for. | [optional]
 **destination_url** | **string** |  | [optional]
 **retry** | **bool** |  | [optional]
 **secret** | **string** |  | [optional]

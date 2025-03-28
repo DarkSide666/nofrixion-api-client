@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionMoneyMoovModelsUserRolePermissionsTest
+ * NoFrixionMoneyMoovModelsRolesUserRoleWithScopeTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Nofrixion\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * NoFrixionMoneyMoovModelsUserRolePermissionsTest Class Doc Comment
+ * NoFrixionMoneyMoovModelsRolesUserRoleWithScopeTest Class Doc Comment
  *
  * @category    Class
- * @description NoFrixionMoneyMoovModelsUserRolePermissions
+ * @description NoFrixionMoneyMoovModelsRolesUserRoleWithScope
  * @package     Nofrixion\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class NoFrixionMoneyMoovModelsUserRolePermissionsTest extends TestCase
+class NoFrixionMoneyMoovModelsRolesUserRoleWithScopeTest extends TestCase
 {
 
     /**
@@ -71,27 +71,63 @@ class NoFrixionMoneyMoovModelsUserRolePermissionsTest extends TestCase
     }
 
     /**
-     * Test "NoFrixionMoneyMoovModelsUserRolePermissions"
+     * Test "NoFrixionMoneyMoovModelsRolesUserRoleWithScope"
      */
-    public function testNoFrixionMoneyMoovModelsUserRolePermissions()
+    public function testNoFrixionMoneyMoovModelsRolesUserRoleWithScope()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "merchant_permissions"
+     * Test attribute "user_id"
      */
-    public function testPropertyMerchantPermissions()
+    public function testPropertyUserId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "account_permissions"
+     * Test attribute "role_id"
      */
-    public function testPropertyAccountPermissions()
+    public function testPropertyRoleId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "merchant_id"
+     */
+    public function testPropertyMerchantId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "role_name"
+     */
+    public function testPropertyRoleName()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "scope"
+     */
+    public function testPropertyScope()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "assigned_at"
+     */
+    public function testPropertyAssignedAt()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

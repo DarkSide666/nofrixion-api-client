@@ -107,9 +107,9 @@ class NoFrixionMoneyMoovModelsMerchantTokenTest extends TestCase
     }
 
     /**
-     * Test attribute "permissions"
+     * Test attribute "permission_types"
      */
-    public function testPropertyPermissions()
+    public function testPropertyPermissionTypes()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -182,6 +182,69 @@ class NoFrixionMoneyMoovModelsMerchantTokenTest extends TestCase
      * Test attribute "expires_at"
      */
     public function testPropertyExpiresAt()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "authorisations"
+     */
+    public function testPropertyAuthorisations()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "can_authorise"
+     */
+    public function testPropertyCanAuthorise()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "has_current_user_authorised"
+     */
+    public function testPropertyHasCurrentUserAuthorised()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "authorisers_required_count"
+     */
+    public function testPropertyAuthorisersRequiredCount()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "authorisers_completed_count"
+     */
+    public function testPropertyAuthorisersCompletedCount()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "authentication_methods"
+     */
+    public function testPropertyAuthenticationMethods()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "last_authorised"
+     */
+    public function testPropertyLastAuthorised()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

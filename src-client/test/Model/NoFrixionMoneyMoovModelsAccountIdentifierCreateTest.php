@@ -125,15 +125,6 @@ class NoFrixionMoneyMoovModelsAccountIdentifierCreateTest extends TestCase
     }
 
     /**
-     * Test attribute "bitcoin_address"
-     */
-    public function testPropertyBitcoinAddress()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "summary"
      */
     public function testPropertySummary()

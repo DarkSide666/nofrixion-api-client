@@ -363,6 +363,7 @@ class NoFrixionMoneyMoovModelsPayrunInvoice implements ModelInterface, ArrayAcce
     public const CURRENCY_NONE = 'NONE';
     public const CURRENCY_GBP = 'GBP';
     public const CURRENCY_EUR = 'EUR';
+    public const CURRENCY_USD = 'USD';
     public const CURRENCY_BTC = 'BTC';
 
     /**
@@ -376,6 +377,7 @@ class NoFrixionMoneyMoovModelsPayrunInvoice implements ModelInterface, ArrayAcce
             self::CURRENCY_NONE,
             self::CURRENCY_GBP,
             self::CURRENCY_EUR,
+            self::CURRENCY_USD,
             self::CURRENCY_BTC,
         ];
     }
@@ -469,10 +471,6 @@ class NoFrixionMoneyMoovModelsPayrunInvoice implements ModelInterface, ArrayAcce
         if ($this->container['total_amount'] === null) {
             $invalidProperties[] = "'total_amount' can't be null";
         }
-        if (!is_null($this->container['payment_reference']) && (mb_strlen($this->container['payment_reference']) > 18)) {
-            $invalidProperties[] = "invalid value for 'payment_reference', the character length must be smaller than or equal to 18.";
-        }
-
         return $invalidProperties;
     }
 
@@ -1142,10 +1140,6 @@ class NoFrixionMoneyMoovModelsPayrunInvoice implements ModelInterface, ArrayAcce
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        if (!is_null($payment_reference) && (mb_strlen($payment_reference) > 18)) {
-            throw new \InvalidArgumentException('invalid length for $payment_reference when calling NoFrixionMoneyMoovModelsPayrunInvoice., must be smaller than or equal to 18.');
-        }
-
         $this->container['payment_reference'] = $payment_reference;
 
         return $this;

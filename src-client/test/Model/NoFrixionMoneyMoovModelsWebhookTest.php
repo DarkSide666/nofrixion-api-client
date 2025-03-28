@@ -89,9 +89,9 @@ class NoFrixionMoneyMoovModelsWebhookTest extends TestCase
     }
 
     /**
-     * Test attribute "type"
+     * Test attribute "resource_types"
      */
-    public function testPropertyType()
+    public function testPropertyResourceTypes()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

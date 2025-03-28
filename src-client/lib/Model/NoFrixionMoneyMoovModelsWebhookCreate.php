@@ -59,7 +59,7 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
     protected static $openAPITypes = [
         'id' => 'string',
         'merchant_id' => 'string',
-        'type' => 'string',
+        'resource_types' => 'string[]',
         'destination_url' => 'string',
         'retry' => 'bool',
         'secret' => 'string',
@@ -77,7 +77,7 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
     protected static $openAPIFormats = [
         'id' => 'uuid',
         'merchant_id' => 'uuid',
-        'type' => null,
+        'resource_types' => null,
         'destination_url' => null,
         'retry' => null,
         'secret' => null,
@@ -93,7 +93,7 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
     protected static array $openAPINullables = [
         'id' => false,
         'merchant_id' => false,
-        'type' => false,
+        'resource_types' => true,
         'destination_url' => false,
         'retry' => false,
         'secret' => false,
@@ -189,7 +189,7 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
     protected static $attributeMap = [
         'id' => 'id',
         'merchant_id' => 'merchantID',
-        'type' => 'type',
+        'resource_types' => 'resourceTypes',
         'destination_url' => 'destinationUrl',
         'retry' => 'retry',
         'secret' => 'secret',
@@ -205,7 +205,7 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
     protected static $setters = [
         'id' => 'setId',
         'merchant_id' => 'setMerchantId',
-        'type' => 'setType',
+        'resource_types' => 'setResourceTypes',
         'destination_url' => 'setDestinationUrl',
         'retry' => 'setRetry',
         'secret' => 'setSecret',
@@ -221,7 +221,7 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
     protected static $getters = [
         'id' => 'getId',
         'merchant_id' => 'getMerchantId',
-        'type' => 'getType',
+        'resource_types' => 'getResourceTypes',
         'destination_url' => 'getDestinationUrl',
         'retry' => 'getRetry',
         'secret' => 'getSecret',
@@ -270,33 +270,33 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
         return self::$openAPIModelName;
     }
 
-    public const TYPE_NONE = 'None';
-    public const TYPE_PAYIN = 'Payin';
-    public const TYPE_PAYOUT = 'Payout';
-    public const TYPE_PAYMENT_REQUEST = 'PaymentRequest';
-    public const TYPE_RULE = 'Rule';
-    public const TYPE_TRANSACTION_PAYIN = 'TransactionPayin';
-    public const TYPE_TRANSACTION_PAYOUT = 'TransactionPayout';
-    public const TYPE_REPORT = 'Report';
-    public const TYPE_TRIBE_LOAD = 'TribeLoad';
+    public const RESOURCE_TYPES_NONE = 'None';
+    public const RESOURCE_TYPES_PAYIN = 'Payin';
+    public const RESOURCE_TYPES_PAYOUT = 'Payout';
+    public const RESOURCE_TYPES_PAYMENT_REQUEST = 'PaymentRequest';
+    public const RESOURCE_TYPES_RULE = 'Rule';
+    public const RESOURCE_TYPES_TRANSACTION_PAYIN = 'TransactionPayin';
+    public const RESOURCE_TYPES_TRANSACTION_PAYOUT = 'TransactionPayout';
+    public const RESOURCE_TYPES_REPORT = 'Report';
+    public const RESOURCE_TYPES_PAYRUN = 'Payrun';
 
     /**
      * Gets allowable values of the enum
      *
      * @return string[]
      */
-    public function getTypeAllowableValues()
+    public function getResourceTypesAllowableValues()
     {
         return [
-            self::TYPE_NONE,
-            self::TYPE_PAYIN,
-            self::TYPE_PAYOUT,
-            self::TYPE_PAYMENT_REQUEST,
-            self::TYPE_RULE,
-            self::TYPE_TRANSACTION_PAYIN,
-            self::TYPE_TRANSACTION_PAYOUT,
-            self::TYPE_REPORT,
-            self::TYPE_TRIBE_LOAD,
+            self::RESOURCE_TYPES_NONE,
+            self::RESOURCE_TYPES_PAYIN,
+            self::RESOURCE_TYPES_PAYOUT,
+            self::RESOURCE_TYPES_PAYMENT_REQUEST,
+            self::RESOURCE_TYPES_RULE,
+            self::RESOURCE_TYPES_TRANSACTION_PAYIN,
+            self::RESOURCE_TYPES_TRANSACTION_PAYOUT,
+            self::RESOURCE_TYPES_REPORT,
+            self::RESOURCE_TYPES_PAYRUN,
         ];
     }
 
@@ -317,7 +317,7 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
     {
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('merchant_id', $data ?? [], null);
-        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('resource_types', $data ?? [], null);
         $this->setIfExists('destination_url', $data ?? [], null);
         $this->setIfExists('retry', $data ?? [], null);
         $this->setIfExists('secret', $data ?? [], null);
@@ -355,18 +355,6 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
         if ($this->container['merchant_id'] === null) {
             $invalidProperties[] = "'merchant_id' can't be null";
         }
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
-        }
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'type', must be one of '%s'",
-                $this->container['type'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         if ($this->container['destination_url'] === null) {
             $invalidProperties[] = "'destination_url' can't be null";
         }
@@ -451,38 +439,44 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
     }
 
     /**
-     * Gets type
+     * Gets resource_types
      *
-     * @return string
+     * @return string[]|null
      */
-    public function getType()
+    public function getResourceTypes()
     {
-        return $this->container['type'];
+        return $this->container['resource_types'];
     }
 
     /**
-     * Sets type
+     * Sets resource_types
      *
-     * @param string $type type
+     * @param string[]|null $resource_types The resource types that the webhook should be generated for.
      *
      * @return self
      */
-    public function setType($type)
+    public function setResourceTypes($resource_types)
     {
-        if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        if (is_null($resource_types)) {
+            array_push($this->openAPINullablesSetToNull, 'resource_types');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('resource_types', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!in_array($type, $allowedValues, true)) {
+        $allowedValues = $this->getResourceTypesAllowableValues();
+        if (!is_null($resource_types) && array_diff($resource_types, $allowedValues)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Invalid value '%s' for 'type', must be one of '%s'",
-                    $type,
+                    "Invalid value for 'resource_types', must be one of '%s'",
                     implode("', '", $allowedValues)
                 )
             );
         }
-        $this->container['type'] = $type;
+        $this->container['resource_types'] = $resource_types;
 
         return $this;
     }

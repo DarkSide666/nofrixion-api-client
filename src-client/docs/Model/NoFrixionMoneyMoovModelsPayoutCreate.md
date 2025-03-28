@@ -17,8 +17,6 @@ Name | Type | Description | Notes
 **tag_ids** | **string[]** | An optional list of tag ids to add to the payout. | [optional]
 **scheduled** | **bool** | Should this payout be scheduled for a future date? | [optional]
 **schedule_date** | **\DateTime** | The date the payout should be submitted. | [optional]
-**bitcoin_subtract_fee_from_amount** | **bool** | For Bitcoin payouts, when this flag is set the network fee will be deducted from the send amount. This is particularly useful for sweeps where it can be difficult to calculate the exact fee required. | [optional]
-**bitcoin_fee_sats_per_vbyte** | **int** | The Bitcoin fee rate to apply in Satoshis per virtual byte. | [optional]
 **beneficiary_id** | **string** | Optional. The ID of the beneficiary to use for the payout destination. | [optional]
 **batch_payout_id** | **string** | The ID of the batch payout this payout is part of. | [optional]
 **topup_payrun_id** | **string** | Optional, if set it indicates that this payout will be used to top up   a payment account for a pay run by an internal transfer. | [optional]

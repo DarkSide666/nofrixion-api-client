@@ -152,9 +152,18 @@ class NoFrixionMoneyMoovModelsUserTest extends TestCase
     }
 
     /**
-     * Test attribute "role_names_formatted"
+     * Test attribute "roles_with_scope"
      */
-    public function testPropertyRoleNamesFormatted()
+    public function testPropertyRolesWithScope()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "client_session_timeouts"
+     */
+    public function testPropertyClientSessionTimeouts()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

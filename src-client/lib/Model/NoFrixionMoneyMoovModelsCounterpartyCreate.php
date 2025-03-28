@@ -62,6 +62,7 @@ class NoFrixionMoneyMoovModelsCounterpartyCreate implements ModelInterface, Arra
         'name' => 'string',
         'email_address' => 'string',
         'phone_number' => 'string',
+        'country_code' => 'string',
         'identifier' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsAccountIdentifierCreate',
         'summary' => 'string'
     ];
@@ -79,6 +80,7 @@ class NoFrixionMoneyMoovModelsCounterpartyCreate implements ModelInterface, Arra
         'name' => null,
         'email_address' => null,
         'phone_number' => null,
+        'country_code' => null,
         'identifier' => null,
         'summary' => null
     ];
@@ -94,6 +96,7 @@ class NoFrixionMoneyMoovModelsCounterpartyCreate implements ModelInterface, Arra
         'name' => true,
         'email_address' => true,
         'phone_number' => true,
+        'country_code' => true,
         'identifier' => false,
         'summary' => true
     ];
@@ -189,6 +192,7 @@ class NoFrixionMoneyMoovModelsCounterpartyCreate implements ModelInterface, Arra
         'name' => 'name',
         'email_address' => 'emailAddress',
         'phone_number' => 'phoneNumber',
+        'country_code' => 'countryCode',
         'identifier' => 'identifier',
         'summary' => 'summary'
     ];
@@ -204,6 +208,7 @@ class NoFrixionMoneyMoovModelsCounterpartyCreate implements ModelInterface, Arra
         'name' => 'setName',
         'email_address' => 'setEmailAddress',
         'phone_number' => 'setPhoneNumber',
+        'country_code' => 'setCountryCode',
         'identifier' => 'setIdentifier',
         'summary' => 'setSummary'
     ];
@@ -219,6 +224,7 @@ class NoFrixionMoneyMoovModelsCounterpartyCreate implements ModelInterface, Arra
         'name' => 'getName',
         'email_address' => 'getEmailAddress',
         'phone_number' => 'getPhoneNumber',
+        'country_code' => 'getCountryCode',
         'identifier' => 'getIdentifier',
         'summary' => 'getSummary'
     ];
@@ -285,6 +291,7 @@ class NoFrixionMoneyMoovModelsCounterpartyCreate implements ModelInterface, Arra
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('email_address', $data ?? [], null);
         $this->setIfExists('phone_number', $data ?? [], null);
+        $this->setIfExists('country_code', $data ?? [], null);
         $this->setIfExists('identifier', $data ?? [], null);
         $this->setIfExists('summary', $data ?? [], null);
     }
@@ -480,7 +487,7 @@ class NoFrixionMoneyMoovModelsCounterpartyCreate implements ModelInterface, Arra
     /**
      * Sets phone_number
      *
-     * @param string|null $phone_number phone_number
+     * @param string|null $phone_number A phone number for the counterparty. Optional to set and depending on the payment  network does not always get set for pay ins.
      *
      * @return self
      */
@@ -497,6 +504,40 @@ class NoFrixionMoneyMoovModelsCounterpartyCreate implements ModelInterface, Arra
             }
         }
         $this->container['phone_number'] = $phone_number;
+
+        return $this;
+    }
+
+    /**
+     * Gets country_code
+     *
+     * @return string|null
+     */
+    public function getCountryCode()
+    {
+        return $this->container['country_code'];
+    }
+
+    /**
+     * Sets country_code
+     *
+     * @param string|null $country_code A country code for the counterparty. Optional to set and depending on the payment  network does not always get set for pay ins
+     *
+     * @return self
+     */
+    public function setCountryCode($country_code)
+    {
+        if (is_null($country_code)) {
+            array_push($this->openAPINullablesSetToNull, 'country_code');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('country_code', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['country_code'] = $country_code;
 
         return $this;
     }

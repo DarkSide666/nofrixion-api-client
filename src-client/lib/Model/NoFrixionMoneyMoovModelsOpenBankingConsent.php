@@ -304,7 +304,6 @@ class NoFrixionMoneyMoovModelsOpenBankingConsent implements ModelInterface, Arra
     public const PROVIDER_LIGHTNING = 'Lightning';
     public const PROVIDER_LIGHTNING_TESTNET = 'LightningTestnet';
     public const PROVIDER_BANKING_CIRCLE_DIRECT_DEBIT = 'BankingCircleDirectDebit';
-    public const PROVIDER_TRIBE = 'Tribe';
 
     /**
      * Gets allowable values of the enum
@@ -330,7 +329,6 @@ class NoFrixionMoneyMoovModelsOpenBankingConsent implements ModelInterface, Arra
             self::PROVIDER_LIGHTNING,
             self::PROVIDER_LIGHTNING_TESTNET,
             self::PROVIDER_BANKING_CIRCLE_DIRECT_DEBIT,
-            self::PROVIDER_TRIBE,
         ];
     }
 

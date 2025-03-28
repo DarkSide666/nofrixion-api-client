@@ -267,10 +267,10 @@ class NoFrixionMoneyMoovModelsPaymentAccountCreate implements ModelInterface, Ar
     public const CURRENCY_NONE = 'NONE';
     public const CURRENCY_GBP = 'GBP';
     public const CURRENCY_EUR = 'EUR';
+    public const CURRENCY_USD = 'USD';
     public const CURRENCY_BTC = 'BTC';
     public const ACCOUNT_TYPE_STANDARD = 'Standard';
     public const ACCOUNT_TYPE_STANDARD_FEE = 'StandardFee';
-    public const ACCOUNT_TYPE_TRIBE = 'Tribe';
 
     /**
      * Gets allowable values of the enum
@@ -283,6 +283,7 @@ class NoFrixionMoneyMoovModelsPaymentAccountCreate implements ModelInterface, Ar
             self::CURRENCY_NONE,
             self::CURRENCY_GBP,
             self::CURRENCY_EUR,
+            self::CURRENCY_USD,
             self::CURRENCY_BTC,
         ];
     }
@@ -297,7 +298,6 @@ class NoFrixionMoneyMoovModelsPaymentAccountCreate implements ModelInterface, Ar
         return [
             self::ACCOUNT_TYPE_STANDARD,
             self::ACCOUNT_TYPE_STANDARD_FEE,
-            self::ACCOUNT_TYPE_TRIBE,
         ];
     }
 
@@ -425,7 +425,7 @@ class NoFrixionMoneyMoovModelsPaymentAccountCreate implements ModelInterface, Ar
     /**
      * Sets currency
      *
-     * @param string|null $currency Currency for the account, only EUR, GBP, and in sandbox BTC are supported.
+     * @param string|null $currency Currency for the account, only EUR, GBP, USD and in sandbox BTC are supported.
      *
      * @return self
      */

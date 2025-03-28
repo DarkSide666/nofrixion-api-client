@@ -188,6 +188,24 @@ class NoFrixionMoneyMoovModelsUserInviteTest extends TestCase
     }
 
     /**
+     * Test attribute "user_id"
+     */
+    public function testPropertyUserId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "user"
+     */
+    public function testPropertyUser()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "is_invitee_registered"
      */
     public function testPropertyIsInviteeRegistered()

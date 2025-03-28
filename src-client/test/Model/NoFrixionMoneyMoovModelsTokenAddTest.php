@@ -107,9 +107,9 @@ class NoFrixionMoneyMoovModelsTokenAddTest extends TestCase
     }
 
     /**
-     * Test attribute "permissions"
+     * Test attribute "permission_types"
      */
-    public function testPropertyPermissions()
+    public function testPropertyPermissionTypes()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

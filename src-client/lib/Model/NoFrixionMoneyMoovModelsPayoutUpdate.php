@@ -69,8 +69,6 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
         'tag_ids' => 'string[]',
         'scheduled' => 'bool',
         'schedule_date' => '\DateTime',
-        'bitcoin_subtract_fee_from_amount' => 'bool',
-        'bitcoin_fee_sats_per_vbyte' => 'int',
         'payment_rail' => 'string'
     ];
 
@@ -94,8 +92,6 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
         'tag_ids' => 'uuid',
         'scheduled' => null,
         'schedule_date' => 'date-time',
-        'bitcoin_subtract_fee_from_amount' => null,
-        'bitcoin_fee_sats_per_vbyte' => 'int32',
         'payment_rail' => null
     ];
 
@@ -117,8 +113,6 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
         'tag_ids' => true,
         'scheduled' => true,
         'schedule_date' => true,
-        'bitcoin_subtract_fee_from_amount' => true,
-        'bitcoin_fee_sats_per_vbyte' => true,
         'payment_rail' => true
     ];
 
@@ -220,8 +214,6 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
         'tag_ids' => 'tagIds',
         'scheduled' => 'scheduled',
         'schedule_date' => 'scheduleDate',
-        'bitcoin_subtract_fee_from_amount' => 'bitcoinSubtractFeeFromAmount',
-        'bitcoin_fee_sats_per_vbyte' => 'bitcoinFeeSatsPerVbyte',
         'payment_rail' => 'paymentRail'
     ];
 
@@ -243,8 +235,6 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
         'tag_ids' => 'setTagIds',
         'scheduled' => 'setScheduled',
         'schedule_date' => 'setScheduleDate',
-        'bitcoin_subtract_fee_from_amount' => 'setBitcoinSubtractFeeFromAmount',
-        'bitcoin_fee_sats_per_vbyte' => 'setBitcoinFeeSatsPerVbyte',
         'payment_rail' => 'setPaymentRail'
     ];
 
@@ -266,8 +256,6 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
         'tag_ids' => 'getTagIds',
         'scheduled' => 'getScheduled',
         'schedule_date' => 'getScheduleDate',
-        'bitcoin_subtract_fee_from_amount' => 'getBitcoinSubtractFeeFromAmount',
-        'bitcoin_fee_sats_per_vbyte' => 'getBitcoinFeeSatsPerVbyte',
         'payment_rail' => 'getPaymentRail'
     ];
 
@@ -317,9 +305,11 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
     public const TYPE_IBAN = 'IBAN';
     public const TYPE_DD = 'DD';
     public const TYPE_BTC = 'BTC';
+    public const TYPE_BIC = 'BIC';
     public const CURRENCY_NONE = 'NONE';
     public const CURRENCY_GBP = 'GBP';
     public const CURRENCY_EUR = 'EUR';
+    public const CURRENCY_USD = 'USD';
     public const CURRENCY_BTC = 'BTC';
     public const PAYMENT_RAIL__DEFAULT = 'Default';
     public const PAYMENT_RAIL_SEPA_CT = 'SEPA_CT';
@@ -339,6 +329,7 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
             self::TYPE_IBAN,
             self::TYPE_DD,
             self::TYPE_BTC,
+            self::TYPE_BIC,
         ];
     }
 
@@ -353,6 +344,7 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
             self::CURRENCY_NONE,
             self::CURRENCY_GBP,
             self::CURRENCY_EUR,
+            self::CURRENCY_USD,
             self::CURRENCY_BTC,
         ];
     }
@@ -399,8 +391,6 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
         $this->setIfExists('tag_ids', $data ?? [], null);
         $this->setIfExists('scheduled', $data ?? [], null);
         $this->setIfExists('schedule_date', $data ?? [], null);
-        $this->setIfExists('bitcoin_subtract_fee_from_amount', $data ?? [], null);
-        $this->setIfExists('bitcoin_fee_sats_per_vbyte', $data ?? [], null);
         $this->setIfExists('payment_rail', $data ?? [], null);
     }
 
@@ -890,74 +880,6 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
             }
         }
         $this->container['schedule_date'] = $schedule_date;
-
-        return $this;
-    }
-
-    /**
-     * Gets bitcoin_subtract_fee_from_amount
-     *
-     * @return bool|null
-     */
-    public function getBitcoinSubtractFeeFromAmount()
-    {
-        return $this->container['bitcoin_subtract_fee_from_amount'];
-    }
-
-    /**
-     * Sets bitcoin_subtract_fee_from_amount
-     *
-     * @param bool|null $bitcoin_subtract_fee_from_amount For Bitcoin payouts, when this flag is set the network fee will be deducted from the send amount.  This is particularly useful for sweeps where it can be difficult to calculate the exact fee required.
-     *
-     * @return self
-     */
-    public function setBitcoinSubtractFeeFromAmount($bitcoin_subtract_fee_from_amount)
-    {
-        if (is_null($bitcoin_subtract_fee_from_amount)) {
-            array_push($this->openAPINullablesSetToNull, 'bitcoin_subtract_fee_from_amount');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('bitcoin_subtract_fee_from_amount', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['bitcoin_subtract_fee_from_amount'] = $bitcoin_subtract_fee_from_amount;
-
-        return $this;
-    }
-
-    /**
-     * Gets bitcoin_fee_sats_per_vbyte
-     *
-     * @return int|null
-     */
-    public function getBitcoinFeeSatsPerVbyte()
-    {
-        return $this->container['bitcoin_fee_sats_per_vbyte'];
-    }
-
-    /**
-     * Sets bitcoin_fee_sats_per_vbyte
-     *
-     * @param int|null $bitcoin_fee_sats_per_vbyte The Bitcoin fee rate to apply in Satoshis per virtual byte.
-     *
-     * @return self
-     */
-    public function setBitcoinFeeSatsPerVbyte($bitcoin_fee_sats_per_vbyte)
-    {
-        if (is_null($bitcoin_fee_sats_per_vbyte)) {
-            array_push($this->openAPINullablesSetToNull, 'bitcoin_fee_sats_per_vbyte');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('bitcoin_fee_sats_per_vbyte', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['bitcoin_fee_sats_per_vbyte'] = $bitcoin_fee_sats_per_vbyte;
 
         return $this;
     }

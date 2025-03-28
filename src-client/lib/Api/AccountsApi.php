@@ -2178,16 +2178,17 @@ class AccountsApi
      * @param  string $credit_type The type of transactions to retrieve from. (optional)
      * @param  string $search The text filter to apply to retrieve transactions with a similar title, description, merchant name. (optional)
      * @param  string $sort Optional expression to sort the order of the transactions. Example \&quot;Amount desc,Inserted asc\&quot;. (optional)
+     * @param  float $min_amount The amount filter to apply to retrieve transactions that exceed this amount. (optional)
+     * @param  float $max_amount The amount filter to apply to retrieve transactions that don&#39;t exceed this amount. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountTransactionsPaged'] to see the possible values for this operation
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTransactionPageResponse
+     * @return void
      */
-    public function getAccountTransactionsPaged($account_id, $from_date = null, $page_number = null, $page_size = 20, $to_date = null, $credit_type = null, $search = null, $sort = null, string $contentType = self::contentTypes['getAccountTransactionsPaged'][0])
+    public function getAccountTransactionsPaged($account_id, $from_date = null, $page_number = null, $page_size = 20, $to_date = null, $credit_type = null, $search = null, $sort = null, $min_amount = null, $max_amount = null, string $contentType = self::contentTypes['getAccountTransactionsPaged'][0])
     {
-        list($response) = $this->getAccountTransactionsPagedWithHttpInfo($account_id, $from_date, $page_number, $page_size, $to_date, $credit_type, $search, $sort, $contentType);
-        return $response;
+        $this->getAccountTransactionsPagedWithHttpInfo($account_id, $from_date, $page_number, $page_size, $to_date, $credit_type, $search, $sort, $min_amount, $max_amount, $contentType);
     }
 
     /**
@@ -2203,15 +2204,17 @@ class AccountsApi
      * @param  string $credit_type The type of transactions to retrieve from. (optional)
      * @param  string $search The text filter to apply to retrieve transactions with a similar title, description, merchant name. (optional)
      * @param  string $sort Optional expression to sort the order of the transactions. Example \&quot;Amount desc,Inserted asc\&quot;. (optional)
+     * @param  float $min_amount The amount filter to apply to retrieve transactions that exceed this amount. (optional)
+     * @param  float $max_amount The amount filter to apply to retrieve transactions that don&#39;t exceed this amount. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountTransactionsPaged'] to see the possible values for this operation
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTransactionPageResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getAccountTransactionsPagedWithHttpInfo($account_id, $from_date = null, $page_number = null, $page_size = 20, $to_date = null, $credit_type = null, $search = null, $sort = null, string $contentType = self::contentTypes['getAccountTransactionsPaged'][0])
+    public function getAccountTransactionsPagedWithHttpInfo($account_id, $from_date = null, $page_number = null, $page_size = 20, $to_date = null, $credit_type = null, $search = null, $sort = null, $min_amount = null, $max_amount = null, string $contentType = self::contentTypes['getAccountTransactionsPaged'][0])
     {
-        $request = $this->getAccountTransactionsPagedRequest($account_id, $from_date, $page_number, $page_size, $to_date, $credit_type, $search, $sort, $contentType);
+        $request = $this->getAccountTransactionsPagedRequest($account_id, $from_date, $page_number, $page_size, $to_date, $credit_type, $search, $sort, $min_amount, $max_amount, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2236,87 +2239,10 @@ class AccountsApi
             $statusCode = $response->getStatusCode();
 
 
-            switch($statusCode) {
-                case 200:
-                    if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTransactionPageResponse' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTransactionPageResponse' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTransactionPageResponse', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTransactionPageResponse';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
+            return [null, $statusCode, $response->getHeaders()];
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTransactionPageResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
             }
             throw $e;
         }
@@ -2335,14 +2261,16 @@ class AccountsApi
      * @param  string $credit_type The type of transactions to retrieve from. (optional)
      * @param  string $search The text filter to apply to retrieve transactions with a similar title, description, merchant name. (optional)
      * @param  string $sort Optional expression to sort the order of the transactions. Example \&quot;Amount desc,Inserted asc\&quot;. (optional)
+     * @param  float $min_amount The amount filter to apply to retrieve transactions that exceed this amount. (optional)
+     * @param  float $max_amount The amount filter to apply to retrieve transactions that don&#39;t exceed this amount. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountTransactionsPaged'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAccountTransactionsPagedAsync($account_id, $from_date = null, $page_number = null, $page_size = 20, $to_date = null, $credit_type = null, $search = null, $sort = null, string $contentType = self::contentTypes['getAccountTransactionsPaged'][0])
+    public function getAccountTransactionsPagedAsync($account_id, $from_date = null, $page_number = null, $page_size = 20, $to_date = null, $credit_type = null, $search = null, $sort = null, $min_amount = null, $max_amount = null, string $contentType = self::contentTypes['getAccountTransactionsPaged'][0])
     {
-        return $this->getAccountTransactionsPagedAsyncWithHttpInfo($account_id, $from_date, $page_number, $page_size, $to_date, $credit_type, $search, $sort, $contentType)
+        return $this->getAccountTransactionsPagedAsyncWithHttpInfo($account_id, $from_date, $page_number, $page_size, $to_date, $credit_type, $search, $sort, $min_amount, $max_amount, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2363,34 +2291,23 @@ class AccountsApi
      * @param  string $credit_type The type of transactions to retrieve from. (optional)
      * @param  string $search The text filter to apply to retrieve transactions with a similar title, description, merchant name. (optional)
      * @param  string $sort Optional expression to sort the order of the transactions. Example \&quot;Amount desc,Inserted asc\&quot;. (optional)
+     * @param  float $min_amount The amount filter to apply to retrieve transactions that exceed this amount. (optional)
+     * @param  float $max_amount The amount filter to apply to retrieve transactions that don&#39;t exceed this amount. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountTransactionsPaged'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAccountTransactionsPagedAsyncWithHttpInfo($account_id, $from_date = null, $page_number = null, $page_size = 20, $to_date = null, $credit_type = null, $search = null, $sort = null, string $contentType = self::contentTypes['getAccountTransactionsPaged'][0])
+    public function getAccountTransactionsPagedAsyncWithHttpInfo($account_id, $from_date = null, $page_number = null, $page_size = 20, $to_date = null, $credit_type = null, $search = null, $sort = null, $min_amount = null, $max_amount = null, string $contentType = self::contentTypes['getAccountTransactionsPaged'][0])
     {
-        $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTransactionPageResponse';
-        $request = $this->getAccountTransactionsPagedRequest($account_id, $from_date, $page_number, $page_size, $to_date, $credit_type, $search, $sort, $contentType);
+        $returnType = '';
+        $request = $this->getAccountTransactionsPagedRequest($account_id, $from_date, $page_number, $page_size, $to_date, $credit_type, $search, $sort, $min_amount, $max_amount, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -2420,12 +2337,14 @@ class AccountsApi
      * @param  string $credit_type The type of transactions to retrieve from. (optional)
      * @param  string $search The text filter to apply to retrieve transactions with a similar title, description, merchant name. (optional)
      * @param  string $sort Optional expression to sort the order of the transactions. Example \&quot;Amount desc,Inserted asc\&quot;. (optional)
+     * @param  float $min_amount The amount filter to apply to retrieve transactions that exceed this amount. (optional)
+     * @param  float $max_amount The amount filter to apply to retrieve transactions that don&#39;t exceed this amount. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountTransactionsPaged'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getAccountTransactionsPagedRequest($account_id, $from_date = null, $page_number = null, $page_size = 20, $to_date = null, $credit_type = null, $search = null, $sort = null, string $contentType = self::contentTypes['getAccountTransactionsPaged'][0])
+    public function getAccountTransactionsPagedRequest($account_id, $from_date = null, $page_number = null, $page_size = 20, $to_date = null, $credit_type = null, $search = null, $sort = null, $min_amount = null, $max_amount = null, string $contentType = self::contentTypes['getAccountTransactionsPaged'][0])
     {
 
         // verify the required parameter 'account_id' is set
@@ -2434,6 +2353,8 @@ class AccountsApi
                 'Missing the required parameter $account_id when calling getAccountTransactionsPaged'
             );
         }
+
+
 
 
 
@@ -2513,6 +2434,24 @@ class AccountsApi
             true, // explode
             false // required
         ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $min_amount,
+            'minAmount', // param base name
+            'number', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $max_amount,
+            'maxAmount', // param base name
+            'number', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -2526,7 +2465,7 @@ class AccountsApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['text/plain', 'application/json', 'text/json', ],
+            [],
             $contentType,
             $multipart
         );
@@ -2591,16 +2530,16 @@ class AccountsApi
      * @param  string $merchant_id The merchantID of the accounts to retrieve. (optional)
      * @param  bool $connected_accounts Optional include connected accounts along with payment accounts. (optional, default to false)
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
+     * @param  bool $include_archived Flag that indicates whether to fetch archived accounts or not. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccounts'] to see the possible values for this operation
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]
+     * @return void
      */
-    public function getAccounts($merchant_id = null, $connected_accounts = false, $only_connect_accounts = false, string $contentType = self::contentTypes['getAccounts'][0])
+    public function getAccounts($merchant_id = null, $connected_accounts = false, $only_connect_accounts = false, $include_archived = false, string $contentType = self::contentTypes['getAccounts'][0])
     {
-        list($response) = $this->getAccountsWithHttpInfo($merchant_id, $connected_accounts, $only_connect_accounts, $contentType);
-        return $response;
+        $this->getAccountsWithHttpInfo($merchant_id, $connected_accounts, $only_connect_accounts, $include_archived, $contentType);
     }
 
     /**
@@ -2611,15 +2550,16 @@ class AccountsApi
      * @param  string $merchant_id The merchantID of the accounts to retrieve. (optional)
      * @param  bool $connected_accounts Optional include connected accounts along with payment accounts. (optional, default to false)
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
+     * @param  bool $include_archived Flag that indicates whether to fetch archived accounts or not. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccounts'] to see the possible values for this operation
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[], HTTP status code, HTTP response headers (array of strings)
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getAccountsWithHttpInfo($merchant_id = null, $connected_accounts = false, $only_connect_accounts = false, string $contentType = self::contentTypes['getAccounts'][0])
+    public function getAccountsWithHttpInfo($merchant_id = null, $connected_accounts = false, $only_connect_accounts = false, $include_archived = false, string $contentType = self::contentTypes['getAccounts'][0])
     {
-        $request = $this->getAccountsRequest($merchant_id, $connected_accounts, $only_connect_accounts, $contentType);
+        $request = $this->getAccountsRequest($merchant_id, $connected_accounts, $only_connect_accounts, $include_archived, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2644,87 +2584,10 @@ class AccountsApi
             $statusCode = $response->getStatusCode();
 
 
-            switch($statusCode) {
-                case 200:
-                    if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
+            return [null, $statusCode, $response->getHeaders()];
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
             }
             throw $e;
         }
@@ -2738,14 +2601,15 @@ class AccountsApi
      * @param  string $merchant_id The merchantID of the accounts to retrieve. (optional)
      * @param  bool $connected_accounts Optional include connected accounts along with payment accounts. (optional, default to false)
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
+     * @param  bool $include_archived Flag that indicates whether to fetch archived accounts or not. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccounts'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAccountsAsync($merchant_id = null, $connected_accounts = false, $only_connect_accounts = false, string $contentType = self::contentTypes['getAccounts'][0])
+    public function getAccountsAsync($merchant_id = null, $connected_accounts = false, $only_connect_accounts = false, $include_archived = false, string $contentType = self::contentTypes['getAccounts'][0])
     {
-        return $this->getAccountsAsyncWithHttpInfo($merchant_id, $connected_accounts, $only_connect_accounts, $contentType)
+        return $this->getAccountsAsyncWithHttpInfo($merchant_id, $connected_accounts, $only_connect_accounts, $include_archived, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2761,34 +2625,22 @@ class AccountsApi
      * @param  string $merchant_id The merchantID of the accounts to retrieve. (optional)
      * @param  bool $connected_accounts Optional include connected accounts along with payment accounts. (optional, default to false)
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
+     * @param  bool $include_archived Flag that indicates whether to fetch archived accounts or not. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccounts'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAccountsAsyncWithHttpInfo($merchant_id = null, $connected_accounts = false, $only_connect_accounts = false, string $contentType = self::contentTypes['getAccounts'][0])
+    public function getAccountsAsyncWithHttpInfo($merchant_id = null, $connected_accounts = false, $only_connect_accounts = false, $include_archived = false, string $contentType = self::contentTypes['getAccounts'][0])
     {
-        $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]';
-        $request = $this->getAccountsRequest($merchant_id, $connected_accounts, $only_connect_accounts, $contentType);
+        $returnType = '';
+        $request = $this->getAccountsRequest($merchant_id, $connected_accounts, $only_connect_accounts, $include_archived, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -2813,13 +2665,15 @@ class AccountsApi
      * @param  string $merchant_id The merchantID of the accounts to retrieve. (optional)
      * @param  bool $connected_accounts Optional include connected accounts along with payment accounts. (optional, default to false)
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
+     * @param  bool $include_archived Flag that indicates whether to fetch archived accounts or not. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccounts'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getAccountsRequest($merchant_id = null, $connected_accounts = false, $only_connect_accounts = false, string $contentType = self::contentTypes['getAccounts'][0])
+    public function getAccountsRequest($merchant_id = null, $connected_accounts = false, $only_connect_accounts = false, $include_archived = false, string $contentType = self::contentTypes['getAccounts'][0])
     {
+
 
 
 
@@ -2859,12 +2713,21 @@ class AccountsApi
             true, // explode
             false // required
         ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $include_archived,
+            'includeArchived', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['text/plain', 'application/json', 'text/json', ],
+            [],
             $contentType,
             $multipart
         );
@@ -2935,16 +2798,16 @@ class AccountsApi
      * @param  string $sort Optional expression to sort the order of the accounts. Example \&quot;AvailableBalance desc,Inserted asc\&quot;. (optional)
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
      * @param  bool $only_archived Flag that indicates whether to fetch only archived accounts or not. (optional, default to false)
+     * @param  bool $include_archived Flag that indicates whether to fetch archived accounts or not. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountsPaged'] to see the possible values for this operation
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse
+     * @return void
      */
-    public function getAccountsPaged($merchant_id = null, $connected_accounts = false, $page_number = null, $page_size = null, $currency = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
+    public function getAccountsPaged($merchant_id = null, $connected_accounts = false, $page_number = null, $page_size = null, $currency = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
     {
-        list($response) = $this->getAccountsPagedWithHttpInfo($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $contentType);
-        return $response;
+        $this->getAccountsPagedWithHttpInfo($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $contentType);
     }
 
     /**
@@ -2961,15 +2824,16 @@ class AccountsApi
      * @param  string $sort Optional expression to sort the order of the accounts. Example \&quot;AvailableBalance desc,Inserted asc\&quot;. (optional)
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
      * @param  bool $only_archived Flag that indicates whether to fetch only archived accounts or not. (optional, default to false)
+     * @param  bool $include_archived Flag that indicates whether to fetch archived accounts or not. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountsPaged'] to see the possible values for this operation
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getAccountsPagedWithHttpInfo($merchant_id = null, $connected_accounts = false, $page_number = null, $page_size = null, $currency = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
+    public function getAccountsPagedWithHttpInfo($merchant_id = null, $connected_accounts = false, $page_number = null, $page_size = null, $currency = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
     {
-        $request = $this->getAccountsPagedRequest($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $contentType);
+        $request = $this->getAccountsPagedRequest($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2994,87 +2858,10 @@ class AccountsApi
             $statusCode = $response->getStatusCode();
 
 
-            switch($statusCode) {
-                case 200:
-                    if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
+            return [null, $statusCode, $response->getHeaders()];
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
             }
             throw $e;
         }
@@ -3094,14 +2881,15 @@ class AccountsApi
      * @param  string $sort Optional expression to sort the order of the accounts. Example \&quot;AvailableBalance desc,Inserted asc\&quot;. (optional)
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
      * @param  bool $only_archived Flag that indicates whether to fetch only archived accounts or not. (optional, default to false)
+     * @param  bool $include_archived Flag that indicates whether to fetch archived accounts or not. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountsPaged'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAccountsPagedAsync($merchant_id = null, $connected_accounts = false, $page_number = null, $page_size = null, $currency = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
+    public function getAccountsPagedAsync($merchant_id = null, $connected_accounts = false, $page_number = null, $page_size = null, $currency = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
     {
-        return $this->getAccountsPagedAsyncWithHttpInfo($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $contentType)
+        return $this->getAccountsPagedAsyncWithHttpInfo($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3123,34 +2911,22 @@ class AccountsApi
      * @param  string $sort Optional expression to sort the order of the accounts. Example \&quot;AvailableBalance desc,Inserted asc\&quot;. (optional)
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
      * @param  bool $only_archived Flag that indicates whether to fetch only archived accounts or not. (optional, default to false)
+     * @param  bool $include_archived Flag that indicates whether to fetch archived accounts or not. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountsPaged'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAccountsPagedAsyncWithHttpInfo($merchant_id = null, $connected_accounts = false, $page_number = null, $page_size = null, $currency = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
+    public function getAccountsPagedAsyncWithHttpInfo($merchant_id = null, $connected_accounts = false, $page_number = null, $page_size = null, $currency = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
     {
-        $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse';
-        $request = $this->getAccountsPagedRequest($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $contentType);
+        $returnType = '';
+        $request = $this->getAccountsPagedRequest($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -3181,13 +2957,15 @@ class AccountsApi
      * @param  string $sort Optional expression to sort the order of the accounts. Example \&quot;AvailableBalance desc,Inserted asc\&quot;. (optional)
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
      * @param  bool $only_archived Flag that indicates whether to fetch only archived accounts or not. (optional, default to false)
+     * @param  bool $include_archived Flag that indicates whether to fetch archived accounts or not. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountsPaged'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getAccountsPagedRequest($merchant_id = null, $connected_accounts = false, $page_number = null, $page_size = null, $currency = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
+    public function getAccountsPagedRequest($merchant_id = null, $connected_accounts = false, $page_number = null, $page_size = null, $currency = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
     {
+
 
 
 
@@ -3287,12 +3065,21 @@ class AccountsApi
             true, // explode
             false // required
         ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $include_archived,
+            'includeArchived', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['text/plain', 'application/json', 'text/json', ],
+            [],
             $contentType,
             $multipart
         );

@@ -75,7 +75,9 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         'rule_id' => 'string',
         'payout_id' => 'string',
         'virtual_iban' => 'string',
-        'tags' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTag[]'
+        'tags' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTag[]',
+        'account_sequence_number' => 'int',
+        'payment_request_id' => 'string'
     ];
 
     /**
@@ -104,7 +106,9 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         'rule_id' => 'uuid',
         'payout_id' => 'uuid',
         'virtual_iban' => null,
-        'tags' => null
+        'tags' => null,
+        'account_sequence_number' => 'int32',
+        'payment_request_id' => 'uuid'
     ];
 
     /**
@@ -131,7 +135,9 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         'rule_id' => true,
         'payout_id' => true,
         'virtual_iban' => true,
-        'tags' => true
+        'tags' => true,
+        'account_sequence_number' => false,
+        'payment_request_id' => true
     ];
 
     /**
@@ -238,7 +244,9 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         'rule_id' => 'ruleID',
         'payout_id' => 'payoutID',
         'virtual_iban' => 'virtualIBAN',
-        'tags' => 'tags'
+        'tags' => 'tags',
+        'account_sequence_number' => 'accountSequenceNumber',
+        'payment_request_id' => 'paymentRequestID'
     ];
 
     /**
@@ -265,7 +273,9 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         'rule_id' => 'setRuleId',
         'payout_id' => 'setPayoutId',
         'virtual_iban' => 'setVirtualIban',
-        'tags' => 'setTags'
+        'tags' => 'setTags',
+        'account_sequence_number' => 'setAccountSequenceNumber',
+        'payment_request_id' => 'setPaymentRequestId'
     ];
 
     /**
@@ -292,7 +302,9 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         'rule_id' => 'getRuleId',
         'payout_id' => 'getPayoutId',
         'virtual_iban' => 'getVirtualIban',
-        'tags' => 'getTags'
+        'tags' => 'getTags',
+        'account_sequence_number' => 'getAccountSequenceNumber',
+        'payment_request_id' => 'getPaymentRequestId'
     ];
 
     /**
@@ -350,9 +362,12 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
     public const TYPE_SEPA = 'SEPA';
     public const TYPE_UNKNOWN = 'Unknown';
     public const TYPE_TARGET2 = 'TARGET2';
+    public const TYPE_SEPA_DD_REJECT = 'SEPA_DD_REJECT';
+    public const TYPE_CROSS_BORDER = 'CROSS_BORDER';
     public const CURRENCY_NONE = 'NONE';
     public const CURRENCY_GBP = 'GBP';
     public const CURRENCY_EUR = 'EUR';
+    public const CURRENCY_USD = 'USD';
     public const CURRENCY_BTC = 'BTC';
 
     /**
@@ -377,6 +392,8 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
             self::TYPE_SEPA,
             self::TYPE_UNKNOWN,
             self::TYPE_TARGET2,
+            self::TYPE_SEPA_DD_REJECT,
+            self::TYPE_CROSS_BORDER,
         ];
     }
 
@@ -391,6 +408,7 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
             self::CURRENCY_NONE,
             self::CURRENCY_GBP,
             self::CURRENCY_EUR,
+            self::CURRENCY_USD,
             self::CURRENCY_BTC,
         ];
     }
@@ -429,6 +447,8 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         $this->setIfExists('payout_id', $data ?? [], null);
         $this->setIfExists('virtual_iban', $data ?? [], null);
         $this->setIfExists('tags', $data ?? [], null);
+        $this->setIfExists('account_sequence_number', $data ?? [], null);
+        $this->setIfExists('payment_request_id', $data ?? [], null);
     }
 
     /**
@@ -1083,6 +1103,67 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
             }
         }
         $this->container['tags'] = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Gets account_sequence_number
+     *
+     * @return int|null
+     */
+    public function getAccountSequenceNumber()
+    {
+        return $this->container['account_sequence_number'];
+    }
+
+    /**
+     * Sets account_sequence_number
+     *
+     * @param int|null $account_sequence_number The sequence number of transaction on a per account basis. This sequence number is guaranteed to be an arithemtic sequence   number for all transactions belonging to the same account.
+     *
+     * @return self
+     */
+    public function setAccountSequenceNumber($account_sequence_number)
+    {
+        if (is_null($account_sequence_number)) {
+            throw new \InvalidArgumentException('non-nullable account_sequence_number cannot be null');
+        }
+        $this->container['account_sequence_number'] = $account_sequence_number;
+
+        return $this;
+    }
+
+    /**
+     * Gets payment_request_id
+     *
+     * @return string|null
+     */
+    public function getPaymentRequestId()
+    {
+        return $this->container['payment_request_id'];
+    }
+
+    /**
+     * Sets payment_request_id
+     *
+     * @param string|null $payment_request_id For Pay by Bank and Direct Debit transactions this will contain the ID of the payment request.
+     *
+     * @return self
+     */
+    public function setPaymentRequestId($payment_request_id)
+    {
+        if (is_null($payment_request_id)) {
+            array_push($this->openAPINullablesSetToNull, 'payment_request_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('payment_request_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['payment_request_id'] = $payment_request_id;
 
         return $this;
     }

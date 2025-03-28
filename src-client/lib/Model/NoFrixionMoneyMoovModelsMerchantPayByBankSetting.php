@@ -292,6 +292,7 @@ class NoFrixionMoneyMoovModelsMerchantPayByBankSetting implements ModelInterface
     public const CURRENCY_NONE = 'NONE';
     public const CURRENCY_GBP = 'GBP';
     public const CURRENCY_EUR = 'EUR';
+    public const CURRENCY_USD = 'USD';
     public const CURRENCY_BTC = 'BTC';
     public const PROCESSOR_NONE = 'None';
     public const PROCESSOR_CYBER_SOURCE = 'CyberSource';
@@ -309,7 +310,6 @@ class NoFrixionMoneyMoovModelsMerchantPayByBankSetting implements ModelInterface
     public const PROCESSOR_LIGHTNING = 'Lightning';
     public const PROCESSOR_LIGHTNING_TESTNET = 'LightningTestnet';
     public const PROCESSOR_BANKING_CIRCLE_DIRECT_DEBIT = 'BankingCircleDirectDebit';
-    public const PROCESSOR_TRIBE = 'Tribe';
 
     /**
      * Gets allowable values of the enum
@@ -322,6 +322,7 @@ class NoFrixionMoneyMoovModelsMerchantPayByBankSetting implements ModelInterface
             self::CURRENCY_NONE,
             self::CURRENCY_GBP,
             self::CURRENCY_EUR,
+            self::CURRENCY_USD,
             self::CURRENCY_BTC,
         ];
     }
@@ -350,7 +351,6 @@ class NoFrixionMoneyMoovModelsMerchantPayByBankSetting implements ModelInterface
             self::PROCESSOR_LIGHTNING,
             self::PROCESSOR_LIGHTNING_TESTNET,
             self::PROCESSOR_BANKING_CIRCLE_DIRECT_DEBIT,
-            self::PROCESSOR_TRIBE,
         ];
     }
 

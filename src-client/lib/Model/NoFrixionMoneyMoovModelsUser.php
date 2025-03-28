@@ -64,8 +64,9 @@ class NoFrixionMoneyMoovModelsUser implements ModelInterface, ArrayAccess, \Json
         'roles' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserRole[]',
         'two_factor_enabled' => 'bool',
         'passkey_added' => 'bool',
-        'permissions' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserRolePermissions',
-        'role_names_formatted' => 'string'
+        'permissions' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserPermissions',
+        'roles_with_scope' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsRolesUserRoleWithScope[]',
+        'client_session_timeouts' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsClientSessionTimeout[]'
     ];
 
     /**
@@ -84,7 +85,8 @@ class NoFrixionMoneyMoovModelsUser implements ModelInterface, ArrayAccess, \Json
         'two_factor_enabled' => null,
         'passkey_added' => null,
         'permissions' => null,
-        'role_names_formatted' => null
+        'roles_with_scope' => null,
+        'client_session_timeouts' => null
     ];
 
     /**
@@ -101,7 +103,8 @@ class NoFrixionMoneyMoovModelsUser implements ModelInterface, ArrayAccess, \Json
         'two_factor_enabled' => false,
         'passkey_added' => false,
         'permissions' => false,
-        'role_names_formatted' => true
+        'roles_with_scope' => true,
+        'client_session_timeouts' => true
     ];
 
     /**
@@ -198,7 +201,8 @@ class NoFrixionMoneyMoovModelsUser implements ModelInterface, ArrayAccess, \Json
         'two_factor_enabled' => 'twoFactorEnabled',
         'passkey_added' => 'passkeyAdded',
         'permissions' => 'permissions',
-        'role_names_formatted' => 'roleNamesFormatted'
+        'roles_with_scope' => 'rolesWithScope',
+        'client_session_timeouts' => 'clientSessionTimeouts'
     ];
 
     /**
@@ -215,7 +219,8 @@ class NoFrixionMoneyMoovModelsUser implements ModelInterface, ArrayAccess, \Json
         'two_factor_enabled' => 'setTwoFactorEnabled',
         'passkey_added' => 'setPasskeyAdded',
         'permissions' => 'setPermissions',
-        'role_names_formatted' => 'setRoleNamesFormatted'
+        'roles_with_scope' => 'setRolesWithScope',
+        'client_session_timeouts' => 'setClientSessionTimeouts'
     ];
 
     /**
@@ -232,7 +237,8 @@ class NoFrixionMoneyMoovModelsUser implements ModelInterface, ArrayAccess, \Json
         'two_factor_enabled' => 'getTwoFactorEnabled',
         'passkey_added' => 'getPasskeyAdded',
         'permissions' => 'getPermissions',
-        'role_names_formatted' => 'getRoleNamesFormatted'
+        'roles_with_scope' => 'getRolesWithScope',
+        'client_session_timeouts' => 'getClientSessionTimeouts'
     ];
 
     /**
@@ -300,7 +306,8 @@ class NoFrixionMoneyMoovModelsUser implements ModelInterface, ArrayAccess, \Json
         $this->setIfExists('two_factor_enabled', $data ?? [], null);
         $this->setIfExists('passkey_added', $data ?? [], null);
         $this->setIfExists('permissions', $data ?? [], null);
-        $this->setIfExists('role_names_formatted', $data ?? [], null);
+        $this->setIfExists('roles_with_scope', $data ?? [], null);
+        $this->setIfExists('client_session_timeouts', $data ?? [], null);
     }
 
     /**
@@ -580,7 +587,7 @@ class NoFrixionMoneyMoovModelsUser implements ModelInterface, ArrayAccess, \Json
     /**
      * Gets permissions
      *
-     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserRolePermissions|null
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserPermissions|null
      */
     public function getPermissions()
     {
@@ -590,7 +597,7 @@ class NoFrixionMoneyMoovModelsUser implements ModelInterface, ArrayAccess, \Json
     /**
      * Sets permissions
      *
-     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserRolePermissions|null $permissions permissions
+     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserPermissions|null $permissions permissions
      *
      * @return self
      */
@@ -605,35 +612,69 @@ class NoFrixionMoneyMoovModelsUser implements ModelInterface, ArrayAccess, \Json
     }
 
     /**
-     * Gets role_names_formatted
+     * Gets roles_with_scope
      *
-     * @return string|null
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsRolesUserRoleWithScope[]|null
      */
-    public function getRoleNamesFormatted()
+    public function getRolesWithScope()
     {
-        return $this->container['role_names_formatted'];
+        return $this->container['roles_with_scope'];
     }
 
     /**
-     * Sets role_names_formatted
+     * Sets roles_with_scope
      *
-     * @param string|null $role_names_formatted role_names_formatted
+     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsRolesUserRoleWithScope[]|null $roles_with_scope roles_with_scope
      *
      * @return self
      */
-    public function setRoleNamesFormatted($role_names_formatted)
+    public function setRolesWithScope($roles_with_scope)
     {
-        if (is_null($role_names_formatted)) {
-            array_push($this->openAPINullablesSetToNull, 'role_names_formatted');
+        if (is_null($roles_with_scope)) {
+            array_push($this->openAPINullablesSetToNull, 'roles_with_scope');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('role_names_formatted', $nullablesSetToNull);
+            $index = array_search('roles_with_scope', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['role_names_formatted'] = $role_names_formatted;
+        $this->container['roles_with_scope'] = $roles_with_scope;
+
+        return $this;
+    }
+
+    /**
+     * Gets client_session_timeouts
+     *
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsClientSessionTimeout[]|null
+     */
+    public function getClientSessionTimeouts()
+    {
+        return $this->container['client_session_timeouts'];
+    }
+
+    /**
+     * Sets client_session_timeouts
+     *
+     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsClientSessionTimeout[]|null $client_session_timeouts The number of seconds a session for this user should last before expiring.  This is based on the user's role on the merchant.  This is used to set the session timeout in the client. If not set the client's default  session timeout will be used.
+     *
+     * @return self
+     */
+    public function setClientSessionTimeouts($client_session_timeouts)
+    {
+        if (is_null($client_session_timeouts)) {
+            array_push($this->openAPINullablesSetToNull, 'client_session_timeouts');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('client_session_timeouts', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['client_session_timeouts'] = $client_session_timeouts;
 
         return $this;
     }

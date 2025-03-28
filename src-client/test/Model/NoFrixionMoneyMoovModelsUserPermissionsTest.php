@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionMoneyMoovModelsTribeLoadTest
+ * NoFrixionMoneyMoovModelsUserPermissionsTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Nofrixion\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * NoFrixionMoneyMoovModelsTribeLoadTest Class Doc Comment
+ * NoFrixionMoneyMoovModelsUserPermissionsTest Class Doc Comment
  *
  * @category    Class
- * @description NoFrixionMoneyMoovModelsTribeLoad
+ * @description NoFrixionMoneyMoovModelsUserPermissions
  * @package     Nofrixion\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class NoFrixionMoneyMoovModelsTribeLoadTest extends TestCase
+class NoFrixionMoneyMoovModelsUserPermissionsTest extends TestCase
 {
 
     /**
@@ -71,54 +71,18 @@ class NoFrixionMoneyMoovModelsTribeLoadTest extends TestCase
     }
 
     /**
-     * Test "NoFrixionMoneyMoovModelsTribeLoad"
+     * Test "NoFrixionMoneyMoovModelsUserPermissions"
      */
-    public function testNoFrixionMoneyMoovModelsTribeLoad()
+    public function testNoFrixionMoneyMoovModelsUserPermissions()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "transaction"
+     * Test attribute "merchant_permissions"
      */
-    public function testPropertyTransaction()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "failure_reason"
-     */
-    public function testPropertyFailureReason()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "id"
-     */
-    public function testPropertyId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "merchant_id"
-     */
-    public function testPropertyMerchantId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "inserted"
-     */
-    public function testPropertyInserted()
+    public function testPropertyMerchantPermissions()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

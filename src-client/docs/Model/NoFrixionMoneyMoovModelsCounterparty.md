@@ -9,7 +9,8 @@ Name | Type | Description | Notes
 **beneficiary_id** | **string** | Optional ID of a Beneficiary to use for the counterparty destination. If set  it will take precedence over any other destination details, except for AccountID,  set for the counterparty. | [optional]
 **name** | **string** | The name of the counterparty. For a person this should be their full name. For a   company this should be their registered or trading name. | [optional]
 **email_address** | **string** | An email address for the counterparty. Optional to set and depending on the payment  network does not always get set for pay ins. | [optional]
-**phone_number** | **string** |  | [optional]
+**phone_number** | **string** | A phone number for the counterparty. Optional to set and depending on the payment  network does not always get set for pay ins. | [optional]
+**country_code** | **string** | A country code for the counterparty. Optional to set and depending on the payment  network does not always get set for pay ins | [optional]
 **identifier** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsAccountIdentifier**](NoFrixionMoneyMoovModelsAccountIdentifier.md) |  | [optional]
 **summary** | **string** | Gets a convenient summary representation of the counterparty. | [optional] [readonly]
 

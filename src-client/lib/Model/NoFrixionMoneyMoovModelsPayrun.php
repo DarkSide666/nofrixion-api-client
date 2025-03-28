@@ -62,7 +62,6 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
         'name' => 'string',
         'merchant_id' => 'string',
         'invoices' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayrunInvoice[]',
-        'total_amount' => 'float',
         'inserted' => '\DateTime',
         'last_updated' => '\DateTime',
         'schedule_date' => '\DateTime',
@@ -73,13 +72,19 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
         'payouts' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayout[]',
         'payments' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayrunPayment[]',
         'is_archived' => 'bool',
+        'total_eur' => 'float',
+        'total_gbp' => 'float',
+        'total_usd' => 'float',
+        'payouts_count' => 'int',
+        'authorisation_date' => '\DateTime',
         'can_edit' => 'bool',
         'can_delete' => 'bool',
         'authorisers_required_count' => 'int',
         'authorisers_completed_count' => 'int',
         'can_authorise' => 'bool',
         'has_current_user_authorised' => 'bool',
-        'authorisations' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsApproveAuthorisation[]'
+        'authorisations' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsApproveAuthorisation[]',
+        'nonce' => 'string'
     ];
 
     /**
@@ -95,7 +100,6 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
         'name' => null,
         'merchant_id' => 'uuid',
         'invoices' => null,
-        'total_amount' => 'double',
         'inserted' => 'date-time',
         'last_updated' => 'date-time',
         'schedule_date' => 'date-time',
@@ -106,13 +110,19 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
         'payouts' => null,
         'payments' => null,
         'is_archived' => null,
+        'total_eur' => 'double',
+        'total_gbp' => 'double',
+        'total_usd' => 'double',
+        'payouts_count' => 'int32',
+        'authorisation_date' => 'date-time',
         'can_edit' => null,
         'can_delete' => null,
         'authorisers_required_count' => 'int32',
         'authorisers_completed_count' => 'int32',
         'can_authorise' => null,
         'has_current_user_authorised' => null,
-        'authorisations' => null
+        'authorisations' => null,
+        'nonce' => null
     ];
 
     /**
@@ -126,7 +136,6 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
         'name' => true,
         'merchant_id' => false,
         'invoices' => true,
-        'total_amount' => false,
         'inserted' => false,
         'last_updated' => false,
         'schedule_date' => true,
@@ -137,13 +146,19 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
         'payouts' => true,
         'payments' => true,
         'is_archived' => false,
+        'total_eur' => false,
+        'total_gbp' => false,
+        'total_usd' => false,
+        'payouts_count' => false,
+        'authorisation_date' => true,
         'can_edit' => false,
         'can_delete' => false,
         'authorisers_required_count' => false,
         'authorisers_completed_count' => false,
         'can_authorise' => false,
         'has_current_user_authorised' => false,
-        'authorisations' => true
+        'authorisations' => true,
+        'nonce' => true
     ];
 
     /**
@@ -237,7 +252,6 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
         'name' => 'name',
         'merchant_id' => 'merchantID',
         'invoices' => 'invoices',
-        'total_amount' => 'totalAmount',
         'inserted' => 'inserted',
         'last_updated' => 'lastUpdated',
         'schedule_date' => 'scheduleDate',
@@ -248,13 +262,19 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
         'payouts' => 'payouts',
         'payments' => 'payments',
         'is_archived' => 'isArchived',
+        'total_eur' => 'totalEur',
+        'total_gbp' => 'totalGbp',
+        'total_usd' => 'totalUsd',
+        'payouts_count' => 'payoutsCount',
+        'authorisation_date' => 'authorisationDate',
         'can_edit' => 'canEdit',
         'can_delete' => 'canDelete',
         'authorisers_required_count' => 'authorisersRequiredCount',
         'authorisers_completed_count' => 'authorisersCompletedCount',
         'can_authorise' => 'canAuthorise',
         'has_current_user_authorised' => 'hasCurrentUserAuthorised',
-        'authorisations' => 'authorisations'
+        'authorisations' => 'authorisations',
+        'nonce' => 'nonce'
     ];
 
     /**
@@ -268,7 +288,6 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
         'name' => 'setName',
         'merchant_id' => 'setMerchantId',
         'invoices' => 'setInvoices',
-        'total_amount' => 'setTotalAmount',
         'inserted' => 'setInserted',
         'last_updated' => 'setLastUpdated',
         'schedule_date' => 'setScheduleDate',
@@ -279,13 +298,19 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
         'payouts' => 'setPayouts',
         'payments' => 'setPayments',
         'is_archived' => 'setIsArchived',
+        'total_eur' => 'setTotalEur',
+        'total_gbp' => 'setTotalGbp',
+        'total_usd' => 'setTotalUsd',
+        'payouts_count' => 'setPayoutsCount',
+        'authorisation_date' => 'setAuthorisationDate',
         'can_edit' => 'setCanEdit',
         'can_delete' => 'setCanDelete',
         'authorisers_required_count' => 'setAuthorisersRequiredCount',
         'authorisers_completed_count' => 'setAuthorisersCompletedCount',
         'can_authorise' => 'setCanAuthorise',
         'has_current_user_authorised' => 'setHasCurrentUserAuthorised',
-        'authorisations' => 'setAuthorisations'
+        'authorisations' => 'setAuthorisations',
+        'nonce' => 'setNonce'
     ];
 
     /**
@@ -299,7 +324,6 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
         'name' => 'getName',
         'merchant_id' => 'getMerchantId',
         'invoices' => 'getInvoices',
-        'total_amount' => 'getTotalAmount',
         'inserted' => 'getInserted',
         'last_updated' => 'getLastUpdated',
         'schedule_date' => 'getScheduleDate',
@@ -310,13 +334,19 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
         'payouts' => 'getPayouts',
         'payments' => 'getPayments',
         'is_archived' => 'getIsArchived',
+        'total_eur' => 'getTotalEur',
+        'total_gbp' => 'getTotalGbp',
+        'total_usd' => 'getTotalUsd',
+        'payouts_count' => 'getPayoutsCount',
+        'authorisation_date' => 'getAuthorisationDate',
         'can_edit' => 'getCanEdit',
         'can_delete' => 'getCanDelete',
         'authorisers_required_count' => 'getAuthorisersRequiredCount',
         'authorisers_completed_count' => 'getAuthorisersCompletedCount',
         'can_authorise' => 'getCanAuthorise',
         'has_current_user_authorised' => 'getHasCurrentUserAuthorised',
-        'authorisations' => 'getAuthorisations'
+        'authorisations' => 'getAuthorisations',
+        'nonce' => 'getNonce'
     ];
 
     /**
@@ -369,6 +399,7 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
     public const STATUS_PAYOUTS_CREATED = 'PayoutsCreated';
     public const STATUS_QUEUED = 'Queued';
     public const STATUS_APPROVING = 'Approving';
+    public const STATUS_PROCESSING = 'Processing';
 
     /**
      * Gets allowable values of the enum
@@ -387,6 +418,7 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
             self::STATUS_PAYOUTS_CREATED,
             self::STATUS_QUEUED,
             self::STATUS_APPROVING,
+            self::STATUS_PROCESSING,
         ];
     }
 
@@ -410,7 +442,6 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('merchant_id', $data ?? [], null);
         $this->setIfExists('invoices', $data ?? [], null);
-        $this->setIfExists('total_amount', $data ?? [], null);
         $this->setIfExists('inserted', $data ?? [], null);
         $this->setIfExists('last_updated', $data ?? [], null);
         $this->setIfExists('schedule_date', $data ?? [], null);
@@ -421,6 +452,11 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('payouts', $data ?? [], null);
         $this->setIfExists('payments', $data ?? [], null);
         $this->setIfExists('is_archived', $data ?? [], null);
+        $this->setIfExists('total_eur', $data ?? [], null);
+        $this->setIfExists('total_gbp', $data ?? [], null);
+        $this->setIfExists('total_usd', $data ?? [], null);
+        $this->setIfExists('payouts_count', $data ?? [], null);
+        $this->setIfExists('authorisation_date', $data ?? [], null);
         $this->setIfExists('can_edit', $data ?? [], null);
         $this->setIfExists('can_delete', $data ?? [], null);
         $this->setIfExists('authorisers_required_count', $data ?? [], null);
@@ -428,6 +464,7 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('can_authorise', $data ?? [], null);
         $this->setIfExists('has_current_user_authorised', $data ?? [], null);
         $this->setIfExists('authorisations', $data ?? [], null);
+        $this->setIfExists('nonce', $data ?? [], null);
     }
 
     /**
@@ -633,33 +670,6 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
             }
         }
         $this->container['invoices'] = $invoices;
-
-        return $this;
-    }
-
-    /**
-     * Gets total_amount
-     *
-     * @return float|null
-     */
-    public function getTotalAmount()
-    {
-        return $this->container['total_amount'];
-    }
-
-    /**
-     * Sets total_amount
-     *
-     * @param float|null $total_amount total_amount
-     *
-     * @return self
-     */
-    public function setTotalAmount($total_amount)
-    {
-        if (is_null($total_amount)) {
-            throw new \InvalidArgumentException('non-nullable total_amount cannot be null');
-        }
-        $this->container['total_amount'] = $total_amount;
 
         return $this;
     }
@@ -980,6 +990,148 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
     }
 
     /**
+     * Gets total_eur
+     *
+     * @return float|null
+     */
+    public function getTotalEur()
+    {
+        return $this->container['total_eur'];
+    }
+
+    /**
+     * Sets total_eur
+     *
+     * @param float|null $total_eur total_eur
+     *
+     * @return self
+     */
+    public function setTotalEur($total_eur)
+    {
+        if (is_null($total_eur)) {
+            throw new \InvalidArgumentException('non-nullable total_eur cannot be null');
+        }
+        $this->container['total_eur'] = $total_eur;
+
+        return $this;
+    }
+
+    /**
+     * Gets total_gbp
+     *
+     * @return float|null
+     */
+    public function getTotalGbp()
+    {
+        return $this->container['total_gbp'];
+    }
+
+    /**
+     * Sets total_gbp
+     *
+     * @param float|null $total_gbp total_gbp
+     *
+     * @return self
+     */
+    public function setTotalGbp($total_gbp)
+    {
+        if (is_null($total_gbp)) {
+            throw new \InvalidArgumentException('non-nullable total_gbp cannot be null');
+        }
+        $this->container['total_gbp'] = $total_gbp;
+
+        return $this;
+    }
+
+    /**
+     * Gets total_usd
+     *
+     * @return float|null
+     */
+    public function getTotalUsd()
+    {
+        return $this->container['total_usd'];
+    }
+
+    /**
+     * Sets total_usd
+     *
+     * @param float|null $total_usd total_usd
+     *
+     * @return self
+     */
+    public function setTotalUsd($total_usd)
+    {
+        if (is_null($total_usd)) {
+            throw new \InvalidArgumentException('non-nullable total_usd cannot be null');
+        }
+        $this->container['total_usd'] = $total_usd;
+
+        return $this;
+    }
+
+    /**
+     * Gets payouts_count
+     *
+     * @return int|null
+     */
+    public function getPayoutsCount()
+    {
+        return $this->container['payouts_count'];
+    }
+
+    /**
+     * Sets payouts_count
+     *
+     * @param int|null $payouts_count payouts_count
+     *
+     * @return self
+     */
+    public function setPayoutsCount($payouts_count)
+    {
+        if (is_null($payouts_count)) {
+            throw new \InvalidArgumentException('non-nullable payouts_count cannot be null');
+        }
+        $this->container['payouts_count'] = $payouts_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets authorisation_date
+     *
+     * @return \DateTime|null
+     */
+    public function getAuthorisationDate()
+    {
+        return $this->container['authorisation_date'];
+    }
+
+    /**
+     * Sets authorisation_date
+     *
+     * @param \DateTime|null $authorisation_date authorisation_date
+     *
+     * @return self
+     */
+    public function setAuthorisationDate($authorisation_date)
+    {
+        if (is_null($authorisation_date)) {
+            array_push($this->openAPINullablesSetToNull, 'authorisation_date');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('authorisation_date', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['authorisation_date'] = $authorisation_date;
+
+        return $this;
+    }
+
+    /**
      * Gets can_edit
      *
      * @return bool|null
@@ -1171,6 +1323,40 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
             }
         }
         $this->container['authorisations'] = $authorisations;
+
+        return $this;
+    }
+
+    /**
+     * Gets nonce
+     *
+     * @return string|null
+     */
+    public function getNonce()
+    {
+        return $this->container['nonce'];
+    }
+
+    /**
+     * Sets nonce
+     *
+     * @param string|null $nonce nonce
+     *
+     * @return self
+     */
+    public function setNonce($nonce)
+    {
+        if (is_null($nonce)) {
+            array_push($this->openAPINullablesSetToNull, 'nonce');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('nonce', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['nonce'] = $nonce;
 
         return $this;
     }

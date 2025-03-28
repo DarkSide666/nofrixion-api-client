@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionMoneyMoovModelsPaymentAccountPageResponseTest
+ * NoFrixionMoneyMoovModelsMerchantPermissionTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Nofrixion\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * NoFrixionMoneyMoovModelsPaymentAccountPageResponseTest Class Doc Comment
+ * NoFrixionMoneyMoovModelsMerchantPermissionTest Class Doc Comment
  *
  * @category    Class
- * @description NoFrixionMoneyMoovModelsPaymentAccountPageResponse
+ * @description NoFrixionMoneyMoovModelsMerchantPermission
  * @package     Nofrixion\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class NoFrixionMoneyMoovModelsPaymentAccountPageResponseTest extends TestCase
+class NoFrixionMoneyMoovModelsMerchantPermissionTest extends TestCase
 {
 
     /**
@@ -71,54 +71,36 @@ class NoFrixionMoneyMoovModelsPaymentAccountPageResponseTest extends TestCase
     }
 
     /**
-     * Test "NoFrixionMoneyMoovModelsPaymentAccountPageResponse"
+     * Test "NoFrixionMoneyMoovModelsMerchantPermission"
      */
-    public function testNoFrixionMoneyMoovModelsPaymentAccountPageResponse()
+    public function testNoFrixionMoneyMoovModelsMerchantPermission()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "content"
+     * Test attribute "merchant_id"
      */
-    public function testPropertyContent()
+    public function testPropertyMerchantId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "page_number"
+     * Test attribute "permissions"
      */
-    public function testPropertyPageNumber()
+    public function testPropertyPermissions()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "page_size"
+     * Test attribute "account_permissions"
      */
-    public function testPropertyPageSize()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "total_pages"
-     */
-    public function testPropertyTotalPages()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "total_size"
-     */
-    public function testPropertyTotalSize()
+    public function testPropertyAccountPermissions()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

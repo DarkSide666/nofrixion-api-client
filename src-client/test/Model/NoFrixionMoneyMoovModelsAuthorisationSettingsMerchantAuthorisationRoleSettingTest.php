@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionMoneyMoovModelsBeneficiaryPageResponseTest
+ * NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationRoleSettingTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Nofrixion\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * NoFrixionMoneyMoovModelsBeneficiaryPageResponseTest Class Doc Comment
+ * NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationRoleSettingTest Class Doc Comment
  *
  * @category    Class
- * @description NoFrixionMoneyMoovModelsBeneficiaryPageResponse
+ * @description NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationRoleSetting
  * @package     Nofrixion\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class NoFrixionMoneyMoovModelsBeneficiaryPageResponseTest extends TestCase
+class NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationRoleSettingTest extends TestCase
 {
 
     /**
@@ -71,54 +71,81 @@ class NoFrixionMoneyMoovModelsBeneficiaryPageResponseTest extends TestCase
     }
 
     /**
-     * Test "NoFrixionMoneyMoovModelsBeneficiaryPageResponse"
+     * Test "NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationRoleSetting"
      */
-    public function testNoFrixionMoneyMoovModelsBeneficiaryPageResponse()
+    public function testNoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationRoleSetting()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "content"
+     * Test attribute "role_id"
      */
-    public function testPropertyContent()
+    public function testPropertyRoleId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "page_number"
+     * Test attribute "name"
      */
-    public function testPropertyPageNumber()
+    public function testPropertyName()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "page_size"
+     * Test attribute "description"
      */
-    public function testPropertyPageSize()
+    public function testPropertyDescription()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "total_pages"
+     * Test attribute "merchant_id"
      */
-    public function testPropertyTotalPages()
+    public function testPropertyMerchantId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "total_size"
+     * Test attribute "min_number_authorisers"
      */
-    public function testPropertyTotalSize()
+    public function testPropertyMinNumberAuthorisers()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "max_number_authorisers"
+     */
+    public function testPropertyMaxNumberAuthorisers()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "inserted"
+     */
+    public function testPropertyInserted()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "last_updated"
+     */
+    public function testPropertyLastUpdated()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

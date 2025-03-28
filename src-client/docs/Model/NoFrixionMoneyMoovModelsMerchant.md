@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** | Unique ID for the merchant. | [optional]
 **name** | **string** | The registered business name of the merchant. | [optional]
-**enabled** | **bool** |  | [optional]
 **company_id** | **string** | The Company ID recorded in the Compliance system. | [optional]
 **merchant_category_code** | **string** | The industry code that represents the merchant&#39;s primary trading activity. | [optional]
 **short_name** | **string** | A URL friendly shortish name for the merchant. Principal purpose is  to use in the hosted payment page URL. | [optional]
@@ -20,6 +19,7 @@ Name | Type | Description | Notes
 **modulr_customer_id** | **string** | For internal use only. | [optional]
 **supported_payment_methods_list** | **string[]** | The payment methods that are configured and supported for this merchant. | [optional]
 **your_role** | **string** | The role of the identity that loaded the merchant record. | [optional]
+**your_role_name** | **string** | The name of the role for the identity that loaded the merchant record. | [optional]
 **user_roles** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserRole[]**](NoFrixionMoneyMoovModelsUserRole.md) | The list of users that have been assigned a role on the merchant. | [optional]
 **tags** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTag[]**](NoFrixionMoneyMoovModelsTag.md) | An optional list of descriptive tags that can be used on merchant entities  such as payment requests. | [optional]
 **payment_accounts** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]**](NoFrixionMoneyMoovModelsPaymentAccount.md) |  | [optional]

@@ -423,6 +423,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestUpdate implements ModelInterface, Ar
     public const CURRENCY_NONE = 'NONE';
     public const CURRENCY_GBP = 'GBP';
     public const CURRENCY_EUR = 'EUR';
+    public const CURRENCY_USD = 'USD';
     public const CURRENCY_BTC = 'BTC';
     public const PAYMENT_METHODS_NONE = 'None';
     public const PAYMENT_METHODS_CARD = 'card';
@@ -447,6 +448,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestUpdate implements ModelInterface, Ar
             self::CURRENCY_NONE,
             self::CURRENCY_GBP,
             self::CURRENCY_EUR,
+            self::CURRENCY_USD,
             self::CURRENCY_BTC,
         ];
     }

@@ -60,7 +60,7 @@ class NoFrixionMoneyMoovModelsTokenAdd implements ModelInterface, ArrayAccess, \
         'merchant_id' => 'string',
         'description' => 'string',
         'hmac_algorithm' => 'string',
-        'permissions' => 'string'
+        'permission_types' => 'string[]'
     ];
 
     /**
@@ -74,7 +74,7 @@ class NoFrixionMoneyMoovModelsTokenAdd implements ModelInterface, ArrayAccess, \
         'merchant_id' => 'uuid',
         'description' => null,
         'hmac_algorithm' => null,
-        'permissions' => null
+        'permission_types' => null
     ];
 
     /**
@@ -86,7 +86,7 @@ class NoFrixionMoneyMoovModelsTokenAdd implements ModelInterface, ArrayAccess, \
         'merchant_id' => false,
         'description' => false,
         'hmac_algorithm' => false,
-        'permissions' => false
+        'permission_types' => true
     ];
 
     /**
@@ -178,7 +178,7 @@ class NoFrixionMoneyMoovModelsTokenAdd implements ModelInterface, ArrayAccess, \
         'merchant_id' => 'merchantID',
         'description' => 'description',
         'hmac_algorithm' => 'hmacAlgorithm',
-        'permissions' => 'permissions'
+        'permission_types' => 'permissionTypes'
     ];
 
     /**
@@ -190,7 +190,7 @@ class NoFrixionMoneyMoovModelsTokenAdd implements ModelInterface, ArrayAccess, \
         'merchant_id' => 'setMerchantId',
         'description' => 'setDescription',
         'hmac_algorithm' => 'setHmacAlgorithm',
-        'permissions' => 'setPermissions'
+        'permission_types' => 'setPermissionTypes'
     ];
 
     /**
@@ -202,7 +202,7 @@ class NoFrixionMoneyMoovModelsTokenAdd implements ModelInterface, ArrayAccess, \
         'merchant_id' => 'getMerchantId',
         'description' => 'getDescription',
         'hmac_algorithm' => 'getHmacAlgorithm',
-        'permissions' => 'getPermissions'
+        'permission_types' => 'getPermissionTypes'
     ];
 
     /**
@@ -251,27 +251,27 @@ class NoFrixionMoneyMoovModelsTokenAdd implements ModelInterface, ArrayAccess, \
     public const HMAC_ALGORITHM_HMAC_SHA256 = 'HMAC_SHA256';
     public const HMAC_ALGORITHM_HMAC_SHA384 = 'HMAC_SHA384';
     public const HMAC_ALGORITHM_HMAC_SHA512 = 'HMAC_SHA512';
-    public const PERMISSIONS_DENY = 'Deny';
-    public const PERMISSIONS_CREATE_PAYMENT_REQUEST = 'CreatePaymentRequest';
-    public const PERMISSIONS_EDIT_PAYMENT_REQUEST = 'EditPaymentRequest';
-    public const PERMISSIONS_DELETE_PAYMENT_REQUEST = 'DeletePaymentRequest';
-    public const PERMISSIONS_CREATE_RULE = 'CreateRule';
-    public const PERMISSIONS_EDIT_RULE = 'EditRule';
-    public const PERMISSIONS_DELETE_RULE = 'DeleteRule';
-    public const PERMISSIONS_CREATE_PAYOUT = 'CreatePayout';
-    public const PERMISSIONS_EDIT_PAYOUT = 'EditPayout';
-    public const PERMISSIONS_DELETE_PAYOUT = 'DeletePayout';
-    public const PERMISSIONS_CREATE_REPORT = 'CreateReport';
-    public const PERMISSIONS_EDIT_REPORT = 'EditReport';
-    public const PERMISSIONS_DELETE_REPORT = 'DeleteReport';
-    public const PERMISSIONS_EXECUTE_REPORT = 'ExecuteReport';
-    public const PERMISSIONS_CREATE_PAYMENT_ACCOUNT = 'CreatePaymentAccount';
-    public const PERMISSIONS_EDIT_PAYMENT_ACCOUNT = 'EditPaymentAccount';
-    public const PERMISSIONS_TRUSTED_SUBMIT_PAYOUT = 'TrustedSubmitPayout';
-    public const PERMISSIONS_OPEN_BANKING_ACCOUNT_INFORMATION = 'OpenBankingAccountInformation';
-    public const PERMISSIONS_CREATE_DIRECT_DEBIT_MANDATE = 'CreateDirectDebitMandate';
-    public const PERMISSIONS_SUBMIT_DIRECT_DEBIT_PAYMENT = 'SubmitDirectDebitPayment';
-    public const PERMISSIONS_VIEW_TRANSACTIONS = 'ViewTransactions';
+    public const PERMISSION_TYPES_DENY = 'Deny';
+    public const PERMISSION_TYPES_CREATE_PAYMENT_REQUEST = 'CreatePaymentRequest';
+    public const PERMISSION_TYPES_EDIT_PAYMENT_REQUEST = 'EditPaymentRequest';
+    public const PERMISSION_TYPES_DELETE_PAYMENT_REQUEST = 'DeletePaymentRequest';
+    public const PERMISSION_TYPES_CREATE_RULE = 'CreateRule';
+    public const PERMISSION_TYPES_EDIT_RULE = 'EditRule';
+    public const PERMISSION_TYPES_DELETE_RULE = 'DeleteRule';
+    public const PERMISSION_TYPES_CREATE_PAYOUT = 'CreatePayout';
+    public const PERMISSION_TYPES_EDIT_PAYOUT = 'EditPayout';
+    public const PERMISSION_TYPES_DELETE_PAYOUT = 'DeletePayout';
+    public const PERMISSION_TYPES_CREATE_REPORT = 'CreateReport';
+    public const PERMISSION_TYPES_EDIT_REPORT = 'EditReport';
+    public const PERMISSION_TYPES_DELETE_REPORT = 'DeleteReport';
+    public const PERMISSION_TYPES_EXECUTE_REPORT = 'ExecuteReport';
+    public const PERMISSION_TYPES_CREATE_PAYMENT_ACCOUNT = 'CreatePaymentAccount';
+    public const PERMISSION_TYPES_EDIT_PAYMENT_ACCOUNT = 'EditPaymentAccount';
+    public const PERMISSION_TYPES_TRUSTED_SUBMIT_PAYOUT = 'TrustedSubmitPayout';
+    public const PERMISSION_TYPES_OPEN_BANKING_ACCOUNT_INFORMATION = 'OpenBankingAccountInformation';
+    public const PERMISSION_TYPES_CREATE_DIRECT_DEBIT_MANDATE = 'CreateDirectDebitMandate';
+    public const PERMISSION_TYPES_SUBMIT_DIRECT_DEBIT_PAYMENT = 'SubmitDirectDebitPayment';
+    public const PERMISSION_TYPES_VIEW_TRANSACTIONS = 'ViewTransactions';
 
     /**
      * Gets allowable values of the enum
@@ -294,30 +294,30 @@ class NoFrixionMoneyMoovModelsTokenAdd implements ModelInterface, ArrayAccess, \
      *
      * @return string[]
      */
-    public function getPermissionsAllowableValues()
+    public function getPermissionTypesAllowableValues()
     {
         return [
-            self::PERMISSIONS_DENY,
-            self::PERMISSIONS_CREATE_PAYMENT_REQUEST,
-            self::PERMISSIONS_EDIT_PAYMENT_REQUEST,
-            self::PERMISSIONS_DELETE_PAYMENT_REQUEST,
-            self::PERMISSIONS_CREATE_RULE,
-            self::PERMISSIONS_EDIT_RULE,
-            self::PERMISSIONS_DELETE_RULE,
-            self::PERMISSIONS_CREATE_PAYOUT,
-            self::PERMISSIONS_EDIT_PAYOUT,
-            self::PERMISSIONS_DELETE_PAYOUT,
-            self::PERMISSIONS_CREATE_REPORT,
-            self::PERMISSIONS_EDIT_REPORT,
-            self::PERMISSIONS_DELETE_REPORT,
-            self::PERMISSIONS_EXECUTE_REPORT,
-            self::PERMISSIONS_CREATE_PAYMENT_ACCOUNT,
-            self::PERMISSIONS_EDIT_PAYMENT_ACCOUNT,
-            self::PERMISSIONS_TRUSTED_SUBMIT_PAYOUT,
-            self::PERMISSIONS_OPEN_BANKING_ACCOUNT_INFORMATION,
-            self::PERMISSIONS_CREATE_DIRECT_DEBIT_MANDATE,
-            self::PERMISSIONS_SUBMIT_DIRECT_DEBIT_PAYMENT,
-            self::PERMISSIONS_VIEW_TRANSACTIONS,
+            self::PERMISSION_TYPES_DENY,
+            self::PERMISSION_TYPES_CREATE_PAYMENT_REQUEST,
+            self::PERMISSION_TYPES_EDIT_PAYMENT_REQUEST,
+            self::PERMISSION_TYPES_DELETE_PAYMENT_REQUEST,
+            self::PERMISSION_TYPES_CREATE_RULE,
+            self::PERMISSION_TYPES_EDIT_RULE,
+            self::PERMISSION_TYPES_DELETE_RULE,
+            self::PERMISSION_TYPES_CREATE_PAYOUT,
+            self::PERMISSION_TYPES_EDIT_PAYOUT,
+            self::PERMISSION_TYPES_DELETE_PAYOUT,
+            self::PERMISSION_TYPES_CREATE_REPORT,
+            self::PERMISSION_TYPES_EDIT_REPORT,
+            self::PERMISSION_TYPES_DELETE_REPORT,
+            self::PERMISSION_TYPES_EXECUTE_REPORT,
+            self::PERMISSION_TYPES_CREATE_PAYMENT_ACCOUNT,
+            self::PERMISSION_TYPES_EDIT_PAYMENT_ACCOUNT,
+            self::PERMISSION_TYPES_TRUSTED_SUBMIT_PAYOUT,
+            self::PERMISSION_TYPES_OPEN_BANKING_ACCOUNT_INFORMATION,
+            self::PERMISSION_TYPES_CREATE_DIRECT_DEBIT_MANDATE,
+            self::PERMISSION_TYPES_SUBMIT_DIRECT_DEBIT_PAYMENT,
+            self::PERMISSION_TYPES_VIEW_TRANSACTIONS,
         ];
     }
 
@@ -339,7 +339,7 @@ class NoFrixionMoneyMoovModelsTokenAdd implements ModelInterface, ArrayAccess, \
         $this->setIfExists('merchant_id', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('hmac_algorithm', $data ?? [], null);
-        $this->setIfExists('permissions', $data ?? [], null);
+        $this->setIfExists('permission_types', $data ?? [], null);
     }
 
     /**
@@ -384,15 +384,6 @@ class NoFrixionMoneyMoovModelsTokenAdd implements ModelInterface, ArrayAccess, \
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'hmac_algorithm', must be one of '%s'",
                 $this->container['hmac_algorithm'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        $allowedValues = $this->getPermissionsAllowableValues();
-        if (!is_null($this->container['permissions']) && !in_array($this->container['permissions'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'permissions', must be one of '%s'",
-                $this->container['permissions'],
                 implode("', '", $allowedValues)
             );
         }
@@ -509,38 +500,44 @@ class NoFrixionMoneyMoovModelsTokenAdd implements ModelInterface, ArrayAccess, \
     }
 
     /**
-     * Gets permissions
+     * Gets permission_types
      *
-     * @return string|null
+     * @return string[]|null
      */
-    public function getPermissions()
+    public function getPermissionTypes()
     {
-        return $this->container['permissions'];
+        return $this->container['permission_types'];
     }
 
     /**
-     * Sets permissions
+     * Sets permission_types
      *
-     * @param string|null $permissions permissions
+     * @param string[]|null $permission_types The list of permissions tho grant to the merchant token.
      *
      * @return self
      */
-    public function setPermissions($permissions)
+    public function setPermissionTypes($permission_types)
     {
-        if (is_null($permissions)) {
-            throw new \InvalidArgumentException('non-nullable permissions cannot be null');
+        if (is_null($permission_types)) {
+            array_push($this->openAPINullablesSetToNull, 'permission_types');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('permission_types', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $allowedValues = $this->getPermissionsAllowableValues();
-        if (!in_array($permissions, $allowedValues, true)) {
+        $allowedValues = $this->getPermissionTypesAllowableValues();
+        if (!is_null($permission_types) && array_diff($permission_types, $allowedValues)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Invalid value '%s' for 'permissions', must be one of '%s'",
-                    $permissions,
+                    "Invalid value for 'permission_types', must be one of '%s'",
                     implode("', '", $allowedValues)
                 )
             );
         }
-        $this->container['permissions'] = $permissions;
+        $this->container['permission_types'] = $permission_types;
 
         return $this;
     }

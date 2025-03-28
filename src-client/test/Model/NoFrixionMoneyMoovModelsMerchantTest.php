@@ -98,15 +98,6 @@ class NoFrixionMoneyMoovModelsMerchantTest extends TestCase
     }
 
     /**
-     * Test attribute "enabled"
-     */
-    public function testPropertyEnabled()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "company_id"
      */
     public function testPropertyCompanyId()
@@ -218,6 +209,15 @@ class NoFrixionMoneyMoovModelsMerchantTest extends TestCase
      * Test attribute "your_role"
      */
     public function testPropertyYourRole()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "your_role_name"
+     */
+    public function testPropertyYourRoleName()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

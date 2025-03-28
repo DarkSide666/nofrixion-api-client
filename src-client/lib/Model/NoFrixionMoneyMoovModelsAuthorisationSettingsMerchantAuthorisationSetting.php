@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionMoneyMoovModelsBeneficiaryCreate
+ * NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationSetting
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Nofrixion\Client\ObjectSerializer;
 
 /**
- * NoFrixionMoneyMoovModelsBeneficiaryCreate Class Doc Comment
+ * NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationSetting Class Doc Comment
  *
  * @category Class
  * @package  Nofrixion\Client
@@ -40,7 +40,7 @@ use \Nofrixion\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class NoFrixionMoneyMoovModelsBeneficiaryCreate implements ModelInterface, ArrayAccess, \JsonSerializable
+class NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationSetting implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class NoFrixionMoneyMoovModelsBeneficiaryCreate implements ModelInterface, Array
       *
       * @var string
       */
-    protected static $openAPIModelName = 'NoFrixion.MoneyMoov.Models.BeneficiaryCreate';
+    protected static $openAPIModelName = 'NoFrixion.MoneyMoov.Models.AuthorisationSettings.MerchantAuthorisationSetting';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,10 +59,15 @@ class NoFrixionMoneyMoovModelsBeneficiaryCreate implements ModelInterface, Array
     protected static $openAPITypes = [
         'id' => 'string',
         'merchant_id' => 'string',
-        'source_account_ids' => 'string[]',
-        'name' => 'string',
-        'currency' => 'string',
-        'destination' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsCounterpartyCreate'
+        'amount_lower' => 'float',
+        'amount_upper' => 'float',
+        'beneficiaries_only' => 'bool',
+        'number_of_authorisers' => 'int',
+        'last_editor_cant_authorise' => 'bool',
+        'authorisation_type' => 'string',
+        'role_settings' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationRoleSetting[]',
+        'inserted' => '\DateTime',
+        'last_updated' => '\DateTime'
     ];
 
     /**
@@ -75,10 +80,15 @@ class NoFrixionMoneyMoovModelsBeneficiaryCreate implements ModelInterface, Array
     protected static $openAPIFormats = [
         'id' => 'uuid',
         'merchant_id' => 'uuid',
-        'source_account_ids' => 'uuid',
-        'name' => null,
-        'currency' => null,
-        'destination' => null
+        'amount_lower' => 'double',
+        'amount_upper' => 'double',
+        'beneficiaries_only' => null,
+        'number_of_authorisers' => 'int32',
+        'last_editor_cant_authorise' => null,
+        'authorisation_type' => null,
+        'role_settings' => null,
+        'inserted' => 'date-time',
+        'last_updated' => 'date-time'
     ];
 
     /**
@@ -89,10 +99,15 @@ class NoFrixionMoneyMoovModelsBeneficiaryCreate implements ModelInterface, Array
     protected static array $openAPINullables = [
         'id' => false,
         'merchant_id' => false,
-        'source_account_ids' => true,
-        'name' => false,
-        'currency' => false,
-        'destination' => false
+        'amount_lower' => true,
+        'amount_upper' => true,
+        'beneficiaries_only' => false,
+        'number_of_authorisers' => false,
+        'last_editor_cant_authorise' => false,
+        'authorisation_type' => false,
+        'role_settings' => true,
+        'inserted' => false,
+        'last_updated' => false
     ];
 
     /**
@@ -183,10 +198,15 @@ class NoFrixionMoneyMoovModelsBeneficiaryCreate implements ModelInterface, Array
     protected static $attributeMap = [
         'id' => 'id',
         'merchant_id' => 'merchantID',
-        'source_account_ids' => 'sourceAccountIDs',
-        'name' => 'name',
-        'currency' => 'currency',
-        'destination' => 'destination'
+        'amount_lower' => 'amountLower',
+        'amount_upper' => 'amountUpper',
+        'beneficiaries_only' => 'beneficiariesOnly',
+        'number_of_authorisers' => 'numberOfAuthorisers',
+        'last_editor_cant_authorise' => 'lastEditorCantAuthorise',
+        'authorisation_type' => 'authorisationType',
+        'role_settings' => 'roleSettings',
+        'inserted' => 'inserted',
+        'last_updated' => 'lastUpdated'
     ];
 
     /**
@@ -197,10 +217,15 @@ class NoFrixionMoneyMoovModelsBeneficiaryCreate implements ModelInterface, Array
     protected static $setters = [
         'id' => 'setId',
         'merchant_id' => 'setMerchantId',
-        'source_account_ids' => 'setSourceAccountIds',
-        'name' => 'setName',
-        'currency' => 'setCurrency',
-        'destination' => 'setDestination'
+        'amount_lower' => 'setAmountLower',
+        'amount_upper' => 'setAmountUpper',
+        'beneficiaries_only' => 'setBeneficiariesOnly',
+        'number_of_authorisers' => 'setNumberOfAuthorisers',
+        'last_editor_cant_authorise' => 'setLastEditorCantAuthorise',
+        'authorisation_type' => 'setAuthorisationType',
+        'role_settings' => 'setRoleSettings',
+        'inserted' => 'setInserted',
+        'last_updated' => 'setLastUpdated'
     ];
 
     /**
@@ -211,10 +236,15 @@ class NoFrixionMoneyMoovModelsBeneficiaryCreate implements ModelInterface, Array
     protected static $getters = [
         'id' => 'getId',
         'merchant_id' => 'getMerchantId',
-        'source_account_ids' => 'getSourceAccountIds',
-        'name' => 'getName',
-        'currency' => 'getCurrency',
-        'destination' => 'getDestination'
+        'amount_lower' => 'getAmountLower',
+        'amount_upper' => 'getAmountUpper',
+        'beneficiaries_only' => 'getBeneficiariesOnly',
+        'number_of_authorisers' => 'getNumberOfAuthorisers',
+        'last_editor_cant_authorise' => 'getLastEditorCantAuthorise',
+        'authorisation_type' => 'getAuthorisationType',
+        'role_settings' => 'getRoleSettings',
+        'inserted' => 'getInserted',
+        'last_updated' => 'getLastUpdated'
     ];
 
     /**
@@ -258,25 +288,27 @@ class NoFrixionMoneyMoovModelsBeneficiaryCreate implements ModelInterface, Array
         return self::$openAPIModelName;
     }
 
-    public const CURRENCY_NONE = 'NONE';
-    public const CURRENCY_GBP = 'GBP';
-    public const CURRENCY_EUR = 'EUR';
-    public const CURRENCY_USD = 'USD';
-    public const CURRENCY_BTC = 'BTC';
+    public const AUTHORISATION_TYPE_NONE = 'None';
+    public const AUTHORISATION_TYPE_PAYOUT = 'Payout';
+    public const AUTHORISATION_TYPE_RULE = 'Rule';
+    public const AUTHORISATION_TYPE_BENEFICIARY = 'Beneficiary';
+    public const AUTHORISATION_TYPE_PAYRUN = 'Payrun';
+    public const AUTHORISATION_TYPE_MERCHANT_TOKEN = 'MerchantToken';
 
     /**
      * Gets allowable values of the enum
      *
      * @return string[]
      */
-    public function getCurrencyAllowableValues()
+    public function getAuthorisationTypeAllowableValues()
     {
         return [
-            self::CURRENCY_NONE,
-            self::CURRENCY_GBP,
-            self::CURRENCY_EUR,
-            self::CURRENCY_USD,
-            self::CURRENCY_BTC,
+            self::AUTHORISATION_TYPE_NONE,
+            self::AUTHORISATION_TYPE_PAYOUT,
+            self::AUTHORISATION_TYPE_RULE,
+            self::AUTHORISATION_TYPE_BENEFICIARY,
+            self::AUTHORISATION_TYPE_PAYRUN,
+            self::AUTHORISATION_TYPE_MERCHANT_TOKEN,
         ];
     }
 
@@ -297,10 +329,15 @@ class NoFrixionMoneyMoovModelsBeneficiaryCreate implements ModelInterface, Array
     {
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('merchant_id', $data ?? [], null);
-        $this->setIfExists('source_account_ids', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('currency', $data ?? [], null);
-        $this->setIfExists('destination', $data ?? [], null);
+        $this->setIfExists('amount_lower', $data ?? [], null);
+        $this->setIfExists('amount_upper', $data ?? [], null);
+        $this->setIfExists('beneficiaries_only', $data ?? [], null);
+        $this->setIfExists('number_of_authorisers', $data ?? [], null);
+        $this->setIfExists('last_editor_cant_authorise', $data ?? [], null);
+        $this->setIfExists('authorisation_type', $data ?? [], null);
+        $this->setIfExists('role_settings', $data ?? [], null);
+        $this->setIfExists('inserted', $data ?? [], null);
+        $this->setIfExists('last_updated', $data ?? [], null);
     }
 
     /**
@@ -330,31 +367,15 @@ class NoFrixionMoneyMoovModelsBeneficiaryCreate implements ModelInterface, Array
     {
         $invalidProperties = [];
 
-        if ($this->container['merchant_id'] === null) {
-            $invalidProperties[] = "'merchant_id' can't be null";
-        }
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
-        }
-        if ((mb_strlen($this->container['name']) < 1)) {
-            $invalidProperties[] = "invalid value for 'name', the character length must be bigger than or equal to 1.";
-        }
-
-        if ($this->container['currency'] === null) {
-            $invalidProperties[] = "'currency' can't be null";
-        }
-        $allowedValues = $this->getCurrencyAllowableValues();
-        if (!is_null($this->container['currency']) && !in_array($this->container['currency'], $allowedValues, true)) {
+        $allowedValues = $this->getAuthorisationTypeAllowableValues();
+        if (!is_null($this->container['authorisation_type']) && !in_array($this->container['authorisation_type'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'currency', must be one of '%s'",
-                $this->container['currency'],
+                "invalid value '%s' for 'authorisation_type', must be one of '%s'",
+                $this->container['authorisation_type'],
                 implode("', '", $allowedValues)
             );
         }
 
-        if ($this->container['destination'] === null) {
-            $invalidProperties[] = "'destination' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -400,7 +421,7 @@ class NoFrixionMoneyMoovModelsBeneficiaryCreate implements ModelInterface, Array
     /**
      * Gets merchant_id
      *
-     * @return string
+     * @return string|null
      */
     public function getMerchantId()
     {
@@ -410,7 +431,7 @@ class NoFrixionMoneyMoovModelsBeneficiaryCreate implements ModelInterface, Array
     /**
      * Sets merchant_id
      *
-     * @param string $merchant_id Gets or Sets the merchant id.
+     * @param string|null $merchant_id merchant_id
      *
      * @return self
      */
@@ -425,131 +446,275 @@ class NoFrixionMoneyMoovModelsBeneficiaryCreate implements ModelInterface, Array
     }
 
     /**
-     * Gets source_account_ids
+     * Gets amount_lower
      *
-     * @return string[]|null
+     * @return float|null
      */
-    public function getSourceAccountIds()
+    public function getAmountLower()
     {
-        return $this->container['source_account_ids'];
+        return $this->container['amount_lower'];
     }
 
     /**
-     * Sets source_account_ids
+     * Sets amount_lower
      *
-     * @param string[]|null $source_account_ids source_account_ids
+     * @param float|null $amount_lower amount_lower
      *
      * @return self
      */
-    public function setSourceAccountIds($source_account_ids)
+    public function setAmountLower($amount_lower)
     {
-        if (is_null($source_account_ids)) {
-            array_push($this->openAPINullablesSetToNull, 'source_account_ids');
+        if (is_null($amount_lower)) {
+            array_push($this->openAPINullablesSetToNull, 'amount_lower');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('source_account_ids', $nullablesSetToNull);
+            $index = array_search('amount_lower', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['source_account_ids'] = $source_account_ids;
+        $this->container['amount_lower'] = $amount_lower;
 
         return $this;
     }
 
     /**
-     * Gets name
+     * Gets amount_upper
      *
-     * @return string
+     * @return float|null
      */
-    public function getName()
+    public function getAmountUpper()
     {
-        return $this->container['name'];
+        return $this->container['amount_upper'];
     }
 
     /**
-     * Sets name
+     * Sets amount_upper
      *
-     * @param string $name The descriptive name for the beneficiary.
+     * @param float|null $amount_upper amount_upper
      *
      * @return self
      */
-    public function setName($name)
+    public function setAmountUpper($amount_upper)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($amount_upper)) {
+            array_push($this->openAPINullablesSetToNull, 'amount_upper');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('amount_upper', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-
-        if ((mb_strlen($name) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $name when calling NoFrixionMoneyMoovModelsBeneficiaryCreate., must be bigger than or equal to 1.');
-        }
-
-        $this->container['name'] = $name;
+        $this->container['amount_upper'] = $amount_upper;
 
         return $this;
     }
 
     /**
-     * Gets currency
+     * Gets beneficiaries_only
      *
-     * @return string
+     * @return bool|null
      */
-    public function getCurrency()
+    public function getBeneficiariesOnly()
     {
-        return $this->container['currency'];
+        return $this->container['beneficiaries_only'];
     }
 
     /**
-     * Sets currency
+     * Sets beneficiaries_only
      *
-     * @param string $currency Gets or Sets the currency.
+     * @param bool|null $beneficiaries_only beneficiaries_only
      *
      * @return self
      */
-    public function setCurrency($currency)
+    public function setBeneficiariesOnly($beneficiaries_only)
     {
-        if (is_null($currency)) {
-            throw new \InvalidArgumentException('non-nullable currency cannot be null');
+        if (is_null($beneficiaries_only)) {
+            throw new \InvalidArgumentException('non-nullable beneficiaries_only cannot be null');
         }
-        $allowedValues = $this->getCurrencyAllowableValues();
-        if (!in_array($currency, $allowedValues, true)) {
+        $this->container['beneficiaries_only'] = $beneficiaries_only;
+
+        return $this;
+    }
+
+    /**
+     * Gets number_of_authorisers
+     *
+     * @return int|null
+     */
+    public function getNumberOfAuthorisers()
+    {
+        return $this->container['number_of_authorisers'];
+    }
+
+    /**
+     * Sets number_of_authorisers
+     *
+     * @param int|null $number_of_authorisers number_of_authorisers
+     *
+     * @return self
+     */
+    public function setNumberOfAuthorisers($number_of_authorisers)
+    {
+        if (is_null($number_of_authorisers)) {
+            throw new \InvalidArgumentException('non-nullable number_of_authorisers cannot be null');
+        }
+        $this->container['number_of_authorisers'] = $number_of_authorisers;
+
+        return $this;
+    }
+
+    /**
+     * Gets last_editor_cant_authorise
+     *
+     * @return bool|null
+     */
+    public function getLastEditorCantAuthorise()
+    {
+        return $this->container['last_editor_cant_authorise'];
+    }
+
+    /**
+     * Sets last_editor_cant_authorise
+     *
+     * @param bool|null $last_editor_cant_authorise last_editor_cant_authorise
+     *
+     * @return self
+     */
+    public function setLastEditorCantAuthorise($last_editor_cant_authorise)
+    {
+        if (is_null($last_editor_cant_authorise)) {
+            throw new \InvalidArgumentException('non-nullable last_editor_cant_authorise cannot be null');
+        }
+        $this->container['last_editor_cant_authorise'] = $last_editor_cant_authorise;
+
+        return $this;
+    }
+
+    /**
+     * Gets authorisation_type
+     *
+     * @return string|null
+     */
+    public function getAuthorisationType()
+    {
+        return $this->container['authorisation_type'];
+    }
+
+    /**
+     * Sets authorisation_type
+     *
+     * @param string|null $authorisation_type authorisation_type
+     *
+     * @return self
+     */
+    public function setAuthorisationType($authorisation_type)
+    {
+        if (is_null($authorisation_type)) {
+            throw new \InvalidArgumentException('non-nullable authorisation_type cannot be null');
+        }
+        $allowedValues = $this->getAuthorisationTypeAllowableValues();
+        if (!in_array($authorisation_type, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Invalid value '%s' for 'currency', must be one of '%s'",
-                    $currency,
+                    "Invalid value '%s' for 'authorisation_type', must be one of '%s'",
+                    $authorisation_type,
                     implode("', '", $allowedValues)
                 )
             );
         }
-        $this->container['currency'] = $currency;
+        $this->container['authorisation_type'] = $authorisation_type;
 
         return $this;
     }
 
     /**
-     * Gets destination
+     * Gets role_settings
      *
-     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsCounterpartyCreate
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationRoleSetting[]|null
      */
-    public function getDestination()
+    public function getRoleSettings()
     {
-        return $this->container['destination'];
+        return $this->container['role_settings'];
     }
 
     /**
-     * Sets destination
+     * Sets role_settings
      *
-     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsCounterpartyCreate $destination destination
+     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationRoleSetting[]|null $role_settings role_settings
      *
      * @return self
      */
-    public function setDestination($destination)
+    public function setRoleSettings($role_settings)
     {
-        if (is_null($destination)) {
-            throw new \InvalidArgumentException('non-nullable destination cannot be null');
+        if (is_null($role_settings)) {
+            array_push($this->openAPINullablesSetToNull, 'role_settings');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('role_settings', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['destination'] = $destination;
+        $this->container['role_settings'] = $role_settings;
+
+        return $this;
+    }
+
+    /**
+     * Gets inserted
+     *
+     * @return \DateTime|null
+     */
+    public function getInserted()
+    {
+        return $this->container['inserted'];
+    }
+
+    /**
+     * Sets inserted
+     *
+     * @param \DateTime|null $inserted inserted
+     *
+     * @return self
+     */
+    public function setInserted($inserted)
+    {
+        if (is_null($inserted)) {
+            throw new \InvalidArgumentException('non-nullable inserted cannot be null');
+        }
+        $this->container['inserted'] = $inserted;
+
+        return $this;
+    }
+
+    /**
+     * Gets last_updated
+     *
+     * @return \DateTime|null
+     */
+    public function getLastUpdated()
+    {
+        return $this->container['last_updated'];
+    }
+
+    /**
+     * Sets last_updated
+     *
+     * @param \DateTime|null $last_updated last_updated
+     *
+     * @return self
+     */
+    public function setLastUpdated($last_updated)
+    {
+        if (is_null($last_updated)) {
+            throw new \InvalidArgumentException('non-nullable last_updated cannot be null');
+        }
+        $this->container['last_updated'] = $last_updated;
 
         return $this;
     }

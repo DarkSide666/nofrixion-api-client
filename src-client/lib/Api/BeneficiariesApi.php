@@ -1535,12 +1535,11 @@ class BeneficiariesApi
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse
+     * @return void
      */
     public function getBeneficiaries($merchant_id = null, $page_number = null, $page_size = null, $search = null, $currency = null, $include_disabled = false, $sort = null, string $contentType = self::contentTypes['getBeneficiaries'][0])
     {
-        list($response) = $this->getBeneficiariesWithHttpInfo($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort, $contentType);
-        return $response;
+        $this->getBeneficiariesWithHttpInfo($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort, $contentType);
     }
 
     /**
@@ -1559,7 +1558,7 @@ class BeneficiariesApi
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
     public function getBeneficiariesWithHttpInfo($merchant_id = null, $page_number = null, $page_size = null, $search = null, $currency = null, $include_disabled = false, $sort = null, string $contentType = self::contentTypes['getBeneficiaries'][0])
     {
@@ -1588,87 +1587,10 @@ class BeneficiariesApi
             $statusCode = $response->getStatusCode();
 
 
-            switch($statusCode) {
-                case 200:
-                    if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
+            return [null, $statusCode, $response->getHeaders()];
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
             }
             throw $e;
         }
@@ -1720,27 +1642,14 @@ class BeneficiariesApi
      */
     public function getBeneficiariesAsyncWithHttpInfo($merchant_id = null, $page_number = null, $page_size = null, $search = null, $currency = null, $include_disabled = false, $sort = null, string $contentType = self::contentTypes['getBeneficiaries'][0])
     {
-        $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse';
+        $returnType = '';
         $request = $this->getBeneficiariesRequest($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -1860,7 +1769,7 @@ class BeneficiariesApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['text/plain', 'application/json', 'text/json', ],
+            [],
             $contentType,
             $multipart
         );

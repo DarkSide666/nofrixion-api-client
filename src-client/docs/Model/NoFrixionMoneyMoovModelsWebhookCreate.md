@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** |  | [optional]
 **merchant_id** | **string** |  |
-**type** | **string** |  |
+**resource_types** | **string[]** | The resource types that the webhook should be generated for. | [optional]
 **destination_url** | **string** |  |
 **retry** | **bool** |  | [optional]
 **secret** | **string** |  |

@@ -95,6 +95,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
         'title' => 'string',
         'partial_payment_steps' => 'string',
         'payrun_id' => 'string',
+        'sandbox_settle_delay_in_seconds' => 'int',
         'tag_ids' => 'string[]',
         'tags' => 'string[]'
     ];
@@ -145,6 +146,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
         'title' => null,
         'partial_payment_steps' => null,
         'payrun_id' => 'uuid',
+        'sandbox_settle_delay_in_seconds' => 'int32',
         'tag_ids' => 'uuid',
         'tags' => null
     ];
@@ -193,6 +195,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
         'title' => true,
         'partial_payment_steps' => true,
         'payrun_id' => true,
+        'sandbox_settle_delay_in_seconds' => true,
         'tag_ids' => true,
         'tags' => true
     ];
@@ -321,6 +324,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
         'title' => 'title',
         'partial_payment_steps' => 'partialPaymentSteps',
         'payrun_id' => 'payrunID',
+        'sandbox_settle_delay_in_seconds' => 'sandboxSettleDelayInSeconds',
         'tag_ids' => 'tagIds',
         'tags' => 'tags'
     ];
@@ -369,6 +373,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
         'title' => 'setTitle',
         'partial_payment_steps' => 'setPartialPaymentSteps',
         'payrun_id' => 'setPayrunId',
+        'sandbox_settle_delay_in_seconds' => 'setSandboxSettleDelayInSeconds',
         'tag_ids' => 'setTagIds',
         'tags' => 'setTags'
     ];
@@ -417,6 +422,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
         'title' => 'getTitle',
         'partial_payment_steps' => 'getPartialPaymentSteps',
         'payrun_id' => 'getPayrunId',
+        'sandbox_settle_delay_in_seconds' => 'getSandboxSettleDelayInSeconds',
         'tag_ids' => 'getTagIds',
         'tags' => 'getTags'
     ];
@@ -465,6 +471,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
     public const CURRENCY_NONE = 'NONE';
     public const CURRENCY_GBP = 'GBP';
     public const CURRENCY_EUR = 'EUR';
+    public const CURRENCY_USD = 'USD';
     public const CURRENCY_BTC = 'BTC';
     public const PAYMENT_METHODS_NONE = 'None';
     public const PAYMENT_METHODS_CARD = 'card';
@@ -491,6 +498,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
             self::CURRENCY_NONE,
             self::CURRENCY_GBP,
             self::CURRENCY_EUR,
+            self::CURRENCY_USD,
             self::CURRENCY_BTC,
         ];
     }
@@ -594,6 +602,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
         $this->setIfExists('title', $data ?? [], null);
         $this->setIfExists('partial_payment_steps', $data ?? [], null);
         $this->setIfExists('payrun_id', $data ?? [], null);
+        $this->setIfExists('sandbox_settle_delay_in_seconds', $data ?? [], null);
         $this->setIfExists('tag_ids', $data ?? [], null);
         $this->setIfExists('tags', $data ?? [], null);
     }
@@ -2021,6 +2030,40 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
             }
         }
         $this->container['payrun_id'] = $payrun_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets sandbox_settle_delay_in_seconds
+     *
+     * @return int|null
+     */
+    public function getSandboxSettleDelayInSeconds()
+    {
+        return $this->container['sandbox_settle_delay_in_seconds'];
+    }
+
+    /**
+     * Sets sandbox_settle_delay_in_seconds
+     *
+     * @param int|null $sandbox_settle_delay_in_seconds Sandbox only. Optional. If set, the simulated Direct Debit settlement will be delayed by the specified number of seconds.  Must be greater than 0 and less than 600. Otherwise, the default value will be used.
+     *
+     * @return self
+     */
+    public function setSandboxSettleDelayInSeconds($sandbox_settle_delay_in_seconds)
+    {
+        if (is_null($sandbox_settle_delay_in_seconds)) {
+            array_push($this->openAPINullablesSetToNull, 'sandbox_settle_delay_in_seconds');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('sandbox_settle_delay_in_seconds', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['sandbox_settle_delay_in_seconds'] = $sandbox_settle_delay_in_seconds;
 
         return $this;
     }

@@ -125,15 +125,6 @@ class NoFrixionMoneyMoovModelsPayrunTest extends TestCase
     }
 
     /**
-     * Test attribute "total_amount"
-     */
-    public function testPropertyTotalAmount()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "inserted"
      */
     public function testPropertyInserted()
@@ -224,6 +215,51 @@ class NoFrixionMoneyMoovModelsPayrunTest extends TestCase
     }
 
     /**
+     * Test attribute "total_eur"
+     */
+    public function testPropertyTotalEur()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "total_gbp"
+     */
+    public function testPropertyTotalGbp()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "total_usd"
+     */
+    public function testPropertyTotalUsd()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "payouts_count"
+     */
+    public function testPropertyPayoutsCount()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "authorisation_date"
+     */
+    public function testPropertyAuthorisationDate()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "can_edit"
      */
     public function testPropertyCanEdit()
@@ -281,6 +317,15 @@ class NoFrixionMoneyMoovModelsPayrunTest extends TestCase
      * Test attribute "authorisations"
      */
     public function testPropertyAuthorisations()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "nonce"
+     */
+    public function testPropertyNonce()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

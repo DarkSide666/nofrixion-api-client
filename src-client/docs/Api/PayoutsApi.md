@@ -763,7 +763,7 @@ try {
 ## `getPayoutsPaged()`
 
 ```php
-getPayoutsPaged($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort): \Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPayoutPageResponse
+getPayoutsPaged($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort)
 ```
 
 Gets a list of all payouts for a specific merchant.
@@ -801,8 +801,7 @@ $tags = array('tags_example'); // string[] | The tag filter to apply to retrieve
 $sort = 'sort_example'; // string | Optional expression to sort the order of the payouts.
 
 try {
-    $result = $apiInstance->getPayoutsPaged($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort);
-    print_r($result);
+    $apiInstance->getPayoutsPaged($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort);
 } catch (Exception $e) {
     echo 'Exception when calling PayoutsApi->getPayoutsPaged: ', $e->getMessage(), PHP_EOL;
 }
@@ -827,7 +826,7 @@ try {
 
 ### Return type
 
-[**\Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPayoutPageResponse**](../Model/NoFrixionBizBizModelsPagingPayoutPageResponse.md)
+void (empty response body)
 
 ### Authorization
 
@@ -836,7 +835,7 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: `text/plain`, `application/json`, `text/json`
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)

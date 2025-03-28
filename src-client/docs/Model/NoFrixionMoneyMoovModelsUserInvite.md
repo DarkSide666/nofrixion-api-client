@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 **last_invited** | **\DateTime** |  | [optional]
 **merchant_name** | **string** |  | [optional]
 **message** | **string** |  | [optional]
+**user_id** | **string** |  | [optional]
+**user** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUser**](NoFrixionMoneyMoovModelsUser.md) |  | [optional]
 **is_invitee_registered** | **bool** | If true, indicates the invitee&#39;s email address corresponds to an existing MoneyMoov user. | [optional]
 **status** | **string** |  | [optional] [readonly]
 

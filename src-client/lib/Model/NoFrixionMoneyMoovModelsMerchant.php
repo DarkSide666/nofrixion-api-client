@@ -59,7 +59,6 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
     protected static $openAPITypes = [
         'id' => 'string',
         'name' => 'string',
-        'enabled' => 'bool',
         'company_id' => 'string',
         'merchant_category_code' => 'string',
         'short_name' => 'string',
@@ -73,6 +72,7 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         'modulr_customer_id' => 'string',
         'supported_payment_methods_list' => 'string[]',
         'your_role' => 'string',
+        'your_role_name' => 'string',
         'user_roles' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserRole[]',
         'tags' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTag[]',
         'payment_accounts' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]'
@@ -88,7 +88,6 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
     protected static $openAPIFormats = [
         'id' => 'uuid',
         'name' => null,
-        'enabled' => null,
         'company_id' => 'uuid',
         'merchant_category_code' => null,
         'short_name' => null,
@@ -102,6 +101,7 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         'modulr_customer_id' => null,
         'supported_payment_methods_list' => null,
         'your_role' => null,
+        'your_role_name' => null,
         'user_roles' => null,
         'tags' => null,
         'payment_accounts' => null
@@ -115,7 +115,6 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
     protected static array $openAPINullables = [
         'id' => false,
         'name' => true,
-        'enabled' => false,
         'company_id' => true,
         'merchant_category_code' => true,
         'short_name' => true,
@@ -129,6 +128,7 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         'modulr_customer_id' => true,
         'supported_payment_methods_list' => true,
         'your_role' => false,
+        'your_role_name' => true,
         'user_roles' => true,
         'tags' => true,
         'payment_accounts' => true
@@ -222,7 +222,6 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
     protected static $attributeMap = [
         'id' => 'id',
         'name' => 'name',
-        'enabled' => 'enabled',
         'company_id' => 'companyID',
         'merchant_category_code' => 'merchantCategoryCode',
         'short_name' => 'shortName',
@@ -236,6 +235,7 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         'modulr_customer_id' => 'modulrCustomerID',
         'supported_payment_methods_list' => 'supportedPaymentMethodsList',
         'your_role' => 'yourRole',
+        'your_role_name' => 'yourRoleName',
         'user_roles' => 'userRoles',
         'tags' => 'tags',
         'payment_accounts' => 'paymentAccounts'
@@ -249,7 +249,6 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
     protected static $setters = [
         'id' => 'setId',
         'name' => 'setName',
-        'enabled' => 'setEnabled',
         'company_id' => 'setCompanyId',
         'merchant_category_code' => 'setMerchantCategoryCode',
         'short_name' => 'setShortName',
@@ -263,6 +262,7 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         'modulr_customer_id' => 'setModulrCustomerId',
         'supported_payment_methods_list' => 'setSupportedPaymentMethodsList',
         'your_role' => 'setYourRole',
+        'your_role_name' => 'setYourRoleName',
         'user_roles' => 'setUserRoles',
         'tags' => 'setTags',
         'payment_accounts' => 'setPaymentAccounts'
@@ -276,7 +276,6 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
     protected static $getters = [
         'id' => 'getId',
         'name' => 'getName',
-        'enabled' => 'getEnabled',
         'company_id' => 'getCompanyId',
         'merchant_category_code' => 'getMerchantCategoryCode',
         'short_name' => 'getShortName',
@@ -290,6 +289,7 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         'modulr_customer_id' => 'getModulrCustomerId',
         'supported_payment_methods_list' => 'getSupportedPaymentMethodsList',
         'your_role' => 'getYourRole',
+        'your_role_name' => 'getYourRoleName',
         'user_roles' => 'getUserRoles',
         'tags' => 'getTags',
         'payment_accounts' => 'getPaymentAccounts'
@@ -419,7 +419,6 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
     {
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('enabled', $data ?? [], null);
         $this->setIfExists('company_id', $data ?? [], null);
         $this->setIfExists('merchant_category_code', $data ?? [], null);
         $this->setIfExists('short_name', $data ?? [], null);
@@ -433,6 +432,7 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         $this->setIfExists('modulr_customer_id', $data ?? [], null);
         $this->setIfExists('supported_payment_methods_list', $data ?? [], null);
         $this->setIfExists('your_role', $data ?? [], null);
+        $this->setIfExists('your_role_name', $data ?? [], null);
         $this->setIfExists('user_roles', $data ?? [], null);
         $this->setIfExists('tags', $data ?? [], null);
         $this->setIfExists('payment_accounts', $data ?? [], null);
@@ -555,33 +555,6 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
             }
         }
         $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets enabled
-     *
-     * @return bool|null
-     */
-    public function getEnabled()
-    {
-        return $this->container['enabled'];
-    }
-
-    /**
-     * Sets enabled
-     *
-     * @param bool|null $enabled enabled
-     *
-     * @return self
-     */
-    public function setEnabled($enabled)
-    {
-        if (is_null($enabled)) {
-            throw new \InvalidArgumentException('non-nullable enabled cannot be null');
-        }
-        $this->container['enabled'] = $enabled;
 
         return $this;
     }
@@ -1004,6 +977,40 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
             );
         }
         $this->container['your_role'] = $your_role;
+
+        return $this;
+    }
+
+    /**
+     * Gets your_role_name
+     *
+     * @return string|null
+     */
+    public function getYourRoleName()
+    {
+        return $this->container['your_role_name'];
+    }
+
+    /**
+     * Sets your_role_name
+     *
+     * @param string|null $your_role_name The name of the role for the identity that loaded the merchant record.
+     *
+     * @return self
+     */
+    public function setYourRoleName($your_role_name)
+    {
+        if (is_null($your_role_name)) {
+            array_push($this->openAPINullablesSetToNull, 'your_role_name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('your_role_name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['your_role_name'] = $your_role_name;
 
         return $this;
     }

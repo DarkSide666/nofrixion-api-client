@@ -197,24 +197,6 @@ class NoFrixionMoneyMoovModelsPayoutCreateTest extends TestCase
     }
 
     /**
-     * Test attribute "bitcoin_subtract_fee_from_amount"
-     */
-    public function testPropertyBitcoinSubtractFeeFromAmount()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "bitcoin_fee_sats_per_vbyte"
-     */
-    public function testPropertyBitcoinFeeSatsPerVbyte()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "beneficiary_id"
      */
     public function testPropertyBeneficiaryId()

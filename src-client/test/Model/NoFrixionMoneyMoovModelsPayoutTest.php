@@ -296,6 +296,15 @@ class NoFrixionMoneyMoovModelsPayoutTest extends TestCase
     }
 
     /**
+     * Test attribute "last_updated"
+     */
+    public function testPropertyLastUpdated()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "source_account_name"
      */
     public function testPropertySourceAccountName()
@@ -326,15 +335,6 @@ class NoFrixionMoneyMoovModelsPayoutTest extends TestCase
      * Test attribute "source_account_sortcode"
      */
     public function testPropertySourceAccountSortcode()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "source_bitcoin_address"
-     */
-    public function testPropertySourceBitcoinAddress()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -425,33 +425,6 @@ class NoFrixionMoneyMoovModelsPayoutTest extends TestCase
      * Test attribute "formatted_schedule"
      */
     public function testPropertyFormattedSchedule()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "bitcoin_subtract_fee_from_amount"
-     */
-    public function testPropertyBitcoinSubtractFeeFromAmount()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "bitcoin_fee_sats_per_vbyte"
-     */
-    public function testPropertyBitcoinFeeSatsPerVbyte()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "formatted_bitcoin_fee"
-     */
-    public function testPropertyFormattedBitcoinFee()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -587,6 +560,33 @@ class NoFrixionMoneyMoovModelsPayoutTest extends TestCase
      * Test attribute "documents"
      */
     public function testPropertyDocuments()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "is_submitted"
+     */
+    public function testPropertyIsSubmitted()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "is_failed"
+     */
+    public function testPropertyIsFailed()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "is_settled"
+     */
+    public function testPropertyIsSettled()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

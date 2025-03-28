@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionMoneyMoovModelsPaymentAccountPageResponse
+ * NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationRoleSetting
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Nofrixion\Client\ObjectSerializer;
 
 /**
- * NoFrixionMoneyMoovModelsPaymentAccountPageResponse Class Doc Comment
+ * NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationRoleSetting Class Doc Comment
  *
  * @category Class
  * @package  Nofrixion\Client
@@ -40,7 +40,7 @@ use \Nofrixion\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class NoFrixionMoneyMoovModelsPaymentAccountPageResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationRoleSetting implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class NoFrixionMoneyMoovModelsPaymentAccountPageResponse implements ModelInterfa
       *
       * @var string
       */
-    protected static $openAPIModelName = 'NoFrixion.MoneyMoov.Models.PaymentAccountPageResponse';
+    protected static $openAPIModelName = 'NoFrixion.MoneyMoov.Models.AuthorisationSettings.MerchantAuthorisationRoleSetting';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,11 +57,14 @@ class NoFrixionMoneyMoovModelsPaymentAccountPageResponse implements ModelInterfa
       * @var string[]
       */
     protected static $openAPITypes = [
-        'content' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]',
-        'page_number' => 'int',
-        'page_size' => 'int',
-        'total_pages' => 'int',
-        'total_size' => 'int'
+        'role_id' => 'string',
+        'name' => 'string',
+        'description' => 'string',
+        'merchant_id' => 'string',
+        'min_number_authorisers' => 'int',
+        'max_number_authorisers' => 'int',
+        'inserted' => '\DateTime',
+        'last_updated' => '\DateTime'
     ];
 
     /**
@@ -72,11 +75,14 @@ class NoFrixionMoneyMoovModelsPaymentAccountPageResponse implements ModelInterfa
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'content' => null,
-        'page_number' => 'int32',
-        'page_size' => 'int32',
-        'total_pages' => 'int32',
-        'total_size' => 'int64'
+        'role_id' => 'uuid',
+        'name' => null,
+        'description' => null,
+        'merchant_id' => 'uuid',
+        'min_number_authorisers' => 'int32',
+        'max_number_authorisers' => 'int32',
+        'inserted' => 'date-time',
+        'last_updated' => 'date-time'
     ];
 
     /**
@@ -85,11 +91,14 @@ class NoFrixionMoneyMoovModelsPaymentAccountPageResponse implements ModelInterfa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'content' => true,
-        'page_number' => false,
-        'page_size' => false,
-        'total_pages' => false,
-        'total_size' => false
+        'role_id' => false,
+        'name' => true,
+        'description' => true,
+        'merchant_id' => false,
+        'min_number_authorisers' => true,
+        'max_number_authorisers' => true,
+        'inserted' => false,
+        'last_updated' => false
     ];
 
     /**
@@ -178,11 +187,14 @@ class NoFrixionMoneyMoovModelsPaymentAccountPageResponse implements ModelInterfa
      * @var string[]
      */
     protected static $attributeMap = [
-        'content' => 'content',
-        'page_number' => 'pageNumber',
-        'page_size' => 'pageSize',
-        'total_pages' => 'totalPages',
-        'total_size' => 'totalSize'
+        'role_id' => 'roleID',
+        'name' => 'name',
+        'description' => 'description',
+        'merchant_id' => 'merchantID',
+        'min_number_authorisers' => 'minNumberAuthorisers',
+        'max_number_authorisers' => 'maxNumberAuthorisers',
+        'inserted' => 'inserted',
+        'last_updated' => 'lastUpdated'
     ];
 
     /**
@@ -191,11 +203,14 @@ class NoFrixionMoneyMoovModelsPaymentAccountPageResponse implements ModelInterfa
      * @var string[]
      */
     protected static $setters = [
-        'content' => 'setContent',
-        'page_number' => 'setPageNumber',
-        'page_size' => 'setPageSize',
-        'total_pages' => 'setTotalPages',
-        'total_size' => 'setTotalSize'
+        'role_id' => 'setRoleId',
+        'name' => 'setName',
+        'description' => 'setDescription',
+        'merchant_id' => 'setMerchantId',
+        'min_number_authorisers' => 'setMinNumberAuthorisers',
+        'max_number_authorisers' => 'setMaxNumberAuthorisers',
+        'inserted' => 'setInserted',
+        'last_updated' => 'setLastUpdated'
     ];
 
     /**
@@ -204,11 +219,14 @@ class NoFrixionMoneyMoovModelsPaymentAccountPageResponse implements ModelInterfa
      * @var string[]
      */
     protected static $getters = [
-        'content' => 'getContent',
-        'page_number' => 'getPageNumber',
-        'page_size' => 'getPageSize',
-        'total_pages' => 'getTotalPages',
-        'total_size' => 'getTotalSize'
+        'role_id' => 'getRoleId',
+        'name' => 'getName',
+        'description' => 'getDescription',
+        'merchant_id' => 'getMerchantId',
+        'min_number_authorisers' => 'getMinNumberAuthorisers',
+        'max_number_authorisers' => 'getMaxNumberAuthorisers',
+        'inserted' => 'getInserted',
+        'last_updated' => 'getLastUpdated'
     ];
 
     /**
@@ -268,11 +286,14 @@ class NoFrixionMoneyMoovModelsPaymentAccountPageResponse implements ModelInterfa
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('content', $data ?? [], null);
-        $this->setIfExists('page_number', $data ?? [], null);
-        $this->setIfExists('page_size', $data ?? [], null);
-        $this->setIfExists('total_pages', $data ?? [], null);
-        $this->setIfExists('total_size', $data ?? [], null);
+        $this->setIfExists('role_id', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('merchant_id', $data ?? [], null);
+        $this->setIfExists('min_number_authorisers', $data ?? [], null);
+        $this->setIfExists('max_number_authorisers', $data ?? [], null);
+        $this->setIfExists('inserted', $data ?? [], null);
+        $this->setIfExists('last_updated', $data ?? [], null);
     }
 
     /**
@@ -318,143 +339,245 @@ class NoFrixionMoneyMoovModelsPaymentAccountPageResponse implements ModelInterfa
 
 
     /**
-     * Gets content
+     * Gets role_id
      *
-     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]|null
+     * @return string|null
      */
-    public function getContent()
+    public function getRoleId()
     {
-        return $this->container['content'];
+        return $this->container['role_id'];
     }
 
     /**
-     * Sets content
+     * Sets role_id
      *
-     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]|null $content content
+     * @param string|null $role_id role_id
      *
      * @return self
      */
-    public function setContent($content)
+    public function setRoleId($role_id)
     {
-        if (is_null($content)) {
-            array_push($this->openAPINullablesSetToNull, 'content');
+        if (is_null($role_id)) {
+            throw new \InvalidArgumentException('non-nullable role_id cannot be null');
+        }
+        $this->container['role_id'] = $role_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string|null $name name
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+        if (is_null($name)) {
+            array_push($this->openAPINullablesSetToNull, 'name');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('content', $nullablesSetToNull);
+            $index = array_search('name', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['content'] = $content;
+        $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets page_number
+     * Gets description
      *
-     * @return int|null
+     * @return string|null
      */
-    public function getPageNumber()
+    public function getDescription()
     {
-        return $this->container['page_number'];
+        return $this->container['description'];
     }
 
     /**
-     * Sets page_number
+     * Sets description
      *
-     * @param int|null $page_number Current page number. Its 1 based. i.e firstpage is 1, secondpage is 2
+     * @param string|null $description description
      *
      * @return self
      */
-    public function setPageNumber($page_number)
+    public function setDescription($description)
     {
-        if (is_null($page_number)) {
-            throw new \InvalidArgumentException('non-nullable page_number cannot be null');
+        if (is_null($description)) {
+            array_push($this->openAPINullablesSetToNull, 'description');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('description', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['page_number'] = $page_number;
+        $this->container['description'] = $description;
 
         return $this;
     }
 
     /**
-     * Gets page_size
+     * Gets merchant_id
      *
-     * @return int|null
+     * @return string|null
      */
-    public function getPageSize()
+    public function getMerchantId()
     {
-        return $this->container['page_size'];
+        return $this->container['merchant_id'];
     }
 
     /**
-     * Sets page_size
+     * Sets merchant_id
      *
-     * @param int|null $page_size Page size
+     * @param string|null $merchant_id merchant_id
      *
      * @return self
      */
-    public function setPageSize($page_size)
+    public function setMerchantId($merchant_id)
     {
-        if (is_null($page_size)) {
-            throw new \InvalidArgumentException('non-nullable page_size cannot be null');
+        if (is_null($merchant_id)) {
+            throw new \InvalidArgumentException('non-nullable merchant_id cannot be null');
         }
-        $this->container['page_size'] = $page_size;
+        $this->container['merchant_id'] = $merchant_id;
 
         return $this;
     }
 
     /**
-     * Gets total_pages
+     * Gets min_number_authorisers
      *
      * @return int|null
      */
-    public function getTotalPages()
+    public function getMinNumberAuthorisers()
     {
-        return $this->container['total_pages'];
+        return $this->container['min_number_authorisers'];
     }
 
     /**
-     * Sets total_pages
+     * Sets min_number_authorisers
      *
-     * @param int|null $total_pages Total pages
+     * @param int|null $min_number_authorisers min_number_authorisers
      *
      * @return self
      */
-    public function setTotalPages($total_pages)
+    public function setMinNumberAuthorisers($min_number_authorisers)
     {
-        if (is_null($total_pages)) {
-            throw new \InvalidArgumentException('non-nullable total_pages cannot be null');
+        if (is_null($min_number_authorisers)) {
+            array_push($this->openAPINullablesSetToNull, 'min_number_authorisers');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('min_number_authorisers', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['total_pages'] = $total_pages;
+        $this->container['min_number_authorisers'] = $min_number_authorisers;
 
         return $this;
     }
 
     /**
-     * Gets total_size
+     * Gets max_number_authorisers
      *
      * @return int|null
      */
-    public function getTotalSize()
+    public function getMaxNumberAuthorisers()
     {
-        return $this->container['total_size'];
+        return $this->container['max_number_authorisers'];
     }
 
     /**
-     * Sets total_size
+     * Sets max_number_authorisers
      *
-     * @param int|null $total_size Total count
+     * @param int|null $max_number_authorisers max_number_authorisers
      *
      * @return self
      */
-    public function setTotalSize($total_size)
+    public function setMaxNumberAuthorisers($max_number_authorisers)
     {
-        if (is_null($total_size)) {
-            throw new \InvalidArgumentException('non-nullable total_size cannot be null');
+        if (is_null($max_number_authorisers)) {
+            array_push($this->openAPINullablesSetToNull, 'max_number_authorisers');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('max_number_authorisers', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['total_size'] = $total_size;
+        $this->container['max_number_authorisers'] = $max_number_authorisers;
+
+        return $this;
+    }
+
+    /**
+     * Gets inserted
+     *
+     * @return \DateTime|null
+     */
+    public function getInserted()
+    {
+        return $this->container['inserted'];
+    }
+
+    /**
+     * Sets inserted
+     *
+     * @param \DateTime|null $inserted inserted
+     *
+     * @return self
+     */
+    public function setInserted($inserted)
+    {
+        if (is_null($inserted)) {
+            throw new \InvalidArgumentException('non-nullable inserted cannot be null');
+        }
+        $this->container['inserted'] = $inserted;
+
+        return $this;
+    }
+
+    /**
+     * Gets last_updated
+     *
+     * @return \DateTime|null
+     */
+    public function getLastUpdated()
+    {
+        return $this->container['last_updated'];
+    }
+
+    /**
+     * Sets last_updated
+     *
+     * @param \DateTime|null $last_updated last_updated
+     *
+     * @return self
+     */
+    public function setLastUpdated($last_updated)
+    {
+        if (is_null($last_updated)) {
+            throw new \InvalidArgumentException('non-nullable last_updated cannot be null');
+        }
+        $this->container['last_updated'] = $last_updated;
 
         return $this;
     }

@@ -168,18 +168,6 @@ class PaymentRequestsApiTest extends TestCase
     }
 
     /**
-     * Test case for getLightningInvoice
-     *
-     * Gets a Bitcoin Lightning invoice for a payment request..
-     *
-     */
-    public function testGetLightningInvoice()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test case for getPaymentRequest
      *
      * Gets a payment request..

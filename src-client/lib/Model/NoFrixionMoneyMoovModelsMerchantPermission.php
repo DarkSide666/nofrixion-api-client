@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionMoneyMoovModelsTribeLoad
+ * NoFrixionMoneyMoovModelsMerchantPermission
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Nofrixion\Client\ObjectSerializer;
 
 /**
- * NoFrixionMoneyMoovModelsTribeLoad Class Doc Comment
+ * NoFrixionMoneyMoovModelsMerchantPermission Class Doc Comment
  *
  * @category Class
  * @package  Nofrixion\Client
@@ -40,7 +40,7 @@ use \Nofrixion\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class NoFrixionMoneyMoovModelsTribeLoad implements ModelInterface, ArrayAccess, \JsonSerializable
+class NoFrixionMoneyMoovModelsMerchantPermission implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class NoFrixionMoneyMoovModelsTribeLoad implements ModelInterface, ArrayAccess, 
       *
       * @var string
       */
-    protected static $openAPIModelName = 'NoFrixion.MoneyMoov.Models.TribeLoad';
+    protected static $openAPIModelName = 'NoFrixion.MoneyMoov.Models.MerchantPermission';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,11 +57,9 @@ class NoFrixionMoneyMoovModelsTribeLoad implements ModelInterface, ArrayAccess, 
       * @var string[]
       */
     protected static $openAPITypes = [
-        'transaction' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTransaction',
-        'failure_reason' => 'string',
-        'id' => 'string',
         'merchant_id' => 'string',
-        'inserted' => '\DateTime'
+        'permissions' => 'string[]',
+        'account_permissions' => 'array<string,string[]>'
     ];
 
     /**
@@ -72,11 +70,9 @@ class NoFrixionMoneyMoovModelsTribeLoad implements ModelInterface, ArrayAccess, 
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'transaction' => null,
-        'failure_reason' => null,
-        'id' => 'uuid',
-        'merchant_id' => 'uuid',
-        'inserted' => 'date-time'
+        'merchant_id' => null,
+        'permissions' => null,
+        'account_permissions' => null
     ];
 
     /**
@@ -85,11 +81,9 @@ class NoFrixionMoneyMoovModelsTribeLoad implements ModelInterface, ArrayAccess, 
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'transaction' => false,
-        'failure_reason' => true,
-        'id' => false,
-        'merchant_id' => false,
-        'inserted' => false
+        'merchant_id' => true,
+        'permissions' => true,
+        'account_permissions' => true
     ];
 
     /**
@@ -178,11 +172,9 @@ class NoFrixionMoneyMoovModelsTribeLoad implements ModelInterface, ArrayAccess, 
      * @var string[]
      */
     protected static $attributeMap = [
-        'transaction' => 'transaction',
-        'failure_reason' => 'failureReason',
-        'id' => 'id',
         'merchant_id' => 'merchantID',
-        'inserted' => 'inserted'
+        'permissions' => 'permissions',
+        'account_permissions' => 'accountPermissions'
     ];
 
     /**
@@ -191,11 +183,9 @@ class NoFrixionMoneyMoovModelsTribeLoad implements ModelInterface, ArrayAccess, 
      * @var string[]
      */
     protected static $setters = [
-        'transaction' => 'setTransaction',
-        'failure_reason' => 'setFailureReason',
-        'id' => 'setId',
         'merchant_id' => 'setMerchantId',
-        'inserted' => 'setInserted'
+        'permissions' => 'setPermissions',
+        'account_permissions' => 'setAccountPermissions'
     ];
 
     /**
@@ -204,11 +194,9 @@ class NoFrixionMoneyMoovModelsTribeLoad implements ModelInterface, ArrayAccess, 
      * @var string[]
      */
     protected static $getters = [
-        'transaction' => 'getTransaction',
-        'failure_reason' => 'getFailureReason',
-        'id' => 'getId',
         'merchant_id' => 'getMerchantId',
-        'inserted' => 'getInserted'
+        'permissions' => 'getPermissions',
+        'account_permissions' => 'getAccountPermissions'
     ];
 
     /**
@@ -268,11 +256,9 @@ class NoFrixionMoneyMoovModelsTribeLoad implements ModelInterface, ArrayAccess, 
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('transaction', $data ?? [], null);
-        $this->setIfExists('failure_reason', $data ?? [], null);
-        $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('merchant_id', $data ?? [], null);
-        $this->setIfExists('inserted', $data ?? [], null);
+        $this->setIfExists('permissions', $data ?? [], null);
+        $this->setIfExists('account_permissions', $data ?? [], null);
     }
 
     /**
@@ -302,8 +288,8 @@ class NoFrixionMoneyMoovModelsTribeLoad implements ModelInterface, ArrayAccess, 
     {
         $invalidProperties = [];
 
-        if ($this->container['transaction'] === null) {
-            $invalidProperties[] = "'transaction' can't be null";
+        if ($this->container['merchant_id'] === null) {
+            $invalidProperties[] = "'merchant_id' can't be null";
         }
         return $invalidProperties;
     }
@@ -321,97 +307,9 @@ class NoFrixionMoneyMoovModelsTribeLoad implements ModelInterface, ArrayAccess, 
 
 
     /**
-     * Gets transaction
-     *
-     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTransaction
-     */
-    public function getTransaction()
-    {
-        return $this->container['transaction'];
-    }
-
-    /**
-     * Sets transaction
-     *
-     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTransaction $transaction transaction
-     *
-     * @return self
-     */
-    public function setTransaction($transaction)
-    {
-        if (is_null($transaction)) {
-            throw new \InvalidArgumentException('non-nullable transaction cannot be null');
-        }
-        $this->container['transaction'] = $transaction;
-
-        return $this;
-    }
-
-    /**
-     * Gets failure_reason
-     *
-     * @return string|null
-     */
-    public function getFailureReason()
-    {
-        return $this->container['failure_reason'];
-    }
-
-    /**
-     * Sets failure_reason
-     *
-     * @param string|null $failure_reason Represents the problem that occurred when attempting to  load the transaction into the tribe account.
-     *
-     * @return self
-     */
-    public function setFailureReason($failure_reason)
-    {
-        if (is_null($failure_reason)) {
-            array_push($this->openAPINullablesSetToNull, 'failure_reason');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('failure_reason', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['failure_reason'] = $failure_reason;
-
-        return $this;
-    }
-
-    /**
-     * Gets id
-     *
-     * @return string|null
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param string|null $id id
-     *
-     * @return self
-     */
-    public function setId($id)
-    {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
-        }
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
      * Gets merchant_id
      *
-     * @return string|null
+     * @return string
      */
     public function getMerchantId()
     {
@@ -421,14 +319,21 @@ class NoFrixionMoneyMoovModelsTribeLoad implements ModelInterface, ArrayAccess, 
     /**
      * Sets merchant_id
      *
-     * @param string|null $merchant_id The ID of the merchant that the tribe account belongs to.
+     * @param string $merchant_id merchant_id
      *
      * @return self
      */
     public function setMerchantId($merchant_id)
     {
         if (is_null($merchant_id)) {
-            throw new \InvalidArgumentException('non-nullable merchant_id cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'merchant_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('merchant_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['merchant_id'] = $merchant_id;
 
@@ -436,28 +341,69 @@ class NoFrixionMoneyMoovModelsTribeLoad implements ModelInterface, ArrayAccess, 
     }
 
     /**
-     * Gets inserted
+     * Gets permissions
      *
-     * @return \DateTime|null
+     * @return string[]|null
      */
-    public function getInserted()
+    public function getPermissions()
     {
-        return $this->container['inserted'];
+        return $this->container['permissions'];
     }
 
     /**
-     * Sets inserted
+     * Sets permissions
      *
-     * @param \DateTime|null $inserted inserted
+     * @param string[]|null $permissions permissions
      *
      * @return self
      */
-    public function setInserted($inserted)
+    public function setPermissions($permissions)
     {
-        if (is_null($inserted)) {
-            throw new \InvalidArgumentException('non-nullable inserted cannot be null');
+        if (is_null($permissions)) {
+            array_push($this->openAPINullablesSetToNull, 'permissions');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('permissions', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['inserted'] = $inserted;
+        $this->container['permissions'] = $permissions;
+
+        return $this;
+    }
+
+    /**
+     * Gets account_permissions
+     *
+     * @return array<string,string[]>|null
+     */
+    public function getAccountPermissions()
+    {
+        return $this->container['account_permissions'];
+    }
+
+    /**
+     * Sets account_permissions
+     *
+     * @param array<string,string[]>|null $account_permissions account_permissions
+     *
+     * @return self
+     */
+    public function setAccountPermissions($account_permissions)
+    {
+        if (is_null($account_permissions)) {
+            array_push($this->openAPINullablesSetToNull, 'account_permissions');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('account_permissions', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['account_permissions'] = $account_permissions;
 
         return $this;
     }

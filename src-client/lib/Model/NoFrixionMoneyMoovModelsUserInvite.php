@@ -69,6 +69,8 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
         'last_invited' => '\DateTime',
         'merchant_name' => 'string',
         'message' => 'string',
+        'user_id' => 'string',
+        'user' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUser',
         'is_invitee_registered' => 'bool',
         'status' => 'string'
     ];
@@ -93,6 +95,8 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
         'last_invited' => 'date-time',
         'merchant_name' => null,
         'message' => null,
+        'user_id' => 'uuid',
+        'user' => null,
         'is_invitee_registered' => null,
         'status' => null
     ];
@@ -115,6 +119,8 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
         'last_invited' => false,
         'merchant_name' => true,
         'message' => true,
+        'user_id' => true,
+        'user' => false,
         'is_invitee_registered' => false,
         'status' => false
     ];
@@ -217,6 +223,8 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
         'last_invited' => 'lastInvited',
         'merchant_name' => 'merchantName',
         'message' => 'message',
+        'user_id' => 'userID',
+        'user' => 'user',
         'is_invitee_registered' => 'isInviteeRegistered',
         'status' => 'status'
     ];
@@ -239,6 +247,8 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
         'last_invited' => 'setLastInvited',
         'merchant_name' => 'setMerchantName',
         'message' => 'setMessage',
+        'user_id' => 'setUserId',
+        'user' => 'setUser',
         'is_invitee_registered' => 'setIsInviteeRegistered',
         'status' => 'setStatus'
     ];
@@ -261,6 +271,8 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
         'last_invited' => 'getLastInvited',
         'merchant_name' => 'getMerchantName',
         'message' => 'getMessage',
+        'user_id' => 'getUserId',
+        'user' => 'getUser',
         'is_invitee_registered' => 'getIsInviteeRegistered',
         'status' => 'getStatus'
     ];
@@ -308,6 +320,7 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
 
     public const STATUS_ACTIVE = 'Active';
     public const STATUS_EXPIRED = 'Expired';
+    public const STATUS_ACCEPTED = 'Accepted';
 
     /**
      * Gets allowable values of the enum
@@ -319,6 +332,7 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
         return [
             self::STATUS_ACTIVE,
             self::STATUS_EXPIRED,
+            self::STATUS_ACCEPTED,
         ];
     }
 
@@ -349,6 +363,8 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
         $this->setIfExists('last_invited', $data ?? [], null);
         $this->setIfExists('merchant_name', $data ?? [], null);
         $this->setIfExists('message', $data ?? [], null);
+        $this->setIfExists('user_id', $data ?? [], null);
+        $this->setIfExists('user', $data ?? [], null);
         $this->setIfExists('is_invitee_registered', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
     }
@@ -787,6 +803,67 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
             }
         }
         $this->container['message'] = $message;
+
+        return $this;
+    }
+
+    /**
+     * Gets user_id
+     *
+     * @return string|null
+     */
+    public function getUserId()
+    {
+        return $this->container['user_id'];
+    }
+
+    /**
+     * Sets user_id
+     *
+     * @param string|null $user_id user_id
+     *
+     * @return self
+     */
+    public function setUserId($user_id)
+    {
+        if (is_null($user_id)) {
+            array_push($this->openAPINullablesSetToNull, 'user_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('user_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['user_id'] = $user_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets user
+     *
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUser|null
+     */
+    public function getUser()
+    {
+        return $this->container['user'];
+    }
+
+    /**
+     * Sets user
+     *
+     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUser|null $user user
+     *
+     * @return self
+     */
+    public function setUser($user)
+    {
+        if (is_null($user)) {
+            throw new \InvalidArgumentException('non-nullable user cannot be null');
+        }
+        $this->container['user'] = $user;
 
         return $this;
     }

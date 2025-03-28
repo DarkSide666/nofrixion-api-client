@@ -107,6 +107,8 @@ Class | Method | HTTP request | Description
 *MerchantsApi* | [**createMerchantUserRole**](docs/Api/MerchantsApi.md#createmerchantuserrole) | **POST** /api/v1/merchants/userroles | Assigns role to user.
 *MerchantsApi* | [**deleteMerchantTag**](docs/Api/MerchantsApi.md#deletemerchanttag) | **DELETE** /api/v1/merchants/{merchantID}/tags/{tagID} | Deletes a tag from a merchant
 *MerchantsApi* | [**deleteMerchantUserRole**](docs/Api/MerchantsApi.md#deletemerchantuserrole) | **DELETE** /api/v1/merchants/userroles/{id} | Deletes user role.
+*MerchantsApi* | [**deleteUserFromMerchant**](docs/Api/MerchantsApi.md#deleteuserfrommerchant) | **DELETE** /api/v1/merchants/{merchantId}/users/{userId} | Deletes all roles for a user in a merchant.
+*MerchantsApi* | [**getAuthorisationSettings**](docs/Api/MerchantsApi.md#getauthorisationsettings) | **GET** /api/v1/merchants/{merchantID}/authorisationsettings | Gets a list of merchant authorisation settings for a merchant
 *MerchantsApi* | [**getMerchant**](docs/Api/MerchantsApi.md#getmerchant) | **GET** /api/v1/merchants/{merchantID} | Get&#39;s a merchant.
 *MerchantsApi* | [**getMerchantAccount**](docs/Api/MerchantsApi.md#getmerchantaccount) | **GET** /api/v1/merchants/{merchantID}/accounts/{accountID} | Get an account.
 *MerchantsApi* | [**getMerchantAccounts**](docs/Api/MerchantsApi.md#getmerchantaccounts) | **GET** /api/v1/merchants/{merchantID}/accounts | Get a list of merchant&#39;s payment accounts.
@@ -116,6 +118,7 @@ Class | Method | HTTP request | Description
 *MerchantsApi* | [**getMerchantBeneficiaryGroups**](docs/Api/MerchantsApi.md#getmerchantbeneficiarygroups) | **GET** /api/v1/merchants/{merchantID}/beneficiarygroups | Gets a list of all beneficiary groups.
 *MerchantsApi* | [**getMerchantPayoutsPaged**](docs/Api/MerchantsApi.md#getmerchantpayoutspaged) | **GET** /api/v1/merchants/{merchantID}/payouts | Gets a list of all payouts for a specific merchant.
 *MerchantsApi* | [**getMerchantTags**](docs/Api/MerchantsApi.md#getmerchanttags) | **GET** /api/v1/merchants/{merchantID}/tags | Get a list of merchant tags
+*MerchantsApi* | [**getMerchantToken**](docs/Api/MerchantsApi.md#getmerchanttoken) | **GET** /api/v1/merchants/tokens/{id} | Gets the details of a merchant API token.
 *MerchantsApi* | [**getMerchantTokens**](docs/Api/MerchantsApi.md#getmerchanttokens) | **GET** /api/v1/merchants/{merchantID}/tokens | Gets a list of a merchant&#39;s issued API tokens.
 *MerchantsApi* | [**getMerchantTransactionsPaged**](docs/Api/MerchantsApi.md#getmerchanttransactionspaged) | **GET** /api/v1/merchants/{merchantID}/transactions | Gets a list of transactions for all a merchant&#39;s accounts.
 *MerchantsApi* | [**getMerchantUserInvites**](docs/Api/MerchantsApi.md#getmerchantuserinvites) | **GET** /api/v1/merchants/{merchantID}/userinvites | Gets user invites associated with merchant.
@@ -124,7 +127,7 @@ Class | Method | HTTP request | Description
 *MerchantsApi* | [**getMerchantWebhooks**](docs/Api/MerchantsApi.md#getmerchantwebhooks) | **GET** /api/v1/merchants/{merchantID}/webhooks | Get all configured webhooks for a merchant.
 *MerchantsApi* | [**getMerchants**](docs/Api/MerchantsApi.md#getmerchants) | **GET** /api/v1/merchants | Get&#39;s a list of merchants the caller has access to.
 *MerchantsApi* | [**getMerchantsPaged**](docs/Api/MerchantsApi.md#getmerchantspaged) | **GET** /api/v1/merchants/paged | Get a paged list of all the merchants the caller has access to.
-*MetadataApi* | [**getBitcoinBlockHeight**](docs/Api/MetadataApi.md#getbitcoinblockheight) | **GET** /api/v1/metadata/height | Gets the current Bitcoin blockchain height. In sandbox the testnet height is returned.
+*MerchantsApi* | [**suspendMerchant**](docs/Api/MerchantsApi.md#suspendmerchant) | **PUT** /api/v1/merchants/{merchantId}/suspend | Suspends a merchant
 *MetadataApi* | [**problem**](docs/Api/MetadataApi.md#problem) | **GET** /api/v1/metadata/problem | Returns an example problem response.
 *MetadataApi* | [**problemNotification**](docs/Api/MetadataApi.md#problemnotification) | **GET** /api/v1/metadata/problemnotification | Triggers a webhook with the problem details in the payload.
 *MetadataApi* | [**version**](docs/Api/MetadataApi.md#version) | **GET** /api/v1/metadata/version | Gets the current version of the MoneyMoov API.
@@ -151,7 +154,6 @@ Class | Method | HTTP request | Description
 *PaymentRequestsApi* | [**deletePaymentRequest**](docs/Api/PaymentRequestsApi.md#deletepaymentrequest) | **DELETE** /api/v1/paymentrequests/{id} | Deletes a payment request, along with its keys and addresses, if there&#39;s  no payment event associated with it.
 *PaymentRequestsApi* | [**deleteTokenisedCard**](docs/Api/PaymentRequestsApi.md#deletetokenisedcard) | **DELETE** /api/v1/paymentrequests/card/customertokens/{id} | Deletes a single card token.
 *PaymentRequestsApi* | [**getAllPaymentRequestsPaged**](docs/Api/PaymentRequestsApi.md#getallpaymentrequestspaged) | **GET** /api/v1/paymentrequests | Gets a list of all payment requests.
-*PaymentRequestsApi* | [**getLightningInvoice**](docs/Api/PaymentRequestsApi.md#getlightninginvoice) | **GET** /api/v1/paymentrequests/{id}/lightning/{partialAmount} | Gets a Bitcoin Lightning invoice for a payment request.
 *PaymentRequestsApi* | [**getPaymentRequest**](docs/Api/PaymentRequestsApi.md#getpaymentrequest) | **GET** /api/v1/paymentrequests/{id} | Gets a payment request.
 *PaymentRequestsApi* | [**getPaymentRequestEvents**](docs/Api/PaymentRequestsApi.md#getpaymentrequestevents) | **GET** /api/v1/paymentrequests/{id}/events | Gets a payment requests&#39;s events.
 *PaymentRequestsApi* | [**getPaymentRequestForOrder**](docs/Api/PaymentRequestsApi.md#getpaymentrequestfororder) | **GET** /api/v1/paymentrequests/getbyorderid/{orderID} | Gets a payment request by its order ID.
@@ -210,8 +212,9 @@ Class | Method | HTTP request | Description
 *RulesApi* | [**getRuleEvents**](docs/Api/RulesApi.md#getruleevents) | **GET** /api/v1/rules/{id}/events | Gets a list of the events for a single rule.
 *RulesApi* | [**getRulesPaged**](docs/Api/RulesApi.md#getrulespaged) | **GET** /api/v1/rules | Gets all the rules for a merchant.
 *RulesApi* | [**updateRule**](docs/Api/RulesApi.md#updaterule) | **PUT** /api/v1/rules/{id} | Update an existing rule.
+*TokensApi* | [**archiveToken**](docs/Api/TokensApi.md#archivetoken) | **DELETE** /api/v1/tokens/{id} | Archives a merchant API token.
+*TokensApi* | [**authoriseMerchantToken**](docs/Api/TokensApi.md#authorisemerchanttoken) | **POST** /api/v1/tokens/authorise/{id} | Authorises a beneficiary.
 *TokensApi* | [**createMerchantToken**](docs/Api/TokensApi.md#createmerchanttoken) | **POST** /api/v1/tokens | Creates a new merchant API token.
-*TokensApi* | [**deleteToken**](docs/Api/TokensApi.md#deletetoken) | **DELETE** /api/v1/tokens/{id} | Deletes a merchant API token.
 *TransactionsApi* | [**addTags**](docs/Api/TransactionsApi.md#addtags) | **POST** /api/v1/transactions/{transactionID}/tags | Adds merchant tags to a transaction.
 *TransactionsApi* | [**getTransactionProof**](docs/Api/TransactionsApi.md#gettransactionproof) | **GET** /api/v1/transactions/{id}/proof | Generates a proof of payment PDF document with the details of a transaction.
 *TransactionsApi* | [**getTransactionsForAccountPaged**](docs/Api/TransactionsApi.md#gettransactionsforaccountpaged) | **GET** /api/v1/transactions/{accountID} | Get a list of the transactions for a single payment account.
@@ -233,7 +236,6 @@ Class | Method | HTTP request | Description
 
 - [MicrosoftAspNetCoreMvcProblemDetails](docs/Model/MicrosoftAspNetCoreMvcProblemDetails.md)
 - [NoFrixionBizBizModelsPagingMerchantDirectDebitMandatePageResponse](docs/Model/NoFrixionBizBizModelsPagingMerchantDirectDebitMandatePageResponse.md)
-- [NoFrixionBizBizModelsPagingPaymentRequestPageResponse](docs/Model/NoFrixionBizBizModelsPagingPaymentRequestPageResponse.md)
 - [NoFrixionBizBizModelsPagingPayoutPageResponse](docs/Model/NoFrixionBizBizModelsPagingPayoutPageResponse.md)
 - [NoFrixionBizBizModelsPagingPayrunPageResponse](docs/Model/NoFrixionBizBizModelsPagingPayrunPageResponse.md)
 - [NoFrixionBizBizModelsPagingRuleEventsPageResponse](docs/Model/NoFrixionBizBizModelsPagingRuleEventsPageResponse.md)
@@ -246,6 +248,8 @@ Class | Method | HTTP request | Description
 - [NoFrixionMoneyMoovModelsAccountIdentifierCreate](docs/Model/NoFrixionMoneyMoovModelsAccountIdentifierCreate.md)
 - [NoFrixionMoneyMoovModelsAccountUpdate](docs/Model/NoFrixionMoneyMoovModelsAccountUpdate.md)
 - [NoFrixionMoneyMoovModelsApproveAuthorisation](docs/Model/NoFrixionMoneyMoovModelsApproveAuthorisation.md)
+- [NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationRoleSetting](docs/Model/NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationRoleSetting.md)
+- [NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationSetting](docs/Model/NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationSetting.md)
 - [NoFrixionMoneyMoovModelsBatchPayout](docs/Model/NoFrixionMoneyMoovModelsBatchPayout.md)
 - [NoFrixionMoneyMoovModelsBeneficiary](docs/Model/NoFrixionMoneyMoovModelsBeneficiary.md)
 - [NoFrixionMoneyMoovModelsBeneficiaryCreate](docs/Model/NoFrixionMoneyMoovModelsBeneficiaryCreate.md)
@@ -253,22 +257,23 @@ Class | Method | HTTP request | Description
 - [NoFrixionMoneyMoovModelsBeneficiaryGroup](docs/Model/NoFrixionMoneyMoovModelsBeneficiaryGroup.md)
 - [NoFrixionMoneyMoovModelsBeneficiaryGroupMember](docs/Model/NoFrixionMoneyMoovModelsBeneficiaryGroupMember.md)
 - [NoFrixionMoneyMoovModelsBeneficiaryGroupPageResponse](docs/Model/NoFrixionMoneyMoovModelsBeneficiaryGroupPageResponse.md)
-- [NoFrixionMoneyMoovModelsBeneficiaryPageResponse](docs/Model/NoFrixionMoneyMoovModelsBeneficiaryPageResponse.md)
 - [NoFrixionMoneyMoovModelsBeneficiaryUpdate](docs/Model/NoFrixionMoneyMoovModelsBeneficiaryUpdate.md)
 - [NoFrixionMoneyMoovModelsCardCustomerToken](docs/Model/NoFrixionMoneyMoovModelsCardCustomerToken.md)
+- [NoFrixionMoneyMoovModelsClientSessionTimeout](docs/Model/NoFrixionMoneyMoovModelsClientSessionTimeout.md)
 - [NoFrixionMoneyMoovModelsCounterparty](docs/Model/NoFrixionMoneyMoovModelsCounterparty.md)
 - [NoFrixionMoneyMoovModelsCounterpartyCreate](docs/Model/NoFrixionMoneyMoovModelsCounterpartyCreate.md)
 - [NoFrixionMoneyMoovModelsGenerateStatementRequest](docs/Model/NoFrixionMoneyMoovModelsGenerateStatementRequest.md)
 - [NoFrixionMoneyMoovModelsIPaymentResponse](docs/Model/NoFrixionMoneyMoovModelsIPaymentResponse.md)
 - [NoFrixionMoneyMoovModelsInvoicesInvoicePayment](docs/Model/NoFrixionMoneyMoovModelsInvoicesInvoicePayment.md)
 - [NoFrixionMoneyMoovModelsLastTransaction](docs/Model/NoFrixionMoneyMoovModelsLastTransaction.md)
-- [NoFrixionMoneyMoovModelsLightningInvoice](docs/Model/NoFrixionMoneyMoovModelsLightningInvoice.md)
 - [NoFrixionMoneyMoovModelsMandatesMandate](docs/Model/NoFrixionMoneyMoovModelsMandatesMandate.md)
 - [NoFrixionMoneyMoovModelsMandatesMandateCreate](docs/Model/NoFrixionMoneyMoovModelsMandatesMandateCreate.md)
 - [NoFrixionMoneyMoovModelsMerchant](docs/Model/NoFrixionMoneyMoovModelsMerchant.md)
 - [NoFrixionMoneyMoovModelsMerchantPageResponse](docs/Model/NoFrixionMoneyMoovModelsMerchantPageResponse.md)
 - [NoFrixionMoneyMoovModelsMerchantPayByBankSetting](docs/Model/NoFrixionMoneyMoovModelsMerchantPayByBankSetting.md)
 - [NoFrixionMoneyMoovModelsMerchantPayByBankSettings](docs/Model/NoFrixionMoneyMoovModelsMerchantPayByBankSettings.md)
+- [NoFrixionMoneyMoovModelsMerchantPermission](docs/Model/NoFrixionMoneyMoovModelsMerchantPermission.md)
+- [NoFrixionMoneyMoovModelsMerchantSuspend](docs/Model/NoFrixionMoneyMoovModelsMerchantSuspend.md)
 - [NoFrixionMoneyMoovModelsMerchantToken](docs/Model/NoFrixionMoneyMoovModelsMerchantToken.md)
 - [NoFrixionMoneyMoovModelsMerchantTokenPageResponse](docs/Model/NoFrixionMoneyMoovModelsMerchantTokenPageResponse.md)
 - [NoFrixionMoneyMoovModelsNoFrixionVersion](docs/Model/NoFrixionMoneyMoovModelsNoFrixionVersion.md)
@@ -301,7 +306,6 @@ Class | Method | HTTP request | Description
 - [NoFrixionMoneyMoovModelsOpenBankingTransactionHash](docs/Model/NoFrixionMoneyMoovModelsOpenBankingTransactionHash.md)
 - [NoFrixionMoneyMoovModelsPaymentAccount](docs/Model/NoFrixionMoneyMoovModelsPaymentAccount.md)
 - [NoFrixionMoneyMoovModelsPaymentAccountCreate](docs/Model/NoFrixionMoneyMoovModelsPaymentAccountCreate.md)
-- [NoFrixionMoneyMoovModelsPaymentAccountPageResponse](docs/Model/NoFrixionMoneyMoovModelsPaymentAccountPageResponse.md)
 - [NoFrixionMoneyMoovModelsPaymentInitiationResponse](docs/Model/NoFrixionMoneyMoovModelsPaymentInitiationResponse.md)
 - [NoFrixionMoneyMoovModelsPaymentRequest](docs/Model/NoFrixionMoneyMoovModelsPaymentRequest.md)
 - [NoFrixionMoneyMoovModelsPaymentRequestAddress](docs/Model/NoFrixionMoneyMoovModelsPaymentRequestAddress.md)
@@ -338,6 +342,7 @@ Class | Method | HTTP request | Description
 - [NoFrixionMoneyMoovModelsPayrunUpdateSourceAccounts](docs/Model/NoFrixionMoneyMoovModelsPayrunUpdateSourceAccounts.md)
 - [NoFrixionMoneyMoovModelsReport](docs/Model/NoFrixionMoneyMoovModelsReport.md)
 - [NoFrixionMoneyMoovModelsReportResult](docs/Model/NoFrixionMoneyMoovModelsReportResult.md)
+- [NoFrixionMoneyMoovModelsRolesUserRoleWithScope](docs/Model/NoFrixionMoneyMoovModelsRolesUserRoleWithScope.md)
 - [NoFrixionMoneyMoovModelsRule](docs/Model/NoFrixionMoneyMoovModelsRule.md)
 - [NoFrixionMoneyMoovModelsRuleCreate](docs/Model/NoFrixionMoneyMoovModelsRuleCreate.md)
 - [NoFrixionMoneyMoovModelsRuleEvent](docs/Model/NoFrixionMoneyMoovModelsRuleEvent.md)
@@ -349,13 +354,12 @@ Class | Method | HTTP request | Description
 - [NoFrixionMoneyMoovModelsTokenAdd](docs/Model/NoFrixionMoneyMoovModelsTokenAdd.md)
 - [NoFrixionMoneyMoovModelsTransaction](docs/Model/NoFrixionMoneyMoovModelsTransaction.md)
 - [NoFrixionMoneyMoovModelsTransactionPageResponse](docs/Model/NoFrixionMoneyMoovModelsTransactionPageResponse.md)
-- [NoFrixionMoneyMoovModelsTribeLoad](docs/Model/NoFrixionMoneyMoovModelsTribeLoad.md)
 - [NoFrixionMoneyMoovModelsUser](docs/Model/NoFrixionMoneyMoovModelsUser.md)
 - [NoFrixionMoneyMoovModelsUserInvite](docs/Model/NoFrixionMoneyMoovModelsUserInvite.md)
 - [NoFrixionMoneyMoovModelsUserInviteCreate](docs/Model/NoFrixionMoneyMoovModelsUserInviteCreate.md)
+- [NoFrixionMoneyMoovModelsUserPermissions](docs/Model/NoFrixionMoneyMoovModelsUserPermissions.md)
 - [NoFrixionMoneyMoovModelsUserRole](docs/Model/NoFrixionMoneyMoovModelsUserRole.md)
 - [NoFrixionMoneyMoovModelsUserRoleCreate](docs/Model/NoFrixionMoneyMoovModelsUserRoleCreate.md)
-- [NoFrixionMoneyMoovModelsUserRolePermissions](docs/Model/NoFrixionMoneyMoovModelsUserRolePermissions.md)
 - [NoFrixionMoneyMoovModelsUserUpdate](docs/Model/NoFrixionMoneyMoovModelsUserUpdate.md)
 - [NoFrixionMoneyMoovModelsWebhook](docs/Model/NoFrixionMoneyMoovModelsWebhook.md)
 - [NoFrixionMoneyMoovModelsWebhookCreate](docs/Model/NoFrixionMoneyMoovModelsWebhookCreate.md)

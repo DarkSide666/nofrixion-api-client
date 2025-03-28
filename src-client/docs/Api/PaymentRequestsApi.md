@@ -12,7 +12,6 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 | [**deletePaymentRequest()**](PaymentRequestsApi.md#deletePaymentRequest) | **DELETE** /api/v1/paymentrequests/{id} | Deletes a payment request, along with its keys and addresses, if there&#39;s  no payment event associated with it. |
 | [**deleteTokenisedCard()**](PaymentRequestsApi.md#deleteTokenisedCard) | **DELETE** /api/v1/paymentrequests/card/customertokens/{id} | Deletes a single card token. |
 | [**getAllPaymentRequestsPaged()**](PaymentRequestsApi.md#getAllPaymentRequestsPaged) | **GET** /api/v1/paymentrequests | Gets a list of all payment requests. |
-| [**getLightningInvoice()**](PaymentRequestsApi.md#getLightningInvoice) | **GET** /api/v1/paymentrequests/{id}/lightning/{partialAmount} | Gets a Bitcoin Lightning invoice for a payment request. |
 | [**getPaymentRequest()**](PaymentRequestsApi.md#getPaymentRequest) | **GET** /api/v1/paymentrequests/{id} | Gets a payment request. |
 | [**getPaymentRequestEvents()**](PaymentRequestsApi.md#getPaymentRequestEvents) | **GET** /api/v1/paymentrequests/{id}/events | Gets a payment requests&#39;s events. |
 | [**getPaymentRequestForOrder()**](PaymentRequestsApi.md#getPaymentRequestForOrder) | **GET** /api/v1/paymentrequests/getbyorderid/{orderID} | Gets a payment request by its order ID. |
@@ -101,7 +100,7 @@ try {
 ## `createAndPayPaymentRequest()`
 
 ```php
-createAndPayPaymentRequest($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id, $payment_request_create_currency, $payment_request_create_customer_id, $payment_request_create_order_id, $payment_request_create_payment_method_types, $payment_request_create_payment_methods, $payment_request_create_description, $payment_request_create_pisp_account_id, $payment_request_create_shipping_first_name, $payment_request_create_shipping_last_name, $payment_request_create_shipping_address_line1, $payment_request_create_shipping_address_line2, $payment_request_create_shipping_address_city, $payment_request_create_shipping_address_county, $payment_request_create_shipping_address_post_code, $payment_request_create_shipping_address_country_code, $payment_request_create_shipping_phone, $payment_request_create_shipping_email, $payment_request_create_origin_url, $payment_request_create_base_origin_url, $payment_request_create_callback_url, $payment_request_create_failure_callback_url, $payment_request_create_success_web_hook_url, $payment_request_create_card_authorize_only, $payment_request_create_card_create_token, $payment_request_create_card_create_token_mode, $payment_request_create_card_transmit_raw_details, $payment_request_create_card_processor_merchant_id, $payment_request_create_ignore_address_verification, $payment_request_create_card_ignore_cvn, $payment_request_create_pisp_recipient_reference, $payment_request_create_use_hosted_payment_page, $payment_request_create_card_no_payer_authentication, $payment_request_create_partial_payment_method, $payment_request_create_customer_email_address, $payment_request_create_payment_processor, $payment_request_create_lightning_invoice, $payment_request_create_lightning_invoice_expires_at, $payment_request_create_notification_email_addresses, $payment_request_create_priority_bank_id, $payment_request_create_title, $payment_request_create_partial_payment_steps, $payment_request_create_payrun_id, $payment_request_create_tag_ids, $payment_request_create_tags, $card_sensitive_jwt_token, $card_sensitive_number_token, $card_sensitive_cvc_token, $card_sensitive_card_holder_first_name, $card_sensitive_card_holder_last_name, $card_sensitive_billing_address_line1, $card_sensitive_billing_address_line2, $card_sensitive_billing_address_city, $card_sensitive_billing_address_county, $card_sensitive_billing_address_post_code, $card_sensitive_billing_address_country_code, $card_sensitive_billing_phone, $card_sensitive_billing_email, $card_sensitive_save_card_consent, $card_sensitive_partial_amount, $card_jwt_token, $card_number_token, $card_cvc_token, $card_card_holder_first_name, $card_card_holder_last_name, $card_billing_address_line1, $card_billing_address_line2, $card_billing_address_city, $card_billing_address_county, $card_billing_address_post_code, $card_billing_address_country_code, $card_billing_phone, $card_billing_email, $card_save_card_consent, $card_partial_amount, $payment_method, $card_token_tokenised_card_id, $card_token_payment_initiator, $card_token_merchant_standard_reason, $card_token_commerce_indicator, $card_token_card_security_code, $card_token_partial_amount, $payment_initiation_request_partial_amount, $payment_initiation_request_redirect_to_origin_url, $payment_initiation_request_origin_url): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsIPaymentResponse
+createAndPayPaymentRequest($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id, $payment_request_create_currency, $payment_request_create_customer_id, $payment_request_create_order_id, $payment_request_create_payment_method_types, $payment_request_create_payment_methods, $payment_request_create_description, $payment_request_create_pisp_account_id, $payment_request_create_shipping_first_name, $payment_request_create_shipping_last_name, $payment_request_create_shipping_address_line1, $payment_request_create_shipping_address_line2, $payment_request_create_shipping_address_city, $payment_request_create_shipping_address_county, $payment_request_create_shipping_address_post_code, $payment_request_create_shipping_address_country_code, $payment_request_create_shipping_phone, $payment_request_create_shipping_email, $payment_request_create_origin_url, $payment_request_create_base_origin_url, $payment_request_create_callback_url, $payment_request_create_failure_callback_url, $payment_request_create_success_web_hook_url, $payment_request_create_card_authorize_only, $payment_request_create_card_create_token, $payment_request_create_card_create_token_mode, $payment_request_create_card_transmit_raw_details, $payment_request_create_card_processor_merchant_id, $payment_request_create_ignore_address_verification, $payment_request_create_card_ignore_cvn, $payment_request_create_pisp_recipient_reference, $payment_request_create_use_hosted_payment_page, $payment_request_create_card_no_payer_authentication, $payment_request_create_partial_payment_method, $payment_request_create_customer_email_address, $payment_request_create_payment_processor, $payment_request_create_lightning_invoice, $payment_request_create_lightning_invoice_expires_at, $payment_request_create_notification_email_addresses, $payment_request_create_priority_bank_id, $payment_request_create_title, $payment_request_create_partial_payment_steps, $payment_request_create_payrun_id, $payment_request_create_sandbox_settle_delay_in_seconds, $payment_request_create_tag_ids, $payment_request_create_tags, $card_sensitive_jwt_token, $card_sensitive_number_token, $card_sensitive_cvc_token, $card_sensitive_card_holder_first_name, $card_sensitive_card_holder_last_name, $card_sensitive_billing_address_line1, $card_sensitive_billing_address_line2, $card_sensitive_billing_address_city, $card_sensitive_billing_address_county, $card_sensitive_billing_address_post_code, $card_sensitive_billing_address_country_code, $card_sensitive_billing_phone, $card_sensitive_billing_email, $card_sensitive_save_card_consent, $card_sensitive_partial_amount, $card_jwt_token, $card_number_token, $card_cvc_token, $card_card_holder_first_name, $card_card_holder_last_name, $card_billing_address_line1, $card_billing_address_line2, $card_billing_address_city, $card_billing_address_county, $card_billing_address_post_code, $card_billing_address_country_code, $card_billing_phone, $card_billing_email, $card_save_card_consent, $card_partial_amount, $payment_method, $card_token_tokenised_card_id, $card_token_payment_initiator, $card_token_merchant_standard_reason, $card_token_commerce_indicator, $card_token_card_security_code, $card_token_partial_amount, $payment_initiation_request_partial_amount, $payment_initiation_request_redirect_to_origin_url, $payment_initiation_request_origin_url): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsIPaymentResponse
 ```
 
 Creates a payment request record and processes the payment.
@@ -176,6 +175,7 @@ $payment_request_create_priority_bank_id = 'payment_request_create_priority_bank
 $payment_request_create_title = 'payment_request_create_title_example'; // string | A generic field to contain any additional data that the merchant wishes to store against the payment request.  E.g. product or service information.
 $payment_request_create_partial_payment_steps = 'payment_request_create_partial_payment_steps_example'; // string | An optional comma separated list of partial payment amounts. The amounts represent guidance, or suggestions, as to  how the payer will be requested to make partial payments.
 $payment_request_create_payrun_id = 'payment_request_create_payrun_id_example'; // string | Optional, if set it indicates that this payment request will be used to top up a payment account for a pay run.
+$payment_request_create_sandbox_settle_delay_in_seconds = 56; // int | Sandbox only. Optional. If set, the simulated Direct Debit settlement will be delayed by the specified number of seconds.  Must be greater than 0 and less than 600. Otherwise, the default value will be used.
 $payment_request_create_tag_ids = array('payment_request_create_tag_ids_example'); // string[] | An optional list of tag ids to add to the payment request
 $payment_request_create_tags = array('payment_request_create_tags_example'); // string[] | An optional list of tag values to set on the payment request. If no matching  tag exists it will be created.
 $card_sensitive_jwt_token = 'card_sensitive_jwt_token_example'; // string | The JWT token is not used if the raw card details are provided. This  property is to override the base card property and stop it being required.
@@ -220,7 +220,7 @@ $payment_initiation_request_redirect_to_origin_url = 'payment_initiation_request
 $payment_initiation_request_origin_url = 'payment_initiation_request_origin_url_example'; // string | Optional. If set should indicate the origin URL the payer is making the   payment from. If a pay by bank attempt fails and the payment request does not  have a FailureCallbackUrl set then the payer will be redirected to this URL.
 
 try {
-    $result = $apiInstance->createAndPayPaymentRequest($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id, $payment_request_create_currency, $payment_request_create_customer_id, $payment_request_create_order_id, $payment_request_create_payment_method_types, $payment_request_create_payment_methods, $payment_request_create_description, $payment_request_create_pisp_account_id, $payment_request_create_shipping_first_name, $payment_request_create_shipping_last_name, $payment_request_create_shipping_address_line1, $payment_request_create_shipping_address_line2, $payment_request_create_shipping_address_city, $payment_request_create_shipping_address_county, $payment_request_create_shipping_address_post_code, $payment_request_create_shipping_address_country_code, $payment_request_create_shipping_phone, $payment_request_create_shipping_email, $payment_request_create_origin_url, $payment_request_create_base_origin_url, $payment_request_create_callback_url, $payment_request_create_failure_callback_url, $payment_request_create_success_web_hook_url, $payment_request_create_card_authorize_only, $payment_request_create_card_create_token, $payment_request_create_card_create_token_mode, $payment_request_create_card_transmit_raw_details, $payment_request_create_card_processor_merchant_id, $payment_request_create_ignore_address_verification, $payment_request_create_card_ignore_cvn, $payment_request_create_pisp_recipient_reference, $payment_request_create_use_hosted_payment_page, $payment_request_create_card_no_payer_authentication, $payment_request_create_partial_payment_method, $payment_request_create_customer_email_address, $payment_request_create_payment_processor, $payment_request_create_lightning_invoice, $payment_request_create_lightning_invoice_expires_at, $payment_request_create_notification_email_addresses, $payment_request_create_priority_bank_id, $payment_request_create_title, $payment_request_create_partial_payment_steps, $payment_request_create_payrun_id, $payment_request_create_tag_ids, $payment_request_create_tags, $card_sensitive_jwt_token, $card_sensitive_number_token, $card_sensitive_cvc_token, $card_sensitive_card_holder_first_name, $card_sensitive_card_holder_last_name, $card_sensitive_billing_address_line1, $card_sensitive_billing_address_line2, $card_sensitive_billing_address_city, $card_sensitive_billing_address_county, $card_sensitive_billing_address_post_code, $card_sensitive_billing_address_country_code, $card_sensitive_billing_phone, $card_sensitive_billing_email, $card_sensitive_save_card_consent, $card_sensitive_partial_amount, $card_jwt_token, $card_number_token, $card_cvc_token, $card_card_holder_first_name, $card_card_holder_last_name, $card_billing_address_line1, $card_billing_address_line2, $card_billing_address_city, $card_billing_address_county, $card_billing_address_post_code, $card_billing_address_country_code, $card_billing_phone, $card_billing_email, $card_save_card_consent, $card_partial_amount, $payment_method, $card_token_tokenised_card_id, $card_token_payment_initiator, $card_token_merchant_standard_reason, $card_token_commerce_indicator, $card_token_card_security_code, $card_token_partial_amount, $payment_initiation_request_partial_amount, $payment_initiation_request_redirect_to_origin_url, $payment_initiation_request_origin_url);
+    $result = $apiInstance->createAndPayPaymentRequest($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id, $payment_request_create_currency, $payment_request_create_customer_id, $payment_request_create_order_id, $payment_request_create_payment_method_types, $payment_request_create_payment_methods, $payment_request_create_description, $payment_request_create_pisp_account_id, $payment_request_create_shipping_first_name, $payment_request_create_shipping_last_name, $payment_request_create_shipping_address_line1, $payment_request_create_shipping_address_line2, $payment_request_create_shipping_address_city, $payment_request_create_shipping_address_county, $payment_request_create_shipping_address_post_code, $payment_request_create_shipping_address_country_code, $payment_request_create_shipping_phone, $payment_request_create_shipping_email, $payment_request_create_origin_url, $payment_request_create_base_origin_url, $payment_request_create_callback_url, $payment_request_create_failure_callback_url, $payment_request_create_success_web_hook_url, $payment_request_create_card_authorize_only, $payment_request_create_card_create_token, $payment_request_create_card_create_token_mode, $payment_request_create_card_transmit_raw_details, $payment_request_create_card_processor_merchant_id, $payment_request_create_ignore_address_verification, $payment_request_create_card_ignore_cvn, $payment_request_create_pisp_recipient_reference, $payment_request_create_use_hosted_payment_page, $payment_request_create_card_no_payer_authentication, $payment_request_create_partial_payment_method, $payment_request_create_customer_email_address, $payment_request_create_payment_processor, $payment_request_create_lightning_invoice, $payment_request_create_lightning_invoice_expires_at, $payment_request_create_notification_email_addresses, $payment_request_create_priority_bank_id, $payment_request_create_title, $payment_request_create_partial_payment_steps, $payment_request_create_payrun_id, $payment_request_create_sandbox_settle_delay_in_seconds, $payment_request_create_tag_ids, $payment_request_create_tags, $card_sensitive_jwt_token, $card_sensitive_number_token, $card_sensitive_cvc_token, $card_sensitive_card_holder_first_name, $card_sensitive_card_holder_last_name, $card_sensitive_billing_address_line1, $card_sensitive_billing_address_line2, $card_sensitive_billing_address_city, $card_sensitive_billing_address_county, $card_sensitive_billing_address_post_code, $card_sensitive_billing_address_country_code, $card_sensitive_billing_phone, $card_sensitive_billing_email, $card_sensitive_save_card_consent, $card_sensitive_partial_amount, $card_jwt_token, $card_number_token, $card_cvc_token, $card_card_holder_first_name, $card_card_holder_last_name, $card_billing_address_line1, $card_billing_address_line2, $card_billing_address_city, $card_billing_address_county, $card_billing_address_post_code, $card_billing_address_country_code, $card_billing_phone, $card_billing_email, $card_save_card_consent, $card_partial_amount, $payment_method, $card_token_tokenised_card_id, $card_token_payment_initiator, $card_token_merchant_standard_reason, $card_token_commerce_indicator, $card_token_card_security_code, $card_token_partial_amount, $payment_initiation_request_partial_amount, $payment_initiation_request_redirect_to_origin_url, $payment_initiation_request_origin_url);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PaymentRequestsApi->createAndPayPaymentRequest: ', $e->getMessage(), PHP_EOL;
@@ -282,6 +282,7 @@ try {
 | **payment_request_create_title** | **string**| A generic field to contain any additional data that the merchant wishes to store against the payment request.  E.g. product or service information. | [optional] |
 | **payment_request_create_partial_payment_steps** | **string**| An optional comma separated list of partial payment amounts. The amounts represent guidance, or suggestions, as to  how the payer will be requested to make partial payments. | [optional] |
 | **payment_request_create_payrun_id** | **string**| Optional, if set it indicates that this payment request will be used to top up a payment account for a pay run. | [optional] |
+| **payment_request_create_sandbox_settle_delay_in_seconds** | **int**| Sandbox only. Optional. If set, the simulated Direct Debit settlement will be delayed by the specified number of seconds.  Must be greater than 0 and less than 600. Otherwise, the default value will be used. | [optional] |
 | **payment_request_create_tag_ids** | [**string[]**](../Model/string.md)| An optional list of tag ids to add to the payment request | [optional] |
 | **payment_request_create_tags** | [**string[]**](../Model/string.md)| An optional list of tag values to set on the payment request. If no matching  tag exists it will be created. | [optional] |
 | **card_sensitive_jwt_token** | **string**| The JWT token is not used if the raw card details are provided. This  property is to override the base card property and stop it being required. | [optional] |
@@ -646,7 +647,7 @@ try {
 ## `getAllPaymentRequestsPaged()`
 
 ```php
-getAllPaymentRequestsPaged($merchant_id, $page, $size, $from_date, $to_date, $status, $search, $currency, $min_amount, $max_amount, $tags, $sort): \Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPaymentRequestPageResponse
+getAllPaymentRequestsPaged($merchant_id, $page, $size, $from_date, $to_date, $status, $search, $currency, $min_amount, $max_amount, $tags, $sort)
 ```
 
 Gets a list of all payment requests.
@@ -684,8 +685,7 @@ $tags = array('tags_example'); // string[] | The tag filter to apply to retrieve
 $sort = 'sort_example'; // string | Optional expression to sort the order of the payment requests. Example \"Amount desc,Inserted asc\".
 
 try {
-    $result = $apiInstance->getAllPaymentRequestsPaged($merchant_id, $page, $size, $from_date, $to_date, $status, $search, $currency, $min_amount, $max_amount, $tags, $sort);
-    print_r($result);
+    $apiInstance->getAllPaymentRequestsPaged($merchant_id, $page, $size, $from_date, $to_date, $status, $search, $currency, $min_amount, $max_amount, $tags, $sort);
 } catch (Exception $e) {
     echo 'Exception when calling PaymentRequestsApi->getAllPaymentRequestsPaged: ', $e->getMessage(), PHP_EOL;
 }
@@ -710,7 +710,7 @@ try {
 
 ### Return type
 
-[**\Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPaymentRequestPageResponse**](../Model/NoFrixionBizBizModelsPagingPaymentRequestPageResponse.md)
+void (empty response body)
 
 ### Authorization
 
@@ -719,69 +719,7 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: `text/plain`, `application/json`, `text/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `getLightningInvoice()`
-
-```php
-getLightningInvoice($id, $partial_amount): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsLightningInvoice
-```
-
-Gets a Bitcoin Lightning invoice for a payment request.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure API key authorization: Bearer
-$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
-
-
-$apiInstance = new Nofrixion\Client\Api\PaymentRequestsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$id = 'id_example'; // string | The ID of the payment request the Lightning invoice is being requested for.
-$partial_amount = 3.4; // float | Optional. If non zero will be used as the amount to take payment for. If not set the full               payment request amount will be used.
-
-try {
-    $result = $apiInstance->getLightningInvoice($id, $partial_amount);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling PaymentRequestsApi->getLightningInvoice: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**| The ID of the payment request the Lightning invoice is being requested for. | |
-| **partial_amount** | **float**| Optional. If non zero will be used as the amount to take payment for. If not set the full               payment request amount will be used. | |
-
-### Return type
-
-[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsLightningInvoice**](../Model/NoFrixionMoneyMoovModelsLightningInvoice.md)
-
-### Authorization
-
-[Bearer](../../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `text/plain`, `application/json`, `text/json`
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)

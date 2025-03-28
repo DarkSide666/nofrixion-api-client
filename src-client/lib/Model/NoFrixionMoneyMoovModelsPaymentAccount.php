@@ -411,6 +411,7 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
     public const CURRENCY_NONE = 'NONE';
     public const CURRENCY_GBP = 'GBP';
     public const CURRENCY_EUR = 'EUR';
+    public const CURRENCY_USD = 'USD';
     public const CURRENCY_BTC = 'BTC';
     public const ACCOUNT_SUPPLIER_NAME_NONE = 'None';
     public const ACCOUNT_SUPPLIER_NAME_CYBER_SOURCE = 'CyberSource';
@@ -428,7 +429,6 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
     public const ACCOUNT_SUPPLIER_NAME_LIGHTNING = 'Lightning';
     public const ACCOUNT_SUPPLIER_NAME_LIGHTNING_TESTNET = 'LightningTestnet';
     public const ACCOUNT_SUPPLIER_NAME_BANKING_CIRCLE_DIRECT_DEBIT = 'BankingCircleDirectDebit';
-    public const ACCOUNT_SUPPLIER_NAME_TRIBE = 'Tribe';
     public const XERO_BANK_FEED_CONNECTION_STATUS_NONE = 'None';
     public const XERO_BANK_FEED_CONNECTION_STATUS_PENDING = 'Pending';
     public const XERO_BANK_FEED_CONNECTION_STATUS_ACTIVE = 'Active';
@@ -443,9 +443,11 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
     public const DEFAULT_PAYMENT_RAIL_SEPA_INST = 'SEPA_INST';
     public const DEFAULT_PAYMENT_RAIL_TARGET2 = 'TARGET2';
     public const SUPPLIER_SEPA_INSTANT_STATUS_NONE = 'None';
+    public const SUPPLIER_SEPA_INSTANT_STATUS_PENDING = 'Pending';
     public const SUPPLIER_SEPA_INSTANT_STATUS_IN_PROGRESS = 'InProgress';
     public const SUPPLIER_SEPA_INSTANT_STATUS_ENABLED = 'Enabled';
     public const SUPPLIER_SEPA_INSTANT_STATUS_DISABLED = 'Disabled';
+    public const SUPPLIER_SEPA_INSTANT_STATUS_FAILED = 'Failed';
 
     /**
      * Gets allowable values of the enum
@@ -458,6 +460,7 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
             self::CURRENCY_NONE,
             self::CURRENCY_GBP,
             self::CURRENCY_EUR,
+            self::CURRENCY_USD,
             self::CURRENCY_BTC,
         ];
     }
@@ -486,7 +489,6 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
             self::ACCOUNT_SUPPLIER_NAME_LIGHTNING,
             self::ACCOUNT_SUPPLIER_NAME_LIGHTNING_TESTNET,
             self::ACCOUNT_SUPPLIER_NAME_BANKING_CIRCLE_DIRECT_DEBIT,
-            self::ACCOUNT_SUPPLIER_NAME_TRIBE,
         ];
     }
 
@@ -545,9 +547,11 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
     {
         return [
             self::SUPPLIER_SEPA_INSTANT_STATUS_NONE,
+            self::SUPPLIER_SEPA_INSTANT_STATUS_PENDING,
             self::SUPPLIER_SEPA_INSTANT_STATUS_IN_PROGRESS,
             self::SUPPLIER_SEPA_INSTANT_STATUS_ENABLED,
             self::SUPPLIER_SEPA_INSTANT_STATUS_DISABLED,
+            self::SUPPLIER_SEPA_INSTANT_STATUS_FAILED,
         ];
     }
 

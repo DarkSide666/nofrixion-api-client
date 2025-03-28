@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionBizBizModelsPagingPaymentRequestPageResponse
+ * NoFrixionMoneyMoovModelsUserPermissions
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Nofrixion\Client\ObjectSerializer;
 
 /**
- * NoFrixionBizBizModelsPagingPaymentRequestPageResponse Class Doc Comment
+ * NoFrixionMoneyMoovModelsUserPermissions Class Doc Comment
  *
  * @category Class
  * @package  Nofrixion\Client
@@ -40,7 +40,7 @@ use \Nofrixion\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class NoFrixionBizBizModelsPagingPaymentRequestPageResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class NoFrixionMoneyMoovModelsUserPermissions implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class NoFrixionBizBizModelsPagingPaymentRequestPageResponse implements ModelInte
       *
       * @var string
       */
-    protected static $openAPIModelName = 'NoFrixion.Biz.BizModels.Paging.PaymentRequestPageResponse';
+    protected static $openAPIModelName = 'NoFrixion.MoneyMoov.Models.UserPermissions';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,11 +57,7 @@ class NoFrixionBizBizModelsPagingPaymentRequestPageResponse implements ModelInte
       * @var string[]
       */
     protected static $openAPITypes = [
-        'content' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequest[]',
-        'page_number' => 'int',
-        'page_size' => 'int',
-        'total_pages' => 'int',
-        'total_size' => 'int'
+        'merchant_permissions' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsMerchantPermission[]'
     ];
 
     /**
@@ -72,11 +68,7 @@ class NoFrixionBizBizModelsPagingPaymentRequestPageResponse implements ModelInte
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'content' => null,
-        'page_number' => 'int32',
-        'page_size' => 'int32',
-        'total_pages' => 'int32',
-        'total_size' => 'int64'
+        'merchant_permissions' => null
     ];
 
     /**
@@ -85,11 +77,7 @@ class NoFrixionBizBizModelsPagingPaymentRequestPageResponse implements ModelInte
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'content' => true,
-        'page_number' => false,
-        'page_size' => false,
-        'total_pages' => false,
-        'total_size' => false
+        'merchant_permissions' => true
     ];
 
     /**
@@ -178,11 +166,7 @@ class NoFrixionBizBizModelsPagingPaymentRequestPageResponse implements ModelInte
      * @var string[]
      */
     protected static $attributeMap = [
-        'content' => 'content',
-        'page_number' => 'pageNumber',
-        'page_size' => 'pageSize',
-        'total_pages' => 'totalPages',
-        'total_size' => 'totalSize'
+        'merchant_permissions' => 'merchantPermissions'
     ];
 
     /**
@@ -191,11 +175,7 @@ class NoFrixionBizBizModelsPagingPaymentRequestPageResponse implements ModelInte
      * @var string[]
      */
     protected static $setters = [
-        'content' => 'setContent',
-        'page_number' => 'setPageNumber',
-        'page_size' => 'setPageSize',
-        'total_pages' => 'setTotalPages',
-        'total_size' => 'setTotalSize'
+        'merchant_permissions' => 'setMerchantPermissions'
     ];
 
     /**
@@ -204,11 +184,7 @@ class NoFrixionBizBizModelsPagingPaymentRequestPageResponse implements ModelInte
      * @var string[]
      */
     protected static $getters = [
-        'content' => 'getContent',
-        'page_number' => 'getPageNumber',
-        'page_size' => 'getPageSize',
-        'total_pages' => 'getTotalPages',
-        'total_size' => 'getTotalSize'
+        'merchant_permissions' => 'getMerchantPermissions'
     ];
 
     /**
@@ -268,11 +244,7 @@ class NoFrixionBizBizModelsPagingPaymentRequestPageResponse implements ModelInte
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('content', $data ?? [], null);
-        $this->setIfExists('page_number', $data ?? [], null);
-        $this->setIfExists('page_size', $data ?? [], null);
-        $this->setIfExists('total_pages', $data ?? [], null);
-        $this->setIfExists('total_size', $data ?? [], null);
+        $this->setIfExists('merchant_permissions', $data ?? [], null);
     }
 
     /**
@@ -318,143 +290,35 @@ class NoFrixionBizBizModelsPagingPaymentRequestPageResponse implements ModelInte
 
 
     /**
-     * Gets content
+     * Gets merchant_permissions
      *
-     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequest[]|null
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsMerchantPermission[]|null
      */
-    public function getContent()
+    public function getMerchantPermissions()
     {
-        return $this->container['content'];
+        return $this->container['merchant_permissions'];
     }
 
     /**
-     * Sets content
+     * Sets merchant_permissions
      *
-     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequest[]|null $content content
+     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsMerchantPermission[]|null $merchant_permissions merchant_permissions
      *
      * @return self
      */
-    public function setContent($content)
+    public function setMerchantPermissions($merchant_permissions)
     {
-        if (is_null($content)) {
-            array_push($this->openAPINullablesSetToNull, 'content');
+        if (is_null($merchant_permissions)) {
+            array_push($this->openAPINullablesSetToNull, 'merchant_permissions');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('content', $nullablesSetToNull);
+            $index = array_search('merchant_permissions', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['content'] = $content;
-
-        return $this;
-    }
-
-    /**
-     * Gets page_number
-     *
-     * @return int|null
-     */
-    public function getPageNumber()
-    {
-        return $this->container['page_number'];
-    }
-
-    /**
-     * Sets page_number
-     *
-     * @param int|null $page_number Current page number. Its 1 based. i.e firstpage is 1, secondpage is 2
-     *
-     * @return self
-     */
-    public function setPageNumber($page_number)
-    {
-        if (is_null($page_number)) {
-            throw new \InvalidArgumentException('non-nullable page_number cannot be null');
-        }
-        $this->container['page_number'] = $page_number;
-
-        return $this;
-    }
-
-    /**
-     * Gets page_size
-     *
-     * @return int|null
-     */
-    public function getPageSize()
-    {
-        return $this->container['page_size'];
-    }
-
-    /**
-     * Sets page_size
-     *
-     * @param int|null $page_size Page size
-     *
-     * @return self
-     */
-    public function setPageSize($page_size)
-    {
-        if (is_null($page_size)) {
-            throw new \InvalidArgumentException('non-nullable page_size cannot be null');
-        }
-        $this->container['page_size'] = $page_size;
-
-        return $this;
-    }
-
-    /**
-     * Gets total_pages
-     *
-     * @return int|null
-     */
-    public function getTotalPages()
-    {
-        return $this->container['total_pages'];
-    }
-
-    /**
-     * Sets total_pages
-     *
-     * @param int|null $total_pages Total pages
-     *
-     * @return self
-     */
-    public function setTotalPages($total_pages)
-    {
-        if (is_null($total_pages)) {
-            throw new \InvalidArgumentException('non-nullable total_pages cannot be null');
-        }
-        $this->container['total_pages'] = $total_pages;
-
-        return $this;
-    }
-
-    /**
-     * Gets total_size
-     *
-     * @return int|null
-     */
-    public function getTotalSize()
-    {
-        return $this->container['total_size'];
-    }
-
-    /**
-     * Sets total_size
-     *
-     * @param int|null $total_size Total count
-     *
-     * @return self
-     */
-    public function setTotalSize($total_size)
-    {
-        if (is_null($total_size)) {
-            throw new \InvalidArgumentException('non-nullable total_size cannot be null');
-        }
-        $this->container['total_size'] = $total_size;
+        $this->container['merchant_permissions'] = $merchant_permissions;
 
         return $this;
     }

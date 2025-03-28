@@ -125,6 +125,15 @@ class NoFrixionMoneyMoovModelsCounterpartyCreateTest extends TestCase
     }
 
     /**
+     * Test attribute "country_code"
+     */
+    public function testPropertyCountryCode()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "identifier"
      */
     public function testPropertyIdentifier()

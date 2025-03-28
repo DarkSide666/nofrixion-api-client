@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionMoneyMoovModelsLightningInvoice
+ * NoFrixionMoneyMoovModelsClientSessionTimeout
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Nofrixion\Client\ObjectSerializer;
 
 /**
- * NoFrixionMoneyMoovModelsLightningInvoice Class Doc Comment
+ * NoFrixionMoneyMoovModelsClientSessionTimeout Class Doc Comment
  *
  * @category Class
  * @package  Nofrixion\Client
@@ -40,7 +40,7 @@ use \Nofrixion\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class NoFrixionMoneyMoovModelsLightningInvoice implements ModelInterface, ArrayAccess, \JsonSerializable
+class NoFrixionMoneyMoovModelsClientSessionTimeout implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class NoFrixionMoneyMoovModelsLightningInvoice implements ModelInterface, ArrayA
       *
       * @var string
       */
-    protected static $openAPIModelName = 'NoFrixion.MoneyMoov.Models.LightningInvoice';
+    protected static $openAPIModelName = 'NoFrixion.MoneyMoov.Models.ClientSessionTimeout';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,8 @@ class NoFrixionMoneyMoovModelsLightningInvoice implements ModelInterface, ArrayA
       * @var string[]
       */
     protected static $openAPITypes = [
-        'description' => 'string',
-        'payment_request' => 'string',
-        'r_hash' => 'string',
-        'expires_at' => '\DateTime'
+        'merchant_id' => 'string',
+        'timeout_seconds' => 'int'
     ];
 
     /**
@@ -71,10 +69,8 @@ class NoFrixionMoneyMoovModelsLightningInvoice implements ModelInterface, ArrayA
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'description' => null,
-        'payment_request' => null,
-        'r_hash' => null,
-        'expires_at' => 'date-time'
+        'merchant_id' => 'uuid',
+        'timeout_seconds' => 'int32'
     ];
 
     /**
@@ -83,10 +79,8 @@ class NoFrixionMoneyMoovModelsLightningInvoice implements ModelInterface, ArrayA
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'description' => true,
-        'payment_request' => true,
-        'r_hash' => true,
-        'expires_at' => false
+        'merchant_id' => false,
+        'timeout_seconds' => false
     ];
 
     /**
@@ -175,10 +169,8 @@ class NoFrixionMoneyMoovModelsLightningInvoice implements ModelInterface, ArrayA
      * @var string[]
      */
     protected static $attributeMap = [
-        'description' => 'description',
-        'payment_request' => 'paymentRequest',
-        'r_hash' => 'rHash',
-        'expires_at' => 'expiresAt'
+        'merchant_id' => 'merchantID',
+        'timeout_seconds' => 'timeoutSeconds'
     ];
 
     /**
@@ -187,10 +179,8 @@ class NoFrixionMoneyMoovModelsLightningInvoice implements ModelInterface, ArrayA
      * @var string[]
      */
     protected static $setters = [
-        'description' => 'setDescription',
-        'payment_request' => 'setPaymentRequest',
-        'r_hash' => 'setRHash',
-        'expires_at' => 'setExpiresAt'
+        'merchant_id' => 'setMerchantId',
+        'timeout_seconds' => 'setTimeoutSeconds'
     ];
 
     /**
@@ -199,10 +189,8 @@ class NoFrixionMoneyMoovModelsLightningInvoice implements ModelInterface, ArrayA
      * @var string[]
      */
     protected static $getters = [
-        'description' => 'getDescription',
-        'payment_request' => 'getPaymentRequest',
-        'r_hash' => 'getRHash',
-        'expires_at' => 'getExpiresAt'
+        'merchant_id' => 'getMerchantId',
+        'timeout_seconds' => 'getTimeoutSeconds'
     ];
 
     /**
@@ -262,10 +250,8 @@ class NoFrixionMoneyMoovModelsLightningInvoice implements ModelInterface, ArrayA
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('description', $data ?? [], null);
-        $this->setIfExists('payment_request', $data ?? [], null);
-        $this->setIfExists('r_hash', $data ?? [], null);
-        $this->setIfExists('expires_at', $data ?? [], null);
+        $this->setIfExists('merchant_id', $data ?? [], null);
+        $this->setIfExists('timeout_seconds', $data ?? [], null);
     }
 
     /**
@@ -311,130 +297,55 @@ class NoFrixionMoneyMoovModelsLightningInvoice implements ModelInterface, ArrayA
 
 
     /**
-     * Gets description
+     * Gets merchant_id
      *
      * @return string|null
      */
-    public function getDescription()
+    public function getMerchantId()
     {
-        return $this->container['description'];
+        return $this->container['merchant_id'];
     }
 
     /**
-     * Sets description
+     * Sets merchant_id
      *
-     * @param string|null $description description
+     * @param string|null $merchant_id The merchant ID for which the session timeout applies.
      *
      * @return self
      */
-    public function setDescription($description)
+    public function setMerchantId($merchant_id)
     {
-        if (is_null($description)) {
-            array_push($this->openAPINullablesSetToNull, 'description');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('description', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($merchant_id)) {
+            throw new \InvalidArgumentException('non-nullable merchant_id cannot be null');
         }
-        $this->container['description'] = $description;
+        $this->container['merchant_id'] = $merchant_id;
 
         return $this;
     }
 
     /**
-     * Gets payment_request
+     * Gets timeout_seconds
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getPaymentRequest()
+    public function getTimeoutSeconds()
     {
-        return $this->container['payment_request'];
+        return $this->container['timeout_seconds'];
     }
 
     /**
-     * Sets payment_request
+     * Sets timeout_seconds
      *
-     * @param string|null $payment_request payment_request
+     * @param int|null $timeout_seconds The number of seconds a session for this user should last before expiring.
      *
      * @return self
      */
-    public function setPaymentRequest($payment_request)
+    public function setTimeoutSeconds($timeout_seconds)
     {
-        if (is_null($payment_request)) {
-            array_push($this->openAPINullablesSetToNull, 'payment_request');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('payment_request', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($timeout_seconds)) {
+            throw new \InvalidArgumentException('non-nullable timeout_seconds cannot be null');
         }
-        $this->container['payment_request'] = $payment_request;
-
-        return $this;
-    }
-
-    /**
-     * Gets r_hash
-     *
-     * @return string|null
-     */
-    public function getRHash()
-    {
-        return $this->container['r_hash'];
-    }
-
-    /**
-     * Sets r_hash
-     *
-     * @param string|null $r_hash r_hash
-     *
-     * @return self
-     */
-    public function setRHash($r_hash)
-    {
-        if (is_null($r_hash)) {
-            array_push($this->openAPINullablesSetToNull, 'r_hash');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('r_hash', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['r_hash'] = $r_hash;
-
-        return $this;
-    }
-
-    /**
-     * Gets expires_at
-     *
-     * @return \DateTime|null
-     */
-    public function getExpiresAt()
-    {
-        return $this->container['expires_at'];
-    }
-
-    /**
-     * Sets expires_at
-     *
-     * @param \DateTime|null $expires_at expires_at
-     *
-     * @return self
-     */
-    public function setExpiresAt($expires_at)
-    {
-        if (is_null($expires_at)) {
-            throw new \InvalidArgumentException('non-nullable expires_at cannot be null');
-        }
-        $this->container['expires_at'] = $expires_at;
+        $this->container['timeout_seconds'] = $timeout_seconds;
 
         return $this;
     }

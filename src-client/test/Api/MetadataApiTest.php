@@ -72,18 +72,6 @@ class MetadataApiTest extends TestCase
     }
 
     /**
-     * Test case for getBitcoinBlockHeight
-     *
-     * Gets the current Bitcoin blockchain height. In sandbox the testnet height is returned..
-     *
-     */
-    public function testGetBitcoinBlockHeight()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test case for problem
      *
      * Returns an example problem response..

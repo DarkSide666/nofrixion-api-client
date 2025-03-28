@@ -120,6 +120,30 @@ class MerchantsApiTest extends TestCase
     }
 
     /**
+     * Test case for deleteUserFromMerchant
+     *
+     * Deletes all roles for a user in a merchant..
+     *
+     */
+    public function testDeleteUserFromMerchant()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getAuthorisationSettings
+     *
+     * Gets a list of merchant authorisation settings for a merchant.
+     *
+     */
+    public function testGetAuthorisationSettings()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getMerchant
      *
      * Get's a merchant..
@@ -228,6 +252,18 @@ class MerchantsApiTest extends TestCase
     }
 
     /**
+     * Test case for getMerchantToken
+     *
+     * Gets the details of a merchant API token..
+     *
+     */
+    public function testGetMerchantToken()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getMerchantTokens
      *
      * Gets a list of a merchant's issued API tokens..
@@ -318,6 +354,18 @@ class MerchantsApiTest extends TestCase
      *
      */
     public function testGetMerchantsPaged()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for suspendMerchant
+     *
+     * Suspends a merchant.
+     *
+     */
+    public function testSuspendMerchant()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -57,6 +57,7 @@ Name | Type | Description | Notes
 **formatted_amount** | **string** |  | [optional] [readonly]
 **lightning_invoice_expires_at** | **\DateTime** | Date and time of expiration of the lightning invoice. | [optional]
 **destination_account** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount**](NoFrixionMoneyMoovModelsPaymentAccount.md) |  | [optional]
+**sandbox_settle_delay_in_seconds** | **int** | Sandbox only. Optional. If set, simulated settlements will be delayed by the specified number of seconds. | [optional]
 **customer_name** | **string** |  | [optional] [readonly]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)
