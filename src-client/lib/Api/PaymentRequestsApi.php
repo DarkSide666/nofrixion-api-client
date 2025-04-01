@@ -92,6 +92,9 @@ class PaymentRequestsApi
         'deleteTokenisedCard' => [
             'application/json',
         ],
+        'exportPaymentRequests' => [
+            'application/json',
+        ],
         'getAllPaymentRequestsPaged' => [
             'application/json',
         ],
@@ -123,9 +126,6 @@ class PaymentRequestsApi
             'application/json',
         ],
         'refundCardPayment' => [
-            'multipart/form-data',
-        ],
-        'setupCardPayerAuthentication' => [
             'multipart/form-data',
         ],
         'simulatePayByBankCallback' => [
@@ -634,8 +634,6 @@ class PaymentRequestsApi
      * @param  string $payment_method The single payment method to use for the pay on demand payment request. (optional)
      * @param  string $card_token_tokenised_card_id The ID of the tokenised card to use for the payment. The merchant needs to ensure that  the use of the tokenised card is restricted to the same customer that created it. (optional)
      * @param  string $card_token_payment_initiator Indicates who initiated the card token payment, customer or merchant. (optional)
-     * @param  string $card_token_merchant_standard_reason For merchant initiated transactions that correspond to one of the industry standard  reasons should be set. (optional)
-     * @param  string $card_token_commerce_indicator For recurring and installment merchant initiated transactions this property should  be set accordingly. For all other transactions it should be left at the default of  \\\&quot;internet\\\&quot;. (optional)
      * @param  string $card_token_card_security_code Not used for merchant initiated transactions. Optional for customer initiated transactions.  If supplied will be sent to the card processor as a check that the customer using the   tokenised card knows the card verification number. (optional)
      * @param  float $card_token_partial_amount Optional partial payment amount. If not specified then the full payment request  amount will be attempted. (optional)
      * @param  float $payment_initiation_request_partial_amount Optional. If 0 the full amount is assumed. (optional)
@@ -647,9 +645,9 @@ class PaymentRequestsApi
      * @throws \InvalidArgumentException
      * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsIPaymentResponse
      */
-    public function createAndPayPaymentRequest($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id = null, $payment_request_create_currency = null, $payment_request_create_customer_id = null, $payment_request_create_order_id = null, $payment_request_create_payment_method_types = null, $payment_request_create_payment_methods = null, $payment_request_create_description = null, $payment_request_create_pisp_account_id = null, $payment_request_create_shipping_first_name = null, $payment_request_create_shipping_last_name = null, $payment_request_create_shipping_address_line1 = null, $payment_request_create_shipping_address_line2 = null, $payment_request_create_shipping_address_city = null, $payment_request_create_shipping_address_county = null, $payment_request_create_shipping_address_post_code = null, $payment_request_create_shipping_address_country_code = null, $payment_request_create_shipping_phone = null, $payment_request_create_shipping_email = null, $payment_request_create_origin_url = null, $payment_request_create_base_origin_url = null, $payment_request_create_callback_url = null, $payment_request_create_failure_callback_url = null, $payment_request_create_success_web_hook_url = null, $payment_request_create_card_authorize_only = null, $payment_request_create_card_create_token = null, $payment_request_create_card_create_token_mode = null, $payment_request_create_card_transmit_raw_details = null, $payment_request_create_card_processor_merchant_id = null, $payment_request_create_ignore_address_verification = null, $payment_request_create_card_ignore_cvn = null, $payment_request_create_pisp_recipient_reference = null, $payment_request_create_use_hosted_payment_page = null, $payment_request_create_card_no_payer_authentication = null, $payment_request_create_partial_payment_method = null, $payment_request_create_customer_email_address = null, $payment_request_create_payment_processor = null, $payment_request_create_lightning_invoice = null, $payment_request_create_lightning_invoice_expires_at = null, $payment_request_create_notification_email_addresses = null, $payment_request_create_priority_bank_id = null, $payment_request_create_title = null, $payment_request_create_partial_payment_steps = null, $payment_request_create_payrun_id = null, $payment_request_create_sandbox_settle_delay_in_seconds = null, $payment_request_create_tag_ids = null, $payment_request_create_tags = null, $card_sensitive_jwt_token = null, $card_sensitive_number_token = null, $card_sensitive_cvc_token = null, $card_sensitive_card_holder_first_name = null, $card_sensitive_card_holder_last_name = null, $card_sensitive_billing_address_line1 = null, $card_sensitive_billing_address_line2 = null, $card_sensitive_billing_address_city = null, $card_sensitive_billing_address_county = null, $card_sensitive_billing_address_post_code = null, $card_sensitive_billing_address_country_code = null, $card_sensitive_billing_phone = null, $card_sensitive_billing_email = null, $card_sensitive_save_card_consent = null, $card_sensitive_partial_amount = null, $card_jwt_token = null, $card_number_token = null, $card_cvc_token = null, $card_card_holder_first_name = null, $card_card_holder_last_name = null, $card_billing_address_line1 = null, $card_billing_address_line2 = null, $card_billing_address_city = null, $card_billing_address_county = null, $card_billing_address_post_code = null, $card_billing_address_country_code = null, $card_billing_phone = null, $card_billing_email = null, $card_save_card_consent = null, $card_partial_amount = null, $payment_method = null, $card_token_tokenised_card_id = null, $card_token_payment_initiator = null, $card_token_merchant_standard_reason = null, $card_token_commerce_indicator = null, $card_token_card_security_code = null, $card_token_partial_amount = null, $payment_initiation_request_partial_amount = null, $payment_initiation_request_redirect_to_origin_url = null, $payment_initiation_request_origin_url = null, string $contentType = self::contentTypes['createAndPayPaymentRequest'][0])
+    public function createAndPayPaymentRequest($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id = null, $payment_request_create_currency = null, $payment_request_create_customer_id = null, $payment_request_create_order_id = null, $payment_request_create_payment_method_types = null, $payment_request_create_payment_methods = null, $payment_request_create_description = null, $payment_request_create_pisp_account_id = null, $payment_request_create_shipping_first_name = null, $payment_request_create_shipping_last_name = null, $payment_request_create_shipping_address_line1 = null, $payment_request_create_shipping_address_line2 = null, $payment_request_create_shipping_address_city = null, $payment_request_create_shipping_address_county = null, $payment_request_create_shipping_address_post_code = null, $payment_request_create_shipping_address_country_code = null, $payment_request_create_shipping_phone = null, $payment_request_create_shipping_email = null, $payment_request_create_origin_url = null, $payment_request_create_base_origin_url = null, $payment_request_create_callback_url = null, $payment_request_create_failure_callback_url = null, $payment_request_create_success_web_hook_url = null, $payment_request_create_card_authorize_only = null, $payment_request_create_card_create_token = null, $payment_request_create_card_create_token_mode = null, $payment_request_create_card_transmit_raw_details = null, $payment_request_create_card_processor_merchant_id = null, $payment_request_create_ignore_address_verification = null, $payment_request_create_card_ignore_cvn = null, $payment_request_create_pisp_recipient_reference = null, $payment_request_create_use_hosted_payment_page = null, $payment_request_create_card_no_payer_authentication = null, $payment_request_create_partial_payment_method = null, $payment_request_create_customer_email_address = null, $payment_request_create_payment_processor = null, $payment_request_create_lightning_invoice = null, $payment_request_create_lightning_invoice_expires_at = null, $payment_request_create_notification_email_addresses = null, $payment_request_create_priority_bank_id = null, $payment_request_create_title = null, $payment_request_create_partial_payment_steps = null, $payment_request_create_payrun_id = null, $payment_request_create_sandbox_settle_delay_in_seconds = null, $payment_request_create_tag_ids = null, $payment_request_create_tags = null, $card_sensitive_jwt_token = null, $card_sensitive_number_token = null, $card_sensitive_cvc_token = null, $card_sensitive_card_holder_first_name = null, $card_sensitive_card_holder_last_name = null, $card_sensitive_billing_address_line1 = null, $card_sensitive_billing_address_line2 = null, $card_sensitive_billing_address_city = null, $card_sensitive_billing_address_county = null, $card_sensitive_billing_address_post_code = null, $card_sensitive_billing_address_country_code = null, $card_sensitive_billing_phone = null, $card_sensitive_billing_email = null, $card_sensitive_save_card_consent = null, $card_sensitive_partial_amount = null, $card_jwt_token = null, $card_number_token = null, $card_cvc_token = null, $card_card_holder_first_name = null, $card_card_holder_last_name = null, $card_billing_address_line1 = null, $card_billing_address_line2 = null, $card_billing_address_city = null, $card_billing_address_county = null, $card_billing_address_post_code = null, $card_billing_address_country_code = null, $card_billing_phone = null, $card_billing_email = null, $card_save_card_consent = null, $card_partial_amount = null, $payment_method = null, $card_token_tokenised_card_id = null, $card_token_payment_initiator = null, $card_token_card_security_code = null, $card_token_partial_amount = null, $payment_initiation_request_partial_amount = null, $payment_initiation_request_redirect_to_origin_url = null, $payment_initiation_request_origin_url = null, string $contentType = self::contentTypes['createAndPayPaymentRequest'][0])
     {
-        list($response) = $this->createAndPayPaymentRequestWithHttpInfo($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id, $payment_request_create_currency, $payment_request_create_customer_id, $payment_request_create_order_id, $payment_request_create_payment_method_types, $payment_request_create_payment_methods, $payment_request_create_description, $payment_request_create_pisp_account_id, $payment_request_create_shipping_first_name, $payment_request_create_shipping_last_name, $payment_request_create_shipping_address_line1, $payment_request_create_shipping_address_line2, $payment_request_create_shipping_address_city, $payment_request_create_shipping_address_county, $payment_request_create_shipping_address_post_code, $payment_request_create_shipping_address_country_code, $payment_request_create_shipping_phone, $payment_request_create_shipping_email, $payment_request_create_origin_url, $payment_request_create_base_origin_url, $payment_request_create_callback_url, $payment_request_create_failure_callback_url, $payment_request_create_success_web_hook_url, $payment_request_create_card_authorize_only, $payment_request_create_card_create_token, $payment_request_create_card_create_token_mode, $payment_request_create_card_transmit_raw_details, $payment_request_create_card_processor_merchant_id, $payment_request_create_ignore_address_verification, $payment_request_create_card_ignore_cvn, $payment_request_create_pisp_recipient_reference, $payment_request_create_use_hosted_payment_page, $payment_request_create_card_no_payer_authentication, $payment_request_create_partial_payment_method, $payment_request_create_customer_email_address, $payment_request_create_payment_processor, $payment_request_create_lightning_invoice, $payment_request_create_lightning_invoice_expires_at, $payment_request_create_notification_email_addresses, $payment_request_create_priority_bank_id, $payment_request_create_title, $payment_request_create_partial_payment_steps, $payment_request_create_payrun_id, $payment_request_create_sandbox_settle_delay_in_seconds, $payment_request_create_tag_ids, $payment_request_create_tags, $card_sensitive_jwt_token, $card_sensitive_number_token, $card_sensitive_cvc_token, $card_sensitive_card_holder_first_name, $card_sensitive_card_holder_last_name, $card_sensitive_billing_address_line1, $card_sensitive_billing_address_line2, $card_sensitive_billing_address_city, $card_sensitive_billing_address_county, $card_sensitive_billing_address_post_code, $card_sensitive_billing_address_country_code, $card_sensitive_billing_phone, $card_sensitive_billing_email, $card_sensitive_save_card_consent, $card_sensitive_partial_amount, $card_jwt_token, $card_number_token, $card_cvc_token, $card_card_holder_first_name, $card_card_holder_last_name, $card_billing_address_line1, $card_billing_address_line2, $card_billing_address_city, $card_billing_address_county, $card_billing_address_post_code, $card_billing_address_country_code, $card_billing_phone, $card_billing_email, $card_save_card_consent, $card_partial_amount, $payment_method, $card_token_tokenised_card_id, $card_token_payment_initiator, $card_token_merchant_standard_reason, $card_token_commerce_indicator, $card_token_card_security_code, $card_token_partial_amount, $payment_initiation_request_partial_amount, $payment_initiation_request_redirect_to_origin_url, $payment_initiation_request_origin_url, $contentType);
+        list($response) = $this->createAndPayPaymentRequestWithHttpInfo($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id, $payment_request_create_currency, $payment_request_create_customer_id, $payment_request_create_order_id, $payment_request_create_payment_method_types, $payment_request_create_payment_methods, $payment_request_create_description, $payment_request_create_pisp_account_id, $payment_request_create_shipping_first_name, $payment_request_create_shipping_last_name, $payment_request_create_shipping_address_line1, $payment_request_create_shipping_address_line2, $payment_request_create_shipping_address_city, $payment_request_create_shipping_address_county, $payment_request_create_shipping_address_post_code, $payment_request_create_shipping_address_country_code, $payment_request_create_shipping_phone, $payment_request_create_shipping_email, $payment_request_create_origin_url, $payment_request_create_base_origin_url, $payment_request_create_callback_url, $payment_request_create_failure_callback_url, $payment_request_create_success_web_hook_url, $payment_request_create_card_authorize_only, $payment_request_create_card_create_token, $payment_request_create_card_create_token_mode, $payment_request_create_card_transmit_raw_details, $payment_request_create_card_processor_merchant_id, $payment_request_create_ignore_address_verification, $payment_request_create_card_ignore_cvn, $payment_request_create_pisp_recipient_reference, $payment_request_create_use_hosted_payment_page, $payment_request_create_card_no_payer_authentication, $payment_request_create_partial_payment_method, $payment_request_create_customer_email_address, $payment_request_create_payment_processor, $payment_request_create_lightning_invoice, $payment_request_create_lightning_invoice_expires_at, $payment_request_create_notification_email_addresses, $payment_request_create_priority_bank_id, $payment_request_create_title, $payment_request_create_partial_payment_steps, $payment_request_create_payrun_id, $payment_request_create_sandbox_settle_delay_in_seconds, $payment_request_create_tag_ids, $payment_request_create_tags, $card_sensitive_jwt_token, $card_sensitive_number_token, $card_sensitive_cvc_token, $card_sensitive_card_holder_first_name, $card_sensitive_card_holder_last_name, $card_sensitive_billing_address_line1, $card_sensitive_billing_address_line2, $card_sensitive_billing_address_city, $card_sensitive_billing_address_county, $card_sensitive_billing_address_post_code, $card_sensitive_billing_address_country_code, $card_sensitive_billing_phone, $card_sensitive_billing_email, $card_sensitive_save_card_consent, $card_sensitive_partial_amount, $card_jwt_token, $card_number_token, $card_cvc_token, $card_card_holder_first_name, $card_card_holder_last_name, $card_billing_address_line1, $card_billing_address_line2, $card_billing_address_city, $card_billing_address_county, $card_billing_address_post_code, $card_billing_address_country_code, $card_billing_phone, $card_billing_email, $card_save_card_consent, $card_partial_amount, $payment_method, $card_token_tokenised_card_id, $card_token_payment_initiator, $card_token_card_security_code, $card_token_partial_amount, $payment_initiation_request_partial_amount, $payment_initiation_request_redirect_to_origin_url, $payment_initiation_request_origin_url, $contentType);
         return $response;
     }
 
@@ -745,8 +743,6 @@ class PaymentRequestsApi
      * @param  string $payment_method The single payment method to use for the pay on demand payment request. (optional)
      * @param  string $card_token_tokenised_card_id The ID of the tokenised card to use for the payment. The merchant needs to ensure that  the use of the tokenised card is restricted to the same customer that created it. (optional)
      * @param  string $card_token_payment_initiator Indicates who initiated the card token payment, customer or merchant. (optional)
-     * @param  string $card_token_merchant_standard_reason For merchant initiated transactions that correspond to one of the industry standard  reasons should be set. (optional)
-     * @param  string $card_token_commerce_indicator For recurring and installment merchant initiated transactions this property should  be set accordingly. For all other transactions it should be left at the default of  \\\&quot;internet\\\&quot;. (optional)
      * @param  string $card_token_card_security_code Not used for merchant initiated transactions. Optional for customer initiated transactions.  If supplied will be sent to the card processor as a check that the customer using the   tokenised card knows the card verification number. (optional)
      * @param  float $card_token_partial_amount Optional partial payment amount. If not specified then the full payment request  amount will be attempted. (optional)
      * @param  float $payment_initiation_request_partial_amount Optional. If 0 the full amount is assumed. (optional)
@@ -758,9 +754,9 @@ class PaymentRequestsApi
      * @throws \InvalidArgumentException
      * @return array of \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsIPaymentResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function createAndPayPaymentRequestWithHttpInfo($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id = null, $payment_request_create_currency = null, $payment_request_create_customer_id = null, $payment_request_create_order_id = null, $payment_request_create_payment_method_types = null, $payment_request_create_payment_methods = null, $payment_request_create_description = null, $payment_request_create_pisp_account_id = null, $payment_request_create_shipping_first_name = null, $payment_request_create_shipping_last_name = null, $payment_request_create_shipping_address_line1 = null, $payment_request_create_shipping_address_line2 = null, $payment_request_create_shipping_address_city = null, $payment_request_create_shipping_address_county = null, $payment_request_create_shipping_address_post_code = null, $payment_request_create_shipping_address_country_code = null, $payment_request_create_shipping_phone = null, $payment_request_create_shipping_email = null, $payment_request_create_origin_url = null, $payment_request_create_base_origin_url = null, $payment_request_create_callback_url = null, $payment_request_create_failure_callback_url = null, $payment_request_create_success_web_hook_url = null, $payment_request_create_card_authorize_only = null, $payment_request_create_card_create_token = null, $payment_request_create_card_create_token_mode = null, $payment_request_create_card_transmit_raw_details = null, $payment_request_create_card_processor_merchant_id = null, $payment_request_create_ignore_address_verification = null, $payment_request_create_card_ignore_cvn = null, $payment_request_create_pisp_recipient_reference = null, $payment_request_create_use_hosted_payment_page = null, $payment_request_create_card_no_payer_authentication = null, $payment_request_create_partial_payment_method = null, $payment_request_create_customer_email_address = null, $payment_request_create_payment_processor = null, $payment_request_create_lightning_invoice = null, $payment_request_create_lightning_invoice_expires_at = null, $payment_request_create_notification_email_addresses = null, $payment_request_create_priority_bank_id = null, $payment_request_create_title = null, $payment_request_create_partial_payment_steps = null, $payment_request_create_payrun_id = null, $payment_request_create_sandbox_settle_delay_in_seconds = null, $payment_request_create_tag_ids = null, $payment_request_create_tags = null, $card_sensitive_jwt_token = null, $card_sensitive_number_token = null, $card_sensitive_cvc_token = null, $card_sensitive_card_holder_first_name = null, $card_sensitive_card_holder_last_name = null, $card_sensitive_billing_address_line1 = null, $card_sensitive_billing_address_line2 = null, $card_sensitive_billing_address_city = null, $card_sensitive_billing_address_county = null, $card_sensitive_billing_address_post_code = null, $card_sensitive_billing_address_country_code = null, $card_sensitive_billing_phone = null, $card_sensitive_billing_email = null, $card_sensitive_save_card_consent = null, $card_sensitive_partial_amount = null, $card_jwt_token = null, $card_number_token = null, $card_cvc_token = null, $card_card_holder_first_name = null, $card_card_holder_last_name = null, $card_billing_address_line1 = null, $card_billing_address_line2 = null, $card_billing_address_city = null, $card_billing_address_county = null, $card_billing_address_post_code = null, $card_billing_address_country_code = null, $card_billing_phone = null, $card_billing_email = null, $card_save_card_consent = null, $card_partial_amount = null, $payment_method = null, $card_token_tokenised_card_id = null, $card_token_payment_initiator = null, $card_token_merchant_standard_reason = null, $card_token_commerce_indicator = null, $card_token_card_security_code = null, $card_token_partial_amount = null, $payment_initiation_request_partial_amount = null, $payment_initiation_request_redirect_to_origin_url = null, $payment_initiation_request_origin_url = null, string $contentType = self::contentTypes['createAndPayPaymentRequest'][0])
+    public function createAndPayPaymentRequestWithHttpInfo($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id = null, $payment_request_create_currency = null, $payment_request_create_customer_id = null, $payment_request_create_order_id = null, $payment_request_create_payment_method_types = null, $payment_request_create_payment_methods = null, $payment_request_create_description = null, $payment_request_create_pisp_account_id = null, $payment_request_create_shipping_first_name = null, $payment_request_create_shipping_last_name = null, $payment_request_create_shipping_address_line1 = null, $payment_request_create_shipping_address_line2 = null, $payment_request_create_shipping_address_city = null, $payment_request_create_shipping_address_county = null, $payment_request_create_shipping_address_post_code = null, $payment_request_create_shipping_address_country_code = null, $payment_request_create_shipping_phone = null, $payment_request_create_shipping_email = null, $payment_request_create_origin_url = null, $payment_request_create_base_origin_url = null, $payment_request_create_callback_url = null, $payment_request_create_failure_callback_url = null, $payment_request_create_success_web_hook_url = null, $payment_request_create_card_authorize_only = null, $payment_request_create_card_create_token = null, $payment_request_create_card_create_token_mode = null, $payment_request_create_card_transmit_raw_details = null, $payment_request_create_card_processor_merchant_id = null, $payment_request_create_ignore_address_verification = null, $payment_request_create_card_ignore_cvn = null, $payment_request_create_pisp_recipient_reference = null, $payment_request_create_use_hosted_payment_page = null, $payment_request_create_card_no_payer_authentication = null, $payment_request_create_partial_payment_method = null, $payment_request_create_customer_email_address = null, $payment_request_create_payment_processor = null, $payment_request_create_lightning_invoice = null, $payment_request_create_lightning_invoice_expires_at = null, $payment_request_create_notification_email_addresses = null, $payment_request_create_priority_bank_id = null, $payment_request_create_title = null, $payment_request_create_partial_payment_steps = null, $payment_request_create_payrun_id = null, $payment_request_create_sandbox_settle_delay_in_seconds = null, $payment_request_create_tag_ids = null, $payment_request_create_tags = null, $card_sensitive_jwt_token = null, $card_sensitive_number_token = null, $card_sensitive_cvc_token = null, $card_sensitive_card_holder_first_name = null, $card_sensitive_card_holder_last_name = null, $card_sensitive_billing_address_line1 = null, $card_sensitive_billing_address_line2 = null, $card_sensitive_billing_address_city = null, $card_sensitive_billing_address_county = null, $card_sensitive_billing_address_post_code = null, $card_sensitive_billing_address_country_code = null, $card_sensitive_billing_phone = null, $card_sensitive_billing_email = null, $card_sensitive_save_card_consent = null, $card_sensitive_partial_amount = null, $card_jwt_token = null, $card_number_token = null, $card_cvc_token = null, $card_card_holder_first_name = null, $card_card_holder_last_name = null, $card_billing_address_line1 = null, $card_billing_address_line2 = null, $card_billing_address_city = null, $card_billing_address_county = null, $card_billing_address_post_code = null, $card_billing_address_country_code = null, $card_billing_phone = null, $card_billing_email = null, $card_save_card_consent = null, $card_partial_amount = null, $payment_method = null, $card_token_tokenised_card_id = null, $card_token_payment_initiator = null, $card_token_card_security_code = null, $card_token_partial_amount = null, $payment_initiation_request_partial_amount = null, $payment_initiation_request_redirect_to_origin_url = null, $payment_initiation_request_origin_url = null, string $contentType = self::contentTypes['createAndPayPaymentRequest'][0])
     {
-        $request = $this->createAndPayPaymentRequestRequest($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id, $payment_request_create_currency, $payment_request_create_customer_id, $payment_request_create_order_id, $payment_request_create_payment_method_types, $payment_request_create_payment_methods, $payment_request_create_description, $payment_request_create_pisp_account_id, $payment_request_create_shipping_first_name, $payment_request_create_shipping_last_name, $payment_request_create_shipping_address_line1, $payment_request_create_shipping_address_line2, $payment_request_create_shipping_address_city, $payment_request_create_shipping_address_county, $payment_request_create_shipping_address_post_code, $payment_request_create_shipping_address_country_code, $payment_request_create_shipping_phone, $payment_request_create_shipping_email, $payment_request_create_origin_url, $payment_request_create_base_origin_url, $payment_request_create_callback_url, $payment_request_create_failure_callback_url, $payment_request_create_success_web_hook_url, $payment_request_create_card_authorize_only, $payment_request_create_card_create_token, $payment_request_create_card_create_token_mode, $payment_request_create_card_transmit_raw_details, $payment_request_create_card_processor_merchant_id, $payment_request_create_ignore_address_verification, $payment_request_create_card_ignore_cvn, $payment_request_create_pisp_recipient_reference, $payment_request_create_use_hosted_payment_page, $payment_request_create_card_no_payer_authentication, $payment_request_create_partial_payment_method, $payment_request_create_customer_email_address, $payment_request_create_payment_processor, $payment_request_create_lightning_invoice, $payment_request_create_lightning_invoice_expires_at, $payment_request_create_notification_email_addresses, $payment_request_create_priority_bank_id, $payment_request_create_title, $payment_request_create_partial_payment_steps, $payment_request_create_payrun_id, $payment_request_create_sandbox_settle_delay_in_seconds, $payment_request_create_tag_ids, $payment_request_create_tags, $card_sensitive_jwt_token, $card_sensitive_number_token, $card_sensitive_cvc_token, $card_sensitive_card_holder_first_name, $card_sensitive_card_holder_last_name, $card_sensitive_billing_address_line1, $card_sensitive_billing_address_line2, $card_sensitive_billing_address_city, $card_sensitive_billing_address_county, $card_sensitive_billing_address_post_code, $card_sensitive_billing_address_country_code, $card_sensitive_billing_phone, $card_sensitive_billing_email, $card_sensitive_save_card_consent, $card_sensitive_partial_amount, $card_jwt_token, $card_number_token, $card_cvc_token, $card_card_holder_first_name, $card_card_holder_last_name, $card_billing_address_line1, $card_billing_address_line2, $card_billing_address_city, $card_billing_address_county, $card_billing_address_post_code, $card_billing_address_country_code, $card_billing_phone, $card_billing_email, $card_save_card_consent, $card_partial_amount, $payment_method, $card_token_tokenised_card_id, $card_token_payment_initiator, $card_token_merchant_standard_reason, $card_token_commerce_indicator, $card_token_card_security_code, $card_token_partial_amount, $payment_initiation_request_partial_amount, $payment_initiation_request_redirect_to_origin_url, $payment_initiation_request_origin_url, $contentType);
+        $request = $this->createAndPayPaymentRequestRequest($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id, $payment_request_create_currency, $payment_request_create_customer_id, $payment_request_create_order_id, $payment_request_create_payment_method_types, $payment_request_create_payment_methods, $payment_request_create_description, $payment_request_create_pisp_account_id, $payment_request_create_shipping_first_name, $payment_request_create_shipping_last_name, $payment_request_create_shipping_address_line1, $payment_request_create_shipping_address_line2, $payment_request_create_shipping_address_city, $payment_request_create_shipping_address_county, $payment_request_create_shipping_address_post_code, $payment_request_create_shipping_address_country_code, $payment_request_create_shipping_phone, $payment_request_create_shipping_email, $payment_request_create_origin_url, $payment_request_create_base_origin_url, $payment_request_create_callback_url, $payment_request_create_failure_callback_url, $payment_request_create_success_web_hook_url, $payment_request_create_card_authorize_only, $payment_request_create_card_create_token, $payment_request_create_card_create_token_mode, $payment_request_create_card_transmit_raw_details, $payment_request_create_card_processor_merchant_id, $payment_request_create_ignore_address_verification, $payment_request_create_card_ignore_cvn, $payment_request_create_pisp_recipient_reference, $payment_request_create_use_hosted_payment_page, $payment_request_create_card_no_payer_authentication, $payment_request_create_partial_payment_method, $payment_request_create_customer_email_address, $payment_request_create_payment_processor, $payment_request_create_lightning_invoice, $payment_request_create_lightning_invoice_expires_at, $payment_request_create_notification_email_addresses, $payment_request_create_priority_bank_id, $payment_request_create_title, $payment_request_create_partial_payment_steps, $payment_request_create_payrun_id, $payment_request_create_sandbox_settle_delay_in_seconds, $payment_request_create_tag_ids, $payment_request_create_tags, $card_sensitive_jwt_token, $card_sensitive_number_token, $card_sensitive_cvc_token, $card_sensitive_card_holder_first_name, $card_sensitive_card_holder_last_name, $card_sensitive_billing_address_line1, $card_sensitive_billing_address_line2, $card_sensitive_billing_address_city, $card_sensitive_billing_address_county, $card_sensitive_billing_address_post_code, $card_sensitive_billing_address_country_code, $card_sensitive_billing_phone, $card_sensitive_billing_email, $card_sensitive_save_card_consent, $card_sensitive_partial_amount, $card_jwt_token, $card_number_token, $card_cvc_token, $card_card_holder_first_name, $card_card_holder_last_name, $card_billing_address_line1, $card_billing_address_line2, $card_billing_address_city, $card_billing_address_county, $card_billing_address_post_code, $card_billing_address_country_code, $card_billing_phone, $card_billing_email, $card_save_card_consent, $card_partial_amount, $payment_method, $card_token_tokenised_card_id, $card_token_payment_initiator, $card_token_card_security_code, $card_token_partial_amount, $payment_initiation_request_partial_amount, $payment_initiation_request_redirect_to_origin_url, $payment_initiation_request_origin_url, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -963,8 +959,6 @@ class PaymentRequestsApi
      * @param  string $payment_method The single payment method to use for the pay on demand payment request. (optional)
      * @param  string $card_token_tokenised_card_id The ID of the tokenised card to use for the payment. The merchant needs to ensure that  the use of the tokenised card is restricted to the same customer that created it. (optional)
      * @param  string $card_token_payment_initiator Indicates who initiated the card token payment, customer or merchant. (optional)
-     * @param  string $card_token_merchant_standard_reason For merchant initiated transactions that correspond to one of the industry standard  reasons should be set. (optional)
-     * @param  string $card_token_commerce_indicator For recurring and installment merchant initiated transactions this property should  be set accordingly. For all other transactions it should be left at the default of  \\\&quot;internet\\\&quot;. (optional)
      * @param  string $card_token_card_security_code Not used for merchant initiated transactions. Optional for customer initiated transactions.  If supplied will be sent to the card processor as a check that the customer using the   tokenised card knows the card verification number. (optional)
      * @param  float $card_token_partial_amount Optional partial payment amount. If not specified then the full payment request  amount will be attempted. (optional)
      * @param  float $payment_initiation_request_partial_amount Optional. If 0 the full amount is assumed. (optional)
@@ -975,9 +969,9 @@ class PaymentRequestsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createAndPayPaymentRequestAsync($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id = null, $payment_request_create_currency = null, $payment_request_create_customer_id = null, $payment_request_create_order_id = null, $payment_request_create_payment_method_types = null, $payment_request_create_payment_methods = null, $payment_request_create_description = null, $payment_request_create_pisp_account_id = null, $payment_request_create_shipping_first_name = null, $payment_request_create_shipping_last_name = null, $payment_request_create_shipping_address_line1 = null, $payment_request_create_shipping_address_line2 = null, $payment_request_create_shipping_address_city = null, $payment_request_create_shipping_address_county = null, $payment_request_create_shipping_address_post_code = null, $payment_request_create_shipping_address_country_code = null, $payment_request_create_shipping_phone = null, $payment_request_create_shipping_email = null, $payment_request_create_origin_url = null, $payment_request_create_base_origin_url = null, $payment_request_create_callback_url = null, $payment_request_create_failure_callback_url = null, $payment_request_create_success_web_hook_url = null, $payment_request_create_card_authorize_only = null, $payment_request_create_card_create_token = null, $payment_request_create_card_create_token_mode = null, $payment_request_create_card_transmit_raw_details = null, $payment_request_create_card_processor_merchant_id = null, $payment_request_create_ignore_address_verification = null, $payment_request_create_card_ignore_cvn = null, $payment_request_create_pisp_recipient_reference = null, $payment_request_create_use_hosted_payment_page = null, $payment_request_create_card_no_payer_authentication = null, $payment_request_create_partial_payment_method = null, $payment_request_create_customer_email_address = null, $payment_request_create_payment_processor = null, $payment_request_create_lightning_invoice = null, $payment_request_create_lightning_invoice_expires_at = null, $payment_request_create_notification_email_addresses = null, $payment_request_create_priority_bank_id = null, $payment_request_create_title = null, $payment_request_create_partial_payment_steps = null, $payment_request_create_payrun_id = null, $payment_request_create_sandbox_settle_delay_in_seconds = null, $payment_request_create_tag_ids = null, $payment_request_create_tags = null, $card_sensitive_jwt_token = null, $card_sensitive_number_token = null, $card_sensitive_cvc_token = null, $card_sensitive_card_holder_first_name = null, $card_sensitive_card_holder_last_name = null, $card_sensitive_billing_address_line1 = null, $card_sensitive_billing_address_line2 = null, $card_sensitive_billing_address_city = null, $card_sensitive_billing_address_county = null, $card_sensitive_billing_address_post_code = null, $card_sensitive_billing_address_country_code = null, $card_sensitive_billing_phone = null, $card_sensitive_billing_email = null, $card_sensitive_save_card_consent = null, $card_sensitive_partial_amount = null, $card_jwt_token = null, $card_number_token = null, $card_cvc_token = null, $card_card_holder_first_name = null, $card_card_holder_last_name = null, $card_billing_address_line1 = null, $card_billing_address_line2 = null, $card_billing_address_city = null, $card_billing_address_county = null, $card_billing_address_post_code = null, $card_billing_address_country_code = null, $card_billing_phone = null, $card_billing_email = null, $card_save_card_consent = null, $card_partial_amount = null, $payment_method = null, $card_token_tokenised_card_id = null, $card_token_payment_initiator = null, $card_token_merchant_standard_reason = null, $card_token_commerce_indicator = null, $card_token_card_security_code = null, $card_token_partial_amount = null, $payment_initiation_request_partial_amount = null, $payment_initiation_request_redirect_to_origin_url = null, $payment_initiation_request_origin_url = null, string $contentType = self::contentTypes['createAndPayPaymentRequest'][0])
+    public function createAndPayPaymentRequestAsync($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id = null, $payment_request_create_currency = null, $payment_request_create_customer_id = null, $payment_request_create_order_id = null, $payment_request_create_payment_method_types = null, $payment_request_create_payment_methods = null, $payment_request_create_description = null, $payment_request_create_pisp_account_id = null, $payment_request_create_shipping_first_name = null, $payment_request_create_shipping_last_name = null, $payment_request_create_shipping_address_line1 = null, $payment_request_create_shipping_address_line2 = null, $payment_request_create_shipping_address_city = null, $payment_request_create_shipping_address_county = null, $payment_request_create_shipping_address_post_code = null, $payment_request_create_shipping_address_country_code = null, $payment_request_create_shipping_phone = null, $payment_request_create_shipping_email = null, $payment_request_create_origin_url = null, $payment_request_create_base_origin_url = null, $payment_request_create_callback_url = null, $payment_request_create_failure_callback_url = null, $payment_request_create_success_web_hook_url = null, $payment_request_create_card_authorize_only = null, $payment_request_create_card_create_token = null, $payment_request_create_card_create_token_mode = null, $payment_request_create_card_transmit_raw_details = null, $payment_request_create_card_processor_merchant_id = null, $payment_request_create_ignore_address_verification = null, $payment_request_create_card_ignore_cvn = null, $payment_request_create_pisp_recipient_reference = null, $payment_request_create_use_hosted_payment_page = null, $payment_request_create_card_no_payer_authentication = null, $payment_request_create_partial_payment_method = null, $payment_request_create_customer_email_address = null, $payment_request_create_payment_processor = null, $payment_request_create_lightning_invoice = null, $payment_request_create_lightning_invoice_expires_at = null, $payment_request_create_notification_email_addresses = null, $payment_request_create_priority_bank_id = null, $payment_request_create_title = null, $payment_request_create_partial_payment_steps = null, $payment_request_create_payrun_id = null, $payment_request_create_sandbox_settle_delay_in_seconds = null, $payment_request_create_tag_ids = null, $payment_request_create_tags = null, $card_sensitive_jwt_token = null, $card_sensitive_number_token = null, $card_sensitive_cvc_token = null, $card_sensitive_card_holder_first_name = null, $card_sensitive_card_holder_last_name = null, $card_sensitive_billing_address_line1 = null, $card_sensitive_billing_address_line2 = null, $card_sensitive_billing_address_city = null, $card_sensitive_billing_address_county = null, $card_sensitive_billing_address_post_code = null, $card_sensitive_billing_address_country_code = null, $card_sensitive_billing_phone = null, $card_sensitive_billing_email = null, $card_sensitive_save_card_consent = null, $card_sensitive_partial_amount = null, $card_jwt_token = null, $card_number_token = null, $card_cvc_token = null, $card_card_holder_first_name = null, $card_card_holder_last_name = null, $card_billing_address_line1 = null, $card_billing_address_line2 = null, $card_billing_address_city = null, $card_billing_address_county = null, $card_billing_address_post_code = null, $card_billing_address_country_code = null, $card_billing_phone = null, $card_billing_email = null, $card_save_card_consent = null, $card_partial_amount = null, $payment_method = null, $card_token_tokenised_card_id = null, $card_token_payment_initiator = null, $card_token_card_security_code = null, $card_token_partial_amount = null, $payment_initiation_request_partial_amount = null, $payment_initiation_request_redirect_to_origin_url = null, $payment_initiation_request_origin_url = null, string $contentType = self::contentTypes['createAndPayPaymentRequest'][0])
     {
-        return $this->createAndPayPaymentRequestAsyncWithHttpInfo($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id, $payment_request_create_currency, $payment_request_create_customer_id, $payment_request_create_order_id, $payment_request_create_payment_method_types, $payment_request_create_payment_methods, $payment_request_create_description, $payment_request_create_pisp_account_id, $payment_request_create_shipping_first_name, $payment_request_create_shipping_last_name, $payment_request_create_shipping_address_line1, $payment_request_create_shipping_address_line2, $payment_request_create_shipping_address_city, $payment_request_create_shipping_address_county, $payment_request_create_shipping_address_post_code, $payment_request_create_shipping_address_country_code, $payment_request_create_shipping_phone, $payment_request_create_shipping_email, $payment_request_create_origin_url, $payment_request_create_base_origin_url, $payment_request_create_callback_url, $payment_request_create_failure_callback_url, $payment_request_create_success_web_hook_url, $payment_request_create_card_authorize_only, $payment_request_create_card_create_token, $payment_request_create_card_create_token_mode, $payment_request_create_card_transmit_raw_details, $payment_request_create_card_processor_merchant_id, $payment_request_create_ignore_address_verification, $payment_request_create_card_ignore_cvn, $payment_request_create_pisp_recipient_reference, $payment_request_create_use_hosted_payment_page, $payment_request_create_card_no_payer_authentication, $payment_request_create_partial_payment_method, $payment_request_create_customer_email_address, $payment_request_create_payment_processor, $payment_request_create_lightning_invoice, $payment_request_create_lightning_invoice_expires_at, $payment_request_create_notification_email_addresses, $payment_request_create_priority_bank_id, $payment_request_create_title, $payment_request_create_partial_payment_steps, $payment_request_create_payrun_id, $payment_request_create_sandbox_settle_delay_in_seconds, $payment_request_create_tag_ids, $payment_request_create_tags, $card_sensitive_jwt_token, $card_sensitive_number_token, $card_sensitive_cvc_token, $card_sensitive_card_holder_first_name, $card_sensitive_card_holder_last_name, $card_sensitive_billing_address_line1, $card_sensitive_billing_address_line2, $card_sensitive_billing_address_city, $card_sensitive_billing_address_county, $card_sensitive_billing_address_post_code, $card_sensitive_billing_address_country_code, $card_sensitive_billing_phone, $card_sensitive_billing_email, $card_sensitive_save_card_consent, $card_sensitive_partial_amount, $card_jwt_token, $card_number_token, $card_cvc_token, $card_card_holder_first_name, $card_card_holder_last_name, $card_billing_address_line1, $card_billing_address_line2, $card_billing_address_city, $card_billing_address_county, $card_billing_address_post_code, $card_billing_address_country_code, $card_billing_phone, $card_billing_email, $card_save_card_consent, $card_partial_amount, $payment_method, $card_token_tokenised_card_id, $card_token_payment_initiator, $card_token_merchant_standard_reason, $card_token_commerce_indicator, $card_token_card_security_code, $card_token_partial_amount, $payment_initiation_request_partial_amount, $payment_initiation_request_redirect_to_origin_url, $payment_initiation_request_origin_url, $contentType)
+        return $this->createAndPayPaymentRequestAsyncWithHttpInfo($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id, $payment_request_create_currency, $payment_request_create_customer_id, $payment_request_create_order_id, $payment_request_create_payment_method_types, $payment_request_create_payment_methods, $payment_request_create_description, $payment_request_create_pisp_account_id, $payment_request_create_shipping_first_name, $payment_request_create_shipping_last_name, $payment_request_create_shipping_address_line1, $payment_request_create_shipping_address_line2, $payment_request_create_shipping_address_city, $payment_request_create_shipping_address_county, $payment_request_create_shipping_address_post_code, $payment_request_create_shipping_address_country_code, $payment_request_create_shipping_phone, $payment_request_create_shipping_email, $payment_request_create_origin_url, $payment_request_create_base_origin_url, $payment_request_create_callback_url, $payment_request_create_failure_callback_url, $payment_request_create_success_web_hook_url, $payment_request_create_card_authorize_only, $payment_request_create_card_create_token, $payment_request_create_card_create_token_mode, $payment_request_create_card_transmit_raw_details, $payment_request_create_card_processor_merchant_id, $payment_request_create_ignore_address_verification, $payment_request_create_card_ignore_cvn, $payment_request_create_pisp_recipient_reference, $payment_request_create_use_hosted_payment_page, $payment_request_create_card_no_payer_authentication, $payment_request_create_partial_payment_method, $payment_request_create_customer_email_address, $payment_request_create_payment_processor, $payment_request_create_lightning_invoice, $payment_request_create_lightning_invoice_expires_at, $payment_request_create_notification_email_addresses, $payment_request_create_priority_bank_id, $payment_request_create_title, $payment_request_create_partial_payment_steps, $payment_request_create_payrun_id, $payment_request_create_sandbox_settle_delay_in_seconds, $payment_request_create_tag_ids, $payment_request_create_tags, $card_sensitive_jwt_token, $card_sensitive_number_token, $card_sensitive_cvc_token, $card_sensitive_card_holder_first_name, $card_sensitive_card_holder_last_name, $card_sensitive_billing_address_line1, $card_sensitive_billing_address_line2, $card_sensitive_billing_address_city, $card_sensitive_billing_address_county, $card_sensitive_billing_address_post_code, $card_sensitive_billing_address_country_code, $card_sensitive_billing_phone, $card_sensitive_billing_email, $card_sensitive_save_card_consent, $card_sensitive_partial_amount, $card_jwt_token, $card_number_token, $card_cvc_token, $card_card_holder_first_name, $card_card_holder_last_name, $card_billing_address_line1, $card_billing_address_line2, $card_billing_address_city, $card_billing_address_county, $card_billing_address_post_code, $card_billing_address_country_code, $card_billing_phone, $card_billing_email, $card_save_card_consent, $card_partial_amount, $payment_method, $card_token_tokenised_card_id, $card_token_payment_initiator, $card_token_card_security_code, $card_token_partial_amount, $payment_initiation_request_partial_amount, $payment_initiation_request_redirect_to_origin_url, $payment_initiation_request_origin_url, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1077,8 +1071,6 @@ class PaymentRequestsApi
      * @param  string $payment_method The single payment method to use for the pay on demand payment request. (optional)
      * @param  string $card_token_tokenised_card_id The ID of the tokenised card to use for the payment. The merchant needs to ensure that  the use of the tokenised card is restricted to the same customer that created it. (optional)
      * @param  string $card_token_payment_initiator Indicates who initiated the card token payment, customer or merchant. (optional)
-     * @param  string $card_token_merchant_standard_reason For merchant initiated transactions that correspond to one of the industry standard  reasons should be set. (optional)
-     * @param  string $card_token_commerce_indicator For recurring and installment merchant initiated transactions this property should  be set accordingly. For all other transactions it should be left at the default of  \\\&quot;internet\\\&quot;. (optional)
      * @param  string $card_token_card_security_code Not used for merchant initiated transactions. Optional for customer initiated transactions.  If supplied will be sent to the card processor as a check that the customer using the   tokenised card knows the card verification number. (optional)
      * @param  float $card_token_partial_amount Optional partial payment amount. If not specified then the full payment request  amount will be attempted. (optional)
      * @param  float $payment_initiation_request_partial_amount Optional. If 0 the full amount is assumed. (optional)
@@ -1089,10 +1081,10 @@ class PaymentRequestsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createAndPayPaymentRequestAsyncWithHttpInfo($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id = null, $payment_request_create_currency = null, $payment_request_create_customer_id = null, $payment_request_create_order_id = null, $payment_request_create_payment_method_types = null, $payment_request_create_payment_methods = null, $payment_request_create_description = null, $payment_request_create_pisp_account_id = null, $payment_request_create_shipping_first_name = null, $payment_request_create_shipping_last_name = null, $payment_request_create_shipping_address_line1 = null, $payment_request_create_shipping_address_line2 = null, $payment_request_create_shipping_address_city = null, $payment_request_create_shipping_address_county = null, $payment_request_create_shipping_address_post_code = null, $payment_request_create_shipping_address_country_code = null, $payment_request_create_shipping_phone = null, $payment_request_create_shipping_email = null, $payment_request_create_origin_url = null, $payment_request_create_base_origin_url = null, $payment_request_create_callback_url = null, $payment_request_create_failure_callback_url = null, $payment_request_create_success_web_hook_url = null, $payment_request_create_card_authorize_only = null, $payment_request_create_card_create_token = null, $payment_request_create_card_create_token_mode = null, $payment_request_create_card_transmit_raw_details = null, $payment_request_create_card_processor_merchant_id = null, $payment_request_create_ignore_address_verification = null, $payment_request_create_card_ignore_cvn = null, $payment_request_create_pisp_recipient_reference = null, $payment_request_create_use_hosted_payment_page = null, $payment_request_create_card_no_payer_authentication = null, $payment_request_create_partial_payment_method = null, $payment_request_create_customer_email_address = null, $payment_request_create_payment_processor = null, $payment_request_create_lightning_invoice = null, $payment_request_create_lightning_invoice_expires_at = null, $payment_request_create_notification_email_addresses = null, $payment_request_create_priority_bank_id = null, $payment_request_create_title = null, $payment_request_create_partial_payment_steps = null, $payment_request_create_payrun_id = null, $payment_request_create_sandbox_settle_delay_in_seconds = null, $payment_request_create_tag_ids = null, $payment_request_create_tags = null, $card_sensitive_jwt_token = null, $card_sensitive_number_token = null, $card_sensitive_cvc_token = null, $card_sensitive_card_holder_first_name = null, $card_sensitive_card_holder_last_name = null, $card_sensitive_billing_address_line1 = null, $card_sensitive_billing_address_line2 = null, $card_sensitive_billing_address_city = null, $card_sensitive_billing_address_county = null, $card_sensitive_billing_address_post_code = null, $card_sensitive_billing_address_country_code = null, $card_sensitive_billing_phone = null, $card_sensitive_billing_email = null, $card_sensitive_save_card_consent = null, $card_sensitive_partial_amount = null, $card_jwt_token = null, $card_number_token = null, $card_cvc_token = null, $card_card_holder_first_name = null, $card_card_holder_last_name = null, $card_billing_address_line1 = null, $card_billing_address_line2 = null, $card_billing_address_city = null, $card_billing_address_county = null, $card_billing_address_post_code = null, $card_billing_address_country_code = null, $card_billing_phone = null, $card_billing_email = null, $card_save_card_consent = null, $card_partial_amount = null, $payment_method = null, $card_token_tokenised_card_id = null, $card_token_payment_initiator = null, $card_token_merchant_standard_reason = null, $card_token_commerce_indicator = null, $card_token_card_security_code = null, $card_token_partial_amount = null, $payment_initiation_request_partial_amount = null, $payment_initiation_request_redirect_to_origin_url = null, $payment_initiation_request_origin_url = null, string $contentType = self::contentTypes['createAndPayPaymentRequest'][0])
+    public function createAndPayPaymentRequestAsyncWithHttpInfo($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id = null, $payment_request_create_currency = null, $payment_request_create_customer_id = null, $payment_request_create_order_id = null, $payment_request_create_payment_method_types = null, $payment_request_create_payment_methods = null, $payment_request_create_description = null, $payment_request_create_pisp_account_id = null, $payment_request_create_shipping_first_name = null, $payment_request_create_shipping_last_name = null, $payment_request_create_shipping_address_line1 = null, $payment_request_create_shipping_address_line2 = null, $payment_request_create_shipping_address_city = null, $payment_request_create_shipping_address_county = null, $payment_request_create_shipping_address_post_code = null, $payment_request_create_shipping_address_country_code = null, $payment_request_create_shipping_phone = null, $payment_request_create_shipping_email = null, $payment_request_create_origin_url = null, $payment_request_create_base_origin_url = null, $payment_request_create_callback_url = null, $payment_request_create_failure_callback_url = null, $payment_request_create_success_web_hook_url = null, $payment_request_create_card_authorize_only = null, $payment_request_create_card_create_token = null, $payment_request_create_card_create_token_mode = null, $payment_request_create_card_transmit_raw_details = null, $payment_request_create_card_processor_merchant_id = null, $payment_request_create_ignore_address_verification = null, $payment_request_create_card_ignore_cvn = null, $payment_request_create_pisp_recipient_reference = null, $payment_request_create_use_hosted_payment_page = null, $payment_request_create_card_no_payer_authentication = null, $payment_request_create_partial_payment_method = null, $payment_request_create_customer_email_address = null, $payment_request_create_payment_processor = null, $payment_request_create_lightning_invoice = null, $payment_request_create_lightning_invoice_expires_at = null, $payment_request_create_notification_email_addresses = null, $payment_request_create_priority_bank_id = null, $payment_request_create_title = null, $payment_request_create_partial_payment_steps = null, $payment_request_create_payrun_id = null, $payment_request_create_sandbox_settle_delay_in_seconds = null, $payment_request_create_tag_ids = null, $payment_request_create_tags = null, $card_sensitive_jwt_token = null, $card_sensitive_number_token = null, $card_sensitive_cvc_token = null, $card_sensitive_card_holder_first_name = null, $card_sensitive_card_holder_last_name = null, $card_sensitive_billing_address_line1 = null, $card_sensitive_billing_address_line2 = null, $card_sensitive_billing_address_city = null, $card_sensitive_billing_address_county = null, $card_sensitive_billing_address_post_code = null, $card_sensitive_billing_address_country_code = null, $card_sensitive_billing_phone = null, $card_sensitive_billing_email = null, $card_sensitive_save_card_consent = null, $card_sensitive_partial_amount = null, $card_jwt_token = null, $card_number_token = null, $card_cvc_token = null, $card_card_holder_first_name = null, $card_card_holder_last_name = null, $card_billing_address_line1 = null, $card_billing_address_line2 = null, $card_billing_address_city = null, $card_billing_address_county = null, $card_billing_address_post_code = null, $card_billing_address_country_code = null, $card_billing_phone = null, $card_billing_email = null, $card_save_card_consent = null, $card_partial_amount = null, $payment_method = null, $card_token_tokenised_card_id = null, $card_token_payment_initiator = null, $card_token_card_security_code = null, $card_token_partial_amount = null, $payment_initiation_request_partial_amount = null, $payment_initiation_request_redirect_to_origin_url = null, $payment_initiation_request_origin_url = null, string $contentType = self::contentTypes['createAndPayPaymentRequest'][0])
     {
         $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsIPaymentResponse';
-        $request = $this->createAndPayPaymentRequestRequest($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id, $payment_request_create_currency, $payment_request_create_customer_id, $payment_request_create_order_id, $payment_request_create_payment_method_types, $payment_request_create_payment_methods, $payment_request_create_description, $payment_request_create_pisp_account_id, $payment_request_create_shipping_first_name, $payment_request_create_shipping_last_name, $payment_request_create_shipping_address_line1, $payment_request_create_shipping_address_line2, $payment_request_create_shipping_address_city, $payment_request_create_shipping_address_county, $payment_request_create_shipping_address_post_code, $payment_request_create_shipping_address_country_code, $payment_request_create_shipping_phone, $payment_request_create_shipping_email, $payment_request_create_origin_url, $payment_request_create_base_origin_url, $payment_request_create_callback_url, $payment_request_create_failure_callback_url, $payment_request_create_success_web_hook_url, $payment_request_create_card_authorize_only, $payment_request_create_card_create_token, $payment_request_create_card_create_token_mode, $payment_request_create_card_transmit_raw_details, $payment_request_create_card_processor_merchant_id, $payment_request_create_ignore_address_verification, $payment_request_create_card_ignore_cvn, $payment_request_create_pisp_recipient_reference, $payment_request_create_use_hosted_payment_page, $payment_request_create_card_no_payer_authentication, $payment_request_create_partial_payment_method, $payment_request_create_customer_email_address, $payment_request_create_payment_processor, $payment_request_create_lightning_invoice, $payment_request_create_lightning_invoice_expires_at, $payment_request_create_notification_email_addresses, $payment_request_create_priority_bank_id, $payment_request_create_title, $payment_request_create_partial_payment_steps, $payment_request_create_payrun_id, $payment_request_create_sandbox_settle_delay_in_seconds, $payment_request_create_tag_ids, $payment_request_create_tags, $card_sensitive_jwt_token, $card_sensitive_number_token, $card_sensitive_cvc_token, $card_sensitive_card_holder_first_name, $card_sensitive_card_holder_last_name, $card_sensitive_billing_address_line1, $card_sensitive_billing_address_line2, $card_sensitive_billing_address_city, $card_sensitive_billing_address_county, $card_sensitive_billing_address_post_code, $card_sensitive_billing_address_country_code, $card_sensitive_billing_phone, $card_sensitive_billing_email, $card_sensitive_save_card_consent, $card_sensitive_partial_amount, $card_jwt_token, $card_number_token, $card_cvc_token, $card_card_holder_first_name, $card_card_holder_last_name, $card_billing_address_line1, $card_billing_address_line2, $card_billing_address_city, $card_billing_address_county, $card_billing_address_post_code, $card_billing_address_country_code, $card_billing_phone, $card_billing_email, $card_save_card_consent, $card_partial_amount, $payment_method, $card_token_tokenised_card_id, $card_token_payment_initiator, $card_token_merchant_standard_reason, $card_token_commerce_indicator, $card_token_card_security_code, $card_token_partial_amount, $payment_initiation_request_partial_amount, $payment_initiation_request_redirect_to_origin_url, $payment_initiation_request_origin_url, $contentType);
+        $request = $this->createAndPayPaymentRequestRequest($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id, $payment_request_create_currency, $payment_request_create_customer_id, $payment_request_create_order_id, $payment_request_create_payment_method_types, $payment_request_create_payment_methods, $payment_request_create_description, $payment_request_create_pisp_account_id, $payment_request_create_shipping_first_name, $payment_request_create_shipping_last_name, $payment_request_create_shipping_address_line1, $payment_request_create_shipping_address_line2, $payment_request_create_shipping_address_city, $payment_request_create_shipping_address_county, $payment_request_create_shipping_address_post_code, $payment_request_create_shipping_address_country_code, $payment_request_create_shipping_phone, $payment_request_create_shipping_email, $payment_request_create_origin_url, $payment_request_create_base_origin_url, $payment_request_create_callback_url, $payment_request_create_failure_callback_url, $payment_request_create_success_web_hook_url, $payment_request_create_card_authorize_only, $payment_request_create_card_create_token, $payment_request_create_card_create_token_mode, $payment_request_create_card_transmit_raw_details, $payment_request_create_card_processor_merchant_id, $payment_request_create_ignore_address_verification, $payment_request_create_card_ignore_cvn, $payment_request_create_pisp_recipient_reference, $payment_request_create_use_hosted_payment_page, $payment_request_create_card_no_payer_authentication, $payment_request_create_partial_payment_method, $payment_request_create_customer_email_address, $payment_request_create_payment_processor, $payment_request_create_lightning_invoice, $payment_request_create_lightning_invoice_expires_at, $payment_request_create_notification_email_addresses, $payment_request_create_priority_bank_id, $payment_request_create_title, $payment_request_create_partial_payment_steps, $payment_request_create_payrun_id, $payment_request_create_sandbox_settle_delay_in_seconds, $payment_request_create_tag_ids, $payment_request_create_tags, $card_sensitive_jwt_token, $card_sensitive_number_token, $card_sensitive_cvc_token, $card_sensitive_card_holder_first_name, $card_sensitive_card_holder_last_name, $card_sensitive_billing_address_line1, $card_sensitive_billing_address_line2, $card_sensitive_billing_address_city, $card_sensitive_billing_address_county, $card_sensitive_billing_address_post_code, $card_sensitive_billing_address_country_code, $card_sensitive_billing_phone, $card_sensitive_billing_email, $card_sensitive_save_card_consent, $card_sensitive_partial_amount, $card_jwt_token, $card_number_token, $card_cvc_token, $card_card_holder_first_name, $card_card_holder_last_name, $card_billing_address_line1, $card_billing_address_line2, $card_billing_address_city, $card_billing_address_county, $card_billing_address_post_code, $card_billing_address_country_code, $card_billing_phone, $card_billing_email, $card_save_card_consent, $card_partial_amount, $payment_method, $card_token_tokenised_card_id, $card_token_payment_initiator, $card_token_card_security_code, $card_token_partial_amount, $payment_initiation_request_partial_amount, $payment_initiation_request_redirect_to_origin_url, $payment_initiation_request_origin_url, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1220,8 +1212,6 @@ class PaymentRequestsApi
      * @param  string $payment_method The single payment method to use for the pay on demand payment request. (optional)
      * @param  string $card_token_tokenised_card_id The ID of the tokenised card to use for the payment. The merchant needs to ensure that  the use of the tokenised card is restricted to the same customer that created it. (optional)
      * @param  string $card_token_payment_initiator Indicates who initiated the card token payment, customer or merchant. (optional)
-     * @param  string $card_token_merchant_standard_reason For merchant initiated transactions that correspond to one of the industry standard  reasons should be set. (optional)
-     * @param  string $card_token_commerce_indicator For recurring and installment merchant initiated transactions this property should  be set accordingly. For all other transactions it should be left at the default of  \\\&quot;internet\\\&quot;. (optional)
      * @param  string $card_token_card_security_code Not used for merchant initiated transactions. Optional for customer initiated transactions.  If supplied will be sent to the card processor as a check that the customer using the   tokenised card knows the card verification number. (optional)
      * @param  float $card_token_partial_amount Optional partial payment amount. If not specified then the full payment request  amount will be attempted. (optional)
      * @param  float $payment_initiation_request_partial_amount Optional. If 0 the full amount is assumed. (optional)
@@ -1232,7 +1222,7 @@ class PaymentRequestsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function createAndPayPaymentRequestRequest($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id = null, $payment_request_create_currency = null, $payment_request_create_customer_id = null, $payment_request_create_order_id = null, $payment_request_create_payment_method_types = null, $payment_request_create_payment_methods = null, $payment_request_create_description = null, $payment_request_create_pisp_account_id = null, $payment_request_create_shipping_first_name = null, $payment_request_create_shipping_last_name = null, $payment_request_create_shipping_address_line1 = null, $payment_request_create_shipping_address_line2 = null, $payment_request_create_shipping_address_city = null, $payment_request_create_shipping_address_county = null, $payment_request_create_shipping_address_post_code = null, $payment_request_create_shipping_address_country_code = null, $payment_request_create_shipping_phone = null, $payment_request_create_shipping_email = null, $payment_request_create_origin_url = null, $payment_request_create_base_origin_url = null, $payment_request_create_callback_url = null, $payment_request_create_failure_callback_url = null, $payment_request_create_success_web_hook_url = null, $payment_request_create_card_authorize_only = null, $payment_request_create_card_create_token = null, $payment_request_create_card_create_token_mode = null, $payment_request_create_card_transmit_raw_details = null, $payment_request_create_card_processor_merchant_id = null, $payment_request_create_ignore_address_verification = null, $payment_request_create_card_ignore_cvn = null, $payment_request_create_pisp_recipient_reference = null, $payment_request_create_use_hosted_payment_page = null, $payment_request_create_card_no_payer_authentication = null, $payment_request_create_partial_payment_method = null, $payment_request_create_customer_email_address = null, $payment_request_create_payment_processor = null, $payment_request_create_lightning_invoice = null, $payment_request_create_lightning_invoice_expires_at = null, $payment_request_create_notification_email_addresses = null, $payment_request_create_priority_bank_id = null, $payment_request_create_title = null, $payment_request_create_partial_payment_steps = null, $payment_request_create_payrun_id = null, $payment_request_create_sandbox_settle_delay_in_seconds = null, $payment_request_create_tag_ids = null, $payment_request_create_tags = null, $card_sensitive_jwt_token = null, $card_sensitive_number_token = null, $card_sensitive_cvc_token = null, $card_sensitive_card_holder_first_name = null, $card_sensitive_card_holder_last_name = null, $card_sensitive_billing_address_line1 = null, $card_sensitive_billing_address_line2 = null, $card_sensitive_billing_address_city = null, $card_sensitive_billing_address_county = null, $card_sensitive_billing_address_post_code = null, $card_sensitive_billing_address_country_code = null, $card_sensitive_billing_phone = null, $card_sensitive_billing_email = null, $card_sensitive_save_card_consent = null, $card_sensitive_partial_amount = null, $card_jwt_token = null, $card_number_token = null, $card_cvc_token = null, $card_card_holder_first_name = null, $card_card_holder_last_name = null, $card_billing_address_line1 = null, $card_billing_address_line2 = null, $card_billing_address_city = null, $card_billing_address_county = null, $card_billing_address_post_code = null, $card_billing_address_country_code = null, $card_billing_phone = null, $card_billing_email = null, $card_save_card_consent = null, $card_partial_amount = null, $payment_method = null, $card_token_tokenised_card_id = null, $card_token_payment_initiator = null, $card_token_merchant_standard_reason = null, $card_token_commerce_indicator = null, $card_token_card_security_code = null, $card_token_partial_amount = null, $payment_initiation_request_partial_amount = null, $payment_initiation_request_redirect_to_origin_url = null, $payment_initiation_request_origin_url = null, string $contentType = self::contentTypes['createAndPayPaymentRequest'][0])
+    public function createAndPayPaymentRequestRequest($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id = null, $payment_request_create_currency = null, $payment_request_create_customer_id = null, $payment_request_create_order_id = null, $payment_request_create_payment_method_types = null, $payment_request_create_payment_methods = null, $payment_request_create_description = null, $payment_request_create_pisp_account_id = null, $payment_request_create_shipping_first_name = null, $payment_request_create_shipping_last_name = null, $payment_request_create_shipping_address_line1 = null, $payment_request_create_shipping_address_line2 = null, $payment_request_create_shipping_address_city = null, $payment_request_create_shipping_address_county = null, $payment_request_create_shipping_address_post_code = null, $payment_request_create_shipping_address_country_code = null, $payment_request_create_shipping_phone = null, $payment_request_create_shipping_email = null, $payment_request_create_origin_url = null, $payment_request_create_base_origin_url = null, $payment_request_create_callback_url = null, $payment_request_create_failure_callback_url = null, $payment_request_create_success_web_hook_url = null, $payment_request_create_card_authorize_only = null, $payment_request_create_card_create_token = null, $payment_request_create_card_create_token_mode = null, $payment_request_create_card_transmit_raw_details = null, $payment_request_create_card_processor_merchant_id = null, $payment_request_create_ignore_address_verification = null, $payment_request_create_card_ignore_cvn = null, $payment_request_create_pisp_recipient_reference = null, $payment_request_create_use_hosted_payment_page = null, $payment_request_create_card_no_payer_authentication = null, $payment_request_create_partial_payment_method = null, $payment_request_create_customer_email_address = null, $payment_request_create_payment_processor = null, $payment_request_create_lightning_invoice = null, $payment_request_create_lightning_invoice_expires_at = null, $payment_request_create_notification_email_addresses = null, $payment_request_create_priority_bank_id = null, $payment_request_create_title = null, $payment_request_create_partial_payment_steps = null, $payment_request_create_payrun_id = null, $payment_request_create_sandbox_settle_delay_in_seconds = null, $payment_request_create_tag_ids = null, $payment_request_create_tags = null, $card_sensitive_jwt_token = null, $card_sensitive_number_token = null, $card_sensitive_cvc_token = null, $card_sensitive_card_holder_first_name = null, $card_sensitive_card_holder_last_name = null, $card_sensitive_billing_address_line1 = null, $card_sensitive_billing_address_line2 = null, $card_sensitive_billing_address_city = null, $card_sensitive_billing_address_county = null, $card_sensitive_billing_address_post_code = null, $card_sensitive_billing_address_country_code = null, $card_sensitive_billing_phone = null, $card_sensitive_billing_email = null, $card_sensitive_save_card_consent = null, $card_sensitive_partial_amount = null, $card_jwt_token = null, $card_number_token = null, $card_cvc_token = null, $card_card_holder_first_name = null, $card_card_holder_last_name = null, $card_billing_address_line1 = null, $card_billing_address_line2 = null, $card_billing_address_city = null, $card_billing_address_county = null, $card_billing_address_post_code = null, $card_billing_address_country_code = null, $card_billing_phone = null, $card_billing_email = null, $card_save_card_consent = null, $card_partial_amount = null, $payment_method = null, $card_token_tokenised_card_id = null, $card_token_payment_initiator = null, $card_token_card_security_code = null, $card_token_partial_amount = null, $payment_initiation_request_partial_amount = null, $payment_initiation_request_redirect_to_origin_url = null, $payment_initiation_request_origin_url = null, string $contentType = self::contentTypes['createAndPayPaymentRequest'][0])
     {
 
         // verify the required parameter 'payment_request_create_amount' is set
@@ -1355,8 +1345,6 @@ class PaymentRequestsApi
             throw new \InvalidArgumentException("invalid value for \"payment_request_create_card_processor_merchant_id\" when calling PaymentRequestsApi.createAndPayPaymentRequest, must conform to the pattern /[a-zA-Z0-9]+/.");
         }
         
-
-
 
 
 
@@ -1767,14 +1755,6 @@ class PaymentRequestsApi
         // form params
         if ($card_token_payment_initiator !== null) {
             $formParams['CardToken.PaymentInitiator'] = ObjectSerializer::toFormValue($card_token_payment_initiator);
-        }
-        // form params
-        if ($card_token_merchant_standard_reason !== null) {
-            $formParams['CardToken.MerchantStandardReason'] = ObjectSerializer::toFormValue($card_token_merchant_standard_reason);
-        }
-        // form params
-        if ($card_token_commerce_indicator !== null) {
-            $formParams['CardToken.CommerceIndicator'] = ObjectSerializer::toFormValue($card_token_commerce_indicator);
         }
         // form params
         if ($card_token_card_security_code !== null) {
@@ -3347,6 +3327,479 @@ class PaymentRequestsApi
     }
 
     /**
+     * Operation exportPaymentRequests
+     *
+     * Export a list of all payment requests to a CSV file.
+     *
+     * @param  string $merchant_id The merchant ID to get he list of payment requests for. This field is ignored for              merchant tokens and required for user tokens. (optional)
+     * @param  int $page The page number from where records are retrieved. Note that the paging starts from page 1.              If a 0 is supplied it will be treated as a 1 and the first page is returned. (optional, default to 1)
+     * @param  int $size The number of records to be retrieved from a page. (optional, default to 20)
+     * @param  \DateTime $from_date The date filter to apply to retrieve payment requests created after this date. (optional)
+     * @param  \DateTime $to_date The date filter to apply to retrieve payment requests created up until this date. (optional)
+     * @param  string $status The status filter to apply to retrieve payment requests with this status (optional, default to 'All')
+     * @param  string $search The text filter to apply to retrieve payment requests with a similar title, description, merchant name or contact information. (optional)
+     * @param  string $currency The currency filter to apply to retrieve payment requests with this currency. (optional)
+     * @param  float $min_amount The amount filter to apply to retrieve payment requests that exceed this amount. (optional)
+     * @param  float $max_amount The amount filter to apply to retrieve payment requests that don&#39;t exceed this amount. (optional)
+     * @param  string[] $tags The tag filter to apply to retrieve payment requests with at least one of these tags. (optional)
+     * @param  string $sort Optional expression to sort the order of the payment requests. Example \&quot;Amount desc,Inserted asc\&quot;. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportPaymentRequests'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function exportPaymentRequests($merchant_id = null, $page = 1, $size = 20, $from_date = null, $to_date = null, $status = 'All', $search = null, $currency = null, $min_amount = null, $max_amount = null, $tags = null, $sort = null, string $contentType = self::contentTypes['exportPaymentRequests'][0])
+    {
+        list($response) = $this->exportPaymentRequestsWithHttpInfo($merchant_id, $page, $size, $from_date, $to_date, $status, $search, $currency, $min_amount, $max_amount, $tags, $sort, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation exportPaymentRequestsWithHttpInfo
+     *
+     * Export a list of all payment requests to a CSV file.
+     *
+     * @param  string $merchant_id The merchant ID to get he list of payment requests for. This field is ignored for              merchant tokens and required for user tokens. (optional)
+     * @param  int $page The page number from where records are retrieved. Note that the paging starts from page 1.              If a 0 is supplied it will be treated as a 1 and the first page is returned. (optional, default to 1)
+     * @param  int $size The number of records to be retrieved from a page. (optional, default to 20)
+     * @param  \DateTime $from_date The date filter to apply to retrieve payment requests created after this date. (optional)
+     * @param  \DateTime $to_date The date filter to apply to retrieve payment requests created up until this date. (optional)
+     * @param  string $status The status filter to apply to retrieve payment requests with this status (optional, default to 'All')
+     * @param  string $search The text filter to apply to retrieve payment requests with a similar title, description, merchant name or contact information. (optional)
+     * @param  string $currency The currency filter to apply to retrieve payment requests with this currency. (optional)
+     * @param  float $min_amount The amount filter to apply to retrieve payment requests that exceed this amount. (optional)
+     * @param  float $max_amount The amount filter to apply to retrieve payment requests that don&#39;t exceed this amount. (optional)
+     * @param  string[] $tags The tag filter to apply to retrieve payment requests with at least one of these tags. (optional)
+     * @param  string $sort Optional expression to sort the order of the payment requests. Example \&quot;Amount desc,Inserted asc\&quot;. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportPaymentRequests'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function exportPaymentRequestsWithHttpInfo($merchant_id = null, $page = 1, $size = 20, $from_date = null, $to_date = null, $status = 'All', $search = null, $currency = null, $min_amount = null, $max_amount = null, $tags = null, $sort = null, string $contentType = self::contentTypes['exportPaymentRequests'][0])
+    {
+        $request = $this->exportPaymentRequestsRequest($merchant_id, $page, $size, $from_date, $to_date, $status, $search, $currency, $min_amount, $max_amount, $tags, $sort, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\SplFileObject' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SplFileObject' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SplFileObject', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\SplFileObject';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation exportPaymentRequestsAsync
+     *
+     * Export a list of all payment requests to a CSV file.
+     *
+     * @param  string $merchant_id The merchant ID to get he list of payment requests for. This field is ignored for              merchant tokens and required for user tokens. (optional)
+     * @param  int $page The page number from where records are retrieved. Note that the paging starts from page 1.              If a 0 is supplied it will be treated as a 1 and the first page is returned. (optional, default to 1)
+     * @param  int $size The number of records to be retrieved from a page. (optional, default to 20)
+     * @param  \DateTime $from_date The date filter to apply to retrieve payment requests created after this date. (optional)
+     * @param  \DateTime $to_date The date filter to apply to retrieve payment requests created up until this date. (optional)
+     * @param  string $status The status filter to apply to retrieve payment requests with this status (optional, default to 'All')
+     * @param  string $search The text filter to apply to retrieve payment requests with a similar title, description, merchant name or contact information. (optional)
+     * @param  string $currency The currency filter to apply to retrieve payment requests with this currency. (optional)
+     * @param  float $min_amount The amount filter to apply to retrieve payment requests that exceed this amount. (optional)
+     * @param  float $max_amount The amount filter to apply to retrieve payment requests that don&#39;t exceed this amount. (optional)
+     * @param  string[] $tags The tag filter to apply to retrieve payment requests with at least one of these tags. (optional)
+     * @param  string $sort Optional expression to sort the order of the payment requests. Example \&quot;Amount desc,Inserted asc\&quot;. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportPaymentRequests'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function exportPaymentRequestsAsync($merchant_id = null, $page = 1, $size = 20, $from_date = null, $to_date = null, $status = 'All', $search = null, $currency = null, $min_amount = null, $max_amount = null, $tags = null, $sort = null, string $contentType = self::contentTypes['exportPaymentRequests'][0])
+    {
+        return $this->exportPaymentRequestsAsyncWithHttpInfo($merchant_id, $page, $size, $from_date, $to_date, $status, $search, $currency, $min_amount, $max_amount, $tags, $sort, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation exportPaymentRequestsAsyncWithHttpInfo
+     *
+     * Export a list of all payment requests to a CSV file.
+     *
+     * @param  string $merchant_id The merchant ID to get he list of payment requests for. This field is ignored for              merchant tokens and required for user tokens. (optional)
+     * @param  int $page The page number from where records are retrieved. Note that the paging starts from page 1.              If a 0 is supplied it will be treated as a 1 and the first page is returned. (optional, default to 1)
+     * @param  int $size The number of records to be retrieved from a page. (optional, default to 20)
+     * @param  \DateTime $from_date The date filter to apply to retrieve payment requests created after this date. (optional)
+     * @param  \DateTime $to_date The date filter to apply to retrieve payment requests created up until this date. (optional)
+     * @param  string $status The status filter to apply to retrieve payment requests with this status (optional, default to 'All')
+     * @param  string $search The text filter to apply to retrieve payment requests with a similar title, description, merchant name or contact information. (optional)
+     * @param  string $currency The currency filter to apply to retrieve payment requests with this currency. (optional)
+     * @param  float $min_amount The amount filter to apply to retrieve payment requests that exceed this amount. (optional)
+     * @param  float $max_amount The amount filter to apply to retrieve payment requests that don&#39;t exceed this amount. (optional)
+     * @param  string[] $tags The tag filter to apply to retrieve payment requests with at least one of these tags. (optional)
+     * @param  string $sort Optional expression to sort the order of the payment requests. Example \&quot;Amount desc,Inserted asc\&quot;. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportPaymentRequests'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function exportPaymentRequestsAsyncWithHttpInfo($merchant_id = null, $page = 1, $size = 20, $from_date = null, $to_date = null, $status = 'All', $search = null, $currency = null, $min_amount = null, $max_amount = null, $tags = null, $sort = null, string $contentType = self::contentTypes['exportPaymentRequests'][0])
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->exportPaymentRequestsRequest($merchant_id, $page, $size, $from_date, $to_date, $status, $search, $currency, $min_amount, $max_amount, $tags, $sort, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'exportPaymentRequests'
+     *
+     * @param  string $merchant_id The merchant ID to get he list of payment requests for. This field is ignored for              merchant tokens and required for user tokens. (optional)
+     * @param  int $page The page number from where records are retrieved. Note that the paging starts from page 1.              If a 0 is supplied it will be treated as a 1 and the first page is returned. (optional, default to 1)
+     * @param  int $size The number of records to be retrieved from a page. (optional, default to 20)
+     * @param  \DateTime $from_date The date filter to apply to retrieve payment requests created after this date. (optional)
+     * @param  \DateTime $to_date The date filter to apply to retrieve payment requests created up until this date. (optional)
+     * @param  string $status The status filter to apply to retrieve payment requests with this status (optional, default to 'All')
+     * @param  string $search The text filter to apply to retrieve payment requests with a similar title, description, merchant name or contact information. (optional)
+     * @param  string $currency The currency filter to apply to retrieve payment requests with this currency. (optional)
+     * @param  float $min_amount The amount filter to apply to retrieve payment requests that exceed this amount. (optional)
+     * @param  float $max_amount The amount filter to apply to retrieve payment requests that don&#39;t exceed this amount. (optional)
+     * @param  string[] $tags The tag filter to apply to retrieve payment requests with at least one of these tags. (optional)
+     * @param  string $sort Optional expression to sort the order of the payment requests. Example \&quot;Amount desc,Inserted asc\&quot;. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportPaymentRequests'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function exportPaymentRequestsRequest($merchant_id = null, $page = 1, $size = 20, $from_date = null, $to_date = null, $status = 'All', $search = null, $currency = null, $min_amount = null, $max_amount = null, $tags = null, $sort = null, string $contentType = self::contentTypes['exportPaymentRequests'][0])
+    {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        $resourcePath = '/api/v1/paymentrequests/export';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $merchant_id,
+            'merchantID', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page,
+            'page', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $size,
+            'size', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $from_date,
+            'fromDate', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $to_date,
+            'toDate', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $status,
+            'status', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $search,
+            'search', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $currency,
+            'currency', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $min_amount,
+            'minAmount', // param base name
+            'number', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $max_amount,
+            'maxAmount', // param base name
+            'number', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $tags,
+            'tags', // param base name
+            'array', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['text/csv', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getAllPaymentRequestsPaged
      *
      * Gets a list of all payment requests.
@@ -3367,11 +3820,12 @@ class PaymentRequestsApi
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return void
+     * @return \Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPaymentRequestPageResponse
      */
     public function getAllPaymentRequestsPaged($merchant_id = null, $page = 1, $size = 20, $from_date = null, $to_date = null, $status = 'All', $search = null, $currency = null, $min_amount = null, $max_amount = null, $tags = null, $sort = null, string $contentType = self::contentTypes['getAllPaymentRequestsPaged'][0])
     {
-        $this->getAllPaymentRequestsPagedWithHttpInfo($merchant_id, $page, $size, $from_date, $to_date, $status, $search, $currency, $min_amount, $max_amount, $tags, $sort, $contentType);
+        list($response) = $this->getAllPaymentRequestsPagedWithHttpInfo($merchant_id, $page, $size, $from_date, $to_date, $status, $search, $currency, $min_amount, $max_amount, $tags, $sort, $contentType);
+        return $response;
     }
 
     /**
@@ -3395,7 +3849,7 @@ class PaymentRequestsApi
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPaymentRequestPageResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function getAllPaymentRequestsPagedWithHttpInfo($merchant_id = null, $page = 1, $size = 20, $from_date = null, $to_date = null, $status = 'All', $search = null, $currency = null, $min_amount = null, $max_amount = null, $tags = null, $sort = null, string $contentType = self::contentTypes['getAllPaymentRequestsPaged'][0])
     {
@@ -3424,10 +3878,87 @@ class PaymentRequestsApi
             $statusCode = $response->getStatusCode();
 
 
-            return [null, $statusCode, $response->getHeaders()];
+            switch($statusCode) {
+                case 200:
+                    if ('\Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPaymentRequestPageResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPaymentRequestPageResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPaymentRequestPageResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPaymentRequestPageResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPaymentRequestPageResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
@@ -3489,14 +4020,27 @@ class PaymentRequestsApi
      */
     public function getAllPaymentRequestsPagedAsyncWithHttpInfo($merchant_id = null, $page = 1, $size = 20, $from_date = null, $to_date = null, $status = 'All', $search = null, $currency = null, $min_amount = null, $max_amount = null, $tags = null, $sort = null, string $contentType = self::contentTypes['getAllPaymentRequestsPaged'][0])
     {
-        $returnType = '';
+        $returnType = '\Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPaymentRequestPageResponse';
         $request = $this->getAllPaymentRequestsPagedRequest($merchant_id, $page, $size, $from_date, $to_date, $status, $search, $currency, $min_amount, $max_amount, $tags, $sort, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -3671,7 +4215,7 @@ class PaymentRequestsApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            [],
+            ['text/plain', 'application/json', 'text/json', ],
             $contentType,
             $multipart
         );
@@ -7024,329 +7568,6 @@ class PaymentRequestsApi
     }
 
     /**
-     * Operation setupCardPayerAuthentication
-     *
-     * Set up payer authentication for a card payment.
-     *
-     * @param  string $id The ID of the payment request the card payment is being processed for. (required)
-     * @param  string $jwt The JSON Web Token containing the tokenised card details. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupCardPayerAuthentication'] to see the possible values for this operation
-     *
-     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return \Nofrixion\Client\Model\NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse
-     */
-    public function setupCardPayerAuthentication($id, $jwt = null, string $contentType = self::contentTypes['setupCardPayerAuthentication'][0])
-    {
-        list($response) = $this->setupCardPayerAuthenticationWithHttpInfo($id, $jwt, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation setupCardPayerAuthenticationWithHttpInfo
-     *
-     * Set up payer authentication for a card payment.
-     *
-     * @param  string $id The ID of the payment request the card payment is being processed for. (required)
-     * @param  string $jwt The JSON Web Token containing the tokenised card details. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupCardPayerAuthentication'] to see the possible values for this operation
-     *
-     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of \Nofrixion\Client\Model\NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function setupCardPayerAuthenticationWithHttpInfo($id, $jwt = null, string $contentType = self::contentTypes['setupCardPayerAuthentication'][0])
-    {
-        $request = $this->setupCardPayerAuthenticationRequest($id, $jwt, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            switch($statusCode) {
-                case 200:
-                    if ('\Nofrixion\Client\Model\NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Nofrixion\Client\Model\NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Nofrixion\Client\Model\NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            $returnType = '\Nofrixion\Client\Model\NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Nofrixion\Client\Model\NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation setupCardPayerAuthenticationAsync
-     *
-     * Set up payer authentication for a card payment.
-     *
-     * @param  string $id The ID of the payment request the card payment is being processed for. (required)
-     * @param  string $jwt The JSON Web Token containing the tokenised card details. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupCardPayerAuthentication'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function setupCardPayerAuthenticationAsync($id, $jwt = null, string $contentType = self::contentTypes['setupCardPayerAuthentication'][0])
-    {
-        return $this->setupCardPayerAuthenticationAsyncWithHttpInfo($id, $jwt, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation setupCardPayerAuthenticationAsyncWithHttpInfo
-     *
-     * Set up payer authentication for a card payment.
-     *
-     * @param  string $id The ID of the payment request the card payment is being processed for. (required)
-     * @param  string $jwt The JSON Web Token containing the tokenised card details. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupCardPayerAuthentication'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function setupCardPayerAuthenticationAsyncWithHttpInfo($id, $jwt = null, string $contentType = self::contentTypes['setupCardPayerAuthentication'][0])
-    {
-        $returnType = '\Nofrixion\Client\Model\NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse';
-        $request = $this->setupCardPayerAuthenticationRequest($id, $jwt, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'setupCardPayerAuthentication'
-     *
-     * @param  string $id The ID of the payment request the card payment is being processed for. (required)
-     * @param  string $jwt The JSON Web Token containing the tokenised card details. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupCardPayerAuthentication'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function setupCardPayerAuthenticationRequest($id, $jwt = null, string $contentType = self::contentTypes['setupCardPayerAuthentication'][0])
-    {
-
-        // verify the required parameter 'id' is set
-        if ($id === null || (is_array($id) && count($id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling setupCardPayerAuthentication'
-            );
-        }
-
-
-
-        $resourcePath = '/api/v1/paymentrequests/{id}/card/authenticationsetup';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-        // path params
-        if ($id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'id' . '}',
-                ObjectSerializer::toPathValue($id),
-                $resourcePath
-            );
-        }
-
-        // form params
-        if ($jwt !== null) {
-            $formParams['jwt'] = ObjectSerializer::toFormValue($jwt);
-        }
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['text/plain', 'application/json', 'text/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
-        if ($apiKey !== null) {
-            $headers['Authorization'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'POST',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
      * Operation simulatePayByBankCallback
      *
      * This action simulates a payment initiation callback from a bank to authorise a payment in a sandbox environment.
@@ -8786,8 +9007,6 @@ class PaymentRequestsApi
      * @param  string $id The ID of the payment request the card payment is being submitted for. (required)
      * @param  string $tokenised_card_id The ID of the tokenised card to use for the payment. The merchant needs to ensure that  the use of the tokenised card is restricted to the same customer that created it. (optional)
      * @param  string $payment_initiator Indicates who initiated the card token payment, customer or merchant. (optional)
-     * @param  string $merchant_standard_reason For merchant initiated transactions that correspond to one of the industry standard  reasons should be set. (optional)
-     * @param  string $commerce_indicator For recurring and installment merchant initiated transactions this property should  be set accordingly. For all other transactions it should be left at the default of  \\\&quot;internet\\\&quot;. (optional)
      * @param  string $card_security_code Not used for merchant initiated transactions. Optional for customer initiated transactions.  If supplied will be sent to the card processor as a check that the customer using the   tokenised card knows the card verification number. (optional)
      * @param  float $partial_amount Optional partial payment amount. If not specified then the full payment request  amount will be attempted. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['submitTokenisedCardPayment'] to see the possible values for this operation
@@ -8796,9 +9015,9 @@ class PaymentRequestsApi
      * @throws \InvalidArgumentException
      * @return \Nofrixion\Client\Model\NoFrixionBizBizModelsPaymentsCardPaymentResponse
      */
-    public function submitTokenisedCardPayment($id, $tokenised_card_id = null, $payment_initiator = null, $merchant_standard_reason = null, $commerce_indicator = null, $card_security_code = null, $partial_amount = null, string $contentType = self::contentTypes['submitTokenisedCardPayment'][0])
+    public function submitTokenisedCardPayment($id, $tokenised_card_id = null, $payment_initiator = null, $card_security_code = null, $partial_amount = null, string $contentType = self::contentTypes['submitTokenisedCardPayment'][0])
     {
-        list($response) = $this->submitTokenisedCardPaymentWithHttpInfo($id, $tokenised_card_id, $payment_initiator, $merchant_standard_reason, $commerce_indicator, $card_security_code, $partial_amount, $contentType);
+        list($response) = $this->submitTokenisedCardPaymentWithHttpInfo($id, $tokenised_card_id, $payment_initiator, $card_security_code, $partial_amount, $contentType);
         return $response;
     }
 
@@ -8810,8 +9029,6 @@ class PaymentRequestsApi
      * @param  string $id The ID of the payment request the card payment is being submitted for. (required)
      * @param  string $tokenised_card_id The ID of the tokenised card to use for the payment. The merchant needs to ensure that  the use of the tokenised card is restricted to the same customer that created it. (optional)
      * @param  string $payment_initiator Indicates who initiated the card token payment, customer or merchant. (optional)
-     * @param  string $merchant_standard_reason For merchant initiated transactions that correspond to one of the industry standard  reasons should be set. (optional)
-     * @param  string $commerce_indicator For recurring and installment merchant initiated transactions this property should  be set accordingly. For all other transactions it should be left at the default of  \\\&quot;internet\\\&quot;. (optional)
      * @param  string $card_security_code Not used for merchant initiated transactions. Optional for customer initiated transactions.  If supplied will be sent to the card processor as a check that the customer using the   tokenised card knows the card verification number. (optional)
      * @param  float $partial_amount Optional partial payment amount. If not specified then the full payment request  amount will be attempted. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['submitTokenisedCardPayment'] to see the possible values for this operation
@@ -8820,9 +9037,9 @@ class PaymentRequestsApi
      * @throws \InvalidArgumentException
      * @return array of \Nofrixion\Client\Model\NoFrixionBizBizModelsPaymentsCardPaymentResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function submitTokenisedCardPaymentWithHttpInfo($id, $tokenised_card_id = null, $payment_initiator = null, $merchant_standard_reason = null, $commerce_indicator = null, $card_security_code = null, $partial_amount = null, string $contentType = self::contentTypes['submitTokenisedCardPayment'][0])
+    public function submitTokenisedCardPaymentWithHttpInfo($id, $tokenised_card_id = null, $payment_initiator = null, $card_security_code = null, $partial_amount = null, string $contentType = self::contentTypes['submitTokenisedCardPayment'][0])
     {
-        $request = $this->submitTokenisedCardPaymentRequest($id, $tokenised_card_id, $payment_initiator, $merchant_standard_reason, $commerce_indicator, $card_security_code, $partial_amount, $contentType);
+        $request = $this->submitTokenisedCardPaymentRequest($id, $tokenised_card_id, $payment_initiator, $card_security_code, $partial_amount, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -8941,8 +9158,6 @@ class PaymentRequestsApi
      * @param  string $id The ID of the payment request the card payment is being submitted for. (required)
      * @param  string $tokenised_card_id The ID of the tokenised card to use for the payment. The merchant needs to ensure that  the use of the tokenised card is restricted to the same customer that created it. (optional)
      * @param  string $payment_initiator Indicates who initiated the card token payment, customer or merchant. (optional)
-     * @param  string $merchant_standard_reason For merchant initiated transactions that correspond to one of the industry standard  reasons should be set. (optional)
-     * @param  string $commerce_indicator For recurring and installment merchant initiated transactions this property should  be set accordingly. For all other transactions it should be left at the default of  \\\&quot;internet\\\&quot;. (optional)
      * @param  string $card_security_code Not used for merchant initiated transactions. Optional for customer initiated transactions.  If supplied will be sent to the card processor as a check that the customer using the   tokenised card knows the card verification number. (optional)
      * @param  float $partial_amount Optional partial payment amount. If not specified then the full payment request  amount will be attempted. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['submitTokenisedCardPayment'] to see the possible values for this operation
@@ -8950,9 +9165,9 @@ class PaymentRequestsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function submitTokenisedCardPaymentAsync($id, $tokenised_card_id = null, $payment_initiator = null, $merchant_standard_reason = null, $commerce_indicator = null, $card_security_code = null, $partial_amount = null, string $contentType = self::contentTypes['submitTokenisedCardPayment'][0])
+    public function submitTokenisedCardPaymentAsync($id, $tokenised_card_id = null, $payment_initiator = null, $card_security_code = null, $partial_amount = null, string $contentType = self::contentTypes['submitTokenisedCardPayment'][0])
     {
-        return $this->submitTokenisedCardPaymentAsyncWithHttpInfo($id, $tokenised_card_id, $payment_initiator, $merchant_standard_reason, $commerce_indicator, $card_security_code, $partial_amount, $contentType)
+        return $this->submitTokenisedCardPaymentAsyncWithHttpInfo($id, $tokenised_card_id, $payment_initiator, $card_security_code, $partial_amount, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -8968,8 +9183,6 @@ class PaymentRequestsApi
      * @param  string $id The ID of the payment request the card payment is being submitted for. (required)
      * @param  string $tokenised_card_id The ID of the tokenised card to use for the payment. The merchant needs to ensure that  the use of the tokenised card is restricted to the same customer that created it. (optional)
      * @param  string $payment_initiator Indicates who initiated the card token payment, customer or merchant. (optional)
-     * @param  string $merchant_standard_reason For merchant initiated transactions that correspond to one of the industry standard  reasons should be set. (optional)
-     * @param  string $commerce_indicator For recurring and installment merchant initiated transactions this property should  be set accordingly. For all other transactions it should be left at the default of  \\\&quot;internet\\\&quot;. (optional)
      * @param  string $card_security_code Not used for merchant initiated transactions. Optional for customer initiated transactions.  If supplied will be sent to the card processor as a check that the customer using the   tokenised card knows the card verification number. (optional)
      * @param  float $partial_amount Optional partial payment amount. If not specified then the full payment request  amount will be attempted. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['submitTokenisedCardPayment'] to see the possible values for this operation
@@ -8977,10 +9190,10 @@ class PaymentRequestsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function submitTokenisedCardPaymentAsyncWithHttpInfo($id, $tokenised_card_id = null, $payment_initiator = null, $merchant_standard_reason = null, $commerce_indicator = null, $card_security_code = null, $partial_amount = null, string $contentType = self::contentTypes['submitTokenisedCardPayment'][0])
+    public function submitTokenisedCardPaymentAsyncWithHttpInfo($id, $tokenised_card_id = null, $payment_initiator = null, $card_security_code = null, $partial_amount = null, string $contentType = self::contentTypes['submitTokenisedCardPayment'][0])
     {
         $returnType = '\Nofrixion\Client\Model\NoFrixionBizBizModelsPaymentsCardPaymentResponse';
-        $request = $this->submitTokenisedCardPaymentRequest($id, $tokenised_card_id, $payment_initiator, $merchant_standard_reason, $commerce_indicator, $card_security_code, $partial_amount, $contentType);
+        $request = $this->submitTokenisedCardPaymentRequest($id, $tokenised_card_id, $payment_initiator, $card_security_code, $partial_amount, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -9024,8 +9237,6 @@ class PaymentRequestsApi
      * @param  string $id The ID of the payment request the card payment is being submitted for. (required)
      * @param  string $tokenised_card_id The ID of the tokenised card to use for the payment. The merchant needs to ensure that  the use of the tokenised card is restricted to the same customer that created it. (optional)
      * @param  string $payment_initiator Indicates who initiated the card token payment, customer or merchant. (optional)
-     * @param  string $merchant_standard_reason For merchant initiated transactions that correspond to one of the industry standard  reasons should be set. (optional)
-     * @param  string $commerce_indicator For recurring and installment merchant initiated transactions this property should  be set accordingly. For all other transactions it should be left at the default of  \\\&quot;internet\\\&quot;. (optional)
      * @param  string $card_security_code Not used for merchant initiated transactions. Optional for customer initiated transactions.  If supplied will be sent to the card processor as a check that the customer using the   tokenised card knows the card verification number. (optional)
      * @param  float $partial_amount Optional partial payment amount. If not specified then the full payment request  amount will be attempted. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['submitTokenisedCardPayment'] to see the possible values for this operation
@@ -9033,7 +9244,7 @@ class PaymentRequestsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function submitTokenisedCardPaymentRequest($id, $tokenised_card_id = null, $payment_initiator = null, $merchant_standard_reason = null, $commerce_indicator = null, $card_security_code = null, $partial_amount = null, string $contentType = self::contentTypes['submitTokenisedCardPayment'][0])
+    public function submitTokenisedCardPaymentRequest($id, $tokenised_card_id = null, $payment_initiator = null, $card_security_code = null, $partial_amount = null, string $contentType = self::contentTypes['submitTokenisedCardPayment'][0])
     {
 
         // verify the required parameter 'id' is set
@@ -9042,8 +9253,6 @@ class PaymentRequestsApi
                 'Missing the required parameter $id when calling submitTokenisedCardPayment'
             );
         }
-
-
 
 
 
@@ -9075,14 +9284,6 @@ class PaymentRequestsApi
         // form params
         if ($payment_initiator !== null) {
             $formParams['PaymentInitiator'] = ObjectSerializer::toFormValue($payment_initiator);
-        }
-        // form params
-        if ($merchant_standard_reason !== null) {
-            $formParams['MerchantStandardReason'] = ObjectSerializer::toFormValue($merchant_standard_reason);
-        }
-        // form params
-        if ($commerce_indicator !== null) {
-            $formParams['CommerceIndicator'] = ObjectSerializer::toFormValue($commerce_indicator);
         }
         // form params
         if ($card_security_code !== null) {

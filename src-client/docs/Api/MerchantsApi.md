@@ -9,6 +9,8 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 | [**deleteMerchantTag()**](MerchantsApi.md#deleteMerchantTag) | **DELETE** /api/v1/merchants/{merchantID}/tags/{tagID} | Deletes a tag from a merchant |
 | [**deleteMerchantUserRole()**](MerchantsApi.md#deleteMerchantUserRole) | **DELETE** /api/v1/merchants/userroles/{id} | Deletes user role. |
 | [**deleteUserFromMerchant()**](MerchantsApi.md#deleteUserFromMerchant) | **DELETE** /api/v1/merchants/{merchantId}/users/{userId} | Deletes all roles for a user in a merchant. |
+| [**exportMerchantBeneficiaries()**](MerchantsApi.md#exportMerchantBeneficiaries) | **GET** /api/v1/merchants/{merchantID}/beneficiaries/export | Exports a list of all beneficiaries. |
+| [**exportMerchantPayouts()**](MerchantsApi.md#exportMerchantPayouts) | **GET** /api/v1/merchants/{merchantID}/payouts/export | Exports a list of all payouts for a specific merchant as a CSV file. |
 | [**getAuthorisationSettings()**](MerchantsApi.md#getAuthorisationSettings) | **GET** /api/v1/merchants/{merchantID}/authorisationsettings | Gets a list of merchant authorisation settings for a merchant |
 | [**getMerchant()**](MerchantsApi.md#getMerchant) | **GET** /api/v1/merchants/{merchantID} | Get&#39;s a merchant. |
 | [**getMerchantAccount()**](MerchantsApi.md#getMerchantAccount) | **GET** /api/v1/merchants/{merchantID}/accounts/{accountID} | Get an account. |
@@ -334,6 +336,160 @@ void (empty response body)
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `exportMerchantBeneficiaries()`
+
+```php
+exportMerchantBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort): \SplFileObject
+```
+
+Exports a list of all beneficiaries.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\MerchantsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$merchant_id = 'merchant_id_example'; // string | The ID of the merchant to get the beneficiaries for.
+$page_number = 56; // int | The page number from where records are retrieved.
+$page_size = 56; // int | The number of records to be retrieved from a page.
+$search = 'search_example'; // string | The text filter used to retrieve the records..
+$currency = 'currency_example'; // string | The currency filter used to retrieve the records..
+$include_disabled = false; // bool | If set to true will include disabled beneficiaries as well
+$sort = 'sort_example'; // string | Optional expression to sort the order of the beneficiaries.
+
+try {
+    $result = $apiInstance->exportMerchantBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling MerchantsApi->exportMerchantBeneficiaries: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **merchant_id** | **string**| The ID of the merchant to get the beneficiaries for. | |
+| **page_number** | **int**| The page number from where records are retrieved. | [optional] |
+| **page_size** | **int**| The number of records to be retrieved from a page. | [optional] |
+| **search** | **string**| The text filter used to retrieve the records.. | [optional] |
+| **currency** | **string**| The currency filter used to retrieve the records.. | [optional] |
+| **include_disabled** | **bool**| If set to true will include disabled beneficiaries as well | [optional] [default to false] |
+| **sort** | **string**| Optional expression to sort the order of the beneficiaries. | [optional] |
+
+### Return type
+
+**\SplFileObject**
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `text/csv`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `exportMerchantPayouts()`
+
+```php
+exportMerchantPayouts($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort): \SplFileObject
+```
+
+Exports a list of all payouts for a specific merchant as a CSV file.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\MerchantsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$merchant_id = 'merchant_id_example'; // string | Required. The ID of the merchant to get the payouts for.
+$page_number = 56; // int | The page number from where records are retrieved.
+$page_size = 56; // int | The number of records to be retrieved from a page.
+$statuses = array('statuses_example'); // string[] | An optional status filter for the payout records.
+$from_date = new \DateTime("2013-10-20T19:20:30+01:00"); // \DateTime | The date filter to apply to retrieve payouts created after this date.
+$to_date = new \DateTime("2013-10-20T19:20:30+01:00"); // \DateTime | The date filter to apply to retrieve payouts created up until this date.
+$search = 'search_example'; // string | The text filter to apply to retrieve payouts with a similar title, description, merchant name or contact information.
+$currency = 'currency_example'; // string | The currency filter to apply to retrieve payouts with this currency.
+$min_amount = 3.4; // float | The amount filter to apply to retrieve payouts that exceed this amount.
+$max_amount = 3.4; // float | The amount filter to apply to retrieve payouts that don't exceed this amount.
+$tags = array('tags_example'); // string[] | The tag filter to apply to retrieve payouts with at least one of these tags.
+$sort = 'sort_example'; // string | Optional expression to sort the order of the payouts.
+
+try {
+    $result = $apiInstance->exportMerchantPayouts($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling MerchantsApi->exportMerchantPayouts: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **merchant_id** | **string**| Required. The ID of the merchant to get the payouts for. | |
+| **page_number** | **int**| The page number from where records are retrieved. | [optional] |
+| **page_size** | **int**| The number of records to be retrieved from a page. | [optional] |
+| **statuses** | [**string[]**](../Model/string.md)| An optional status filter for the payout records. | [optional] |
+| **from_date** | **\DateTime**| The date filter to apply to retrieve payouts created after this date. | [optional] |
+| **to_date** | **\DateTime**| The date filter to apply to retrieve payouts created up until this date. | [optional] |
+| **search** | **string**| The text filter to apply to retrieve payouts with a similar title, description, merchant name or contact information. | [optional] |
+| **currency** | **string**| The currency filter to apply to retrieve payouts with this currency. | [optional] |
+| **min_amount** | **float**| The amount filter to apply to retrieve payouts that exceed this amount. | [optional] |
+| **max_amount** | **float**| The amount filter to apply to retrieve payouts that don&#39;t exceed this amount. | [optional] |
+| **tags** | [**string[]**](../Model/string.md)| The tag filter to apply to retrieve payouts with at least one of these tags. | [optional] |
+| **sort** | **string**| Optional expression to sort the order of the payouts. | [optional] |
+
+### Return type
+
+**\SplFileObject**
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `text/csv`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `getAuthorisationSettings()`
 
 ```php
@@ -519,7 +675,7 @@ try {
 ## `getMerchantAccounts()`
 
 ```php
-getMerchantAccounts($merchant_id, $connected_accounts)
+getMerchantAccounts($merchant_id, $connected_accounts): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]
 ```
 
 Get a list of merchant's payment accounts.
@@ -547,7 +703,8 @@ $merchant_id = 'merchant_id_example'; // string | The ID of the merchant to get 
 $connected_accounts = false; // bool | Optional include connected accounts along with payment accounts.
 
 try {
-    $apiInstance->getMerchantAccounts($merchant_id, $connected_accounts);
+    $result = $apiInstance->getMerchantAccounts($merchant_id, $connected_accounts);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling MerchantsApi->getMerchantAccounts: ', $e->getMessage(), PHP_EOL;
 }
@@ -562,7 +719,7 @@ try {
 
 ### Return type
 
-void (empty response body)
+[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]**](../Model/NoFrixionMoneyMoovModelsPaymentAccount.md)
 
 ### Authorization
 
@@ -571,7 +728,7 @@ void (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: `text/plain`, `application/json`, `text/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)
@@ -644,7 +801,7 @@ try {
 ## `getMerchantBeneficiaries()`
 
 ```php
-getMerchantBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort)
+getMerchantBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse
 ```
 
 Gets a list of all beneficiaries.
@@ -677,7 +834,8 @@ $include_disabled = false; // bool | If set to true will include disabled benefi
 $sort = 'sort_example'; // string | Optional expression to sort the order of the beneficiaries.
 
 try {
-    $apiInstance->getMerchantBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort);
+    $result = $apiInstance->getMerchantBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling MerchantsApi->getMerchantBeneficiaries: ', $e->getMessage(), PHP_EOL;
 }
@@ -697,7 +855,7 @@ try {
 
 ### Return type
 
-void (empty response body)
+[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse**](../Model/NoFrixionMoneyMoovModelsBeneficiaryPageResponse.md)
 
 ### Authorization
 
@@ -706,7 +864,7 @@ void (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: `text/plain`, `application/json`, `text/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)
@@ -841,7 +999,7 @@ try {
 ## `getMerchantPayoutsPaged()`
 
 ```php
-getMerchantPayoutsPaged($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort)
+getMerchantPayoutsPaged($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort): \Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPayoutPageResponse
 ```
 
 Gets a list of all payouts for a specific merchant.
@@ -879,7 +1037,8 @@ $tags = array('tags_example'); // string[] | The tag filter to apply to retrieve
 $sort = 'sort_example'; // string | Optional expression to sort the order of the payouts.
 
 try {
-    $apiInstance->getMerchantPayoutsPaged($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort);
+    $result = $apiInstance->getMerchantPayoutsPaged($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling MerchantsApi->getMerchantPayoutsPaged: ', $e->getMessage(), PHP_EOL;
 }
@@ -904,7 +1063,7 @@ try {
 
 ### Return type
 
-void (empty response body)
+[**\Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPayoutPageResponse**](../Model/NoFrixionBizBizModelsPagingPayoutPageResponse.md)
 
 ### Authorization
 
@@ -913,7 +1072,7 @@ void (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: `text/plain`, `application/json`, `text/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)

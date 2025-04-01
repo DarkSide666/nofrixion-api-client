@@ -74,7 +74,13 @@ class TransactionsApi
         'addTags' => [
             'application/json',
         ],
+        'exportTransactionsForAccount' => [
+            'application/json',
+        ],
         'getTransactionProof' => [
+            'application/json',
+        ],
+        'getTransactionsByAccountSequenceNumber' => [
             'application/json',
         ],
         'getTransactionsForAccountPaged' => [
@@ -370,6 +376,454 @@ class TransactionsApi
     }
 
     /**
+     * Operation exportTransactionsForAccount
+     *
+     * Exports a list of the transactions for a single payment account to a CSV file.
+     *
+     * @param  string $account_id The ID of the account to retrieve transactions for. (required)
+     * @param  \DateTime $from_date The start date to retrieve transactions from. (optional)
+     * @param  int $page_number The page number to retrieve. (optional)
+     * @param  int $page_size The number of transactions per page. (optional, default to 20)
+     * @param  \DateTime $to_date The end date to retrieve transactions from. (optional)
+     * @param  string $credit_type A credit filter to apply to the transactions to retrieve. (optional)
+     * @param  string $search The text filter to apply to retrieve transactions with a similar account name, description, their reference, your reference, etc. (optional)
+     * @param  string $sort Optional expression to sort the order of the transactions. Example \&quot;Amount desc,Inserted asc\&quot;. (optional)
+     * @param  float $min_amount The amount filter to apply to retrieve transactions that exceed this amount. (optional)
+     * @param  float $max_amount The amount filter to apply to retrieve transactions that don&#39;t exceed this amount. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportTransactionsForAccount'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function exportTransactionsForAccount($account_id, $from_date = null, $page_number = null, $page_size = 20, $to_date = null, $credit_type = null, $search = null, $sort = null, $min_amount = null, $max_amount = null, string $contentType = self::contentTypes['exportTransactionsForAccount'][0])
+    {
+        list($response) = $this->exportTransactionsForAccountWithHttpInfo($account_id, $from_date, $page_number, $page_size, $to_date, $credit_type, $search, $sort, $min_amount, $max_amount, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation exportTransactionsForAccountWithHttpInfo
+     *
+     * Exports a list of the transactions for a single payment account to a CSV file.
+     *
+     * @param  string $account_id The ID of the account to retrieve transactions for. (required)
+     * @param  \DateTime $from_date The start date to retrieve transactions from. (optional)
+     * @param  int $page_number The page number to retrieve. (optional)
+     * @param  int $page_size The number of transactions per page. (optional, default to 20)
+     * @param  \DateTime $to_date The end date to retrieve transactions from. (optional)
+     * @param  string $credit_type A credit filter to apply to the transactions to retrieve. (optional)
+     * @param  string $search The text filter to apply to retrieve transactions with a similar account name, description, their reference, your reference, etc. (optional)
+     * @param  string $sort Optional expression to sort the order of the transactions. Example \&quot;Amount desc,Inserted asc\&quot;. (optional)
+     * @param  float $min_amount The amount filter to apply to retrieve transactions that exceed this amount. (optional)
+     * @param  float $max_amount The amount filter to apply to retrieve transactions that don&#39;t exceed this amount. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportTransactionsForAccount'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function exportTransactionsForAccountWithHttpInfo($account_id, $from_date = null, $page_number = null, $page_size = 20, $to_date = null, $credit_type = null, $search = null, $sort = null, $min_amount = null, $max_amount = null, string $contentType = self::contentTypes['exportTransactionsForAccount'][0])
+    {
+        $request = $this->exportTransactionsForAccountRequest($account_id, $from_date, $page_number, $page_size, $to_date, $credit_type, $search, $sort, $min_amount, $max_amount, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\SplFileObject' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SplFileObject' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SplFileObject', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\SplFileObject';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation exportTransactionsForAccountAsync
+     *
+     * Exports a list of the transactions for a single payment account to a CSV file.
+     *
+     * @param  string $account_id The ID of the account to retrieve transactions for. (required)
+     * @param  \DateTime $from_date The start date to retrieve transactions from. (optional)
+     * @param  int $page_number The page number to retrieve. (optional)
+     * @param  int $page_size The number of transactions per page. (optional, default to 20)
+     * @param  \DateTime $to_date The end date to retrieve transactions from. (optional)
+     * @param  string $credit_type A credit filter to apply to the transactions to retrieve. (optional)
+     * @param  string $search The text filter to apply to retrieve transactions with a similar account name, description, their reference, your reference, etc. (optional)
+     * @param  string $sort Optional expression to sort the order of the transactions. Example \&quot;Amount desc,Inserted asc\&quot;. (optional)
+     * @param  float $min_amount The amount filter to apply to retrieve transactions that exceed this amount. (optional)
+     * @param  float $max_amount The amount filter to apply to retrieve transactions that don&#39;t exceed this amount. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportTransactionsForAccount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function exportTransactionsForAccountAsync($account_id, $from_date = null, $page_number = null, $page_size = 20, $to_date = null, $credit_type = null, $search = null, $sort = null, $min_amount = null, $max_amount = null, string $contentType = self::contentTypes['exportTransactionsForAccount'][0])
+    {
+        return $this->exportTransactionsForAccountAsyncWithHttpInfo($account_id, $from_date, $page_number, $page_size, $to_date, $credit_type, $search, $sort, $min_amount, $max_amount, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation exportTransactionsForAccountAsyncWithHttpInfo
+     *
+     * Exports a list of the transactions for a single payment account to a CSV file.
+     *
+     * @param  string $account_id The ID of the account to retrieve transactions for. (required)
+     * @param  \DateTime $from_date The start date to retrieve transactions from. (optional)
+     * @param  int $page_number The page number to retrieve. (optional)
+     * @param  int $page_size The number of transactions per page. (optional, default to 20)
+     * @param  \DateTime $to_date The end date to retrieve transactions from. (optional)
+     * @param  string $credit_type A credit filter to apply to the transactions to retrieve. (optional)
+     * @param  string $search The text filter to apply to retrieve transactions with a similar account name, description, their reference, your reference, etc. (optional)
+     * @param  string $sort Optional expression to sort the order of the transactions. Example \&quot;Amount desc,Inserted asc\&quot;. (optional)
+     * @param  float $min_amount The amount filter to apply to retrieve transactions that exceed this amount. (optional)
+     * @param  float $max_amount The amount filter to apply to retrieve transactions that don&#39;t exceed this amount. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportTransactionsForAccount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function exportTransactionsForAccountAsyncWithHttpInfo($account_id, $from_date = null, $page_number = null, $page_size = 20, $to_date = null, $credit_type = null, $search = null, $sort = null, $min_amount = null, $max_amount = null, string $contentType = self::contentTypes['exportTransactionsForAccount'][0])
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->exportTransactionsForAccountRequest($account_id, $from_date, $page_number, $page_size, $to_date, $credit_type, $search, $sort, $min_amount, $max_amount, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'exportTransactionsForAccount'
+     *
+     * @param  string $account_id The ID of the account to retrieve transactions for. (required)
+     * @param  \DateTime $from_date The start date to retrieve transactions from. (optional)
+     * @param  int $page_number The page number to retrieve. (optional)
+     * @param  int $page_size The number of transactions per page. (optional, default to 20)
+     * @param  \DateTime $to_date The end date to retrieve transactions from. (optional)
+     * @param  string $credit_type A credit filter to apply to the transactions to retrieve. (optional)
+     * @param  string $search The text filter to apply to retrieve transactions with a similar account name, description, their reference, your reference, etc. (optional)
+     * @param  string $sort Optional expression to sort the order of the transactions. Example \&quot;Amount desc,Inserted asc\&quot;. (optional)
+     * @param  float $min_amount The amount filter to apply to retrieve transactions that exceed this amount. (optional)
+     * @param  float $max_amount The amount filter to apply to retrieve transactions that don&#39;t exceed this amount. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportTransactionsForAccount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function exportTransactionsForAccountRequest($account_id, $from_date = null, $page_number = null, $page_size = 20, $to_date = null, $credit_type = null, $search = null, $sort = null, $min_amount = null, $max_amount = null, string $contentType = self::contentTypes['exportTransactionsForAccount'][0])
+    {
+
+        // verify the required parameter 'account_id' is set
+        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $account_id when calling exportTransactionsForAccount'
+            );
+        }
+
+
+
+
+
+
+
+
+
+
+
+        $resourcePath = '/api/v1/transactions/{accountID}/export';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $from_date,
+            'fromDate', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page_number,
+            'pageNumber', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page_size,
+            'pageSize', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $to_date,
+            'toDate', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $credit_type,
+            'creditType', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $search,
+            'search', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $min_amount,
+            'minAmount', // param base name
+            'number', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $max_amount,
+            'maxAmount', // param base name
+            'number', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+        // path params
+        if ($account_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'accountID' . '}',
+                ObjectSerializer::toPathValue($account_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['text/csv', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getTransactionProof
      *
      * Generates a proof of payment PDF document with the details of a transaction.
@@ -592,55 +1046,41 @@ class TransactionsApi
     }
 
     /**
-     * Operation getTransactionsForAccountPaged
+     * Operation getTransactionsByAccountSequenceNumber
      *
-     * Get a list of the transactions for a single payment account.
+     * Gets an account&#39;s transactions by sequence number
      *
      * @param  string $account_id The ID of the account to retrieve transactions for. (required)
-     * @param  \DateTime $from_date The start date to retrieve transactions from. (optional)
-     * @param  int $page_number The page number to retrieve. (optional)
+     * @param  int $sequence_number The account sequence number to retrieve the transactions from. (required)
      * @param  int $page_size The number of transactions per page. (optional, default to 20)
-     * @param  \DateTime $to_date The end date to retrieve transactions from. (optional)
-     * @param  string $credit_type A credit filter to apply to the transactions to retrieve. (optional)
-     * @param  string $search The text filter to apply to retrieve transactions with a similar account name, description, their reference, your reference, etc. (optional)
-     * @param  string $sort Optional expression to sort the order of the transactions. Example \&quot;Amount desc,Inserted asc\&quot;. (optional)
-     * @param  float $min_amount The amount filter to apply to retrieve transactions that exceed this amount. (optional)
-     * @param  float $max_amount The amount filter to apply to retrieve transactions that don&#39;t exceed this amount. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTransactionsForAccountPaged'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTransactionsByAccountSequenceNumber'] to see the possible values for this operation
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function getTransactionsForAccountPaged($account_id, $from_date = null, $page_number = null, $page_size = 20, $to_date = null, $credit_type = null, $search = null, $sort = null, $min_amount = null, $max_amount = null, string $contentType = self::contentTypes['getTransactionsForAccountPaged'][0])
+    public function getTransactionsByAccountSequenceNumber($account_id, $sequence_number, $page_size = 20, string $contentType = self::contentTypes['getTransactionsByAccountSequenceNumber'][0])
     {
-        $this->getTransactionsForAccountPagedWithHttpInfo($account_id, $from_date, $page_number, $page_size, $to_date, $credit_type, $search, $sort, $min_amount, $max_amount, $contentType);
+        $this->getTransactionsByAccountSequenceNumberWithHttpInfo($account_id, $sequence_number, $page_size, $contentType);
     }
 
     /**
-     * Operation getTransactionsForAccountPagedWithHttpInfo
+     * Operation getTransactionsByAccountSequenceNumberWithHttpInfo
      *
-     * Get a list of the transactions for a single payment account.
+     * Gets an account&#39;s transactions by sequence number
      *
      * @param  string $account_id The ID of the account to retrieve transactions for. (required)
-     * @param  \DateTime $from_date The start date to retrieve transactions from. (optional)
-     * @param  int $page_number The page number to retrieve. (optional)
+     * @param  int $sequence_number The account sequence number to retrieve the transactions from. (required)
      * @param  int $page_size The number of transactions per page. (optional, default to 20)
-     * @param  \DateTime $to_date The end date to retrieve transactions from. (optional)
-     * @param  string $credit_type A credit filter to apply to the transactions to retrieve. (optional)
-     * @param  string $search The text filter to apply to retrieve transactions with a similar account name, description, their reference, your reference, etc. (optional)
-     * @param  string $sort Optional expression to sort the order of the transactions. Example \&quot;Amount desc,Inserted asc\&quot;. (optional)
-     * @param  float $min_amount The amount filter to apply to retrieve transactions that exceed this amount. (optional)
-     * @param  float $max_amount The amount filter to apply to retrieve transactions that don&#39;t exceed this amount. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTransactionsForAccountPaged'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTransactionsByAccountSequenceNumber'] to see the possible values for this operation
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getTransactionsForAccountPagedWithHttpInfo($account_id, $from_date = null, $page_number = null, $page_size = 20, $to_date = null, $credit_type = null, $search = null, $sort = null, $min_amount = null, $max_amount = null, string $contentType = self::contentTypes['getTransactionsForAccountPaged'][0])
+    public function getTransactionsByAccountSequenceNumberWithHttpInfo($account_id, $sequence_number, $page_size = 20, string $contentType = self::contentTypes['getTransactionsByAccountSequenceNumber'][0])
     {
-        $request = $this->getTransactionsForAccountPagedRequest($account_id, $from_date, $page_number, $page_size, $to_date, $credit_type, $search, $sort, $min_amount, $max_amount, $contentType);
+        $request = $this->getTransactionsByAccountSequenceNumberRequest($account_id, $sequence_number, $page_size, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -669,6 +1109,355 @@ class TransactionsApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getTransactionsByAccountSequenceNumberAsync
+     *
+     * Gets an account&#39;s transactions by sequence number
+     *
+     * @param  string $account_id The ID of the account to retrieve transactions for. (required)
+     * @param  int $sequence_number The account sequence number to retrieve the transactions from. (required)
+     * @param  int $page_size The number of transactions per page. (optional, default to 20)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTransactionsByAccountSequenceNumber'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getTransactionsByAccountSequenceNumberAsync($account_id, $sequence_number, $page_size = 20, string $contentType = self::contentTypes['getTransactionsByAccountSequenceNumber'][0])
+    {
+        return $this->getTransactionsByAccountSequenceNumberAsyncWithHttpInfo($account_id, $sequence_number, $page_size, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getTransactionsByAccountSequenceNumberAsyncWithHttpInfo
+     *
+     * Gets an account&#39;s transactions by sequence number
+     *
+     * @param  string $account_id The ID of the account to retrieve transactions for. (required)
+     * @param  int $sequence_number The account sequence number to retrieve the transactions from. (required)
+     * @param  int $page_size The number of transactions per page. (optional, default to 20)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTransactionsByAccountSequenceNumber'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getTransactionsByAccountSequenceNumberAsyncWithHttpInfo($account_id, $sequence_number, $page_size = 20, string $contentType = self::contentTypes['getTransactionsByAccountSequenceNumber'][0])
+    {
+        $returnType = '';
+        $request = $this->getTransactionsByAccountSequenceNumberRequest($account_id, $sequence_number, $page_size, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getTransactionsByAccountSequenceNumber'
+     *
+     * @param  string $account_id The ID of the account to retrieve transactions for. (required)
+     * @param  int $sequence_number The account sequence number to retrieve the transactions from. (required)
+     * @param  int $page_size The number of transactions per page. (optional, default to 20)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTransactionsByAccountSequenceNumber'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getTransactionsByAccountSequenceNumberRequest($account_id, $sequence_number, $page_size = 20, string $contentType = self::contentTypes['getTransactionsByAccountSequenceNumber'][0])
+    {
+
+        // verify the required parameter 'account_id' is set
+        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $account_id when calling getTransactionsByAccountSequenceNumber'
+            );
+        }
+
+        // verify the required parameter 'sequence_number' is set
+        if ($sequence_number === null || (is_array($sequence_number) && count($sequence_number) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $sequence_number when calling getTransactionsByAccountSequenceNumber'
+            );
+        }
+
+
+
+        $resourcePath = '/api/v1/transactions/{accountID}/from/{sequenceNumber}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page_size,
+            'pageSize', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+        // path params
+        if ($account_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'accountID' . '}',
+                ObjectSerializer::toPathValue($account_id),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($sequence_number !== null) {
+            $resourcePath = str_replace(
+                '{' . 'sequenceNumber' . '}',
+                ObjectSerializer::toPathValue($sequence_number),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            [],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getTransactionsForAccountPaged
+     *
+     * Get a list of the transactions for a single payment account.
+     *
+     * @param  string $account_id The ID of the account to retrieve transactions for. (required)
+     * @param  \DateTime $from_date The start date to retrieve transactions from. (optional)
+     * @param  int $page_number The page number to retrieve. (optional)
+     * @param  int $page_size The number of transactions per page. (optional, default to 20)
+     * @param  \DateTime $to_date The end date to retrieve transactions from. (optional)
+     * @param  string $credit_type A credit filter to apply to the transactions to retrieve. (optional)
+     * @param  string $search The text filter to apply to retrieve transactions with a similar account name, description, their reference, your reference, etc. (optional)
+     * @param  string $sort Optional expression to sort the order of the transactions. Example \&quot;Amount desc,Inserted asc\&quot;. (optional)
+     * @param  float $min_amount The amount filter to apply to retrieve transactions that exceed this amount. (optional)
+     * @param  float $max_amount The amount filter to apply to retrieve transactions that don&#39;t exceed this amount. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTransactionsForAccountPaged'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTransactionPageResponse
+     */
+    public function getTransactionsForAccountPaged($account_id, $from_date = null, $page_number = null, $page_size = 20, $to_date = null, $credit_type = null, $search = null, $sort = null, $min_amount = null, $max_amount = null, string $contentType = self::contentTypes['getTransactionsForAccountPaged'][0])
+    {
+        list($response) = $this->getTransactionsForAccountPagedWithHttpInfo($account_id, $from_date, $page_number, $page_size, $to_date, $credit_type, $search, $sort, $min_amount, $max_amount, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getTransactionsForAccountPagedWithHttpInfo
+     *
+     * Get a list of the transactions for a single payment account.
+     *
+     * @param  string $account_id The ID of the account to retrieve transactions for. (required)
+     * @param  \DateTime $from_date The start date to retrieve transactions from. (optional)
+     * @param  int $page_number The page number to retrieve. (optional)
+     * @param  int $page_size The number of transactions per page. (optional, default to 20)
+     * @param  \DateTime $to_date The end date to retrieve transactions from. (optional)
+     * @param  string $credit_type A credit filter to apply to the transactions to retrieve. (optional)
+     * @param  string $search The text filter to apply to retrieve transactions with a similar account name, description, their reference, your reference, etc. (optional)
+     * @param  string $sort Optional expression to sort the order of the transactions. Example \&quot;Amount desc,Inserted asc\&quot;. (optional)
+     * @param  float $min_amount The amount filter to apply to retrieve transactions that exceed this amount. (optional)
+     * @param  float $max_amount The amount filter to apply to retrieve transactions that don&#39;t exceed this amount. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTransactionsForAccountPaged'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTransactionPageResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getTransactionsForAccountPagedWithHttpInfo($account_id, $from_date = null, $page_number = null, $page_size = 20, $to_date = null, $credit_type = null, $search = null, $sort = null, $min_amount = null, $max_amount = null, string $contentType = self::contentTypes['getTransactionsForAccountPaged'][0])
+    {
+        $request = $this->getTransactionsForAccountPagedRequest($account_id, $from_date, $page_number, $page_size, $to_date, $credit_type, $search, $sort, $min_amount, $max_amount, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTransactionPageResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTransactionPageResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTransactionPageResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTransactionPageResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTransactionPageResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
@@ -726,14 +1515,27 @@ class TransactionsApi
      */
     public function getTransactionsForAccountPagedAsyncWithHttpInfo($account_id, $from_date = null, $page_number = null, $page_size = 20, $to_date = null, $credit_type = null, $search = null, $sort = null, $min_amount = null, $max_amount = null, string $contentType = self::contentTypes['getTransactionsForAccountPaged'][0])
     {
-        $returnType = '';
+        $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTransactionPageResponse';
         $request = $this->getTransactionsForAccountPagedRequest($account_id, $from_date, $page_number, $page_size, $to_date, $credit_type, $search, $sort, $min_amount, $max_amount, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -891,7 +1693,7 @@ class TransactionsApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            [],
+            ['text/plain', 'application/json', 'text/json', ],
             $contentType,
             $multipart
         );

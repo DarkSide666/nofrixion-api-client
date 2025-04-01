@@ -92,6 +92,9 @@ class PayoutsApi
             'text/json',
             'application/*+json',
         ],
+        'exportPayouts' => [
+            'application/json',
+        ],
         'getBatchPayout' => [
             'application/json',
         ],
@@ -1841,6 +1844,479 @@ class PayoutsApi
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'DELETE',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation exportPayouts
+     *
+     * Exports a list of all payouts for a specific merchant to a CSV file.
+     *
+     * @param  string $merchant_id Required. The ID of the merchant to get the payouts for. (optional)
+     * @param  int $page_number The page number from where records are retrieved. (optional)
+     * @param  int $page_size The number of records to be retrieved from a page. (optional)
+     * @param  string[] $statuses An optional status filter for the payout records. (optional)
+     * @param  \DateTime $from_date The date filter to apply to retrieve payouts created after this date. (optional)
+     * @param  \DateTime $to_date The date filter to apply to retrieve payouts created up until this date. (optional)
+     * @param  string $search The text filter to apply to retrieve payouts with a similar title, description, merchant name or contact information. (optional)
+     * @param  string $currency The currency filter to apply to retrieve payouts with this currency. (optional)
+     * @param  float $min_amount The amount filter to apply to retrieve payouts that exceed this amount. (optional)
+     * @param  float $max_amount The amount filter to apply to retrieve payouts that don&#39;t exceed this amount. (optional)
+     * @param  string[] $tags The tag filter to apply to retrieve payouts with at least one of these tags. (optional)
+     * @param  string $sort Optional expression to sort the order of the payouts. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportPayouts'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function exportPayouts($merchant_id = null, $page_number = null, $page_size = null, $statuses = null, $from_date = null, $to_date = null, $search = null, $currency = null, $min_amount = null, $max_amount = null, $tags = null, $sort = null, string $contentType = self::contentTypes['exportPayouts'][0])
+    {
+        list($response) = $this->exportPayoutsWithHttpInfo($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation exportPayoutsWithHttpInfo
+     *
+     * Exports a list of all payouts for a specific merchant to a CSV file.
+     *
+     * @param  string $merchant_id Required. The ID of the merchant to get the payouts for. (optional)
+     * @param  int $page_number The page number from where records are retrieved. (optional)
+     * @param  int $page_size The number of records to be retrieved from a page. (optional)
+     * @param  string[] $statuses An optional status filter for the payout records. (optional)
+     * @param  \DateTime $from_date The date filter to apply to retrieve payouts created after this date. (optional)
+     * @param  \DateTime $to_date The date filter to apply to retrieve payouts created up until this date. (optional)
+     * @param  string $search The text filter to apply to retrieve payouts with a similar title, description, merchant name or contact information. (optional)
+     * @param  string $currency The currency filter to apply to retrieve payouts with this currency. (optional)
+     * @param  float $min_amount The amount filter to apply to retrieve payouts that exceed this amount. (optional)
+     * @param  float $max_amount The amount filter to apply to retrieve payouts that don&#39;t exceed this amount. (optional)
+     * @param  string[] $tags The tag filter to apply to retrieve payouts with at least one of these tags. (optional)
+     * @param  string $sort Optional expression to sort the order of the payouts. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportPayouts'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function exportPayoutsWithHttpInfo($merchant_id = null, $page_number = null, $page_size = null, $statuses = null, $from_date = null, $to_date = null, $search = null, $currency = null, $min_amount = null, $max_amount = null, $tags = null, $sort = null, string $contentType = self::contentTypes['exportPayouts'][0])
+    {
+        $request = $this->exportPayoutsRequest($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\SplFileObject' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SplFileObject' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SplFileObject', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\SplFileObject';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation exportPayoutsAsync
+     *
+     * Exports a list of all payouts for a specific merchant to a CSV file.
+     *
+     * @param  string $merchant_id Required. The ID of the merchant to get the payouts for. (optional)
+     * @param  int $page_number The page number from where records are retrieved. (optional)
+     * @param  int $page_size The number of records to be retrieved from a page. (optional)
+     * @param  string[] $statuses An optional status filter for the payout records. (optional)
+     * @param  \DateTime $from_date The date filter to apply to retrieve payouts created after this date. (optional)
+     * @param  \DateTime $to_date The date filter to apply to retrieve payouts created up until this date. (optional)
+     * @param  string $search The text filter to apply to retrieve payouts with a similar title, description, merchant name or contact information. (optional)
+     * @param  string $currency The currency filter to apply to retrieve payouts with this currency. (optional)
+     * @param  float $min_amount The amount filter to apply to retrieve payouts that exceed this amount. (optional)
+     * @param  float $max_amount The amount filter to apply to retrieve payouts that don&#39;t exceed this amount. (optional)
+     * @param  string[] $tags The tag filter to apply to retrieve payouts with at least one of these tags. (optional)
+     * @param  string $sort Optional expression to sort the order of the payouts. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportPayouts'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function exportPayoutsAsync($merchant_id = null, $page_number = null, $page_size = null, $statuses = null, $from_date = null, $to_date = null, $search = null, $currency = null, $min_amount = null, $max_amount = null, $tags = null, $sort = null, string $contentType = self::contentTypes['exportPayouts'][0])
+    {
+        return $this->exportPayoutsAsyncWithHttpInfo($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation exportPayoutsAsyncWithHttpInfo
+     *
+     * Exports a list of all payouts for a specific merchant to a CSV file.
+     *
+     * @param  string $merchant_id Required. The ID of the merchant to get the payouts for. (optional)
+     * @param  int $page_number The page number from where records are retrieved. (optional)
+     * @param  int $page_size The number of records to be retrieved from a page. (optional)
+     * @param  string[] $statuses An optional status filter for the payout records. (optional)
+     * @param  \DateTime $from_date The date filter to apply to retrieve payouts created after this date. (optional)
+     * @param  \DateTime $to_date The date filter to apply to retrieve payouts created up until this date. (optional)
+     * @param  string $search The text filter to apply to retrieve payouts with a similar title, description, merchant name or contact information. (optional)
+     * @param  string $currency The currency filter to apply to retrieve payouts with this currency. (optional)
+     * @param  float $min_amount The amount filter to apply to retrieve payouts that exceed this amount. (optional)
+     * @param  float $max_amount The amount filter to apply to retrieve payouts that don&#39;t exceed this amount. (optional)
+     * @param  string[] $tags The tag filter to apply to retrieve payouts with at least one of these tags. (optional)
+     * @param  string $sort Optional expression to sort the order of the payouts. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportPayouts'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function exportPayoutsAsyncWithHttpInfo($merchant_id = null, $page_number = null, $page_size = null, $statuses = null, $from_date = null, $to_date = null, $search = null, $currency = null, $min_amount = null, $max_amount = null, $tags = null, $sort = null, string $contentType = self::contentTypes['exportPayouts'][0])
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->exportPayoutsRequest($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'exportPayouts'
+     *
+     * @param  string $merchant_id Required. The ID of the merchant to get the payouts for. (optional)
+     * @param  int $page_number The page number from where records are retrieved. (optional)
+     * @param  int $page_size The number of records to be retrieved from a page. (optional)
+     * @param  string[] $statuses An optional status filter for the payout records. (optional)
+     * @param  \DateTime $from_date The date filter to apply to retrieve payouts created after this date. (optional)
+     * @param  \DateTime $to_date The date filter to apply to retrieve payouts created up until this date. (optional)
+     * @param  string $search The text filter to apply to retrieve payouts with a similar title, description, merchant name or contact information. (optional)
+     * @param  string $currency The currency filter to apply to retrieve payouts with this currency. (optional)
+     * @param  float $min_amount The amount filter to apply to retrieve payouts that exceed this amount. (optional)
+     * @param  float $max_amount The amount filter to apply to retrieve payouts that don&#39;t exceed this amount. (optional)
+     * @param  string[] $tags The tag filter to apply to retrieve payouts with at least one of these tags. (optional)
+     * @param  string $sort Optional expression to sort the order of the payouts. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportPayouts'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function exportPayoutsRequest($merchant_id = null, $page_number = null, $page_size = null, $statuses = null, $from_date = null, $to_date = null, $search = null, $currency = null, $min_amount = null, $max_amount = null, $tags = null, $sort = null, string $contentType = self::contentTypes['exportPayouts'][0])
+    {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        $resourcePath = '/api/v1/payouts/export';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $merchant_id,
+            'merchantID', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page_number,
+            'pageNumber', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page_size,
+            'pageSize', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $statuses,
+            'statuses', // param base name
+            'array', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $from_date,
+            'fromDate', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $to_date,
+            'toDate', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $search,
+            'search', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $currency,
+            'currency', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $min_amount,
+            'minAmount', // param base name
+            'number', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $max_amount,
+            'maxAmount', // param base name
+            'number', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $tags,
+            'tags', // param base name
+            'array', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['text/csv', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -3755,11 +4231,12 @@ class PayoutsApi
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return void
+     * @return \Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPayoutPageResponse
      */
     public function getPayoutsPaged($merchant_id = null, $page_number = null, $page_size = null, $statuses = null, $from_date = null, $to_date = null, $search = null, $currency = null, $min_amount = null, $max_amount = null, $tags = null, $sort = null, string $contentType = self::contentTypes['getPayoutsPaged'][0])
     {
-        $this->getPayoutsPagedWithHttpInfo($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort, $contentType);
+        list($response) = $this->getPayoutsPagedWithHttpInfo($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort, $contentType);
+        return $response;
     }
 
     /**
@@ -3783,7 +4260,7 @@ class PayoutsApi
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPayoutPageResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function getPayoutsPagedWithHttpInfo($merchant_id = null, $page_number = null, $page_size = null, $statuses = null, $from_date = null, $to_date = null, $search = null, $currency = null, $min_amount = null, $max_amount = null, $tags = null, $sort = null, string $contentType = self::contentTypes['getPayoutsPaged'][0])
     {
@@ -3812,10 +4289,87 @@ class PayoutsApi
             $statusCode = $response->getStatusCode();
 
 
-            return [null, $statusCode, $response->getHeaders()];
+            switch($statusCode) {
+                case 200:
+                    if ('\Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPayoutPageResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPayoutPageResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPayoutPageResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPayoutPageResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPayoutPageResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
@@ -3877,14 +4431,27 @@ class PayoutsApi
      */
     public function getPayoutsPagedAsyncWithHttpInfo($merchant_id = null, $page_number = null, $page_size = null, $statuses = null, $from_date = null, $to_date = null, $search = null, $currency = null, $min_amount = null, $max_amount = null, $tags = null, $sort = null, string $contentType = self::contentTypes['getPayoutsPaged'][0])
     {
-        $returnType = '';
+        $returnType = '\Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPayoutPageResponse';
         $request = $this->getPayoutsPagedRequest($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -4059,7 +4626,7 @@ class PayoutsApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            [],
+            ['text/plain', 'application/json', 'text/json', ],
             $contentType,
             $multipart
         );

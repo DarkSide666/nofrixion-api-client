@@ -11,6 +11,7 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 | [**deleteAllTokenisedCardsForMerchant()**](PaymentRequestsApi.md#deleteAllTokenisedCardsForMerchant) | **DELETE** /api/v1/paymentrequests/card/customertokens/removeall/{merchantID}/{customerEmailAddress} | Deletes all the card tokens for a customer. |
 | [**deletePaymentRequest()**](PaymentRequestsApi.md#deletePaymentRequest) | **DELETE** /api/v1/paymentrequests/{id} | Deletes a payment request, along with its keys and addresses, if there&#39;s  no payment event associated with it. |
 | [**deleteTokenisedCard()**](PaymentRequestsApi.md#deleteTokenisedCard) | **DELETE** /api/v1/paymentrequests/card/customertokens/{id} | Deletes a single card token. |
+| [**exportPaymentRequests()**](PaymentRequestsApi.md#exportPaymentRequests) | **GET** /api/v1/paymentrequests/export | Export a list of all payment requests to a CSV file. |
 | [**getAllPaymentRequestsPaged()**](PaymentRequestsApi.md#getAllPaymentRequestsPaged) | **GET** /api/v1/paymentrequests | Gets a list of all payment requests. |
 | [**getPaymentRequest()**](PaymentRequestsApi.md#getPaymentRequest) | **GET** /api/v1/paymentrequests/{id} | Gets a payment request. |
 | [**getPaymentRequestEvents()**](PaymentRequestsApi.md#getPaymentRequestEvents) | **GET** /api/v1/paymentrequests/{id}/events | Gets a payment requests&#39;s events. |
@@ -22,7 +23,6 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 | [**getTokenisedCards()**](PaymentRequestsApi.md#getTokenisedCards) | **GET** /api/v1/paymentrequests/card/customertokens/{customerEmailAddress} | Gets a list of the tokenised cards stored for a single customer. |
 | [**getTokenisedCardsForMerchant()**](PaymentRequestsApi.md#getTokenisedCardsForMerchant) | **GET** /api/v1/paymentrequests/card/customertokens/{merchantID}/{customerEmailAddress} | Gets a list of the tokenised cards stored for a single customer. |
 | [**refundCardPayment()**](PaymentRequestsApi.md#refundCardPayment) | **POST** /api/v1/paymentrequests/{id}/card/refund/{partialRefundAmount} | Submits a request to refund a card payment. |
-| [**setupCardPayerAuthentication()**](PaymentRequestsApi.md#setupCardPayerAuthentication) | **POST** /api/v1/paymentrequests/{id}/card/authenticationsetup | Set up payer authentication for a card payment. |
 | [**simulatePayByBankCallback()**](PaymentRequestsApi.md#simulatePayByBankCallback) | **PUT** /api/v1/paymentrequests/{id}/pisp/sandboxcallback | This action simulates a payment initiation callback from a bank to authorise a payment in a sandbox environment. |
 | [**submitCardPayment()**](PaymentRequestsApi.md#submitCardPayment) | **POST** /api/v1/paymentrequests/{id}/card | Submit a payment authorisation request to the card gateway. |
 | [**submitDirectDebitForMandate()**](PaymentRequestsApi.md#submitDirectDebitForMandate) | **POST** /api/v1/paymentrequests/{id}/directdebit | Submits a Direct Debit payment attempt. |
@@ -100,7 +100,7 @@ try {
 ## `createAndPayPaymentRequest()`
 
 ```php
-createAndPayPaymentRequest($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id, $payment_request_create_currency, $payment_request_create_customer_id, $payment_request_create_order_id, $payment_request_create_payment_method_types, $payment_request_create_payment_methods, $payment_request_create_description, $payment_request_create_pisp_account_id, $payment_request_create_shipping_first_name, $payment_request_create_shipping_last_name, $payment_request_create_shipping_address_line1, $payment_request_create_shipping_address_line2, $payment_request_create_shipping_address_city, $payment_request_create_shipping_address_county, $payment_request_create_shipping_address_post_code, $payment_request_create_shipping_address_country_code, $payment_request_create_shipping_phone, $payment_request_create_shipping_email, $payment_request_create_origin_url, $payment_request_create_base_origin_url, $payment_request_create_callback_url, $payment_request_create_failure_callback_url, $payment_request_create_success_web_hook_url, $payment_request_create_card_authorize_only, $payment_request_create_card_create_token, $payment_request_create_card_create_token_mode, $payment_request_create_card_transmit_raw_details, $payment_request_create_card_processor_merchant_id, $payment_request_create_ignore_address_verification, $payment_request_create_card_ignore_cvn, $payment_request_create_pisp_recipient_reference, $payment_request_create_use_hosted_payment_page, $payment_request_create_card_no_payer_authentication, $payment_request_create_partial_payment_method, $payment_request_create_customer_email_address, $payment_request_create_payment_processor, $payment_request_create_lightning_invoice, $payment_request_create_lightning_invoice_expires_at, $payment_request_create_notification_email_addresses, $payment_request_create_priority_bank_id, $payment_request_create_title, $payment_request_create_partial_payment_steps, $payment_request_create_payrun_id, $payment_request_create_sandbox_settle_delay_in_seconds, $payment_request_create_tag_ids, $payment_request_create_tags, $card_sensitive_jwt_token, $card_sensitive_number_token, $card_sensitive_cvc_token, $card_sensitive_card_holder_first_name, $card_sensitive_card_holder_last_name, $card_sensitive_billing_address_line1, $card_sensitive_billing_address_line2, $card_sensitive_billing_address_city, $card_sensitive_billing_address_county, $card_sensitive_billing_address_post_code, $card_sensitive_billing_address_country_code, $card_sensitive_billing_phone, $card_sensitive_billing_email, $card_sensitive_save_card_consent, $card_sensitive_partial_amount, $card_jwt_token, $card_number_token, $card_cvc_token, $card_card_holder_first_name, $card_card_holder_last_name, $card_billing_address_line1, $card_billing_address_line2, $card_billing_address_city, $card_billing_address_county, $card_billing_address_post_code, $card_billing_address_country_code, $card_billing_phone, $card_billing_email, $card_save_card_consent, $card_partial_amount, $payment_method, $card_token_tokenised_card_id, $card_token_payment_initiator, $card_token_merchant_standard_reason, $card_token_commerce_indicator, $card_token_card_security_code, $card_token_partial_amount, $payment_initiation_request_partial_amount, $payment_initiation_request_redirect_to_origin_url, $payment_initiation_request_origin_url): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsIPaymentResponse
+createAndPayPaymentRequest($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id, $payment_request_create_currency, $payment_request_create_customer_id, $payment_request_create_order_id, $payment_request_create_payment_method_types, $payment_request_create_payment_methods, $payment_request_create_description, $payment_request_create_pisp_account_id, $payment_request_create_shipping_first_name, $payment_request_create_shipping_last_name, $payment_request_create_shipping_address_line1, $payment_request_create_shipping_address_line2, $payment_request_create_shipping_address_city, $payment_request_create_shipping_address_county, $payment_request_create_shipping_address_post_code, $payment_request_create_shipping_address_country_code, $payment_request_create_shipping_phone, $payment_request_create_shipping_email, $payment_request_create_origin_url, $payment_request_create_base_origin_url, $payment_request_create_callback_url, $payment_request_create_failure_callback_url, $payment_request_create_success_web_hook_url, $payment_request_create_card_authorize_only, $payment_request_create_card_create_token, $payment_request_create_card_create_token_mode, $payment_request_create_card_transmit_raw_details, $payment_request_create_card_processor_merchant_id, $payment_request_create_ignore_address_verification, $payment_request_create_card_ignore_cvn, $payment_request_create_pisp_recipient_reference, $payment_request_create_use_hosted_payment_page, $payment_request_create_card_no_payer_authentication, $payment_request_create_partial_payment_method, $payment_request_create_customer_email_address, $payment_request_create_payment_processor, $payment_request_create_lightning_invoice, $payment_request_create_lightning_invoice_expires_at, $payment_request_create_notification_email_addresses, $payment_request_create_priority_bank_id, $payment_request_create_title, $payment_request_create_partial_payment_steps, $payment_request_create_payrun_id, $payment_request_create_sandbox_settle_delay_in_seconds, $payment_request_create_tag_ids, $payment_request_create_tags, $card_sensitive_jwt_token, $card_sensitive_number_token, $card_sensitive_cvc_token, $card_sensitive_card_holder_first_name, $card_sensitive_card_holder_last_name, $card_sensitive_billing_address_line1, $card_sensitive_billing_address_line2, $card_sensitive_billing_address_city, $card_sensitive_billing_address_county, $card_sensitive_billing_address_post_code, $card_sensitive_billing_address_country_code, $card_sensitive_billing_phone, $card_sensitive_billing_email, $card_sensitive_save_card_consent, $card_sensitive_partial_amount, $card_jwt_token, $card_number_token, $card_cvc_token, $card_card_holder_first_name, $card_card_holder_last_name, $card_billing_address_line1, $card_billing_address_line2, $card_billing_address_city, $card_billing_address_county, $card_billing_address_post_code, $card_billing_address_country_code, $card_billing_phone, $card_billing_email, $card_save_card_consent, $card_partial_amount, $payment_method, $card_token_tokenised_card_id, $card_token_payment_initiator, $card_token_card_security_code, $card_token_partial_amount, $payment_initiation_request_partial_amount, $payment_initiation_request_redirect_to_origin_url, $payment_initiation_request_origin_url): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsIPaymentResponse
 ```
 
 Creates a payment request record and processes the payment.
@@ -211,8 +211,6 @@ $card_partial_amount = 3.4; // float | Optional partial payment amount. If not s
 $payment_method = 'payment_method_example'; // string | The single payment method to use for the pay on demand payment request.
 $card_token_tokenised_card_id = 'card_token_tokenised_card_id_example'; // string | The ID of the tokenised card to use for the payment. The merchant needs to ensure that  the use of the tokenised card is restricted to the same customer that created it.
 $card_token_payment_initiator = 'card_token_payment_initiator_example'; // string | Indicates who initiated the card token payment, customer or merchant.
-$card_token_merchant_standard_reason = 'card_token_merchant_standard_reason_example'; // string | For merchant initiated transactions that correspond to one of the industry standard  reasons should be set.
-$card_token_commerce_indicator = 'card_token_commerce_indicator_example'; // string | For recurring and installment merchant initiated transactions this property should  be set accordingly. For all other transactions it should be left at the default of  \\\"internet\\\".
 $card_token_card_security_code = 'card_token_card_security_code_example'; // string | Not used for merchant initiated transactions. Optional for customer initiated transactions.  If supplied will be sent to the card processor as a check that the customer using the   tokenised card knows the card verification number.
 $card_token_partial_amount = 3.4; // float | Optional partial payment amount. If not specified then the full payment request  amount will be attempted.
 $payment_initiation_request_partial_amount = 3.4; // float | Optional. If 0 the full amount is assumed.
@@ -220,7 +218,7 @@ $payment_initiation_request_redirect_to_origin_url = 'payment_initiation_request
 $payment_initiation_request_origin_url = 'payment_initiation_request_origin_url_example'; // string | Optional. If set should indicate the origin URL the payer is making the   payment from. If a pay by bank attempt fails and the payment request does not  have a FailureCallbackUrl set then the payer will be redirected to this URL.
 
 try {
-    $result = $apiInstance->createAndPayPaymentRequest($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id, $payment_request_create_currency, $payment_request_create_customer_id, $payment_request_create_order_id, $payment_request_create_payment_method_types, $payment_request_create_payment_methods, $payment_request_create_description, $payment_request_create_pisp_account_id, $payment_request_create_shipping_first_name, $payment_request_create_shipping_last_name, $payment_request_create_shipping_address_line1, $payment_request_create_shipping_address_line2, $payment_request_create_shipping_address_city, $payment_request_create_shipping_address_county, $payment_request_create_shipping_address_post_code, $payment_request_create_shipping_address_country_code, $payment_request_create_shipping_phone, $payment_request_create_shipping_email, $payment_request_create_origin_url, $payment_request_create_base_origin_url, $payment_request_create_callback_url, $payment_request_create_failure_callback_url, $payment_request_create_success_web_hook_url, $payment_request_create_card_authorize_only, $payment_request_create_card_create_token, $payment_request_create_card_create_token_mode, $payment_request_create_card_transmit_raw_details, $payment_request_create_card_processor_merchant_id, $payment_request_create_ignore_address_verification, $payment_request_create_card_ignore_cvn, $payment_request_create_pisp_recipient_reference, $payment_request_create_use_hosted_payment_page, $payment_request_create_card_no_payer_authentication, $payment_request_create_partial_payment_method, $payment_request_create_customer_email_address, $payment_request_create_payment_processor, $payment_request_create_lightning_invoice, $payment_request_create_lightning_invoice_expires_at, $payment_request_create_notification_email_addresses, $payment_request_create_priority_bank_id, $payment_request_create_title, $payment_request_create_partial_payment_steps, $payment_request_create_payrun_id, $payment_request_create_sandbox_settle_delay_in_seconds, $payment_request_create_tag_ids, $payment_request_create_tags, $card_sensitive_jwt_token, $card_sensitive_number_token, $card_sensitive_cvc_token, $card_sensitive_card_holder_first_name, $card_sensitive_card_holder_last_name, $card_sensitive_billing_address_line1, $card_sensitive_billing_address_line2, $card_sensitive_billing_address_city, $card_sensitive_billing_address_county, $card_sensitive_billing_address_post_code, $card_sensitive_billing_address_country_code, $card_sensitive_billing_phone, $card_sensitive_billing_email, $card_sensitive_save_card_consent, $card_sensitive_partial_amount, $card_jwt_token, $card_number_token, $card_cvc_token, $card_card_holder_first_name, $card_card_holder_last_name, $card_billing_address_line1, $card_billing_address_line2, $card_billing_address_city, $card_billing_address_county, $card_billing_address_post_code, $card_billing_address_country_code, $card_billing_phone, $card_billing_email, $card_save_card_consent, $card_partial_amount, $payment_method, $card_token_tokenised_card_id, $card_token_payment_initiator, $card_token_merchant_standard_reason, $card_token_commerce_indicator, $card_token_card_security_code, $card_token_partial_amount, $payment_initiation_request_partial_amount, $payment_initiation_request_redirect_to_origin_url, $payment_initiation_request_origin_url);
+    $result = $apiInstance->createAndPayPaymentRequest($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id, $payment_request_create_currency, $payment_request_create_customer_id, $payment_request_create_order_id, $payment_request_create_payment_method_types, $payment_request_create_payment_methods, $payment_request_create_description, $payment_request_create_pisp_account_id, $payment_request_create_shipping_first_name, $payment_request_create_shipping_last_name, $payment_request_create_shipping_address_line1, $payment_request_create_shipping_address_line2, $payment_request_create_shipping_address_city, $payment_request_create_shipping_address_county, $payment_request_create_shipping_address_post_code, $payment_request_create_shipping_address_country_code, $payment_request_create_shipping_phone, $payment_request_create_shipping_email, $payment_request_create_origin_url, $payment_request_create_base_origin_url, $payment_request_create_callback_url, $payment_request_create_failure_callback_url, $payment_request_create_success_web_hook_url, $payment_request_create_card_authorize_only, $payment_request_create_card_create_token, $payment_request_create_card_create_token_mode, $payment_request_create_card_transmit_raw_details, $payment_request_create_card_processor_merchant_id, $payment_request_create_ignore_address_verification, $payment_request_create_card_ignore_cvn, $payment_request_create_pisp_recipient_reference, $payment_request_create_use_hosted_payment_page, $payment_request_create_card_no_payer_authentication, $payment_request_create_partial_payment_method, $payment_request_create_customer_email_address, $payment_request_create_payment_processor, $payment_request_create_lightning_invoice, $payment_request_create_lightning_invoice_expires_at, $payment_request_create_notification_email_addresses, $payment_request_create_priority_bank_id, $payment_request_create_title, $payment_request_create_partial_payment_steps, $payment_request_create_payrun_id, $payment_request_create_sandbox_settle_delay_in_seconds, $payment_request_create_tag_ids, $payment_request_create_tags, $card_sensitive_jwt_token, $card_sensitive_number_token, $card_sensitive_cvc_token, $card_sensitive_card_holder_first_name, $card_sensitive_card_holder_last_name, $card_sensitive_billing_address_line1, $card_sensitive_billing_address_line2, $card_sensitive_billing_address_city, $card_sensitive_billing_address_county, $card_sensitive_billing_address_post_code, $card_sensitive_billing_address_country_code, $card_sensitive_billing_phone, $card_sensitive_billing_email, $card_sensitive_save_card_consent, $card_sensitive_partial_amount, $card_jwt_token, $card_number_token, $card_cvc_token, $card_card_holder_first_name, $card_card_holder_last_name, $card_billing_address_line1, $card_billing_address_line2, $card_billing_address_city, $card_billing_address_county, $card_billing_address_post_code, $card_billing_address_country_code, $card_billing_phone, $card_billing_email, $card_save_card_consent, $card_partial_amount, $payment_method, $card_token_tokenised_card_id, $card_token_payment_initiator, $card_token_card_security_code, $card_token_partial_amount, $payment_initiation_request_partial_amount, $payment_initiation_request_redirect_to_origin_url, $payment_initiation_request_origin_url);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PaymentRequestsApi->createAndPayPaymentRequest: ', $e->getMessage(), PHP_EOL;
@@ -318,8 +316,6 @@ try {
 | **payment_method** | **string**| The single payment method to use for the pay on demand payment request. | [optional] |
 | **card_token_tokenised_card_id** | **string**| The ID of the tokenised card to use for the payment. The merchant needs to ensure that  the use of the tokenised card is restricted to the same customer that created it. | [optional] |
 | **card_token_payment_initiator** | **string**| Indicates who initiated the card token payment, customer or merchant. | [optional] |
-| **card_token_merchant_standard_reason** | **string**| For merchant initiated transactions that correspond to one of the industry standard  reasons should be set. | [optional] |
-| **card_token_commerce_indicator** | **string**| For recurring and installment merchant initiated transactions this property should  be set accordingly. For all other transactions it should be left at the default of  \\\&quot;internet\\\&quot;. | [optional] |
 | **card_token_card_security_code** | **string**| Not used for merchant initiated transactions. Optional for customer initiated transactions.  If supplied will be sent to the card processor as a check that the customer using the   tokenised card knows the card verification number. | [optional] |
 | **card_token_partial_amount** | **float**| Optional partial payment amount. If not specified then the full payment request  amount will be attempted. | [optional] |
 | **payment_initiation_request_partial_amount** | **float**| Optional. If 0 the full amount is assumed. | [optional] |
@@ -644,10 +640,92 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `exportPaymentRequests()`
+
+```php
+exportPaymentRequests($merchant_id, $page, $size, $from_date, $to_date, $status, $search, $currency, $min_amount, $max_amount, $tags, $sort): \SplFileObject
+```
+
+Export a list of all payment requests to a CSV file.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\PaymentRequestsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$merchant_id = 'merchant_id_example'; // string | The merchant ID to get he list of payment requests for. This field is ignored for              merchant tokens and required for user tokens.
+$page = 1; // int | The page number from where records are retrieved. Note that the paging starts from page 1.              If a 0 is supplied it will be treated as a 1 and the first page is returned.
+$size = 20; // int | The number of records to be retrieved from a page.
+$from_date = new \DateTime("2013-10-20T19:20:30+01:00"); // \DateTime | The date filter to apply to retrieve payment requests created after this date.
+$to_date = new \DateTime("2013-10-20T19:20:30+01:00"); // \DateTime | The date filter to apply to retrieve payment requests created up until this date.
+$status = 'All'; // string | The status filter to apply to retrieve payment requests with this status
+$search = 'search_example'; // string | The text filter to apply to retrieve payment requests with a similar title, description, merchant name or contact information.
+$currency = 'currency_example'; // string | The currency filter to apply to retrieve payment requests with this currency.
+$min_amount = 3.4; // float | The amount filter to apply to retrieve payment requests that exceed this amount.
+$max_amount = 3.4; // float | The amount filter to apply to retrieve payment requests that don't exceed this amount.
+$tags = array('tags_example'); // string[] | The tag filter to apply to retrieve payment requests with at least one of these tags.
+$sort = 'sort_example'; // string | Optional expression to sort the order of the payment requests. Example \"Amount desc,Inserted asc\".
+
+try {
+    $result = $apiInstance->exportPaymentRequests($merchant_id, $page, $size, $from_date, $to_date, $status, $search, $currency, $min_amount, $max_amount, $tags, $sort);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PaymentRequestsApi->exportPaymentRequests: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **merchant_id** | **string**| The merchant ID to get he list of payment requests for. This field is ignored for              merchant tokens and required for user tokens. | [optional] |
+| **page** | **int**| The page number from where records are retrieved. Note that the paging starts from page 1.              If a 0 is supplied it will be treated as a 1 and the first page is returned. | [optional] [default to 1] |
+| **size** | **int**| The number of records to be retrieved from a page. | [optional] [default to 20] |
+| **from_date** | **\DateTime**| The date filter to apply to retrieve payment requests created after this date. | [optional] |
+| **to_date** | **\DateTime**| The date filter to apply to retrieve payment requests created up until this date. | [optional] |
+| **status** | **string**| The status filter to apply to retrieve payment requests with this status | [optional] [default to &#39;All&#39;] |
+| **search** | **string**| The text filter to apply to retrieve payment requests with a similar title, description, merchant name or contact information. | [optional] |
+| **currency** | **string**| The currency filter to apply to retrieve payment requests with this currency. | [optional] |
+| **min_amount** | **float**| The amount filter to apply to retrieve payment requests that exceed this amount. | [optional] |
+| **max_amount** | **float**| The amount filter to apply to retrieve payment requests that don&#39;t exceed this amount. | [optional] |
+| **tags** | [**string[]**](../Model/string.md)| The tag filter to apply to retrieve payment requests with at least one of these tags. | [optional] |
+| **sort** | **string**| Optional expression to sort the order of the payment requests. Example \&quot;Amount desc,Inserted asc\&quot;. | [optional] |
+
+### Return type
+
+**\SplFileObject**
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `text/csv`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `getAllPaymentRequestsPaged()`
 
 ```php
-getAllPaymentRequestsPaged($merchant_id, $page, $size, $from_date, $to_date, $status, $search, $currency, $min_amount, $max_amount, $tags, $sort)
+getAllPaymentRequestsPaged($merchant_id, $page, $size, $from_date, $to_date, $status, $search, $currency, $min_amount, $max_amount, $tags, $sort): \Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPaymentRequestPageResponse
 ```
 
 Gets a list of all payment requests.
@@ -685,7 +763,8 @@ $tags = array('tags_example'); // string[] | The tag filter to apply to retrieve
 $sort = 'sort_example'; // string | Optional expression to sort the order of the payment requests. Example \"Amount desc,Inserted asc\".
 
 try {
-    $apiInstance->getAllPaymentRequestsPaged($merchant_id, $page, $size, $from_date, $to_date, $status, $search, $currency, $min_amount, $max_amount, $tags, $sort);
+    $result = $apiInstance->getAllPaymentRequestsPaged($merchant_id, $page, $size, $from_date, $to_date, $status, $search, $currency, $min_amount, $max_amount, $tags, $sort);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PaymentRequestsApi->getAllPaymentRequestsPaged: ', $e->getMessage(), PHP_EOL;
 }
@@ -710,7 +789,7 @@ try {
 
 ### Return type
 
-void (empty response body)
+[**\Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPaymentRequestPageResponse**](../Model/NoFrixionBizBizModelsPagingPaymentRequestPageResponse.md)
 
 ### Authorization
 
@@ -719,7 +798,7 @@ void (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: `text/plain`, `application/json`, `text/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)
@@ -1349,70 +1428,6 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `setupCardPayerAuthentication()`
-
-```php
-setupCardPayerAuthentication($id, $jwt): \Nofrixion\Client\Model\NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse
-```
-
-Set up payer authentication for a card payment.
-
-The payer authentication can only be set up once the payer has entered their card details and they   have been tokenised by the CyberSource Flex MicroForm javascript library.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure API key authorization: Bearer
-$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
-
-
-$apiInstance = new Nofrixion\Client\Api\PaymentRequestsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$id = 'id_example'; // string | The ID of the payment request the card payment is being processed for.
-$jwt = 'jwt_example'; // string | The JSON Web Token containing the tokenised card details.
-
-try {
-    $result = $apiInstance->setupCardPayerAuthentication($id, $jwt);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling PaymentRequestsApi->setupCardPayerAuthentication: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**| The ID of the payment request the card payment is being processed for. | |
-| **jwt** | **string**| The JSON Web Token containing the tokenised card details. | [optional] |
-
-### Return type
-
-[**\Nofrixion\Client\Model\NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse**](../Model/NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse.md)
-
-### Authorization
-
-[Bearer](../../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: `multipart/form-data`
-- **Accept**: `text/plain`, `application/json`, `text/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
 ## `simulatePayByBankCallback()`
 
 ```php
@@ -1705,7 +1720,7 @@ try {
 ## `submitTokenisedCardPayment()`
 
 ```php
-submitTokenisedCardPayment($id, $tokenised_card_id, $payment_initiator, $merchant_standard_reason, $commerce_indicator, $card_security_code, $partial_amount): \Nofrixion\Client\Model\NoFrixionBizBizModelsPaymentsCardPaymentResponse
+submitTokenisedCardPayment($id, $tokenised_card_id, $payment_initiator, $card_security_code, $partial_amount): \Nofrixion\Client\Model\NoFrixionBizBizModelsPaymentsCardPaymentResponse
 ```
 
 Submits a payment request, using a tokenised card, to a payment gateway.
@@ -1732,13 +1747,11 @@ $apiInstance = new Nofrixion\Client\Api\PaymentRequestsApi(
 $id = 'id_example'; // string | The ID of the payment request the card payment is being submitted for.
 $tokenised_card_id = 'tokenised_card_id_example'; // string | The ID of the tokenised card to use for the payment. The merchant needs to ensure that  the use of the tokenised card is restricted to the same customer that created it.
 $payment_initiator = 'payment_initiator_example'; // string | Indicates who initiated the card token payment, customer or merchant.
-$merchant_standard_reason = 'merchant_standard_reason_example'; // string | For merchant initiated transactions that correspond to one of the industry standard  reasons should be set.
-$commerce_indicator = 'commerce_indicator_example'; // string | For recurring and installment merchant initiated transactions this property should  be set accordingly. For all other transactions it should be left at the default of  \\\"internet\\\".
 $card_security_code = 'card_security_code_example'; // string | Not used for merchant initiated transactions. Optional for customer initiated transactions.  If supplied will be sent to the card processor as a check that the customer using the   tokenised card knows the card verification number.
 $partial_amount = 3.4; // float | Optional partial payment amount. If not specified then the full payment request  amount will be attempted.
 
 try {
-    $result = $apiInstance->submitTokenisedCardPayment($id, $tokenised_card_id, $payment_initiator, $merchant_standard_reason, $commerce_indicator, $card_security_code, $partial_amount);
+    $result = $apiInstance->submitTokenisedCardPayment($id, $tokenised_card_id, $payment_initiator, $card_security_code, $partial_amount);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PaymentRequestsApi->submitTokenisedCardPayment: ', $e->getMessage(), PHP_EOL;
@@ -1752,8 +1765,6 @@ try {
 | **id** | **string**| The ID of the payment request the card payment is being submitted for. | |
 | **tokenised_card_id** | **string**| The ID of the tokenised card to use for the payment. The merchant needs to ensure that  the use of the tokenised card is restricted to the same customer that created it. | [optional] |
 | **payment_initiator** | **string**| Indicates who initiated the card token payment, customer or merchant. | [optional] |
-| **merchant_standard_reason** | **string**| For merchant initiated transactions that correspond to one of the industry standard  reasons should be set. | [optional] |
-| **commerce_indicator** | **string**| For recurring and installment merchant initiated transactions this property should  be set accordingly. For all other transactions it should be left at the default of  \\\&quot;internet\\\&quot;. | [optional] |
 | **card_security_code** | **string**| Not used for merchant initiated transactions. Optional for customer initiated transactions.  If supplied will be sent to the card processor as a check that the customer using the   tokenised card knows the card verification number. | [optional] |
 | **partial_amount** | **float**| Optional partial payment amount. If not specified then the full payment request  amount will be attempted. | [optional] |
 

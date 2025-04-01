@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponseTest
+ * NoFrixionMoneyMoovModelsPaymentAccountPageResponseTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Nofrixion\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponseTest Class Doc Comment
+ * NoFrixionMoneyMoovModelsPaymentAccountPageResponseTest Class Doc Comment
  *
  * @category    Class
- * @description NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse
+ * @description NoFrixionMoneyMoovModelsPaymentAccountPageResponse
  * @package     Nofrixion\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponseTest extends TestCase
+class NoFrixionMoneyMoovModelsPaymentAccountPageResponseTest extends TestCase
 {
 
     /**
@@ -71,36 +71,54 @@ class NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponseTest exte
     }
 
     /**
-     * Test "NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse"
+     * Test "NoFrixionMoneyMoovModelsPaymentAccountPageResponse"
      */
-    public function testNoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse()
+    public function testNoFrixionMoneyMoovModelsPaymentAccountPageResponse()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "access_token"
+     * Test attribute "content"
      */
-    public function testPropertyAccessToken()
+    public function testPropertyContent()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "device_data_collection_url"
+     * Test attribute "page_number"
      */
-    public function testPropertyDeviceDataCollectionUrl()
+    public function testPropertyPageNumber()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "reference_id"
+     * Test attribute "page_size"
      */
-    public function testPropertyReferenceId()
+    public function testPropertyPageSize()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "total_pages"
+     */
+    public function testPropertyTotalPages()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "total_size"
+     */
+    public function testPropertyTotalSize()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

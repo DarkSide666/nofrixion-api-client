@@ -144,6 +144,18 @@ class PayoutsApiTest extends TestCase
     }
 
     /**
+     * Test case for exportPayouts
+     *
+     * Exports a list of all payouts for a specific merchant to a CSV file..
+     *
+     */
+    public function testExportPayouts()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getBatchPayout
      *
      * Gets a list of all the payouts contained in a batch..

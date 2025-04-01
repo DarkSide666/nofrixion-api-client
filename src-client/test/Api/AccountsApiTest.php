@@ -108,6 +108,30 @@ class AccountsApiTest extends TestCase
     }
 
     /**
+     * Test case for exportAccountTransactions
+     *
+     * Exports a list of all transactions for a specific account in CSV format..
+     *
+     */
+    public function testExportAccountTransactions()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for exportAccounts
+     *
+     * Exports a list of all payment accounts the user has access to for a specific merchant..
+     *
+     */
+    public function testExportAccounts()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for generateAccountStatement
      *
      * Sends a message to the transaction statement queue to generate a statement with the supplied parameters..

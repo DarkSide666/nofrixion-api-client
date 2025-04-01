@@ -132,6 +132,30 @@ class MerchantsApiTest extends TestCase
     }
 
     /**
+     * Test case for exportMerchantBeneficiaries
+     *
+     * Exports a list of all beneficiaries..
+     *
+     */
+    public function testExportMerchantBeneficiaries()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for exportMerchantPayouts
+     *
+     * Exports a list of all payouts for a specific merchant as a CSV file..
+     *
+     */
+    public function testExportMerchantPayouts()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getAuthorisationSettings
      *
      * Gets a list of merchant authorisation settings for a merchant.

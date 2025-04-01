@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse
+ * NoFrixionMoneyMoovModelsBeneficiaryPageResponse
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Nofrixion\Client\ObjectSerializer;
 
 /**
- * NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse Class Doc Comment
+ * NoFrixionMoneyMoovModelsBeneficiaryPageResponse Class Doc Comment
  *
  * @category Class
  * @package  Nofrixion\Client
@@ -40,7 +40,7 @@ use \Nofrixion\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class NoFrixionMoneyMoovModelsBeneficiaryPageResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse implemen
       *
       * @var string
       */
-    protected static $openAPIModelName = 'NoFrixion.Biz.BizModels.Payments.CardPayerAuthenticationSetupResponse';
+    protected static $openAPIModelName = 'NoFrixion.MoneyMoov.Models.BeneficiaryPageResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +57,11 @@ class NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse implemen
       * @var string[]
       */
     protected static $openAPITypes = [
-        'access_token' => 'string',
-        'device_data_collection_url' => 'string',
-        'reference_id' => 'string'
+        'content' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiary[]',
+        'page_number' => 'int',
+        'page_size' => 'int',
+        'total_pages' => 'int',
+        'total_size' => 'int'
     ];
 
     /**
@@ -70,9 +72,11 @@ class NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse implemen
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'access_token' => null,
-        'device_data_collection_url' => null,
-        'reference_id' => null
+        'content' => null,
+        'page_number' => 'int32',
+        'page_size' => 'int32',
+        'total_pages' => 'int32',
+        'total_size' => 'int64'
     ];
 
     /**
@@ -81,9 +85,11 @@ class NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse implemen
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'access_token' => true,
-        'device_data_collection_url' => true,
-        'reference_id' => true
+        'content' => true,
+        'page_number' => false,
+        'page_size' => false,
+        'total_pages' => false,
+        'total_size' => false
     ];
 
     /**
@@ -172,9 +178,11 @@ class NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse implemen
      * @var string[]
      */
     protected static $attributeMap = [
-        'access_token' => 'accessToken',
-        'device_data_collection_url' => 'deviceDataCollectionUrl',
-        'reference_id' => 'referenceID'
+        'content' => 'content',
+        'page_number' => 'pageNumber',
+        'page_size' => 'pageSize',
+        'total_pages' => 'totalPages',
+        'total_size' => 'totalSize'
     ];
 
     /**
@@ -183,9 +191,11 @@ class NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse implemen
      * @var string[]
      */
     protected static $setters = [
-        'access_token' => 'setAccessToken',
-        'device_data_collection_url' => 'setDeviceDataCollectionUrl',
-        'reference_id' => 'setReferenceId'
+        'content' => 'setContent',
+        'page_number' => 'setPageNumber',
+        'page_size' => 'setPageSize',
+        'total_pages' => 'setTotalPages',
+        'total_size' => 'setTotalSize'
     ];
 
     /**
@@ -194,9 +204,11 @@ class NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse implemen
      * @var string[]
      */
     protected static $getters = [
-        'access_token' => 'getAccessToken',
-        'device_data_collection_url' => 'getDeviceDataCollectionUrl',
-        'reference_id' => 'getReferenceId'
+        'content' => 'getContent',
+        'page_number' => 'getPageNumber',
+        'page_size' => 'getPageSize',
+        'total_pages' => 'getTotalPages',
+        'total_size' => 'getTotalSize'
     ];
 
     /**
@@ -256,9 +268,11 @@ class NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse implemen
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('access_token', $data ?? [], null);
-        $this->setIfExists('device_data_collection_url', $data ?? [], null);
-        $this->setIfExists('reference_id', $data ?? [], null);
+        $this->setIfExists('content', $data ?? [], null);
+        $this->setIfExists('page_number', $data ?? [], null);
+        $this->setIfExists('page_size', $data ?? [], null);
+        $this->setIfExists('total_pages', $data ?? [], null);
+        $this->setIfExists('total_size', $data ?? [], null);
     }
 
     /**
@@ -304,103 +318,143 @@ class NoFrixionBizBizModelsPaymentsCardPayerAuthenticationSetupResponse implemen
 
 
     /**
-     * Gets access_token
+     * Gets content
      *
-     * @return string|null
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiary[]|null
      */
-    public function getAccessToken()
+    public function getContent()
     {
-        return $this->container['access_token'];
+        return $this->container['content'];
     }
 
     /**
-     * Sets access_token
+     * Sets content
      *
-     * @param string|null $access_token access_token
+     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiary[]|null $content content
      *
      * @return self
      */
-    public function setAccessToken($access_token)
+    public function setContent($content)
     {
-        if (is_null($access_token)) {
-            array_push($this->openAPINullablesSetToNull, 'access_token');
+        if (is_null($content)) {
+            array_push($this->openAPINullablesSetToNull, 'content');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('access_token', $nullablesSetToNull);
+            $index = array_search('content', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['access_token'] = $access_token;
+        $this->container['content'] = $content;
 
         return $this;
     }
 
     /**
-     * Gets device_data_collection_url
+     * Gets page_number
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getDeviceDataCollectionUrl()
+    public function getPageNumber()
     {
-        return $this->container['device_data_collection_url'];
+        return $this->container['page_number'];
     }
 
     /**
-     * Sets device_data_collection_url
+     * Sets page_number
      *
-     * @param string|null $device_data_collection_url device_data_collection_url
+     * @param int|null $page_number Current page number. Its 1 based. i.e firstpage is 1, secondpage is 2
      *
      * @return self
      */
-    public function setDeviceDataCollectionUrl($device_data_collection_url)
+    public function setPageNumber($page_number)
     {
-        if (is_null($device_data_collection_url)) {
-            array_push($this->openAPINullablesSetToNull, 'device_data_collection_url');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('device_data_collection_url', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($page_number)) {
+            throw new \InvalidArgumentException('non-nullable page_number cannot be null');
         }
-        $this->container['device_data_collection_url'] = $device_data_collection_url;
+        $this->container['page_number'] = $page_number;
 
         return $this;
     }
 
     /**
-     * Gets reference_id
+     * Gets page_size
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getReferenceId()
+    public function getPageSize()
     {
-        return $this->container['reference_id'];
+        return $this->container['page_size'];
     }
 
     /**
-     * Sets reference_id
+     * Sets page_size
      *
-     * @param string|null $reference_id reference_id
+     * @param int|null $page_size Page size
      *
      * @return self
      */
-    public function setReferenceId($reference_id)
+    public function setPageSize($page_size)
     {
-        if (is_null($reference_id)) {
-            array_push($this->openAPINullablesSetToNull, 'reference_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('reference_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($page_size)) {
+            throw new \InvalidArgumentException('non-nullable page_size cannot be null');
         }
-        $this->container['reference_id'] = $reference_id;
+        $this->container['page_size'] = $page_size;
+
+        return $this;
+    }
+
+    /**
+     * Gets total_pages
+     *
+     * @return int|null
+     */
+    public function getTotalPages()
+    {
+        return $this->container['total_pages'];
+    }
+
+    /**
+     * Sets total_pages
+     *
+     * @param int|null $total_pages Total pages
+     *
+     * @return self
+     */
+    public function setTotalPages($total_pages)
+    {
+        if (is_null($total_pages)) {
+            throw new \InvalidArgumentException('non-nullable total_pages cannot be null');
+        }
+        $this->container['total_pages'] = $total_pages;
+
+        return $this;
+    }
+
+    /**
+     * Gets total_size
+     *
+     * @return int|null
+     */
+    public function getTotalSize()
+    {
+        return $this->container['total_size'];
+    }
+
+    /**
+     * Sets total_size
+     *
+     * @param int|null $total_size Total count
+     *
+     * @return self
+     */
+    public function setTotalSize($total_size)
+    {
+        if (is_null($total_size)) {
+            throw new \InvalidArgumentException('non-nullable total_size cannot be null');
+        }
+        $this->container['total_size'] = $total_size;
 
         return $this;
     }

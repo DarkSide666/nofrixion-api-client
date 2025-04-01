@@ -84,12 +84,36 @@ class TransactionsApiTest extends TestCase
     }
 
     /**
+     * Test case for exportTransactionsForAccount
+     *
+     * Exports a list of the transactions for a single payment account to a CSV file..
+     *
+     */
+    public function testExportTransactionsForAccount()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getTransactionProof
      *
      * Generates a proof of payment PDF document with the details of a transaction..
      *
      */
     public function testGetTransactionProof()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getTransactionsByAccountSequenceNumber
+     *
+     * Gets an account's transactions by sequence number.
+     *
+     */
+    public function testGetTransactionsByAccountSequenceNumber()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

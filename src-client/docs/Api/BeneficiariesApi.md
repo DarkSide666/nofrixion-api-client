@@ -9,6 +9,7 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 | [**deleteBeneficiary()**](BeneficiariesApi.md#deleteBeneficiary) | **DELETE** /api/v1/beneficiaries/{id} | Deletes a beneficiary |
 | [**disableBeneficiary()**](BeneficiariesApi.md#disableBeneficiary) | **PUT** /api/v1/beneficiaries/disable/{id} | Attempts to disable a beneficiary. If successful the beneficiary will be disabled. |
 | [**enableBeneficiary()**](BeneficiariesApi.md#enableBeneficiary) | **PUT** /api/v1/beneficiaries/enable/{id} | Attempts to enable a beneficiary. If successful the beneficiary will be enabled. |
+| [**exportBeneficiaries()**](BeneficiariesApi.md#exportBeneficiaries) | **GET** /api/v1/beneficiaries/export | Export beneficiaries to CSV. |
 | [**getBeneficiaries()**](BeneficiariesApi.md#getBeneficiaries) | **GET** /api/v1/beneficiaries | Gets a list of all beneficiaries. |
 | [**getBeneficiary()**](BeneficiariesApi.md#getBeneficiary) | **GET** /api/v1/beneficiaries/{id} | Get&#39;s a beneficiary by beneficiary ID. |
 | [**updateBeneficiary()**](BeneficiariesApi.md#updateBeneficiary) | **PUT** /api/v1/beneficiaries/{id} | Updates a beneficiary. |
@@ -312,10 +313,82 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `exportBeneficiaries()`
+
+```php
+exportBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort): \SplFileObject
+```
+
+Export beneficiaries to CSV.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\BeneficiariesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$merchant_id = 'merchant_id_example'; // string | Optional. The ID of the merchant to retrieve the beneficiaries for.               If not set beneficiaries for all merchants the user has access to will be returned
+$page_number = 56; // int | The page number from where records are retrieved.
+$page_size = 56; // int | The number of records to be retrieved from a page.
+$search = 'search_example'; // string | The text filter used to retrieve the records.
+$currency = 'currency_example'; // string | The currency filter used to retrieve the records..
+$include_disabled = false; // bool | If set to true will include disabled beneficiaries as well
+$sort = 'sort_example'; // string | Optional expression to sort the order of the beneficiaries.
+
+try {
+    $result = $apiInstance->exportBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling BeneficiariesApi->exportBeneficiaries: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **merchant_id** | **string**| Optional. The ID of the merchant to retrieve the beneficiaries for.               If not set beneficiaries for all merchants the user has access to will be returned | [optional] |
+| **page_number** | **int**| The page number from where records are retrieved. | [optional] |
+| **page_size** | **int**| The number of records to be retrieved from a page. | [optional] |
+| **search** | **string**| The text filter used to retrieve the records. | [optional] |
+| **currency** | **string**| The currency filter used to retrieve the records.. | [optional] |
+| **include_disabled** | **bool**| If set to true will include disabled beneficiaries as well | [optional] [default to false] |
+| **sort** | **string**| Optional expression to sort the order of the beneficiaries. | [optional] |
+
+### Return type
+
+**\SplFileObject**
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `text/csv`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `getBeneficiaries()`
 
 ```php
-getBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort)
+getBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse
 ```
 
 Gets a list of all beneficiaries.
@@ -348,7 +421,8 @@ $include_disabled = false; // bool | If set to true will include disabled benefi
 $sort = 'sort_example'; // string | Optional expression to sort the order of the beneficiaries.
 
 try {
-    $apiInstance->getBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort);
+    $result = $apiInstance->getBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling BeneficiariesApi->getBeneficiaries: ', $e->getMessage(), PHP_EOL;
 }
@@ -368,7 +442,7 @@ try {
 
 ### Return type
 
-void (empty response body)
+[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse**](../Model/NoFrixionMoneyMoovModelsBeneficiaryPageResponse.md)
 
 ### Authorization
 
@@ -377,7 +451,7 @@ void (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: `text/plain`, `application/json`, `text/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)

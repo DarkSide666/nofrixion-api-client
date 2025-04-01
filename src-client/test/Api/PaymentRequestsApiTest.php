@@ -156,6 +156,18 @@ class PaymentRequestsApiTest extends TestCase
     }
 
     /**
+     * Test case for exportPaymentRequests
+     *
+     * Export a list of all payment requests to a CSV file..
+     *
+     */
+    public function testExportPaymentRequests()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getAllPaymentRequestsPaged
      *
      * Gets a list of all payment requests..
@@ -282,18 +294,6 @@ class PaymentRequestsApiTest extends TestCase
      *
      */
     public function testRefundCardPayment()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for setupCardPayerAuthentication
-     *
-     * Set up payer authentication for a card payment..
-     *
-     */
-    public function testSetupCardPayerAuthentication()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

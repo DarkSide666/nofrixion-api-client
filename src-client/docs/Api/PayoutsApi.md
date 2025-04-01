@@ -10,6 +10,7 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 | [**createPayouts()**](PayoutsApi.md#createPayouts) | **POST** /api/v1/payouts/batchcreate | Creates payouts. |
 | [**deletePayout()**](PayoutsApi.md#deletePayout) | **DELETE** /api/v1/payouts/{id} | Deletes a payout record. |
 | [**deletePayouts()**](PayoutsApi.md#deletePayouts) | **DELETE** /api/v1/payouts/batchdelete | Deletes a list of payout records. |
+| [**exportPayouts()**](PayoutsApi.md#exportPayouts) | **GET** /api/v1/payouts/export | Exports a list of all payouts for a specific merchant to a CSV file. |
 | [**getBatchPayout()**](PayoutsApi.md#getBatchPayout) | **GET** /api/v1/payouts/batch/{id} | Gets a list of all the payouts contained in a batch. |
 | [**getPayout()**](PayoutsApi.md#getPayout) | **GET** /api/v1/payouts/{id} | Gets a single payout. |
 | [**getPayoutForInvoice()**](PayoutsApi.md#getPayoutForInvoice) | **GET** /api/v1/payouts/getbyinvoiceid/{invoiceID} | Gets a payout by its invoice ID. |
@@ -380,6 +381,88 @@ void (empty response body)
 
 - **Content-Type**: `application/json-patch+json`, `application/json`, `text/json`, `application/*+json`
 - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `exportPayouts()`
+
+```php
+exportPayouts($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort): \SplFileObject
+```
+
+Exports a list of all payouts for a specific merchant to a CSV file.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\PayoutsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$merchant_id = 'merchant_id_example'; // string | Required. The ID of the merchant to get the payouts for.
+$page_number = 56; // int | The page number from where records are retrieved.
+$page_size = 56; // int | The number of records to be retrieved from a page.
+$statuses = array('statuses_example'); // string[] | An optional status filter for the payout records.
+$from_date = new \DateTime("2013-10-20T19:20:30+01:00"); // \DateTime | The date filter to apply to retrieve payouts created after this date.
+$to_date = new \DateTime("2013-10-20T19:20:30+01:00"); // \DateTime | The date filter to apply to retrieve payouts created up until this date.
+$search = 'search_example'; // string | The text filter to apply to retrieve payouts with a similar title, description, merchant name or contact information.
+$currency = 'currency_example'; // string | The currency filter to apply to retrieve payouts with this currency.
+$min_amount = 3.4; // float | The amount filter to apply to retrieve payouts that exceed this amount.
+$max_amount = 3.4; // float | The amount filter to apply to retrieve payouts that don't exceed this amount.
+$tags = array('tags_example'); // string[] | The tag filter to apply to retrieve payouts with at least one of these tags.
+$sort = 'sort_example'; // string | Optional expression to sort the order of the payouts.
+
+try {
+    $result = $apiInstance->exportPayouts($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PayoutsApi->exportPayouts: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **merchant_id** | **string**| Required. The ID of the merchant to get the payouts for. | [optional] |
+| **page_number** | **int**| The page number from where records are retrieved. | [optional] |
+| **page_size** | **int**| The number of records to be retrieved from a page. | [optional] |
+| **statuses** | [**string[]**](../Model/string.md)| An optional status filter for the payout records. | [optional] |
+| **from_date** | **\DateTime**| The date filter to apply to retrieve payouts created after this date. | [optional] |
+| **to_date** | **\DateTime**| The date filter to apply to retrieve payouts created up until this date. | [optional] |
+| **search** | **string**| The text filter to apply to retrieve payouts with a similar title, description, merchant name or contact information. | [optional] |
+| **currency** | **string**| The currency filter to apply to retrieve payouts with this currency. | [optional] |
+| **min_amount** | **float**| The amount filter to apply to retrieve payouts that exceed this amount. | [optional] |
+| **max_amount** | **float**| The amount filter to apply to retrieve payouts that don&#39;t exceed this amount. | [optional] |
+| **tags** | [**string[]**](../Model/string.md)| The tag filter to apply to retrieve payouts with at least one of these tags. | [optional] |
+| **sort** | **string**| Optional expression to sort the order of the payouts. | [optional] |
+
+### Return type
+
+**\SplFileObject**
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `text/csv`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)
@@ -763,7 +846,7 @@ try {
 ## `getPayoutsPaged()`
 
 ```php
-getPayoutsPaged($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort)
+getPayoutsPaged($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort): \Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPayoutPageResponse
 ```
 
 Gets a list of all payouts for a specific merchant.
@@ -801,7 +884,8 @@ $tags = array('tags_example'); // string[] | The tag filter to apply to retrieve
 $sort = 'sort_example'; // string | Optional expression to sort the order of the payouts.
 
 try {
-    $apiInstance->getPayoutsPaged($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort);
+    $result = $apiInstance->getPayoutsPaged($merchant_id, $page_number, $page_size, $statuses, $from_date, $to_date, $search, $currency, $min_amount, $max_amount, $tags, $sort);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PayoutsApi->getPayoutsPaged: ', $e->getMessage(), PHP_EOL;
 }
@@ -826,7 +910,7 @@ try {
 
 ### Return type
 
-void (empty response body)
+[**\Nofrixion\Client\Model\NoFrixionBizBizModelsPagingPayoutPageResponse**](../Model/NoFrixionBizBizModelsPagingPayoutPageResponse.md)
 
 ### Authorization
 
@@ -835,7 +919,7 @@ void (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: `text/plain`, `application/json`, `text/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)
