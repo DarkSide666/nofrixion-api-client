@@ -10,6 +10,7 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 | [**deleteAllTokenisedCards()**](PaymentRequestsApi.md#deleteAllTokenisedCards) | **DELETE** /api/v1/paymentrequests/card/customertokens/removeall/{customerEmailAddress} | Deletes all the card tokens for a customer. |
 | [**deleteAllTokenisedCardsForMerchant()**](PaymentRequestsApi.md#deleteAllTokenisedCardsForMerchant) | **DELETE** /api/v1/paymentrequests/card/customertokens/removeall/{merchantID}/{customerEmailAddress} | Deletes all the card tokens for a customer. |
 | [**deletePaymentRequest()**](PaymentRequestsApi.md#deletePaymentRequest) | **DELETE** /api/v1/paymentrequests/{id} | Deletes a payment request, along with its keys and addresses, if there&#39;s  no payment event associated with it. |
+| [**deletePaymentRequestTemplate()**](PaymentRequestsApi.md#deletePaymentRequestTemplate) | **DELETE** /api/v1/paymentrequests/{merchantID}/templates/{templateID} | Deletes a payment request template for a merchant. |
 | [**deleteTokenisedCard()**](PaymentRequestsApi.md#deleteTokenisedCard) | **DELETE** /api/v1/paymentrequests/card/customertokens/{id} | Deletes a single card token. |
 | [**exportPaymentRequests()**](PaymentRequestsApi.md#exportPaymentRequests) | **GET** /api/v1/paymentrequests/export | Export a list of all payment requests to a CSV file. |
 | [**getAllPaymentRequestsPaged()**](PaymentRequestsApi.md#getAllPaymentRequestsPaged) | **GET** /api/v1/paymentrequests | Gets a list of all payment requests. |
@@ -19,6 +20,8 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 | [**getPaymentRequestMetricsForMerchant()**](PaymentRequestsApi.md#getPaymentRequestMetricsForMerchant) | **GET** /api/v1/paymentrequests/metrics | Gets payment request metrics of a merchant. |
 | [**getPaymentRequestMinimal()**](PaymentRequestsApi.md#getPaymentRequestMinimal) | **GET** /api/v1/paymentrequests/{id}/minimal | Gets a minimal representation of a payment request. |
 | [**getPaymentRequestResult()**](PaymentRequestsApi.md#getPaymentRequestResult) | **GET** /api/v1/paymentrequests/{id}/result | Gets a payment request result. |
+| [**getPaymentRequestTemplate()**](PaymentRequestsApi.md#getPaymentRequestTemplate) | **GET** /api/v1/paymentrequests/{merchantID}/templates/{templateID} | Gets a payment request template for a merchant. |
+| [**getPaymentRequestTemplates()**](PaymentRequestsApi.md#getPaymentRequestTemplates) | **GET** /api/v1/paymentrequests/{merchantID}/templates | Gets a list of payment request templates for a merchant. |
 | [**getPublicKeyForCardPayment()**](PaymentRequestsApi.md#getPublicKeyForCardPayment) | **GET** /api/v1/paymentrequests/{id}/card/publickey | Gets the public key to encrypt card details with when submitting an authorisation. |
 | [**getTokenisedCards()**](PaymentRequestsApi.md#getTokenisedCards) | **GET** /api/v1/paymentrequests/card/customertokens/{customerEmailAddress} | Gets a list of the tokenised cards stored for a single customer. |
 | [**getTokenisedCardsForMerchant()**](PaymentRequestsApi.md#getTokenisedCardsForMerchant) | **GET** /api/v1/paymentrequests/card/customertokens/{merchantID}/{customerEmailAddress} | Gets a list of the tokenised cards stored for a single customer. |
@@ -29,6 +32,7 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 | [**submitPayByBank()**](PaymentRequestsApi.md#submitPayByBank) | **POST** /api/v1/paymentrequests/{id}/pisp | Submits a payment initiation request. |
 | [**submitTokenisedCardPayment()**](PaymentRequestsApi.md#submitTokenisedCardPayment) | **POST** /api/v1/paymentrequests/{id}/card/paywithtoken | Submits a payment request, using a tokenised card, to a payment gateway. |
 | [**updatePaymentRequest()**](PaymentRequestsApi.md#updatePaymentRequest) | **PUT** /api/v1/paymentrequests/{id} | Updates a payment request. |
+| [**updatePaymentRequestTemplate()**](PaymentRequestsApi.md#updatePaymentRequestTemplate) | **PUT** /api/v1/paymentrequests/{merchantID}/templates/{templateID} | Updates a payment request template for a merchant. |
 | [**voidAllCardPayments()**](PaymentRequestsApi.md#voidAllCardPayments) | **POST** /api/v1/paymentrequests/{id}/card/voidpaymentrequest | Submits a request to void all payments for a payment request. |
 | [**voidCardPayment()**](PaymentRequestsApi.md#voidCardPayment) | **POST** /api/v1/paymentrequests/{id}/card/void | Submits a request to void a card payment. |
 
@@ -575,6 +579,68 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `deletePaymentRequestTemplate()`
+
+```php
+deletePaymentRequestTemplate($merchant_id, $template_id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsMerchantPaymentRequestTemplate
+```
+
+Deletes a payment request template for a merchant.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\PaymentRequestsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$merchant_id = 'merchant_id_example'; // string | The ID of the merchant to delete payment request templates for.
+$template_id = 'template_id_example'; // string | The ID of the template.
+
+try {
+    $result = $apiInstance->deletePaymentRequestTemplate($merchant_id, $template_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PaymentRequestsApi->deletePaymentRequestTemplate: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **merchant_id** | **string**| The ID of the merchant to delete payment request templates for. | |
+| **template_id** | **string**| The ID of the template. | |
+
+### Return type
+
+[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsMerchantPaymentRequestTemplate**](../Model/NoFrixionMoneyMoovModelsPaymentRequestsMerchantPaymentRequestTemplate.md)
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `text/plain`, `application/json`, `text/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)
@@ -1166,6 +1232,128 @@ try {
 ### Return type
 
 [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestResult**](../Model/NoFrixionMoneyMoovModelsPaymentRequestResult.md)
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `text/plain`, `application/json`, `text/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getPaymentRequestTemplate()`
+
+```php
+getPaymentRequestTemplate($merchant_id, $template_id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsMerchantPaymentRequestTemplate
+```
+
+Gets a payment request template for a merchant.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\PaymentRequestsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$merchant_id = 'merchant_id_example'; // string | The ID of the merchant to get payment request templates for.
+$template_id = 'template_id_example'; // string | The ID of the template.
+
+try {
+    $result = $apiInstance->getPaymentRequestTemplate($merchant_id, $template_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PaymentRequestsApi->getPaymentRequestTemplate: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **merchant_id** | **string**| The ID of the merchant to get payment request templates for. | |
+| **template_id** | **string**| The ID of the template. | |
+
+### Return type
+
+[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsMerchantPaymentRequestTemplate**](../Model/NoFrixionMoneyMoovModelsPaymentRequestsMerchantPaymentRequestTemplate.md)
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `text/plain`, `application/json`, `text/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getPaymentRequestTemplates()`
+
+```php
+getPaymentRequestTemplates($merchant_id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsMerchantPaymentRequestTemplate[]
+```
+
+Gets a list of payment request templates for a merchant.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\PaymentRequestsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$merchant_id = 'merchant_id_example'; // string | The ID of the merchant to get payment request templates for.
+
+try {
+    $result = $apiInstance->getPaymentRequestTemplates($merchant_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PaymentRequestsApi->getPaymentRequestTemplates: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **merchant_id** | **string**| The ID of the merchant to get payment request templates for. | |
+
+### Return type
+
+[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsMerchantPaymentRequestTemplate[]**](../Model/NoFrixionMoneyMoovModelsPaymentRequestsMerchantPaymentRequestTemplate.md)
 
 ### Authorization
 
@@ -1841,6 +2029,70 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: `application/json`
+- **Accept**: `text/plain`, `application/json`, `text/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updatePaymentRequestTemplate()`
+
+```php
+updatePaymentRequestTemplate($merchant_id, $template_id, $no_frixion_money_moov_models_payment_requests_payment_request_template_update): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsMerchantPaymentRequestTemplate
+```
+
+Updates a payment request template for a merchant.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\PaymentRequestsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$merchant_id = 'merchant_id_example'; // string | The ID of the merchant for the payment request template update.
+$template_id = 'template_id_example'; // string | The ID of the template.
+$no_frixion_money_moov_models_payment_requests_payment_request_template_update = new \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateUpdate(); // \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateUpdate | The template to update
+
+try {
+    $result = $apiInstance->updatePaymentRequestTemplate($merchant_id, $template_id, $no_frixion_money_moov_models_payment_requests_payment_request_template_update);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PaymentRequestsApi->updatePaymentRequestTemplate: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **merchant_id** | **string**| The ID of the merchant for the payment request template update. | |
+| **template_id** | **string**| The ID of the template. | |
+| **no_frixion_money_moov_models_payment_requests_payment_request_template_update** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateUpdate**](../Model/NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateUpdate.md)| The template to update | [optional] |
+
+### Return type
+
+[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsMerchantPaymentRequestTemplate**](../Model/NoFrixionMoneyMoovModelsPaymentRequestsMerchantPaymentRequestTemplate.md)
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json-patch+json`, `application/json`, `text/json`, `application/*+json`
 - **Accept**: `text/plain`, `application/json`, `text/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)

@@ -23,5 +23,7 @@ Name | Type | Description | Notes
 **authorisers_completed_count** | **int** | The number of distinct authorisers that have authorised the merchant token. | [optional]
 **authentication_methods** | **string[]** | A list of authentication types allowed to authorise the merchant token. | [optional]
 **last_authorised** | **\DateTime** |  | [optional]
+**ip_address_whitelist** | **string** | Optional. If set represents a comma separated list of IP addresses that this token is authorised to be used from.  Attempts to use the token from an IP address not in the list will be rejected. | [optional]
+**is_archived** | **bool** | Indicates whether the merchant token is archived. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

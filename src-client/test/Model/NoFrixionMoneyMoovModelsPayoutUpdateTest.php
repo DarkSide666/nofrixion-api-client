@@ -195,4 +195,13 @@ class NoFrixionMoneyMoovModelsPayoutUpdateTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "charge_bearer"
+     */
+    public function testPropertyChargeBearer()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

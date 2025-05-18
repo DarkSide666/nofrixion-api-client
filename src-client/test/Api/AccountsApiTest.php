@@ -228,6 +228,18 @@ class AccountsApiTest extends TestCase
     }
 
     /**
+     * Test case for getFailedPayoutsForAccount
+     *
+     * Get failed payouts for a specific account..
+     *
+     */
+    public function testGetFailedPayoutsForAccount()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getTransactionForAccount
      *
      * Get a transaction..

@@ -113,6 +113,9 @@ class AccountsApi
         'getAllAccountStatements' => [
             'application/json',
         ],
+        'getFailedPayoutsForAccount' => [
+            'application/json',
+        ],
         'getTransactionForAccount' => [
             'application/json',
         ],
@@ -1360,7 +1363,7 @@ class AccountsApi
      * @param  bool $connected_accounts Optional include connected accounts along with payment accounts. (optional, default to false)
      * @param  int $page_number Optional. The page number to retrieve. (optional)
      * @param  int $page_size Optional. The number of accounts per page. (optional)
-     * @param  string $currency Optional. If specified will only return accounts for this currency. (optional)
+     * @param  string[] $currency Optional. Array. If specified will only return accounts for thes currencies. (optional)
      * @param  string $search The text filter to apply to retrieve accounts with a similar account name, IBAN etc. (optional)
      * @param  string $sort Optional expression to sort the order of the accounts. Example \&quot;AvailableBalance desc,Inserted asc\&quot;. (optional)
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
@@ -1387,7 +1390,7 @@ class AccountsApi
      * @param  bool $connected_accounts Optional include connected accounts along with payment accounts. (optional, default to false)
      * @param  int $page_number Optional. The page number to retrieve. (optional)
      * @param  int $page_size Optional. The number of accounts per page. (optional)
-     * @param  string $currency Optional. If specified will only return accounts for this currency. (optional)
+     * @param  string[] $currency Optional. Array. If specified will only return accounts for thes currencies. (optional)
      * @param  string $search The text filter to apply to retrieve accounts with a similar account name, IBAN etc. (optional)
      * @param  string $sort Optional expression to sort the order of the accounts. Example \&quot;AvailableBalance desc,Inserted asc\&quot;. (optional)
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
@@ -1521,7 +1524,7 @@ class AccountsApi
      * @param  bool $connected_accounts Optional include connected accounts along with payment accounts. (optional, default to false)
      * @param  int $page_number Optional. The page number to retrieve. (optional)
      * @param  int $page_size Optional. The number of accounts per page. (optional)
-     * @param  string $currency Optional. If specified will only return accounts for this currency. (optional)
+     * @param  string[] $currency Optional. Array. If specified will only return accounts for thes currencies. (optional)
      * @param  string $search The text filter to apply to retrieve accounts with a similar account name, IBAN etc. (optional)
      * @param  string $sort Optional expression to sort the order of the accounts. Example \&quot;AvailableBalance desc,Inserted asc\&quot;. (optional)
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
@@ -1551,7 +1554,7 @@ class AccountsApi
      * @param  bool $connected_accounts Optional include connected accounts along with payment accounts. (optional, default to false)
      * @param  int $page_number Optional. The page number to retrieve. (optional)
      * @param  int $page_size Optional. The number of accounts per page. (optional)
-     * @param  string $currency Optional. If specified will only return accounts for this currency. (optional)
+     * @param  string[] $currency Optional. Array. If specified will only return accounts for thes currencies. (optional)
      * @param  string $search The text filter to apply to retrieve accounts with a similar account name, IBAN etc. (optional)
      * @param  string $sort Optional expression to sort the order of the accounts. Example \&quot;AvailableBalance desc,Inserted asc\&quot;. (optional)
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
@@ -1610,7 +1613,7 @@ class AccountsApi
      * @param  bool $connected_accounts Optional include connected accounts along with payment accounts. (optional, default to false)
      * @param  int $page_number Optional. The page number to retrieve. (optional)
      * @param  int $page_size Optional. The number of accounts per page. (optional)
-     * @param  string $currency Optional. If specified will only return accounts for this currency. (optional)
+     * @param  string[] $currency Optional. Array. If specified will only return accounts for thes currencies. (optional)
      * @param  string $search The text filter to apply to retrieve accounts with a similar account name, IBAN etc. (optional)
      * @param  string $sort Optional expression to sort the order of the accounts. Example \&quot;AvailableBalance desc,Inserted asc\&quot;. (optional)
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
@@ -1682,7 +1685,7 @@ class AccountsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $currency,
             'currency', // param base name
-            'string', // openApiType
+            'array', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -3869,10 +3872,10 @@ class AccountsApi
      * Get a paged list of all payment accounts the user has access to for a specific merchant.
      *
      * @param  string $merchant_id The merchantID of the accounts to retrieve. (optional)
+     * @param  string[] $currency Optional. Array. If specified will only return accounts for these currencies. (optional)
      * @param  bool $connected_accounts Optional include connected accounts along with payment accounts. (optional, default to false)
      * @param  int $page_number Optional. The page number to retrieve. (optional)
      * @param  int $page_size Optional. The number of accounts per page. (optional)
-     * @param  string $currency Optional. If specified will only return accounts for this currency. (optional)
      * @param  string $search The text filter to apply to retrieve accounts with a similar account name, IBAN etc. (optional)
      * @param  string $sort Optional expression to sort the order of the accounts. Example \&quot;AvailableBalance desc,Inserted asc\&quot;. (optional)
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
@@ -3884,9 +3887,9 @@ class AccountsApi
      * @throws \InvalidArgumentException
      * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse
      */
-    public function getAccountsPaged($merchant_id = null, $connected_accounts = false, $page_number = null, $page_size = null, $currency = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
+    public function getAccountsPaged($merchant_id = null, $currency = null, $connected_accounts = false, $page_number = null, $page_size = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
     {
-        list($response) = $this->getAccountsPagedWithHttpInfo($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $contentType);
+        list($response) = $this->getAccountsPagedWithHttpInfo($merchant_id, $currency, $connected_accounts, $page_number, $page_size, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $contentType);
         return $response;
     }
 
@@ -3896,10 +3899,10 @@ class AccountsApi
      * Get a paged list of all payment accounts the user has access to for a specific merchant.
      *
      * @param  string $merchant_id The merchantID of the accounts to retrieve. (optional)
+     * @param  string[] $currency Optional. Array. If specified will only return accounts for these currencies. (optional)
      * @param  bool $connected_accounts Optional include connected accounts along with payment accounts. (optional, default to false)
      * @param  int $page_number Optional. The page number to retrieve. (optional)
      * @param  int $page_size Optional. The number of accounts per page. (optional)
-     * @param  string $currency Optional. If specified will only return accounts for this currency. (optional)
      * @param  string $search The text filter to apply to retrieve accounts with a similar account name, IBAN etc. (optional)
      * @param  string $sort Optional expression to sort the order of the accounts. Example \&quot;AvailableBalance desc,Inserted asc\&quot;. (optional)
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
@@ -3911,9 +3914,9 @@ class AccountsApi
      * @throws \InvalidArgumentException
      * @return array of \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getAccountsPagedWithHttpInfo($merchant_id = null, $connected_accounts = false, $page_number = null, $page_size = null, $currency = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
+    public function getAccountsPagedWithHttpInfo($merchant_id = null, $currency = null, $connected_accounts = false, $page_number = null, $page_size = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
     {
-        $request = $this->getAccountsPagedRequest($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $contentType);
+        $request = $this->getAccountsPagedRequest($merchant_id, $currency, $connected_accounts, $page_number, $page_size, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -4030,10 +4033,10 @@ class AccountsApi
      * Get a paged list of all payment accounts the user has access to for a specific merchant.
      *
      * @param  string $merchant_id The merchantID of the accounts to retrieve. (optional)
+     * @param  string[] $currency Optional. Array. If specified will only return accounts for these currencies. (optional)
      * @param  bool $connected_accounts Optional include connected accounts along with payment accounts. (optional, default to false)
      * @param  int $page_number Optional. The page number to retrieve. (optional)
      * @param  int $page_size Optional. The number of accounts per page. (optional)
-     * @param  string $currency Optional. If specified will only return accounts for this currency. (optional)
      * @param  string $search The text filter to apply to retrieve accounts with a similar account name, IBAN etc. (optional)
      * @param  string $sort Optional expression to sort the order of the accounts. Example \&quot;AvailableBalance desc,Inserted asc\&quot;. (optional)
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
@@ -4044,9 +4047,9 @@ class AccountsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAccountsPagedAsync($merchant_id = null, $connected_accounts = false, $page_number = null, $page_size = null, $currency = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
+    public function getAccountsPagedAsync($merchant_id = null, $currency = null, $connected_accounts = false, $page_number = null, $page_size = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
     {
-        return $this->getAccountsPagedAsyncWithHttpInfo($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $contentType)
+        return $this->getAccountsPagedAsyncWithHttpInfo($merchant_id, $currency, $connected_accounts, $page_number, $page_size, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -4060,10 +4063,10 @@ class AccountsApi
      * Get a paged list of all payment accounts the user has access to for a specific merchant.
      *
      * @param  string $merchant_id The merchantID of the accounts to retrieve. (optional)
+     * @param  string[] $currency Optional. Array. If specified will only return accounts for these currencies. (optional)
      * @param  bool $connected_accounts Optional include connected accounts along with payment accounts. (optional, default to false)
      * @param  int $page_number Optional. The page number to retrieve. (optional)
      * @param  int $page_size Optional. The number of accounts per page. (optional)
-     * @param  string $currency Optional. If specified will only return accounts for this currency. (optional)
      * @param  string $search The text filter to apply to retrieve accounts with a similar account name, IBAN etc. (optional)
      * @param  string $sort Optional expression to sort the order of the accounts. Example \&quot;AvailableBalance desc,Inserted asc\&quot;. (optional)
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
@@ -4074,10 +4077,10 @@ class AccountsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAccountsPagedAsyncWithHttpInfo($merchant_id = null, $connected_accounts = false, $page_number = null, $page_size = null, $currency = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
+    public function getAccountsPagedAsyncWithHttpInfo($merchant_id = null, $currency = null, $connected_accounts = false, $page_number = null, $page_size = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
     {
         $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse';
-        $request = $this->getAccountsPagedRequest($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $contentType);
+        $request = $this->getAccountsPagedRequest($merchant_id, $currency, $connected_accounts, $page_number, $page_size, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -4119,10 +4122,10 @@ class AccountsApi
      * Create request for operation 'getAccountsPaged'
      *
      * @param  string $merchant_id The merchantID of the accounts to retrieve. (optional)
+     * @param  string[] $currency Optional. Array. If specified will only return accounts for these currencies. (optional)
      * @param  bool $connected_accounts Optional include connected accounts along with payment accounts. (optional, default to false)
      * @param  int $page_number Optional. The page number to retrieve. (optional)
      * @param  int $page_size Optional. The number of accounts per page. (optional)
-     * @param  string $currency Optional. If specified will only return accounts for this currency. (optional)
      * @param  string $search The text filter to apply to retrieve accounts with a similar account name, IBAN etc. (optional)
      * @param  string $sort Optional expression to sort the order of the accounts. Example \&quot;AvailableBalance desc,Inserted asc\&quot;. (optional)
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
@@ -4133,7 +4136,7 @@ class AccountsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getAccountsPagedRequest($merchant_id = null, $connected_accounts = false, $page_number = null, $page_size = null, $currency = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
+    public function getAccountsPagedRequest($merchant_id = null, $currency = null, $connected_accounts = false, $page_number = null, $page_size = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
     {
 
 
@@ -4165,6 +4168,15 @@ class AccountsApi
         ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $currency,
+            'currency', // param base name
+            'array', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $connected_accounts,
             'connectedAccounts', // param base name
             'boolean', // openApiType
@@ -4186,15 +4198,6 @@ class AccountsApi
             $page_size,
             'pageSize', // param base name
             'integer', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $currency,
-            'currency', // param base name
-            'string', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -4452,6 +4455,349 @@ class AccountsApi
 
         $headers = $this->headerSelector->selectHeaders(
             [],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getFailedPayoutsForAccount
+     *
+     * Get failed payouts for a specific account.
+     *
+     * @param  string $account_id The account id to get the failed payouts for. (required)
+     * @param  string $from_date_utc Optional. The date to fetch the payouts from. Must be ISO 8601 format (optional)
+     * @param  int $page_size Optional. The page size. Default is 20 (optional, default to 20)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFailedPayoutsForAccount'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayoutKeysetPageResponse
+     */
+    public function getFailedPayoutsForAccount($account_id, $from_date_utc = null, $page_size = 20, string $contentType = self::contentTypes['getFailedPayoutsForAccount'][0])
+    {
+        list($response) = $this->getFailedPayoutsForAccountWithHttpInfo($account_id, $from_date_utc, $page_size, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getFailedPayoutsForAccountWithHttpInfo
+     *
+     * Get failed payouts for a specific account.
+     *
+     * @param  string $account_id The account id to get the failed payouts for. (required)
+     * @param  string $from_date_utc Optional. The date to fetch the payouts from. Must be ISO 8601 format (optional)
+     * @param  int $page_size Optional. The page size. Default is 20 (optional, default to 20)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFailedPayoutsForAccount'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayoutKeysetPageResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getFailedPayoutsForAccountWithHttpInfo($account_id, $from_date_utc = null, $page_size = 20, string $contentType = self::contentTypes['getFailedPayoutsForAccount'][0])
+    {
+        $request = $this->getFailedPayoutsForAccountRequest($account_id, $from_date_utc, $page_size, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayoutKeysetPageResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayoutKeysetPageResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayoutKeysetPageResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayoutKeysetPageResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayoutKeysetPageResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getFailedPayoutsForAccountAsync
+     *
+     * Get failed payouts for a specific account.
+     *
+     * @param  string $account_id The account id to get the failed payouts for. (required)
+     * @param  string $from_date_utc Optional. The date to fetch the payouts from. Must be ISO 8601 format (optional)
+     * @param  int $page_size Optional. The page size. Default is 20 (optional, default to 20)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFailedPayoutsForAccount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getFailedPayoutsForAccountAsync($account_id, $from_date_utc = null, $page_size = 20, string $contentType = self::contentTypes['getFailedPayoutsForAccount'][0])
+    {
+        return $this->getFailedPayoutsForAccountAsyncWithHttpInfo($account_id, $from_date_utc, $page_size, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getFailedPayoutsForAccountAsyncWithHttpInfo
+     *
+     * Get failed payouts for a specific account.
+     *
+     * @param  string $account_id The account id to get the failed payouts for. (required)
+     * @param  string $from_date_utc Optional. The date to fetch the payouts from. Must be ISO 8601 format (optional)
+     * @param  int $page_size Optional. The page size. Default is 20 (optional, default to 20)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFailedPayoutsForAccount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getFailedPayoutsForAccountAsyncWithHttpInfo($account_id, $from_date_utc = null, $page_size = 20, string $contentType = self::contentTypes['getFailedPayoutsForAccount'][0])
+    {
+        $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayoutKeysetPageResponse';
+        $request = $this->getFailedPayoutsForAccountRequest($account_id, $from_date_utc, $page_size, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getFailedPayoutsForAccount'
+     *
+     * @param  string $account_id The account id to get the failed payouts for. (required)
+     * @param  string $from_date_utc Optional. The date to fetch the payouts from. Must be ISO 8601 format (optional)
+     * @param  int $page_size Optional. The page size. Default is 20 (optional, default to 20)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFailedPayoutsForAccount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getFailedPayoutsForAccountRequest($account_id, $from_date_utc = null, $page_size = 20, string $contentType = self::contentTypes['getFailedPayoutsForAccount'][0])
+    {
+
+        // verify the required parameter 'account_id' is set
+        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $account_id when calling getFailedPayoutsForAccount'
+            );
+        }
+
+
+
+
+        $resourcePath = '/api/v1/accounts/{accountID}/payouts/failed';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $from_date_utc,
+            'fromDateUtc', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page_size,
+            'pageSize', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+        // path params
+        if ($account_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'accountID' . '}',
+                ObjectSerializer::toPathValue($account_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['text/plain', 'application/json', 'text/json', ],
             $contentType,
             $multipart
         );

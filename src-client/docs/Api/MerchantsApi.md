@@ -12,6 +12,7 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 | [**exportMerchantBeneficiaries()**](MerchantsApi.md#exportMerchantBeneficiaries) | **GET** /api/v1/merchants/{merchantID}/beneficiaries/export | Exports a list of all beneficiaries. |
 | [**exportMerchantPayouts()**](MerchantsApi.md#exportMerchantPayouts) | **GET** /api/v1/merchants/{merchantID}/payouts/export | Exports a list of all payouts for a specific merchant as a CSV file. |
 | [**getAuthorisationSettings()**](MerchantsApi.md#getAuthorisationSettings) | **GET** /api/v1/merchants/{merchantID}/authorisationsettings | Gets a list of merchant authorisation settings for a merchant |
+| [**getFailedPayoutsForMerchant()**](MerchantsApi.md#getFailedPayoutsForMerchant) | **GET** /api/v1/merchants/{merchantID}/payouts/failed | Get failed payouts for a specific merchant. |
 | [**getMerchant()**](MerchantsApi.md#getMerchant) | **GET** /api/v1/merchants/{merchantID} | Get&#39;s a merchant. |
 | [**getMerchantAccount()**](MerchantsApi.md#getMerchantAccount) | **GET** /api/v1/merchants/{merchantID}/accounts/{accountID} | Get an account. |
 | [**getMerchantAccounts()**](MerchantsApi.md#getMerchantAccounts) | **GET** /api/v1/merchants/{merchantID}/accounts | Get a list of merchant&#39;s payment accounts. |
@@ -536,6 +537,70 @@ try {
 ### Return type
 
 [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationSetting[]**](../Model/NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationSetting.md)
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `text/plain`, `application/json`, `text/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getFailedPayoutsForMerchant()`
+
+```php
+getFailedPayoutsForMerchant($merchant_id, $from_date_utc, $page_size): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayoutKeysetPageResponse
+```
+
+Get failed payouts for a specific merchant.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\MerchantsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$merchant_id = 'merchant_id_example'; // string | The merchant id to get the failed payouts fro.
+$from_date_utc = 'from_date_utc_example'; // string | Optional. The date to fetch the payouts from. Must be ISO 8601 format
+$page_size = 20; // int | Optional. The page size. Default is 20
+
+try {
+    $result = $apiInstance->getFailedPayoutsForMerchant($merchant_id, $from_date_utc, $page_size);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling MerchantsApi->getFailedPayoutsForMerchant: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **merchant_id** | **string**| The merchant id to get the failed payouts fro. | |
+| **from_date_utc** | **string**| Optional. The date to fetch the payouts from. Must be ISO 8601 format | [optional] |
+| **page_size** | **int**| Optional. The page size. Default is 20 | [optional] [default to 20] |
+
+### Return type
+
+[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayoutKeysetPageResponse**](../Model/NoFrixionMoneyMoovModelsPayoutKeysetPageResponse.md)
 
 ### Authorization
 

@@ -249,4 +249,22 @@ class NoFrixionMoneyMoovModelsMerchantTokenTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "ip_address_whitelist"
+     */
+    public function testPropertyIpAddressWhitelist()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "is_archived"
+     */
+    public function testPropertyIsArchived()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

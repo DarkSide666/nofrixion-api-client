@@ -63,6 +63,7 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         'merchant_id' => 'string',
         'type' => 'string',
         'amount' => 'float',
+        'amount_minor_units' => 'int',
         'currency' => 'string',
         'description' => 'string',
         'transaction_date' => '\DateTime',
@@ -72,6 +73,7 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         'counterparty' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsCounterparty',
         'counterparty_summary' => 'string',
         'balance' => 'float',
+        'balance_minor_units' => 'int',
         'rule_id' => 'string',
         'payout_id' => 'string',
         'virtual_iban' => 'string',
@@ -94,6 +96,7 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         'merchant_id' => 'uuid',
         'type' => null,
         'amount' => 'double',
+        'amount_minor_units' => 'int64',
         'currency' => null,
         'description' => null,
         'transaction_date' => 'date-time',
@@ -103,6 +106,7 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         'counterparty' => null,
         'counterparty_summary' => null,
         'balance' => 'double',
+        'balance_minor_units' => 'int64',
         'rule_id' => 'uuid',
         'payout_id' => 'uuid',
         'virtual_iban' => null,
@@ -123,6 +127,7 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         'merchant_id' => false,
         'type' => false,
         'amount' => false,
+        'amount_minor_units' => false,
         'currency' => false,
         'description' => true,
         'transaction_date' => false,
@@ -132,6 +137,7 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         'counterparty' => false,
         'counterparty_summary' => true,
         'balance' => false,
+        'balance_minor_units' => false,
         'rule_id' => true,
         'payout_id' => true,
         'virtual_iban' => true,
@@ -232,6 +238,7 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         'merchant_id' => 'merchantID',
         'type' => 'type',
         'amount' => 'amount',
+        'amount_minor_units' => 'amountMinorUnits',
         'currency' => 'currency',
         'description' => 'description',
         'transaction_date' => 'transactionDate',
@@ -241,6 +248,7 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         'counterparty' => 'counterparty',
         'counterparty_summary' => 'counterpartySummary',
         'balance' => 'balance',
+        'balance_minor_units' => 'balanceMinorUnits',
         'rule_id' => 'ruleID',
         'payout_id' => 'payoutID',
         'virtual_iban' => 'virtualIBAN',
@@ -261,6 +269,7 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         'merchant_id' => 'setMerchantId',
         'type' => 'setType',
         'amount' => 'setAmount',
+        'amount_minor_units' => 'setAmountMinorUnits',
         'currency' => 'setCurrency',
         'description' => 'setDescription',
         'transaction_date' => 'setTransactionDate',
@@ -270,6 +279,7 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         'counterparty' => 'setCounterparty',
         'counterparty_summary' => 'setCounterpartySummary',
         'balance' => 'setBalance',
+        'balance_minor_units' => 'setBalanceMinorUnits',
         'rule_id' => 'setRuleId',
         'payout_id' => 'setPayoutId',
         'virtual_iban' => 'setVirtualIban',
@@ -290,6 +300,7 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         'merchant_id' => 'getMerchantId',
         'type' => 'getType',
         'amount' => 'getAmount',
+        'amount_minor_units' => 'getAmountMinorUnits',
         'currency' => 'getCurrency',
         'description' => 'getDescription',
         'transaction_date' => 'getTransactionDate',
@@ -299,6 +310,7 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         'counterparty' => 'getCounterparty',
         'counterparty_summary' => 'getCounterpartySummary',
         'balance' => 'getBalance',
+        'balance_minor_units' => 'getBalanceMinorUnits',
         'rule_id' => 'getRuleId',
         'payout_id' => 'getPayoutId',
         'virtual_iban' => 'getVirtualIban',
@@ -434,6 +446,7 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         $this->setIfExists('merchant_id', $data ?? [], null);
         $this->setIfExists('type', $data ?? [], null);
         $this->setIfExists('amount', $data ?? [], null);
+        $this->setIfExists('amount_minor_units', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('transaction_date', $data ?? [], null);
@@ -443,6 +456,7 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         $this->setIfExists('counterparty', $data ?? [], null);
         $this->setIfExists('counterparty_summary', $data ?? [], null);
         $this->setIfExists('balance', $data ?? [], null);
+        $this->setIfExists('balance_minor_units', $data ?? [], null);
         $this->setIfExists('rule_id', $data ?? [], null);
         $this->setIfExists('payout_id', $data ?? [], null);
         $this->setIfExists('virtual_iban', $data ?? [], null);
@@ -686,6 +700,33 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
             throw new \InvalidArgumentException('non-nullable amount cannot be null');
         }
         $this->container['amount'] = $amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets amount_minor_units
+     *
+     * @return int|null
+     */
+    public function getAmountMinorUnits()
+    {
+        return $this->container['amount_minor_units'];
+    }
+
+    /**
+     * Sets amount_minor_units
+     *
+     * @param int|null $amount_minor_units Amount of the transaction expressed in the currency’s minor units (e.g. cents, pence).
+     *
+     * @return self
+     */
+    public function setAmountMinorUnits($amount_minor_units)
+    {
+        if (is_null($amount_minor_units)) {
+            throw new \InvalidArgumentException('non-nullable amount_minor_units cannot be null');
+        }
+        $this->container['amount_minor_units'] = $amount_minor_units;
 
         return $this;
     }
@@ -967,6 +1008,33 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
             throw new \InvalidArgumentException('non-nullable balance cannot be null');
         }
         $this->container['balance'] = $balance;
+
+        return $this;
+    }
+
+    /**
+     * Gets balance_minor_units
+     *
+     * @return int|null
+     */
+    public function getBalanceMinorUnits()
+    {
+        return $this->container['balance_minor_units'];
+    }
+
+    /**
+     * Sets balance_minor_units
+     *
+     * @param int|null $balance_minor_units Balance on the account expressed in the currency’s minor units (e.g. cents, pence).
+     *
+     * @return self
+     */
+    public function setBalanceMinorUnits($balance_minor_units)
+    {
+        if (is_null($balance_minor_units)) {
+            throw new \InvalidArgumentException('non-nullable balance_minor_units cannot be null');
+        }
+        $this->container['balance_minor_units'] = $balance_minor_units;
 
         return $this;
     }

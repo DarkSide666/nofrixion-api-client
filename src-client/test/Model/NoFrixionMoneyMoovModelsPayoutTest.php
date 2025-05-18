@@ -179,6 +179,15 @@ class NoFrixionMoneyMoovModelsPayoutTest extends TestCase
     }
 
     /**
+     * Test attribute "amount_minor_units"
+     */
+    public function testPropertyAmountMinorUnits()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "formatted_amount"
      */
     public function testPropertyFormattedAmount()
@@ -305,6 +314,15 @@ class NoFrixionMoneyMoovModelsPayoutTest extends TestCase
     }
 
     /**
+     * Test attribute "source_account_currency"
+     */
+    public function testPropertySourceAccountCurrency()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "source_account_name"
      */
     public function testPropertySourceAccountName()
@@ -341,6 +359,15 @@ class NoFrixionMoneyMoovModelsPayoutTest extends TestCase
     }
 
     /**
+     * Test attribute "source_account_bic"
+     */
+    public function testPropertySourceAccountBic()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "source_account_identifier"
      */
     public function testPropertySourceAccountIdentifier()
@@ -353,6 +380,15 @@ class NoFrixionMoneyMoovModelsPayoutTest extends TestCase
      * Test attribute "source_account_available_balance"
      */
     public function testPropertySourceAccountAvailableBalance()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "source_account_available_balance_minor_units"
+     */
+    public function testPropertySourceAccountAvailableBalanceMinorUnits()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -560,6 +596,15 @@ class NoFrixionMoneyMoovModelsPayoutTest extends TestCase
      * Test attribute "documents"
      */
     public function testPropertyDocuments()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "charge_bearer"
+     */
+    public function testPropertyChargeBearer()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

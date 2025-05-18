@@ -144,6 +144,18 @@ class PaymentRequestsApiTest extends TestCase
     }
 
     /**
+     * Test case for deletePaymentRequestTemplate
+     *
+     * Deletes a payment request template for a merchant..
+     *
+     */
+    public function testDeletePaymentRequestTemplate()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for deleteTokenisedCard
      *
      * Deletes a single card token..
@@ -246,6 +258,30 @@ class PaymentRequestsApiTest extends TestCase
      *
      */
     public function testGetPaymentRequestResult()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getPaymentRequestTemplate
+     *
+     * Gets a payment request template for a merchant..
+     *
+     */
+    public function testGetPaymentRequestTemplate()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getPaymentRequestTemplates
+     *
+     * Gets a list of payment request templates for a merchant..
+     *
+     */
+    public function testGetPaymentRequestTemplates()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -366,6 +402,18 @@ class PaymentRequestsApiTest extends TestCase
      *
      */
     public function testUpdatePaymentRequest()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updatePaymentRequestTemplate
+     *
+     * Updates a payment request template for a merchant..
+     *
+     */
+    public function testUpdatePaymentRequestTemplate()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -78,8 +78,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         'status' => 'string',
         'partial_payment_method' => 'string',
         'stripe_account_id' => 'string',
-        'lightning_invoice' => 'string',
-        'lightning_invoice_expires_at' => '\DateTime'
+        'country_code' => 'string'
     ];
 
     /**
@@ -111,8 +110,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         'status' => null,
         'partial_payment_method' => null,
         'stripe_account_id' => null,
-        'lightning_invoice' => null,
-        'lightning_invoice_expires_at' => 'date-time'
+        'country_code' => null
     ];
 
     /**
@@ -142,8 +140,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         'status' => false,
         'partial_payment_method' => false,
         'stripe_account_id' => true,
-        'lightning_invoice' => true,
-        'lightning_invoice_expires_at' => true
+        'country_code' => true
     ];
 
     /**
@@ -253,8 +250,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         'status' => 'status',
         'partial_payment_method' => 'partialPaymentMethod',
         'stripe_account_id' => 'stripeAccountID',
-        'lightning_invoice' => 'lightningInvoice',
-        'lightning_invoice_expires_at' => 'lightningInvoiceExpiresAt'
+        'country_code' => 'countryCode'
     ];
 
     /**
@@ -284,8 +280,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         'status' => 'setStatus',
         'partial_payment_method' => 'setPartialPaymentMethod',
         'stripe_account_id' => 'setStripeAccountId',
-        'lightning_invoice' => 'setLightningInvoice',
-        'lightning_invoice_expires_at' => 'setLightningInvoiceExpiresAt'
+        'country_code' => 'setCountryCode'
     ];
 
     /**
@@ -315,8 +310,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         'status' => 'getStatus',
         'partial_payment_method' => 'getPartialPaymentMethod',
         'stripe_account_id' => 'getStripeAccountId',
-        'lightning_invoice' => 'getLightningInvoice',
-        'lightning_invoice_expires_at' => 'getLightningInvoiceExpiresAt'
+        'country_code' => 'getCountryCode'
     ];
 
     /**
@@ -526,8 +520,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('partial_payment_method', $data ?? [], null);
         $this->setIfExists('stripe_account_id', $data ?? [], null);
-        $this->setIfExists('lightning_invoice', $data ?? [], null);
-        $this->setIfExists('lightning_invoice_expires_at', $data ?? [], null);
+        $this->setIfExists('country_code', $data ?? [], null);
     }
 
     /**
@@ -1323,69 +1316,35 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
     }
 
     /**
-     * Gets lightning_invoice
+     * Gets country_code
      *
      * @return string|null
      */
-    public function getLightningInvoice()
+    public function getCountryCode()
     {
-        return $this->container['lightning_invoice'];
+        return $this->container['country_code'];
     }
 
     /**
-     * Sets lightning_invoice
+     * Sets country_code
      *
-     * @param string|null $lightning_invoice Lightning invoice ID, if any.
+     * @param string|null $country_code The country code associated with the payment.
      *
      * @return self
      */
-    public function setLightningInvoice($lightning_invoice)
+    public function setCountryCode($country_code)
     {
-        if (is_null($lightning_invoice)) {
-            array_push($this->openAPINullablesSetToNull, 'lightning_invoice');
+        if (is_null($country_code)) {
+            array_push($this->openAPINullablesSetToNull, 'country_code');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('lightning_invoice', $nullablesSetToNull);
+            $index = array_search('country_code', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['lightning_invoice'] = $lightning_invoice;
-
-        return $this;
-    }
-
-    /**
-     * Gets lightning_invoice_expires_at
-     *
-     * @return \DateTime|null
-     */
-    public function getLightningInvoiceExpiresAt()
-    {
-        return $this->container['lightning_invoice_expires_at'];
-    }
-
-    /**
-     * Sets lightning_invoice_expires_at
-     *
-     * @param \DateTime|null $lightning_invoice_expires_at Date and time of expiration of the lightning invoice.
-     *
-     * @return self
-     */
-    public function setLightningInvoiceExpiresAt($lightning_invoice_expires_at)
-    {
-        if (is_null($lightning_invoice_expires_at)) {
-            array_push($this->openAPINullablesSetToNull, 'lightning_invoice_expires_at');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('lightning_invoice_expires_at', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['lightning_invoice_expires_at'] = $lightning_invoice_expires_at;
+        $this->container['country_code'] = $country_code;
 
         return $this;
     }

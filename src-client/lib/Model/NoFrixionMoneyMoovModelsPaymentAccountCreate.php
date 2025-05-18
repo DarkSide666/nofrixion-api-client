@@ -271,6 +271,7 @@ class NoFrixionMoneyMoovModelsPaymentAccountCreate implements ModelInterface, Ar
     public const CURRENCY_BTC = 'BTC';
     public const ACCOUNT_TYPE_STANDARD = 'Standard';
     public const ACCOUNT_TYPE_STANDARD_FEE = 'StandardFee';
+    public const ACCOUNT_TYPE_LIQUIDATOR_FEE = 'LiquidatorFee';
 
     /**
      * Gets allowable values of the enum
@@ -298,6 +299,7 @@ class NoFrixionMoneyMoovModelsPaymentAccountCreate implements ModelInterface, Ar
         return [
             self::ACCOUNT_TYPE_STANDARD,
             self::ACCOUNT_TYPE_STANDARD_FEE,
+            self::ACCOUNT_TYPE_LIQUIDATOR_FEE,
         ];
     }
 

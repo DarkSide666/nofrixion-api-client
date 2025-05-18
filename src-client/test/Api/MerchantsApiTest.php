@@ -168,6 +168,18 @@ class MerchantsApiTest extends TestCase
     }
 
     /**
+     * Test case for getFailedPayoutsForMerchant
+     *
+     * Get failed payouts for a specific merchant..
+     *
+     */
+    public function testGetFailedPayoutsForMerchant()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getMerchant
      *
      * Get's a merchant..

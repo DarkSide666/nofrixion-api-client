@@ -168,24 +168,24 @@ class PayoutsApiTest extends TestCase
     }
 
     /**
-     * Test case for getPayout
+     * Test case for getFailedPayouts
      *
-     * Gets a single payout..
+     * Get failed payouts for a specific merchant..
      *
      */
-    public function testGetPayout()
+    public function testGetFailedPayouts()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getPayoutForInvoice
+     * Test case for getPayout
      *
-     * Gets a payout by its invoice ID..
+     * Gets a single payout..
      *
      */
-    public function testGetPayoutForInvoice()
+    public function testGetPayout()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -210,18 +210,6 @@ class PayoutsApiTest extends TestCase
      *
      */
     public function testGetPayoutProof()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for getPayoutStatus
-     *
-     * Gets a single payout status from..
-     *
-     */
-    public function testGetPayoutStatus()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

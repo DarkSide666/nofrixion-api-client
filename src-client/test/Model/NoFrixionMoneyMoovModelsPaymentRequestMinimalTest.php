@@ -269,18 +269,9 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimalTest extends TestCase
     }
 
     /**
-     * Test attribute "lightning_invoice"
+     * Test attribute "country_code"
      */
-    public function testPropertyLightningInvoice()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "lightning_invoice_expires_at"
-     */
-    public function testPropertyLightningInvoiceExpiresAt()
+    public function testPropertyCountryCode()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

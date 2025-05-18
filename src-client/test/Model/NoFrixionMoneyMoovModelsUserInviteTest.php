@@ -215,6 +215,15 @@ class NoFrixionMoneyMoovModelsUserInviteTest extends TestCase
     }
 
     /**
+     * Test attribute "initial_role_id"
+     */
+    public function testPropertyInitialRoleId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "status"
      */
     public function testPropertyStatus()

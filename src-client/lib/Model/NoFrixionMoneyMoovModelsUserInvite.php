@@ -72,6 +72,7 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
         'user_id' => 'string',
         'user' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUser',
         'is_invitee_registered' => 'bool',
+        'initial_role_id' => 'string',
         'status' => 'string'
     ];
 
@@ -98,6 +99,7 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
         'user_id' => 'uuid',
         'user' => null,
         'is_invitee_registered' => null,
+        'initial_role_id' => 'uuid',
         'status' => null
     ];
 
@@ -122,6 +124,7 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
         'user_id' => true,
         'user' => false,
         'is_invitee_registered' => false,
+        'initial_role_id' => true,
         'status' => false
     ];
 
@@ -226,6 +229,7 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
         'user_id' => 'userID',
         'user' => 'user',
         'is_invitee_registered' => 'isInviteeRegistered',
+        'initial_role_id' => 'initialRoleID',
         'status' => 'status'
     ];
 
@@ -250,6 +254,7 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
         'user_id' => 'setUserId',
         'user' => 'setUser',
         'is_invitee_registered' => 'setIsInviteeRegistered',
+        'initial_role_id' => 'setInitialRoleId',
         'status' => 'setStatus'
     ];
 
@@ -274,6 +279,7 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
         'user_id' => 'getUserId',
         'user' => 'getUser',
         'is_invitee_registered' => 'getIsInviteeRegistered',
+        'initial_role_id' => 'getInitialRoleId',
         'status' => 'getStatus'
     ];
 
@@ -366,6 +372,7 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
         $this->setIfExists('user_id', $data ?? [], null);
         $this->setIfExists('user', $data ?? [], null);
         $this->setIfExists('is_invitee_registered', $data ?? [], null);
+        $this->setIfExists('initial_role_id', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
     }
 
@@ -891,6 +898,40 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
             throw new \InvalidArgumentException('non-nullable is_invitee_registered cannot be null');
         }
         $this->container['is_invitee_registered'] = $is_invitee_registered;
+
+        return $this;
+    }
+
+    /**
+     * Gets initial_role_id
+     *
+     * @return string|null
+     */
+    public function getInitialRoleId()
+    {
+        return $this->container['initial_role_id'];
+    }
+
+    /**
+     * Sets initial_role_id
+     *
+     * @param string|null $initial_role_id The role ID to automatically assign to the merchant’s very first user.  Typically set by the compliance team when the first user is invited to a new merchant.
+     *
+     * @return self
+     */
+    public function setInitialRoleId($initial_role_id)
+    {
+        if (is_null($initial_role_id)) {
+            array_push($this->openAPINullablesSetToNull, 'initial_role_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('initial_role_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['initial_role_id'] = $initial_role_id;
 
         return $this;
     }

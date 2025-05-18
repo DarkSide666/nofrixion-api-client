@@ -17,6 +17,7 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 | [**getAccounts()**](AccountsApi.md#getAccounts) | **GET** /api/v1/accounts | Get a list of all payment accounts the user has access to. |
 | [**getAccountsPaged()**](AccountsApi.md#getAccountsPaged) | **GET** /api/v1/accounts/paged | Get a paged list of all payment accounts the user has access to for a specific merchant. |
 | [**getAllAccountStatements()**](AccountsApi.md#getAllAccountStatements) | **GET** /api/v1/accounts/statements | Gets all active statement generation requests for the user. |
+| [**getFailedPayoutsForAccount()**](AccountsApi.md#getFailedPayoutsForAccount) | **GET** /api/v1/accounts/{accountID}/payouts/failed | Get failed payouts for a specific account. |
 | [**getTransactionForAccount()**](AccountsApi.md#getTransactionForAccount) | **GET** /api/v1/accounts/{accountID}/transactions/{id} | Get a transaction. |
 | [**topupAccount()**](AccountsApi.md#topupAccount) | **PUT** /api/v1/accounts/{accountID}/topup/{amount} | SANDBOX ONLY. Top-ups a payment account with the amount provided. |
 | [**unarchiveAccount()**](AccountsApi.md#unarchiveAccount) | **PUT** /api/v1/accounts/unarchive/{id} | Sets the specified account as unarchived / active. |
@@ -307,7 +308,7 @@ $merchant_id = 'merchant_id_example'; // string | The merchantID of the accounts
 $connected_accounts = false; // bool | Optional include connected accounts along with payment accounts.
 $page_number = 56; // int | Optional. The page number to retrieve.
 $page_size = 56; // int | Optional. The number of accounts per page.
-$currency = 'currency_example'; // string | Optional. If specified will only return accounts for this currency.
+$currency = array('currency_example'); // string[] | Optional. Array. If specified will only return accounts for thes currencies.
 $search = 'search_example'; // string | The text filter to apply to retrieve accounts with a similar account name, IBAN etc.
 $sort = 'sort_example'; // string | Optional expression to sort the order of the accounts. Example \"AvailableBalance desc,Inserted asc\".
 $only_connect_accounts = false; // bool | Only return connected accounts
@@ -330,7 +331,7 @@ try {
 | **connected_accounts** | **bool**| Optional include connected accounts along with payment accounts. | [optional] [default to false] |
 | **page_number** | **int**| Optional. The page number to retrieve. | [optional] |
 | **page_size** | **int**| Optional. The number of accounts per page. | [optional] |
-| **currency** | **string**| Optional. If specified will only return accounts for this currency. | [optional] |
+| **currency** | [**string[]**](../Model/string.md)| Optional. Array. If specified will only return accounts for thes currencies. | [optional] |
 | **search** | **string**| The text filter to apply to retrieve accounts with a similar account name, IBAN etc. | [optional] |
 | **sort** | **string**| Optional expression to sort the order of the accounts. Example \&quot;AvailableBalance desc,Inserted asc\&quot;. | [optional] |
 | **only_connect_accounts** | **bool**| Only return connected accounts | [optional] [default to false] |
@@ -765,7 +766,7 @@ try {
 ## `getAccountsPaged()`
 
 ```php
-getAccountsPaged($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $include_archived): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse
+getAccountsPaged($merchant_id, $currency, $connected_accounts, $page_number, $page_size, $search, $sort, $only_connect_accounts, $only_archived, $include_archived): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse
 ```
 
 Get a paged list of all payment accounts the user has access to for a specific merchant.
@@ -790,10 +791,10 @@ $apiInstance = new Nofrixion\Client\Api\AccountsApi(
     $config
 );
 $merchant_id = 'merchant_id_example'; // string | The merchantID of the accounts to retrieve.
+$currency = array('currency_example'); // string[] | Optional. Array. If specified will only return accounts for these currencies.
 $connected_accounts = false; // bool | Optional include connected accounts along with payment accounts.
 $page_number = 56; // int | Optional. The page number to retrieve.
 $page_size = 56; // int | Optional. The number of accounts per page.
-$currency = 'currency_example'; // string | Optional. If specified will only return accounts for this currency.
 $search = 'search_example'; // string | The text filter to apply to retrieve accounts with a similar account name, IBAN etc.
 $sort = 'sort_example'; // string | Optional expression to sort the order of the accounts. Example \"AvailableBalance desc,Inserted asc\".
 $only_connect_accounts = false; // bool | Only return connected accounts
@@ -801,7 +802,7 @@ $only_archived = false; // bool | Flag that indicates whether to fetch only arch
 $include_archived = false; // bool | Flag that indicates whether to fetch archived accounts or not.
 
 try {
-    $result = $apiInstance->getAccountsPaged($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $include_archived);
+    $result = $apiInstance->getAccountsPaged($merchant_id, $currency, $connected_accounts, $page_number, $page_size, $search, $sort, $only_connect_accounts, $only_archived, $include_archived);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AccountsApi->getAccountsPaged: ', $e->getMessage(), PHP_EOL;
@@ -813,10 +814,10 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **merchant_id** | **string**| The merchantID of the accounts to retrieve. | [optional] |
+| **currency** | [**string[]**](../Model/string.md)| Optional. Array. If specified will only return accounts for these currencies. | [optional] |
 | **connected_accounts** | **bool**| Optional include connected accounts along with payment accounts. | [optional] [default to false] |
 | **page_number** | **int**| Optional. The page number to retrieve. | [optional] |
 | **page_size** | **int**| Optional. The number of accounts per page. | [optional] |
-| **currency** | **string**| Optional. If specified will only return accounts for this currency. | [optional] |
 | **search** | **string**| The text filter to apply to retrieve accounts with a similar account name, IBAN etc. | [optional] |
 | **sort** | **string**| Optional expression to sort the order of the accounts. Example \&quot;AvailableBalance desc,Inserted asc\&quot;. | [optional] |
 | **only_connect_accounts** | **bool**| Only return connected accounts | [optional] [default to false] |
@@ -891,6 +892,70 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getFailedPayoutsForAccount()`
+
+```php
+getFailedPayoutsForAccount($account_id, $from_date_utc, $page_size): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayoutKeysetPageResponse
+```
+
+Get failed payouts for a specific account.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\AccountsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$account_id = 'account_id_example'; // string | The account id to get the failed payouts for.
+$from_date_utc = 'from_date_utc_example'; // string | Optional. The date to fetch the payouts from. Must be ISO 8601 format
+$page_size = 20; // int | Optional. The page size. Default is 20
+
+try {
+    $result = $apiInstance->getFailedPayoutsForAccount($account_id, $from_date_utc, $page_size);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AccountsApi->getFailedPayoutsForAccount: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **account_id** | **string**| The account id to get the failed payouts for. | |
+| **from_date_utc** | **string**| Optional. The date to fetch the payouts from. Must be ISO 8601 format | [optional] |
+| **page_size** | **int**| Optional. The page size. Default is 20 | [optional] [default to 20] |
+
+### Return type
+
+[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayoutKeysetPageResponse**](../Model/NoFrixionMoneyMoovModelsPayoutKeysetPageResponse.md)
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `text/plain`, `application/json`, `text/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)

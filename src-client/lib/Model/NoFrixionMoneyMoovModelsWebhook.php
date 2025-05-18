@@ -64,7 +64,8 @@ class NoFrixionMoneyMoovModelsWebhook implements ModelInterface, ArrayAccess, \J
         'secret' => 'string',
         'is_active' => 'bool',
         'email_address' => 'string',
-        'version' => 'int'
+        'version' => 'int',
+        'merchant_id' => 'string'
     ];
 
     /**
@@ -82,7 +83,8 @@ class NoFrixionMoneyMoovModelsWebhook implements ModelInterface, ArrayAccess, \J
         'secret' => null,
         'is_active' => null,
         'email_address' => null,
-        'version' => 'int32'
+        'version' => 'int32',
+        'merchant_id' => 'uuid'
     ];
 
     /**
@@ -98,7 +100,8 @@ class NoFrixionMoneyMoovModelsWebhook implements ModelInterface, ArrayAccess, \J
         'secret' => true,
         'is_active' => false,
         'email_address' => true,
-        'version' => false
+        'version' => false,
+        'merchant_id' => false
     ];
 
     /**
@@ -194,7 +197,8 @@ class NoFrixionMoneyMoovModelsWebhook implements ModelInterface, ArrayAccess, \J
         'secret' => 'secret',
         'is_active' => 'isActive',
         'email_address' => 'emailAddress',
-        'version' => 'version'
+        'version' => 'version',
+        'merchant_id' => 'merchantID'
     ];
 
     /**
@@ -210,7 +214,8 @@ class NoFrixionMoneyMoovModelsWebhook implements ModelInterface, ArrayAccess, \J
         'secret' => 'setSecret',
         'is_active' => 'setIsActive',
         'email_address' => 'setEmailAddress',
-        'version' => 'setVersion'
+        'version' => 'setVersion',
+        'merchant_id' => 'setMerchantId'
     ];
 
     /**
@@ -226,7 +231,8 @@ class NoFrixionMoneyMoovModelsWebhook implements ModelInterface, ArrayAccess, \J
         'secret' => 'getSecret',
         'is_active' => 'getIsActive',
         'email_address' => 'getEmailAddress',
-        'version' => 'getVersion'
+        'version' => 'getVersion',
+        'merchant_id' => 'getMerchantId'
     ];
 
     /**
@@ -323,6 +329,7 @@ class NoFrixionMoneyMoovModelsWebhook implements ModelInterface, ArrayAccess, \J
         $this->setIfExists('is_active', $data ?? [], null);
         $this->setIfExists('email_address', $data ?? [], null);
         $this->setIfExists('version', $data ?? [], null);
+        $this->setIfExists('merchant_id', $data ?? [], null);
     }
 
     /**
@@ -616,6 +623,33 @@ class NoFrixionMoneyMoovModelsWebhook implements ModelInterface, ArrayAccess, \J
             throw new \InvalidArgumentException('non-nullable version cannot be null');
         }
         $this->container['version'] = $version;
+
+        return $this;
+    }
+
+    /**
+     * Gets merchant_id
+     *
+     * @return string|null
+     */
+    public function getMerchantId()
+    {
+        return $this->container['merchant_id'];
+    }
+
+    /**
+     * Sets merchant_id
+     *
+     * @param string|null $merchant_id The ID of the merchant that the webhook is for.
+     *
+     * @return self
+     */
+    public function setMerchantId($merchant_id)
+    {
+        if (is_null($merchant_id)) {
+            throw new \InvalidArgumentException('non-nullable merchant_id cannot be null');
+        }
+        $this->container['merchant_id'] = $merchant_id;
 
         return $this;
     }

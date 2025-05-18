@@ -66,6 +66,7 @@ class NoFrixionMoneyMoovModelsReport implements ModelInterface, ArrayAccess, \Js
         'inserted' => '\DateTime',
         'last_updated' => '\DateTime',
         'cron_expression' => 'string',
+        'time_zone_id' => 'string',
         'status' => 'string',
         'last_completed_at' => '\DateTime',
         'statement_number' => 'int',
@@ -90,6 +91,7 @@ class NoFrixionMoneyMoovModelsReport implements ModelInterface, ArrayAccess, \Js
         'inserted' => 'date-time',
         'last_updated' => 'date-time',
         'cron_expression' => null,
+        'time_zone_id' => null,
         'status' => null,
         'last_completed_at' => 'date-time',
         'statement_number' => 'int32',
@@ -112,6 +114,7 @@ class NoFrixionMoneyMoovModelsReport implements ModelInterface, ArrayAccess, \Js
         'inserted' => false,
         'last_updated' => false,
         'cron_expression' => true,
+        'time_zone_id' => true,
         'status' => false,
         'last_completed_at' => false,
         'statement_number' => false,
@@ -214,6 +217,7 @@ class NoFrixionMoneyMoovModelsReport implements ModelInterface, ArrayAccess, \Js
         'inserted' => 'inserted',
         'last_updated' => 'lastUpdated',
         'cron_expression' => 'cronExpression',
+        'time_zone_id' => 'timeZoneId',
         'status' => 'status',
         'last_completed_at' => 'lastCompletedAt',
         'statement_number' => 'statementNumber',
@@ -236,6 +240,7 @@ class NoFrixionMoneyMoovModelsReport implements ModelInterface, ArrayAccess, \Js
         'inserted' => 'setInserted',
         'last_updated' => 'setLastUpdated',
         'cron_expression' => 'setCronExpression',
+        'time_zone_id' => 'setTimeZoneId',
         'status' => 'setStatus',
         'last_completed_at' => 'setLastCompletedAt',
         'statement_number' => 'setStatementNumber',
@@ -258,6 +263,7 @@ class NoFrixionMoneyMoovModelsReport implements ModelInterface, ArrayAccess, \Js
         'inserted' => 'getInserted',
         'last_updated' => 'getLastUpdated',
         'cron_expression' => 'getCronExpression',
+        'time_zone_id' => 'getTimeZoneId',
         'status' => 'getStatus',
         'last_completed_at' => 'getLastCompletedAt',
         'statement_number' => 'getStatementNumber',
@@ -377,6 +383,7 @@ class NoFrixionMoneyMoovModelsReport implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('inserted', $data ?? [], null);
         $this->setIfExists('last_updated', $data ?? [], null);
         $this->setIfExists('cron_expression', $data ?? [], null);
+        $this->setIfExists('time_zone_id', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('last_completed_at', $data ?? [], null);
         $this->setIfExists('statement_number', $data ?? [], null);
@@ -721,6 +728,40 @@ class NoFrixionMoneyMoovModelsReport implements ModelInterface, ArrayAccess, \Js
             }
         }
         $this->container['cron_expression'] = $cron_expression;
+
+        return $this;
+    }
+
+    /**
+     * Gets time_zone_id
+     *
+     * @return string|null
+     */
+    public function getTimeZoneId()
+    {
+        return $this->container['time_zone_id'];
+    }
+
+    /**
+     * Sets time_zone_id
+     *
+     * @param string|null $time_zone_id time_zone_id
+     *
+     * @return self
+     */
+    public function setTimeZoneId($time_zone_id)
+    {
+        if (is_null($time_zone_id)) {
+            array_push($this->openAPINullablesSetToNull, 'time_zone_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('time_zone_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['time_zone_id'] = $time_zone_id;
 
         return $this;
     }

@@ -150,4 +150,13 @@ class NoFrixionMoneyMoovModelsWebhookTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "merchant_id"
+     */
+    public function testPropertyMerchantId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

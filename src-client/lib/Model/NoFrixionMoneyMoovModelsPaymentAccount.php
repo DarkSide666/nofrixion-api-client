@@ -60,7 +60,9 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'id' => 'string',
         'merchant_id' => 'string',
         'balance' => 'float',
+        'balance_minor_units' => 'int',
         'submitted_payouts_balance' => 'float',
+        'submitted_payouts_balance_minor_units' => 'int',
         'inserted' => '\DateTime',
         'last_updated' => '\DateTime',
         'currency' => 'string',
@@ -70,6 +72,7 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'summary' => 'string',
         'is_default' => 'bool',
         'available_balance' => 'float',
+        'available_balance_minor_units' => 'int',
         'account_supplier_name' => 'string',
         'is_connected_account' => 'bool',
         'consent_id' => 'string',
@@ -101,7 +104,9 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'id' => 'uuid',
         'merchant_id' => 'uuid',
         'balance' => 'double',
+        'balance_minor_units' => 'int64',
         'submitted_payouts_balance' => 'double',
+        'submitted_payouts_balance_minor_units' => 'int64',
         'inserted' => 'date-time',
         'last_updated' => 'date-time',
         'currency' => null,
@@ -111,6 +116,7 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'summary' => null,
         'is_default' => null,
         'available_balance' => 'double',
+        'available_balance_minor_units' => 'int64',
         'account_supplier_name' => null,
         'is_connected_account' => null,
         'consent_id' => 'uuid',
@@ -140,7 +146,9 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'id' => false,
         'merchant_id' => false,
         'balance' => false,
+        'balance_minor_units' => false,
         'submitted_payouts_balance' => false,
+        'submitted_payouts_balance_minor_units' => false,
         'inserted' => false,
         'last_updated' => false,
         'currency' => false,
@@ -150,6 +158,7 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'summary' => true,
         'is_default' => false,
         'available_balance' => false,
+        'available_balance_minor_units' => false,
         'account_supplier_name' => false,
         'is_connected_account' => false,
         'consent_id' => true,
@@ -259,7 +268,9 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'id' => 'id',
         'merchant_id' => 'merchantID',
         'balance' => 'balance',
+        'balance_minor_units' => 'balanceMinorUnits',
         'submitted_payouts_balance' => 'submittedPayoutsBalance',
+        'submitted_payouts_balance_minor_units' => 'submittedPayoutsBalanceMinorUnits',
         'inserted' => 'inserted',
         'last_updated' => 'lastUpdated',
         'currency' => 'currency',
@@ -269,6 +280,7 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'summary' => 'summary',
         'is_default' => 'isDefault',
         'available_balance' => 'availableBalance',
+        'available_balance_minor_units' => 'availableBalanceMinorUnits',
         'account_supplier_name' => 'accountSupplierName',
         'is_connected_account' => 'isConnectedAccount',
         'consent_id' => 'consentID',
@@ -298,7 +310,9 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'id' => 'setId',
         'merchant_id' => 'setMerchantId',
         'balance' => 'setBalance',
+        'balance_minor_units' => 'setBalanceMinorUnits',
         'submitted_payouts_balance' => 'setSubmittedPayoutsBalance',
+        'submitted_payouts_balance_minor_units' => 'setSubmittedPayoutsBalanceMinorUnits',
         'inserted' => 'setInserted',
         'last_updated' => 'setLastUpdated',
         'currency' => 'setCurrency',
@@ -308,6 +322,7 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'summary' => 'setSummary',
         'is_default' => 'setIsDefault',
         'available_balance' => 'setAvailableBalance',
+        'available_balance_minor_units' => 'setAvailableBalanceMinorUnits',
         'account_supplier_name' => 'setAccountSupplierName',
         'is_connected_account' => 'setIsConnectedAccount',
         'consent_id' => 'setConsentId',
@@ -337,7 +352,9 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'id' => 'getId',
         'merchant_id' => 'getMerchantId',
         'balance' => 'getBalance',
+        'balance_minor_units' => 'getBalanceMinorUnits',
         'submitted_payouts_balance' => 'getSubmittedPayoutsBalance',
+        'submitted_payouts_balance_minor_units' => 'getSubmittedPayoutsBalanceMinorUnits',
         'inserted' => 'getInserted',
         'last_updated' => 'getLastUpdated',
         'currency' => 'getCurrency',
@@ -347,6 +364,7 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'summary' => 'getSummary',
         'is_default' => 'getIsDefault',
         'available_balance' => 'getAvailableBalance',
+        'available_balance_minor_units' => 'getAvailableBalanceMinorUnits',
         'account_supplier_name' => 'getAccountSupplierName',
         'is_connected_account' => 'getIsConnectedAccount',
         'consent_id' => 'getConsentId',
@@ -573,7 +591,9 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('merchant_id', $data ?? [], null);
         $this->setIfExists('balance', $data ?? [], null);
+        $this->setIfExists('balance_minor_units', $data ?? [], null);
         $this->setIfExists('submitted_payouts_balance', $data ?? [], null);
+        $this->setIfExists('submitted_payouts_balance_minor_units', $data ?? [], null);
         $this->setIfExists('inserted', $data ?? [], null);
         $this->setIfExists('last_updated', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
@@ -583,6 +603,7 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         $this->setIfExists('summary', $data ?? [], null);
         $this->setIfExists('is_default', $data ?? [], null);
         $this->setIfExists('available_balance', $data ?? [], null);
+        $this->setIfExists('available_balance_minor_units', $data ?? [], null);
         $this->setIfExists('account_supplier_name', $data ?? [], null);
         $this->setIfExists('is_connected_account', $data ?? [], null);
         $this->setIfExists('consent_id', $data ?? [], null);
@@ -781,6 +802,33 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
     }
 
     /**
+     * Gets balance_minor_units
+     *
+     * @return int|null
+     */
+    public function getBalanceMinorUnits()
+    {
+        return $this->container['balance_minor_units'];
+    }
+
+    /**
+     * Sets balance_minor_units
+     *
+     * @param int|null $balance_minor_units Balance of the account expressed in the currency’s minor units (e.g. cents, pence).
+     *
+     * @return self
+     */
+    public function setBalanceMinorUnits($balance_minor_units)
+    {
+        if (is_null($balance_minor_units)) {
+            throw new \InvalidArgumentException('non-nullable balance_minor_units cannot be null');
+        }
+        $this->container['balance_minor_units'] = $balance_minor_units;
+
+        return $this;
+    }
+
+    /**
      * Gets submitted_payouts_balance
      *
      * @return float|null
@@ -803,6 +851,33 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
             throw new \InvalidArgumentException('non-nullable submitted_payouts_balance cannot be null');
         }
         $this->container['submitted_payouts_balance'] = $submitted_payouts_balance;
+
+        return $this;
+    }
+
+    /**
+     * Gets submitted_payouts_balance_minor_units
+     *
+     * @return int|null
+     */
+    public function getSubmittedPayoutsBalanceMinorUnits()
+    {
+        return $this->container['submitted_payouts_balance_minor_units'];
+    }
+
+    /**
+     * Sets submitted_payouts_balance_minor_units
+     *
+     * @param int|null $submitted_payouts_balance_minor_units The balance of the submitted payouts expressed in the currency’s minor units (e.g. cents, pence).
+     *
+     * @return self
+     */
+    public function setSubmittedPayoutsBalanceMinorUnits($submitted_payouts_balance_minor_units)
+    {
+        if (is_null($submitted_payouts_balance_minor_units)) {
+            throw new \InvalidArgumentException('non-nullable submitted_payouts_balance_minor_units cannot be null');
+        }
+        $this->container['submitted_payouts_balance_minor_units'] = $submitted_payouts_balance_minor_units;
 
         return $this;
     }
@@ -1077,6 +1152,33 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
             throw new \InvalidArgumentException('non-nullable available_balance cannot be null');
         }
         $this->container['available_balance'] = $available_balance;
+
+        return $this;
+    }
+
+    /**
+     * Gets available_balance_minor_units
+     *
+     * @return int|null
+     */
+    public function getAvailableBalanceMinorUnits()
+    {
+        return $this->container['available_balance_minor_units'];
+    }
+
+    /**
+     * Sets available_balance_minor_units
+     *
+     * @param int|null $available_balance_minor_units The available balance expressed in the currency’s minor units (e.g. cents, pence).
+     *
+     * @return self
+     */
+    public function setAvailableBalanceMinorUnits($available_balance_minor_units)
+    {
+        if (is_null($available_balance_minor_units)) {
+            throw new \InvalidArgumentException('non-nullable available_balance_minor_units cannot be null');
+        }
+        $this->container['available_balance_minor_units'] = $available_balance_minor_units;
 
         return $this;
     }

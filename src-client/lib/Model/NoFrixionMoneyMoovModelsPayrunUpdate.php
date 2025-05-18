@@ -59,7 +59,7 @@ class NoFrixionMoneyMoovModelsPayrunUpdate implements ModelInterface, ArrayAcces
     protected static $openAPITypes = [
         'id' => 'string',
         'name' => 'string',
-        'source_accounts' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayrunUpdateSourceAccounts',
+        'source_accounts' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsBankPaymentOptionsDestinationAccounts',
         'invoices' => 'array<string,bool>',
         'scheduled_date' => '\DateTime'
     ];
@@ -381,7 +381,7 @@ class NoFrixionMoneyMoovModelsPayrunUpdate implements ModelInterface, ArrayAcces
     /**
      * Gets source_accounts
      *
-     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayrunUpdateSourceAccounts|null
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsBankPaymentOptionsDestinationAccounts|null
      */
     public function getSourceAccounts()
     {
@@ -391,7 +391,7 @@ class NoFrixionMoneyMoovModelsPayrunUpdate implements ModelInterface, ArrayAcces
     /**
      * Sets source_accounts
      *
-     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayrunUpdateSourceAccounts|null $source_accounts source_accounts
+     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsBankPaymentOptionsDestinationAccounts|null $source_accounts source_accounts
      *
      * @return self
      */

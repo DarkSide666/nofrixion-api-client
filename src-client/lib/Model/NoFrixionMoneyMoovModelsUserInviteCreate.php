@@ -62,7 +62,8 @@ class NoFrixionMoneyMoovModelsUserInviteCreate implements ModelInterface, ArrayA
         'invitee_first_name' => 'string',
         'invitee_last_name' => 'string',
         'registration_url' => 'string',
-        'send_invite_email' => 'bool'
+        'send_invite_email' => 'bool',
+        'initial_role_id' => 'string'
     ];
 
     /**
@@ -78,7 +79,8 @@ class NoFrixionMoneyMoovModelsUserInviteCreate implements ModelInterface, ArrayA
         'invitee_first_name' => null,
         'invitee_last_name' => null,
         'registration_url' => null,
-        'send_invite_email' => null
+        'send_invite_email' => null,
+        'initial_role_id' => 'uuid'
     ];
 
     /**
@@ -92,7 +94,8 @@ class NoFrixionMoneyMoovModelsUserInviteCreate implements ModelInterface, ArrayA
         'invitee_first_name' => true,
         'invitee_last_name' => true,
         'registration_url' => true,
-        'send_invite_email' => false
+        'send_invite_email' => false,
+        'initial_role_id' => true
     ];
 
     /**
@@ -186,7 +189,8 @@ class NoFrixionMoneyMoovModelsUserInviteCreate implements ModelInterface, ArrayA
         'invitee_first_name' => 'inviteeFirstName',
         'invitee_last_name' => 'inviteeLastName',
         'registration_url' => 'registrationUrl',
-        'send_invite_email' => 'sendInviteEmail'
+        'send_invite_email' => 'sendInviteEmail',
+        'initial_role_id' => 'initialRoleID'
     ];
 
     /**
@@ -200,7 +204,8 @@ class NoFrixionMoneyMoovModelsUserInviteCreate implements ModelInterface, ArrayA
         'invitee_first_name' => 'setInviteeFirstName',
         'invitee_last_name' => 'setInviteeLastName',
         'registration_url' => 'setRegistrationUrl',
-        'send_invite_email' => 'setSendInviteEmail'
+        'send_invite_email' => 'setSendInviteEmail',
+        'initial_role_id' => 'setInitialRoleId'
     ];
 
     /**
@@ -214,7 +219,8 @@ class NoFrixionMoneyMoovModelsUserInviteCreate implements ModelInterface, ArrayA
         'invitee_first_name' => 'getInviteeFirstName',
         'invitee_last_name' => 'getInviteeLastName',
         'registration_url' => 'getRegistrationUrl',
-        'send_invite_email' => 'getSendInviteEmail'
+        'send_invite_email' => 'getSendInviteEmail',
+        'initial_role_id' => 'getInitialRoleId'
     ];
 
     /**
@@ -280,6 +286,7 @@ class NoFrixionMoneyMoovModelsUserInviteCreate implements ModelInterface, ArrayA
         $this->setIfExists('invitee_last_name', $data ?? [], null);
         $this->setIfExists('registration_url', $data ?? [], null);
         $this->setIfExists('send_invite_email', $data ?? [], null);
+        $this->setIfExists('initial_role_id', $data ?? [], null);
     }
 
     /**
@@ -515,6 +522,40 @@ class NoFrixionMoneyMoovModelsUserInviteCreate implements ModelInterface, ArrayA
             throw new \InvalidArgumentException('non-nullable send_invite_email cannot be null');
         }
         $this->container['send_invite_email'] = $send_invite_email;
+
+        return $this;
+    }
+
+    /**
+     * Gets initial_role_id
+     *
+     * @return string|null
+     */
+    public function getInitialRoleId()
+    {
+        return $this->container['initial_role_id'];
+    }
+
+    /**
+     * Sets initial_role_id
+     *
+     * @param string|null $initial_role_id The role ID to automatically assign to the merchant’s very first user.   This property can only be set when the merchant has no users with roles.  Typically set by the compliance team when the first user is invited to a new merchant.
+     *
+     * @return self
+     */
+    public function setInitialRoleId($initial_role_id)
+    {
+        if (is_null($initial_role_id)) {
+            array_push($this->openAPINullablesSetToNull, 'initial_role_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('initial_role_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['initial_role_id'] = $initial_role_id;
 
         return $this;
     }

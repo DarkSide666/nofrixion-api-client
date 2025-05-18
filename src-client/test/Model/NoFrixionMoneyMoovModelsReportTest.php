@@ -161,6 +161,15 @@ class NoFrixionMoneyMoovModelsReportTest extends TestCase
     }
 
     /**
+     * Test attribute "time_zone_id"
+     */
+    public function testPropertyTimeZoneId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "status"
      */
     public function testPropertyStatus()

@@ -69,13 +69,13 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         'hosted_pay_version' => 'int',
         'web_hook_limit' => 'int',
         'display_qr_on_hosted_pay' => 'bool',
-        'modulr_customer_id' => 'string',
         'supported_payment_methods_list' => 'string[]',
         'your_role' => 'string',
         'your_role_name' => 'string',
         'user_roles' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserRole[]',
         'tags' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTag[]',
-        'payment_accounts' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]'
+        'payment_accounts' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]',
+        'account_currencies' => 'string[]'
     ];
 
     /**
@@ -98,13 +98,13 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         'hosted_pay_version' => 'int32',
         'web_hook_limit' => 'int32',
         'display_qr_on_hosted_pay' => null,
-        'modulr_customer_id' => null,
         'supported_payment_methods_list' => null,
         'your_role' => null,
         'your_role_name' => null,
         'user_roles' => null,
         'tags' => null,
-        'payment_accounts' => null
+        'payment_accounts' => null,
+        'account_currencies' => null
     ];
 
     /**
@@ -125,13 +125,13 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         'hosted_pay_version' => false,
         'web_hook_limit' => false,
         'display_qr_on_hosted_pay' => false,
-        'modulr_customer_id' => true,
         'supported_payment_methods_list' => true,
         'your_role' => false,
         'your_role_name' => true,
         'user_roles' => true,
         'tags' => true,
-        'payment_accounts' => true
+        'payment_accounts' => true,
+        'account_currencies' => true
     ];
 
     /**
@@ -232,13 +232,13 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         'hosted_pay_version' => 'hostedPayVersion',
         'web_hook_limit' => 'webHookLimit',
         'display_qr_on_hosted_pay' => 'displayQrOnHostedPay',
-        'modulr_customer_id' => 'modulrCustomerID',
         'supported_payment_methods_list' => 'supportedPaymentMethodsList',
         'your_role' => 'yourRole',
         'your_role_name' => 'yourRoleName',
         'user_roles' => 'userRoles',
         'tags' => 'tags',
-        'payment_accounts' => 'paymentAccounts'
+        'payment_accounts' => 'paymentAccounts',
+        'account_currencies' => 'accountCurrencies'
     ];
 
     /**
@@ -259,13 +259,13 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         'hosted_pay_version' => 'setHostedPayVersion',
         'web_hook_limit' => 'setWebHookLimit',
         'display_qr_on_hosted_pay' => 'setDisplayQrOnHostedPay',
-        'modulr_customer_id' => 'setModulrCustomerId',
         'supported_payment_methods_list' => 'setSupportedPaymentMethodsList',
         'your_role' => 'setYourRole',
         'your_role_name' => 'setYourRoleName',
         'user_roles' => 'setUserRoles',
         'tags' => 'setTags',
-        'payment_accounts' => 'setPaymentAccounts'
+        'payment_accounts' => 'setPaymentAccounts',
+        'account_currencies' => 'setAccountCurrencies'
     ];
 
     /**
@@ -286,13 +286,13 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         'hosted_pay_version' => 'getHostedPayVersion',
         'web_hook_limit' => 'getWebHookLimit',
         'display_qr_on_hosted_pay' => 'getDisplayQrOnHostedPay',
-        'modulr_customer_id' => 'getModulrCustomerId',
         'supported_payment_methods_list' => 'getSupportedPaymentMethodsList',
         'your_role' => 'getYourRole',
         'your_role_name' => 'getYourRoleName',
         'user_roles' => 'getUserRoles',
         'tags' => 'getTags',
-        'payment_accounts' => 'getPaymentAccounts'
+        'payment_accounts' => 'getPaymentAccounts',
+        'account_currencies' => 'getAccountCurrencies'
     ];
 
     /**
@@ -352,6 +352,11 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
     public const YOUR_ROLE_USER = 'User';
     public const YOUR_ROLE_APPROVER = 'Approver';
     public const YOUR_ROLE_ADMIN_APPROVER = 'AdminApprover';
+    public const ACCOUNT_CURRENCIES_NONE = 'NONE';
+    public const ACCOUNT_CURRENCIES_GBP = 'GBP';
+    public const ACCOUNT_CURRENCIES_EUR = 'EUR';
+    public const ACCOUNT_CURRENCIES_USD = 'USD';
+    public const ACCOUNT_CURRENCIES_BTC = 'BTC';
 
     /**
      * Gets allowable values of the enum
@@ -403,6 +408,22 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
     }
 
     /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getAccountCurrenciesAllowableValues()
+    {
+        return [
+            self::ACCOUNT_CURRENCIES_NONE,
+            self::ACCOUNT_CURRENCIES_GBP,
+            self::ACCOUNT_CURRENCIES_EUR,
+            self::ACCOUNT_CURRENCIES_USD,
+            self::ACCOUNT_CURRENCIES_BTC,
+        ];
+    }
+
+    /**
      * Associative array for storing property values
      *
      * @var mixed[]
@@ -429,13 +450,13 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         $this->setIfExists('hosted_pay_version', $data ?? [], null);
         $this->setIfExists('web_hook_limit', $data ?? [], null);
         $this->setIfExists('display_qr_on_hosted_pay', $data ?? [], null);
-        $this->setIfExists('modulr_customer_id', $data ?? [], null);
         $this->setIfExists('supported_payment_methods_list', $data ?? [], null);
         $this->setIfExists('your_role', $data ?? [], null);
         $this->setIfExists('your_role_name', $data ?? [], null);
         $this->setIfExists('user_roles', $data ?? [], null);
         $this->setIfExists('tags', $data ?? [], null);
         $this->setIfExists('payment_accounts', $data ?? [], null);
+        $this->setIfExists('account_currencies', $data ?? [], null);
     }
 
     /**
@@ -868,40 +889,6 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
     }
 
     /**
-     * Gets modulr_customer_id
-     *
-     * @return string|null
-     */
-    public function getModulrCustomerId()
-    {
-        return $this->container['modulr_customer_id'];
-    }
-
-    /**
-     * Sets modulr_customer_id
-     *
-     * @param string|null $modulr_customer_id For internal use only.
-     *
-     * @return self
-     */
-    public function setModulrCustomerId($modulr_customer_id)
-    {
-        if (is_null($modulr_customer_id)) {
-            array_push($this->openAPINullablesSetToNull, 'modulr_customer_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('modulr_customer_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['modulr_customer_id'] = $modulr_customer_id;
-
-        return $this;
-    }
-
-    /**
      * Gets supported_payment_methods_list
      *
      * @return string[]|null
@@ -1113,6 +1100,49 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
             }
         }
         $this->container['payment_accounts'] = $payment_accounts;
+
+        return $this;
+    }
+
+    /**
+     * Gets account_currencies
+     *
+     * @return string[]|null
+     */
+    public function getAccountCurrencies()
+    {
+        return $this->container['account_currencies'];
+    }
+
+    /**
+     * Sets account_currencies
+     *
+     * @param string[]|null $account_currencies The list of currencies that the merchant has accounts for.
+     *
+     * @return self
+     */
+    public function setAccountCurrencies($account_currencies)
+    {
+        if (is_null($account_currencies)) {
+            array_push($this->openAPINullablesSetToNull, 'account_currencies');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('account_currencies', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $allowedValues = $this->getAccountCurrenciesAllowableValues();
+        if (!is_null($account_currencies) && array_diff($account_currencies, $allowedValues)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'account_currencies', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['account_currencies'] = $account_currencies;
 
         return $this;
     }

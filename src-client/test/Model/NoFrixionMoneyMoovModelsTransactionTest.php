@@ -134,6 +134,15 @@ class NoFrixionMoneyMoovModelsTransactionTest extends TestCase
     }
 
     /**
+     * Test attribute "amount_minor_units"
+     */
+    public function testPropertyAmountMinorUnits()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "currency"
      */
     public function testPropertyCurrency()
@@ -209,6 +218,15 @@ class NoFrixionMoneyMoovModelsTransactionTest extends TestCase
      * Test attribute "balance"
      */
     public function testPropertyBalance()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "balance_minor_units"
+     */
+    public function testPropertyBalanceMinorUnits()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

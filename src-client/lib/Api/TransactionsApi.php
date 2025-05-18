@@ -145,7 +145,7 @@ class TransactionsApi
      *
      * Adds merchant tags to a transaction.
      *
-     * @param  string $transaction_id The ID of the transaction to add tags. (required)
+     * @param  string $id The ID of the transaction to add tags. (required)
      * @param  string[] $request_body The tags to add to the transaction. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTags'] to see the possible values for this operation
      *
@@ -153,9 +153,9 @@ class TransactionsApi
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function addTags($transaction_id, $request_body = null, string $contentType = self::contentTypes['addTags'][0])
+    public function addTags($id, $request_body = null, string $contentType = self::contentTypes['addTags'][0])
     {
-        $this->addTagsWithHttpInfo($transaction_id, $request_body, $contentType);
+        $this->addTagsWithHttpInfo($id, $request_body, $contentType);
     }
 
     /**
@@ -163,7 +163,7 @@ class TransactionsApi
      *
      * Adds merchant tags to a transaction.
      *
-     * @param  string $transaction_id The ID of the transaction to add tags. (required)
+     * @param  string $id The ID of the transaction to add tags. (required)
      * @param  string[] $request_body The tags to add to the transaction. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTags'] to see the possible values for this operation
      *
@@ -171,9 +171,9 @@ class TransactionsApi
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function addTagsWithHttpInfo($transaction_id, $request_body = null, string $contentType = self::contentTypes['addTags'][0])
+    public function addTagsWithHttpInfo($id, $request_body = null, string $contentType = self::contentTypes['addTags'][0])
     {
-        $request = $this->addTagsRequest($transaction_id, $request_body, $contentType);
+        $request = $this->addTagsRequest($id, $request_body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -212,16 +212,16 @@ class TransactionsApi
      *
      * Adds merchant tags to a transaction.
      *
-     * @param  string $transaction_id The ID of the transaction to add tags. (required)
+     * @param  string $id The ID of the transaction to add tags. (required)
      * @param  string[] $request_body The tags to add to the transaction. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTags'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function addTagsAsync($transaction_id, $request_body = null, string $contentType = self::contentTypes['addTags'][0])
+    public function addTagsAsync($id, $request_body = null, string $contentType = self::contentTypes['addTags'][0])
     {
-        return $this->addTagsAsyncWithHttpInfo($transaction_id, $request_body, $contentType)
+        return $this->addTagsAsyncWithHttpInfo($id, $request_body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -234,17 +234,17 @@ class TransactionsApi
      *
      * Adds merchant tags to a transaction.
      *
-     * @param  string $transaction_id The ID of the transaction to add tags. (required)
+     * @param  string $id The ID of the transaction to add tags. (required)
      * @param  string[] $request_body The tags to add to the transaction. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTags'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function addTagsAsyncWithHttpInfo($transaction_id, $request_body = null, string $contentType = self::contentTypes['addTags'][0])
+    public function addTagsAsyncWithHttpInfo($id, $request_body = null, string $contentType = self::contentTypes['addTags'][0])
     {
         $returnType = '';
-        $request = $this->addTagsRequest($transaction_id, $request_body, $contentType);
+        $request = $this->addTagsRequest($id, $request_body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -272,26 +272,26 @@ class TransactionsApi
     /**
      * Create request for operation 'addTags'
      *
-     * @param  string $transaction_id The ID of the transaction to add tags. (required)
+     * @param  string $id The ID of the transaction to add tags. (required)
      * @param  string[] $request_body The tags to add to the transaction. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTags'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function addTagsRequest($transaction_id, $request_body = null, string $contentType = self::contentTypes['addTags'][0])
+    public function addTagsRequest($id, $request_body = null, string $contentType = self::contentTypes['addTags'][0])
     {
 
-        // verify the required parameter 'transaction_id' is set
-        if ($transaction_id === null || (is_array($transaction_id) && count($transaction_id) === 0)) {
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $transaction_id when calling addTags'
+                'Missing the required parameter $id when calling addTags'
             );
         }
 
 
 
-        $resourcePath = '/api/v1/transactions/{transactionID}/tags';
+        $resourcePath = '/api/v1/transactions/{id}/tags';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -301,10 +301,10 @@ class TransactionsApi
 
 
         // path params
-        if ($transaction_id !== null) {
+        if ($id !== null) {
             $resourcePath = str_replace(
-                '{' . 'transactionID' . '}',
-                ObjectSerializer::toPathValue($transaction_id),
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
                 $resourcePath
             );
         }
@@ -2123,7 +2123,7 @@ class TransactionsApi
      *
      * Removes a tag from the transaction using the tag ID.
      *
-     * @param  string $transaction_id The ID of the transaction to remove tag. (required)
+     * @param  string $id The ID of the transaction to remove tag. (required)
      * @param  string $tag_id The ID of the tag to remove. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeTag'] to see the possible values for this operation
      *
@@ -2131,9 +2131,9 @@ class TransactionsApi
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function removeTag($transaction_id, $tag_id = null, string $contentType = self::contentTypes['removeTag'][0])
+    public function removeTag($id, $tag_id = null, string $contentType = self::contentTypes['removeTag'][0])
     {
-        $this->removeTagWithHttpInfo($transaction_id, $tag_id, $contentType);
+        $this->removeTagWithHttpInfo($id, $tag_id, $contentType);
     }
 
     /**
@@ -2141,7 +2141,7 @@ class TransactionsApi
      *
      * Removes a tag from the transaction using the tag ID.
      *
-     * @param  string $transaction_id The ID of the transaction to remove tag. (required)
+     * @param  string $id The ID of the transaction to remove tag. (required)
      * @param  string $tag_id The ID of the tag to remove. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeTag'] to see the possible values for this operation
      *
@@ -2149,9 +2149,9 @@ class TransactionsApi
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function removeTagWithHttpInfo($transaction_id, $tag_id = null, string $contentType = self::contentTypes['removeTag'][0])
+    public function removeTagWithHttpInfo($id, $tag_id = null, string $contentType = self::contentTypes['removeTag'][0])
     {
-        $request = $this->removeTagRequest($transaction_id, $tag_id, $contentType);
+        $request = $this->removeTagRequest($id, $tag_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2190,16 +2190,16 @@ class TransactionsApi
      *
      * Removes a tag from the transaction using the tag ID.
      *
-     * @param  string $transaction_id The ID of the transaction to remove tag. (required)
+     * @param  string $id The ID of the transaction to remove tag. (required)
      * @param  string $tag_id The ID of the tag to remove. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeTag'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function removeTagAsync($transaction_id, $tag_id = null, string $contentType = self::contentTypes['removeTag'][0])
+    public function removeTagAsync($id, $tag_id = null, string $contentType = self::contentTypes['removeTag'][0])
     {
-        return $this->removeTagAsyncWithHttpInfo($transaction_id, $tag_id, $contentType)
+        return $this->removeTagAsyncWithHttpInfo($id, $tag_id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2212,17 +2212,17 @@ class TransactionsApi
      *
      * Removes a tag from the transaction using the tag ID.
      *
-     * @param  string $transaction_id The ID of the transaction to remove tag. (required)
+     * @param  string $id The ID of the transaction to remove tag. (required)
      * @param  string $tag_id The ID of the tag to remove. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeTag'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function removeTagAsyncWithHttpInfo($transaction_id, $tag_id = null, string $contentType = self::contentTypes['removeTag'][0])
+    public function removeTagAsyncWithHttpInfo($id, $tag_id = null, string $contentType = self::contentTypes['removeTag'][0])
     {
         $returnType = '';
-        $request = $this->removeTagRequest($transaction_id, $tag_id, $contentType);
+        $request = $this->removeTagRequest($id, $tag_id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2250,26 +2250,26 @@ class TransactionsApi
     /**
      * Create request for operation 'removeTag'
      *
-     * @param  string $transaction_id The ID of the transaction to remove tag. (required)
+     * @param  string $id The ID of the transaction to remove tag. (required)
      * @param  string $tag_id The ID of the tag to remove. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['removeTag'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function removeTagRequest($transaction_id, $tag_id = null, string $contentType = self::contentTypes['removeTag'][0])
+    public function removeTagRequest($id, $tag_id = null, string $contentType = self::contentTypes['removeTag'][0])
     {
 
-        // verify the required parameter 'transaction_id' is set
-        if ($transaction_id === null || (is_array($transaction_id) && count($transaction_id) === 0)) {
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $transaction_id when calling removeTag'
+                'Missing the required parameter $id when calling removeTag'
             );
         }
 
 
 
-        $resourcePath = '/api/v1/transactions/{transactionID}/tag';
+        $resourcePath = '/api/v1/transactions/{id}/tag';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2288,10 +2288,10 @@ class TransactionsApi
 
 
         // path params
-        if ($transaction_id !== null) {
+        if ($id !== null) {
             $resourcePath = str_replace(
-                '{' . 'transactionID' . '}',
-                ObjectSerializer::toPathValue($transaction_id),
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
                 $resourcePath
             );
         }

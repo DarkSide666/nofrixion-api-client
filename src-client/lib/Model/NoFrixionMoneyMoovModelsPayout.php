@@ -68,6 +68,7 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'description' => 'string',
         'currency' => 'string',
         'amount' => 'float',
+        'amount_minor_units' => 'int',
         'formatted_amount' => 'string',
         'your_reference' => 'string',
         'their_reference' => 'string',
@@ -82,12 +83,15 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'created_by_email_address' => 'string',
         'inserted' => '\DateTime',
         'last_updated' => '\DateTime',
+        'source_account_currency' => 'string',
         'source_account_name' => 'string',
         'source_account_iban' => 'string',
         'source_account_number' => 'string',
         'source_account_sortcode' => 'string',
+        'source_account_bic' => 'string',
         'source_account_identifier' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsAccountIdentifier',
         'source_account_available_balance' => 'float',
+        'source_account_available_balance_minor_units' => 'int',
         'formatted_source_account_available_balance' => 'string',
         'destination' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsCounterparty',
         'invoice_id' => 'string',
@@ -111,6 +115,7 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'payment_rail' => 'string',
         'nonce' => 'string',
         'documents' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayoutDocument[]',
+        'charge_bearer' => 'string',
         'is_submitted' => 'bool',
         'is_failed' => 'bool',
         'is_settled' => 'bool'
@@ -135,6 +140,7 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'description' => null,
         'currency' => null,
         'amount' => 'double',
+        'amount_minor_units' => 'int64',
         'formatted_amount' => null,
         'your_reference' => null,
         'their_reference' => null,
@@ -149,12 +155,15 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'created_by_email_address' => null,
         'inserted' => 'date-time',
         'last_updated' => 'date-time',
+        'source_account_currency' => null,
         'source_account_name' => null,
         'source_account_iban' => null,
         'source_account_number' => null,
         'source_account_sortcode' => null,
+        'source_account_bic' => null,
         'source_account_identifier' => null,
         'source_account_available_balance' => 'double',
+        'source_account_available_balance_minor_units' => 'int64',
         'formatted_source_account_available_balance' => null,
         'destination' => null,
         'invoice_id' => null,
@@ -178,6 +187,7 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'payment_rail' => null,
         'nonce' => null,
         'documents' => null,
+        'charge_bearer' => null,
         'is_submitted' => null,
         'is_failed' => null,
         'is_settled' => null
@@ -200,6 +210,7 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'description' => true,
         'currency' => false,
         'amount' => false,
+        'amount_minor_units' => false,
         'formatted_amount' => true,
         'your_reference' => true,
         'their_reference' => true,
@@ -214,12 +225,15 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'created_by_email_address' => true,
         'inserted' => false,
         'last_updated' => false,
+        'source_account_currency' => false,
         'source_account_name' => true,
         'source_account_iban' => true,
         'source_account_number' => true,
         'source_account_sortcode' => true,
+        'source_account_bic' => true,
         'source_account_identifier' => false,
         'source_account_available_balance' => true,
+        'source_account_available_balance_minor_units' => true,
         'formatted_source_account_available_balance' => true,
         'destination' => false,
         'invoice_id' => true,
@@ -243,6 +257,7 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'payment_rail' => false,
         'nonce' => true,
         'documents' => true,
+        'charge_bearer' => false,
         'is_submitted' => false,
         'is_failed' => false,
         'is_settled' => false
@@ -345,6 +360,7 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'description' => 'description',
         'currency' => 'currency',
         'amount' => 'amount',
+        'amount_minor_units' => 'amountMinorUnits',
         'formatted_amount' => 'formattedAmount',
         'your_reference' => 'yourReference',
         'their_reference' => 'theirReference',
@@ -359,12 +375,15 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'created_by_email_address' => 'createdByEmailAddress',
         'inserted' => 'inserted',
         'last_updated' => 'lastUpdated',
+        'source_account_currency' => 'sourceAccountCurrency',
         'source_account_name' => 'sourceAccountName',
         'source_account_iban' => 'sourceAccountIban',
         'source_account_number' => 'sourceAccountNumber',
         'source_account_sortcode' => 'sourceAccountSortcode',
+        'source_account_bic' => 'sourceAccountBic',
         'source_account_identifier' => 'sourceAccountIdentifier',
         'source_account_available_balance' => 'sourceAccountAvailableBalance',
+        'source_account_available_balance_minor_units' => 'sourceAccountAvailableBalanceMinorUnits',
         'formatted_source_account_available_balance' => 'formattedSourceAccountAvailableBalance',
         'destination' => 'destination',
         'invoice_id' => 'invoiceID',
@@ -388,6 +407,7 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'payment_rail' => 'paymentRail',
         'nonce' => 'nonce',
         'documents' => 'documents',
+        'charge_bearer' => 'chargeBearer',
         'is_submitted' => 'isSubmitted',
         'is_failed' => 'isFailed',
         'is_settled' => 'isSettled'
@@ -410,6 +430,7 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'description' => 'setDescription',
         'currency' => 'setCurrency',
         'amount' => 'setAmount',
+        'amount_minor_units' => 'setAmountMinorUnits',
         'formatted_amount' => 'setFormattedAmount',
         'your_reference' => 'setYourReference',
         'their_reference' => 'setTheirReference',
@@ -424,12 +445,15 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'created_by_email_address' => 'setCreatedByEmailAddress',
         'inserted' => 'setInserted',
         'last_updated' => 'setLastUpdated',
+        'source_account_currency' => 'setSourceAccountCurrency',
         'source_account_name' => 'setSourceAccountName',
         'source_account_iban' => 'setSourceAccountIban',
         'source_account_number' => 'setSourceAccountNumber',
         'source_account_sortcode' => 'setSourceAccountSortcode',
+        'source_account_bic' => 'setSourceAccountBic',
         'source_account_identifier' => 'setSourceAccountIdentifier',
         'source_account_available_balance' => 'setSourceAccountAvailableBalance',
+        'source_account_available_balance_minor_units' => 'setSourceAccountAvailableBalanceMinorUnits',
         'formatted_source_account_available_balance' => 'setFormattedSourceAccountAvailableBalance',
         'destination' => 'setDestination',
         'invoice_id' => 'setInvoiceId',
@@ -453,6 +477,7 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'payment_rail' => 'setPaymentRail',
         'nonce' => 'setNonce',
         'documents' => 'setDocuments',
+        'charge_bearer' => 'setChargeBearer',
         'is_submitted' => 'setIsSubmitted',
         'is_failed' => 'setIsFailed',
         'is_settled' => 'setIsSettled'
@@ -475,6 +500,7 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'description' => 'getDescription',
         'currency' => 'getCurrency',
         'amount' => 'getAmount',
+        'amount_minor_units' => 'getAmountMinorUnits',
         'formatted_amount' => 'getFormattedAmount',
         'your_reference' => 'getYourReference',
         'their_reference' => 'getTheirReference',
@@ -489,12 +515,15 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'created_by_email_address' => 'getCreatedByEmailAddress',
         'inserted' => 'getInserted',
         'last_updated' => 'getLastUpdated',
+        'source_account_currency' => 'getSourceAccountCurrency',
         'source_account_name' => 'getSourceAccountName',
         'source_account_iban' => 'getSourceAccountIban',
         'source_account_number' => 'getSourceAccountNumber',
         'source_account_sortcode' => 'getSourceAccountSortcode',
+        'source_account_bic' => 'getSourceAccountBic',
         'source_account_identifier' => 'getSourceAccountIdentifier',
         'source_account_available_balance' => 'getSourceAccountAvailableBalance',
+        'source_account_available_balance_minor_units' => 'getSourceAccountAvailableBalanceMinorUnits',
         'formatted_source_account_available_balance' => 'getFormattedSourceAccountAvailableBalance',
         'destination' => 'getDestination',
         'invoice_id' => 'getInvoiceId',
@@ -518,6 +547,7 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'payment_rail' => 'getPaymentRail',
         'nonce' => 'getNonce',
         'documents' => 'getDocuments',
+        'charge_bearer' => 'getChargeBearer',
         'is_submitted' => 'getIsSubmitted',
         'is_failed' => 'getIsFailed',
         'is_settled' => 'getIsSettled'
@@ -591,6 +621,11 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
     public const CURRENT_USER_ROLE_USER = 'User';
     public const CURRENT_USER_ROLE_APPROVER = 'Approver';
     public const CURRENT_USER_ROLE_ADMIN_APPROVER = 'AdminApprover';
+    public const SOURCE_ACCOUNT_CURRENCY_NONE = 'NONE';
+    public const SOURCE_ACCOUNT_CURRENCY_GBP = 'GBP';
+    public const SOURCE_ACCOUNT_CURRENCY_EUR = 'EUR';
+    public const SOURCE_ACCOUNT_CURRENCY_USD = 'USD';
+    public const SOURCE_ACCOUNT_CURRENCY_BTC = 'BTC';
     public const AUTHENTICATION_METHODS_NONE = 'None';
     public const AUTHENTICATION_METHODS_WEB_AUTHN = 'WebAuthn';
     public const AUTHENTICATION_METHODS_ONE_TIME_PASSWORD = 'OneTimePassword';
@@ -614,6 +649,10 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
     public const PAYMENT_RAIL_SEPA_CT = 'SEPA_CT';
     public const PAYMENT_RAIL_SEPA_INST = 'SEPA_INST';
     public const PAYMENT_RAIL_TARGET2 = 'TARGET2';
+    public const CHARGE_BEARER__DEFAULT = 'Default';
+    public const CHARGE_BEARER_BEN = 'BEN';
+    public const CHARGE_BEARER_OUR = 'OUR';
+    public const CHARGE_BEARER_SHA = 'SHA';
 
     /**
      * Gets allowable values of the enum
@@ -691,6 +730,22 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
      *
      * @return string[]
      */
+    public function getSourceAccountCurrencyAllowableValues()
+    {
+        return [
+            self::SOURCE_ACCOUNT_CURRENCY_NONE,
+            self::SOURCE_ACCOUNT_CURRENCY_GBP,
+            self::SOURCE_ACCOUNT_CURRENCY_EUR,
+            self::SOURCE_ACCOUNT_CURRENCY_USD,
+            self::SOURCE_ACCOUNT_CURRENCY_BTC,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
     public function getAuthenticationMethodsAllowableValues()
     {
         return [
@@ -743,6 +798,21 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
     }
 
     /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getChargeBearerAllowableValues()
+    {
+        return [
+            self::CHARGE_BEARER__DEFAULT,
+            self::CHARGE_BEARER_BEN,
+            self::CHARGE_BEARER_OUR,
+            self::CHARGE_BEARER_SHA,
+        ];
+    }
+
+    /**
      * Associative array for storing property values
      *
      * @var mixed[]
@@ -768,6 +838,7 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
         $this->setIfExists('amount', $data ?? [], null);
+        $this->setIfExists('amount_minor_units', $data ?? [], null);
         $this->setIfExists('formatted_amount', $data ?? [], null);
         $this->setIfExists('your_reference', $data ?? [], null);
         $this->setIfExists('their_reference', $data ?? [], null);
@@ -782,12 +853,15 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('created_by_email_address', $data ?? [], null);
         $this->setIfExists('inserted', $data ?? [], null);
         $this->setIfExists('last_updated', $data ?? [], null);
+        $this->setIfExists('source_account_currency', $data ?? [], null);
         $this->setIfExists('source_account_name', $data ?? [], null);
         $this->setIfExists('source_account_iban', $data ?? [], null);
         $this->setIfExists('source_account_number', $data ?? [], null);
         $this->setIfExists('source_account_sortcode', $data ?? [], null);
+        $this->setIfExists('source_account_bic', $data ?? [], null);
         $this->setIfExists('source_account_identifier', $data ?? [], null);
         $this->setIfExists('source_account_available_balance', $data ?? [], null);
+        $this->setIfExists('source_account_available_balance_minor_units', $data ?? [], null);
         $this->setIfExists('formatted_source_account_available_balance', $data ?? [], null);
         $this->setIfExists('destination', $data ?? [], null);
         $this->setIfExists('invoice_id', $data ?? [], null);
@@ -811,6 +885,7 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('payment_rail', $data ?? [], null);
         $this->setIfExists('nonce', $data ?? [], null);
         $this->setIfExists('documents', $data ?? [], null);
+        $this->setIfExists('charge_bearer', $data ?? [], null);
         $this->setIfExists('is_submitted', $data ?? [], null);
         $this->setIfExists('is_failed', $data ?? [], null);
         $this->setIfExists('is_settled', $data ?? [], null);
@@ -879,6 +954,15 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
             );
         }
 
+        $allowedValues = $this->getSourceAccountCurrencyAllowableValues();
+        if (!is_null($this->container['source_account_currency']) && !in_array($this->container['source_account_currency'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'source_account_currency', must be one of '%s'",
+                $this->container['source_account_currency'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         $allowedValues = $this->getPaymentProcessorAllowableValues();
         if (!is_null($this->container['payment_processor']) && !in_array($this->container['payment_processor'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
@@ -893,6 +977,15 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'payment_rail', must be one of '%s'",
                 $this->container['payment_rail'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getChargeBearerAllowableValues();
+        if (!is_null($this->container['charge_bearer']) && !in_array($this->container['charge_bearer'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'charge_bearer', must be one of '%s'",
+                $this->container['charge_bearer'],
                 implode("', '", $allowedValues)
             );
         }
@@ -1260,6 +1353,33 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
             throw new \InvalidArgumentException('non-nullable amount cannot be null');
         }
         $this->container['amount'] = $amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets amount_minor_units
+     *
+     * @return int|null
+     */
+    public function getAmountMinorUnits()
+    {
+        return $this->container['amount_minor_units'];
+    }
+
+    /**
+     * Sets amount_minor_units
+     *
+     * @param int|null $amount_minor_units The payout amount expressed in the currency’s minor units (e.g. cents, pence).
+     *
+     * @return self
+     */
+    public function setAmountMinorUnits($amount_minor_units)
+    {
+        if (is_null($amount_minor_units)) {
+            throw new \InvalidArgumentException('non-nullable amount_minor_units cannot be null');
+        }
+        $this->container['amount_minor_units'] = $amount_minor_units;
 
         return $this;
     }
@@ -1733,6 +1853,43 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
     }
 
     /**
+     * Gets source_account_currency
+     *
+     * @return string|null
+     */
+    public function getSourceAccountCurrency()
+    {
+        return $this->container['source_account_currency'];
+    }
+
+    /**
+     * Sets source_account_currency
+     *
+     * @param string|null $source_account_currency The currency of the source account.
+     *
+     * @return self
+     */
+    public function setSourceAccountCurrency($source_account_currency)
+    {
+        if (is_null($source_account_currency)) {
+            throw new \InvalidArgumentException('non-nullable source_account_currency cannot be null');
+        }
+        $allowedValues = $this->getSourceAccountCurrencyAllowableValues();
+        if (!in_array($source_account_currency, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'source_account_currency', must be one of '%s'",
+                    $source_account_currency,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['source_account_currency'] = $source_account_currency;
+
+        return $this;
+    }
+
+    /**
      * Gets source_account_name
      *
      * @return string|null
@@ -1869,6 +2026,40 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
     }
 
     /**
+     * Gets source_account_bic
+     *
+     * @return string|null
+     */
+    public function getSourceAccountBic()
+    {
+        return $this->container['source_account_bic'];
+    }
+
+    /**
+     * Sets source_account_bic
+     *
+     * @param string|null $source_account_bic The BIC of the account the payout is being made from.
+     *
+     * @return self
+     */
+    public function setSourceAccountBic($source_account_bic)
+    {
+        if (is_null($source_account_bic)) {
+            array_push($this->openAPINullablesSetToNull, 'source_account_bic');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('source_account_bic', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['source_account_bic'] = $source_account_bic;
+
+        return $this;
+    }
+
+    /**
      * Gets source_account_identifier
      *
      * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsAccountIdentifier|null
@@ -1925,6 +2116,40 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
             }
         }
         $this->container['source_account_available_balance'] = $source_account_available_balance;
+
+        return $this;
+    }
+
+    /**
+     * Gets source_account_available_balance_minor_units
+     *
+     * @return int|null
+     */
+    public function getSourceAccountAvailableBalanceMinorUnits()
+    {
+        return $this->container['source_account_available_balance_minor_units'];
+    }
+
+    /**
+     * Sets source_account_available_balance_minor_units
+     *
+     * @param int|null $source_account_available_balance_minor_units The available balance of the source account expressed in the currency’s minor units (e.g. cents, pence).
+     *
+     * @return self
+     */
+    public function setSourceAccountAvailableBalanceMinorUnits($source_account_available_balance_minor_units)
+    {
+        if (is_null($source_account_available_balance_minor_units)) {
+            array_push($this->openAPINullablesSetToNull, 'source_account_available_balance_minor_units');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('source_account_available_balance_minor_units', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['source_account_available_balance_minor_units'] = $source_account_available_balance_minor_units;
 
         return $this;
     }
@@ -2666,6 +2891,43 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
             }
         }
         $this->container['documents'] = $documents;
+
+        return $this;
+    }
+
+    /**
+     * Gets charge_bearer
+     *
+     * @return string|null
+     */
+    public function getChargeBearer()
+    {
+        return $this->container['charge_bearer'];
+    }
+
+    /**
+     * Sets charge_bearer
+     *
+     * @param string|null $charge_bearer Optional field to set who should pay any fees for the payout. Typically only  used for international payments and ignored for SEPA and Faster Payments.
+     *
+     * @return self
+     */
+    public function setChargeBearer($charge_bearer)
+    {
+        if (is_null($charge_bearer)) {
+            throw new \InvalidArgumentException('non-nullable charge_bearer cannot be null');
+        }
+        $allowedValues = $this->getChargeBearerAllowableValues();
+        if (!in_array($charge_bearer, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'charge_bearer', must be one of '%s'",
+                    $charge_bearer,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['charge_bearer'] = $charge_bearer;
 
         return $this;
     }

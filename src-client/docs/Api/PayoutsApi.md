@@ -12,11 +12,10 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 | [**deletePayouts()**](PayoutsApi.md#deletePayouts) | **DELETE** /api/v1/payouts/batchdelete | Deletes a list of payout records. |
 | [**exportPayouts()**](PayoutsApi.md#exportPayouts) | **GET** /api/v1/payouts/export | Exports a list of all payouts for a specific merchant to a CSV file. |
 | [**getBatchPayout()**](PayoutsApi.md#getBatchPayout) | **GET** /api/v1/payouts/batch/{id} | Gets a list of all the payouts contained in a batch. |
+| [**getFailedPayouts()**](PayoutsApi.md#getFailedPayouts) | **GET** /api/v1/payouts/{merchantID}/failed | Get failed payouts for a specific merchant. |
 | [**getPayout()**](PayoutsApi.md#getPayout) | **GET** /api/v1/payouts/{id} | Gets a single payout. |
-| [**getPayoutForInvoice()**](PayoutsApi.md#getPayoutForInvoice) | **GET** /api/v1/payouts/getbyinvoiceid/{invoiceID} | Gets a payout by its invoice ID. |
 | [**getPayoutMetrics()**](PayoutsApi.md#getPayoutMetrics) | **GET** /api/v1/payouts/metrics | Gets a list of all payout metrics for a specific merchant. |
 | [**getPayoutProof()**](PayoutsApi.md#getPayoutProof) | **GET** /api/v1/payouts/{id}/proof | Generates a proof of payment PDF document with the details of a payout. |
-| [**getPayoutStatus()**](PayoutsApi.md#getPayoutStatus) | **GET** /api/v1/payouts/status/{id} | Gets a single payout status from. |
 | [**getPayoutsPaged()**](PayoutsApi.md#getPayoutsPaged) | **GET** /api/v1/payouts | Gets a list of all payouts for a specific merchant. |
 | [**rejectPayout()**](PayoutsApi.md#rejectPayout) | **PUT** /api/v1/payouts/reject/{id} | Rejects the authorisation for a payout. |
 | [**sendPayout()**](PayoutsApi.md#sendPayout) | **POST** /api/v1/payouts/send | Creates and submits a payout for a trusted caller. |
@@ -528,6 +527,70 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `getFailedPayouts()`
+
+```php
+getFailedPayouts($merchant_id, $from_date_utc, $page_size): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayoutKeysetPageResponse
+```
+
+Get failed payouts for a specific merchant.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\PayoutsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$merchant_id = 'merchant_id_example'; // string | The merchant id to get the failed payouts fro.
+$from_date_utc = 'from_date_utc_example'; // string | Optional. The date to fetch the payouts from. Must be ISO 8601 format
+$page_size = 20; // int | Optional. The page size. Default is 20
+
+try {
+    $result = $apiInstance->getFailedPayouts($merchant_id, $from_date_utc, $page_size);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PayoutsApi->getFailedPayouts: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **merchant_id** | **string**| The merchant id to get the failed payouts fro. | |
+| **from_date_utc** | **string**| Optional. The date to fetch the payouts from. Must be ISO 8601 format | [optional] |
+| **page_size** | **int**| Optional. The page size. Default is 20 | [optional] [default to 20] |
+
+### Return type
+
+[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayoutKeysetPageResponse**](../Model/NoFrixionMoneyMoovModelsPayoutKeysetPageResponse.md)
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `text/plain`, `application/json`, `text/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `getPayout()`
 
 ```php
@@ -574,68 +637,6 @@ try {
 ### Return type
 
 [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayout**](../Model/NoFrixionMoneyMoovModelsPayout.md)
-
-### Authorization
-
-[Bearer](../../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `text/plain`, `application/json`, `text/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `getPayoutForInvoice()`
-
-```php
-getPayoutForInvoice($invoice_id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequest
-```
-
-Gets a payout by its invoice ID.
-
-Can only be called with a merchant token. The payout lookup is done by              invoice and merchant ID and relies on the merchant ID from the token.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure API key authorization: Bearer
-$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
-
-
-$apiInstance = new Nofrixion\Client\Api\PayoutsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$invoice_id = 'invoice_id_example'; // string | The invoice ID of the payout to retrieve. Useful when the              payout has been created by an external application such as Xero.
-
-try {
-    $result = $apiInstance->getPayoutForInvoice($invoice_id);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling PayoutsApi->getPayoutForInvoice: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **invoice_id** | **string**| The invoice ID of the payout to retrieve. Useful when the              payout has been created by an external application such as Xero. | |
-
-### Return type
-
-[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequest**](../Model/NoFrixionMoneyMoovModelsPaymentRequest.md)
 
 ### Authorization
 
@@ -778,66 +779,6 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `getPayoutStatus()`
-
-```php
-getPayoutStatus($id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayout
-```
-
-Gets a single payout status from.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure API key authorization: Bearer
-$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
-
-
-$apiInstance = new Nofrixion\Client\Api\PayoutsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$id = 'id_example'; // string | The ID of the payout record to retrieve.
-
-try {
-    $result = $apiInstance->getPayoutStatus($id);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling PayoutsApi->getPayoutStatus: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**| The ID of the payout record to retrieve. | |
-
-### Return type
-
-[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayout**](../Model/NoFrixionMoneyMoovModelsPayout.md)
-
-### Authorization
-
-[Bearer](../../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `text/plain`, `application/json`, `text/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)

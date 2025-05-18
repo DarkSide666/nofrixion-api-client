@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionMoneyMoovModelsPayrunUpdateSourceAccountsTest
+ * NoFrixionMoneyMoovModelsPaymentRequestsMerchantPaymentRequestTemplateTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Nofrixion\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * NoFrixionMoneyMoovModelsPayrunUpdateSourceAccountsTest Class Doc Comment
+ * NoFrixionMoneyMoovModelsPaymentRequestsMerchantPaymentRequestTemplateTest Class Doc Comment
  *
  * @category    Class
- * @description NoFrixionMoneyMoovModelsPayrunUpdateSourceAccounts
+ * @description NoFrixionMoneyMoovModelsPaymentRequestsMerchantPaymentRequestTemplate
  * @package     Nofrixion\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class NoFrixionMoneyMoovModelsPayrunUpdateSourceAccountsTest extends TestCase
+class NoFrixionMoneyMoovModelsPaymentRequestsMerchantPaymentRequestTemplateTest extends TestCase
 {
 
     /**
@@ -71,54 +71,72 @@ class NoFrixionMoneyMoovModelsPayrunUpdateSourceAccountsTest extends TestCase
     }
 
     /**
-     * Test "NoFrixionMoneyMoovModelsPayrunUpdateSourceAccounts"
+     * Test "NoFrixionMoneyMoovModelsPaymentRequestsMerchantPaymentRequestTemplate"
      */
-    public function testNoFrixionMoneyMoovModelsPayrunUpdateSourceAccounts()
+    public function testNoFrixionMoneyMoovModelsPaymentRequestsMerchantPaymentRequestTemplate()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "none"
+     * Test attribute "id"
      */
-    public function testPropertyNone()
+    public function testPropertyId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "gbp"
+     * Test attribute "merchant_id"
      */
-    public function testPropertyGbp()
+    public function testPropertyMerchantId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "eur"
+     * Test attribute "name"
      */
-    public function testPropertyEur()
+    public function testPropertyName()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "usd"
+     * Test attribute "description"
      */
-    public function testPropertyUsd()
+    public function testPropertyDescription()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "btc"
+     * Test attribute "template"
      */
-    public function testPropertyBtc()
+    public function testPropertyTemplate()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "inserted"
+     */
+    public function testPropertyInserted()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "last_updated"
+     */
+    public function testPropertyLastUpdated()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

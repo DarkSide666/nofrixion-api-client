@@ -17,5 +17,6 @@ Name | Type | Description | Notes
 **scheduled** | **bool** | Should this payout be scheduled for a future date? | [optional]
 **schedule_date** | **\DateTime** | The date the payout should be submitted. | [optional]
 **payment_rail** | **string** | Optional field to indicate the payment rail to use for the payout. Currrently only  supports choosing between SEPA-CT and SEPA-INST for EUR payments. If not set, for a EUR  payment, the default behaviour is to attempt SEPA-INST and fallback to SEPA-CT if rejected. | [optional]
+**charge_bearer** | **string** | Optional field to set who should pay any fees for the payout. Typically only  used for international payments and ignored for SEPA and Faster Payments. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

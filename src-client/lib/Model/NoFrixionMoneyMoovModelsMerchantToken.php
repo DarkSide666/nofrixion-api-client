@@ -75,7 +75,9 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         'authorisers_required_count' => 'int',
         'authorisers_completed_count' => 'int',
         'authentication_methods' => 'string[]',
-        'last_authorised' => '\DateTime'
+        'last_authorised' => '\DateTime',
+        'ip_address_whitelist' => 'string',
+        'is_archived' => 'bool'
     ];
 
     /**
@@ -104,7 +106,9 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         'authorisers_required_count' => 'int32',
         'authorisers_completed_count' => 'int32',
         'authentication_methods' => null,
-        'last_authorised' => 'date-time'
+        'last_authorised' => 'date-time',
+        'ip_address_whitelist' => null,
+        'is_archived' => null
     ];
 
     /**
@@ -131,7 +135,9 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         'authorisers_required_count' => false,
         'authorisers_completed_count' => false,
         'authentication_methods' => true,
-        'last_authorised' => true
+        'last_authorised' => true,
+        'ip_address_whitelist' => true,
+        'is_archived' => false
     ];
 
     /**
@@ -238,7 +244,9 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         'authorisers_required_count' => 'authorisersRequiredCount',
         'authorisers_completed_count' => 'authorisersCompletedCount',
         'authentication_methods' => 'authenticationMethods',
-        'last_authorised' => 'lastAuthorised'
+        'last_authorised' => 'lastAuthorised',
+        'ip_address_whitelist' => 'ipAddressWhitelist',
+        'is_archived' => 'isArchived'
     ];
 
     /**
@@ -265,7 +273,9 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         'authorisers_required_count' => 'setAuthorisersRequiredCount',
         'authorisers_completed_count' => 'setAuthorisersCompletedCount',
         'authentication_methods' => 'setAuthenticationMethods',
-        'last_authorised' => 'setLastAuthorised'
+        'last_authorised' => 'setLastAuthorised',
+        'ip_address_whitelist' => 'setIpAddressWhitelist',
+        'is_archived' => 'setIsArchived'
     ];
 
     /**
@@ -292,7 +302,9 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         'authorisers_required_count' => 'getAuthorisersRequiredCount',
         'authorisers_completed_count' => 'getAuthorisersCompletedCount',
         'authentication_methods' => 'getAuthenticationMethods',
-        'last_authorised' => 'getLastAuthorised'
+        'last_authorised' => 'getLastAuthorised',
+        'ip_address_whitelist' => 'getIpAddressWhitelist',
+        'is_archived' => 'getIsArchived'
     ];
 
     /**
@@ -357,6 +369,8 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
     public const PERMISSION_TYPES_CREATE_DIRECT_DEBIT_MANDATE = 'CreateDirectDebitMandate';
     public const PERMISSION_TYPES_SUBMIT_DIRECT_DEBIT_PAYMENT = 'SubmitDirectDebitPayment';
     public const PERMISSION_TYPES_VIEW_TRANSACTIONS = 'ViewTransactions';
+    public const PERMISSION_TYPES_VIEW_PAYMENT_ACCOUNT = 'ViewPaymentAccount';
+    public const PERMISSION_TYPES_VIEW_PAYOUT = 'ViewPayout';
     public const SHARED_SECRET_ALGORITHM_NONE = 'None';
     public const SHARED_SECRET_ALGORITHM_HMAC_SHA1 = 'HMAC_SHA1';
     public const SHARED_SECRET_ALGORITHM_HMAC_SHA256 = 'HMAC_SHA256';
@@ -395,6 +409,8 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
             self::PERMISSION_TYPES_CREATE_DIRECT_DEBIT_MANDATE,
             self::PERMISSION_TYPES_SUBMIT_DIRECT_DEBIT_PAYMENT,
             self::PERMISSION_TYPES_VIEW_TRANSACTIONS,
+            self::PERMISSION_TYPES_VIEW_PAYMENT_ACCOUNT,
+            self::PERMISSION_TYPES_VIEW_PAYOUT,
         ];
     }
 
@@ -462,6 +478,8 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         $this->setIfExists('authorisers_completed_count', $data ?? [], null);
         $this->setIfExists('authentication_methods', $data ?? [], null);
         $this->setIfExists('last_authorised', $data ?? [], null);
+        $this->setIfExists('ip_address_whitelist', $data ?? [], null);
+        $this->setIfExists('is_archived', $data ?? [], null);
     }
 
     /**
@@ -1108,6 +1126,67 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
             }
         }
         $this->container['last_authorised'] = $last_authorised;
+
+        return $this;
+    }
+
+    /**
+     * Gets ip_address_whitelist
+     *
+     * @return string|null
+     */
+    public function getIpAddressWhitelist()
+    {
+        return $this->container['ip_address_whitelist'];
+    }
+
+    /**
+     * Sets ip_address_whitelist
+     *
+     * @param string|null $ip_address_whitelist Optional. If set represents a comma separated list of IP addresses that this token is authorised to be used from.  Attempts to use the token from an IP address not in the list will be rejected.
+     *
+     * @return self
+     */
+    public function setIpAddressWhitelist($ip_address_whitelist)
+    {
+        if (is_null($ip_address_whitelist)) {
+            array_push($this->openAPINullablesSetToNull, 'ip_address_whitelist');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('ip_address_whitelist', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['ip_address_whitelist'] = $ip_address_whitelist;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_archived
+     *
+     * @return bool|null
+     */
+    public function getIsArchived()
+    {
+        return $this->container['is_archived'];
+    }
+
+    /**
+     * Sets is_archived
+     *
+     * @param bool|null $is_archived Indicates whether the merchant token is archived.
+     *
+     * @return self
+     */
+    public function setIsArchived($is_archived)
+    {
+        if (is_null($is_archived)) {
+            throw new \InvalidArgumentException('non-nullable is_archived cannot be null');
+        }
+        $this->container['is_archived'] = $is_archived;
 
         return $this;
     }

@@ -272,6 +272,8 @@ class NoFrixionMoneyMoovModelsTokenAdd implements ModelInterface, ArrayAccess, \
     public const PERMISSION_TYPES_CREATE_DIRECT_DEBIT_MANDATE = 'CreateDirectDebitMandate';
     public const PERMISSION_TYPES_SUBMIT_DIRECT_DEBIT_PAYMENT = 'SubmitDirectDebitPayment';
     public const PERMISSION_TYPES_VIEW_TRANSACTIONS = 'ViewTransactions';
+    public const PERMISSION_TYPES_VIEW_PAYMENT_ACCOUNT = 'ViewPaymentAccount';
+    public const PERMISSION_TYPES_VIEW_PAYOUT = 'ViewPayout';
 
     /**
      * Gets allowable values of the enum
@@ -318,6 +320,8 @@ class NoFrixionMoneyMoovModelsTokenAdd implements ModelInterface, ArrayAccess, \
             self::PERMISSION_TYPES_CREATE_DIRECT_DEBIT_MANDATE,
             self::PERMISSION_TYPES_SUBMIT_DIRECT_DEBIT_PAYMENT,
             self::PERMISSION_TYPES_VIEW_TRANSACTIONS,
+            self::PERMISSION_TYPES_VIEW_PAYMENT_ACCOUNT,
+            self::PERMISSION_TYPES_VIEW_PAYOUT,
         ];
     }
 

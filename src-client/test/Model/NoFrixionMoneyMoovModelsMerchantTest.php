@@ -188,15 +188,6 @@ class NoFrixionMoneyMoovModelsMerchantTest extends TestCase
     }
 
     /**
-     * Test attribute "modulr_customer_id"
-     */
-    public function testPropertyModulrCustomerId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "supported_payment_methods_list"
      */
     public function testPropertySupportedPaymentMethodsList()
@@ -245,6 +236,15 @@ class NoFrixionMoneyMoovModelsMerchantTest extends TestCase
      * Test attribute "payment_accounts"
      */
     public function testPropertyPaymentAccounts()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "account_currencies"
+     */
+    public function testPropertyAccountCurrencies()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

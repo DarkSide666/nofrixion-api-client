@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **inserted** | **\DateTime** |  | [optional]
 **last_updated** | **\DateTime** |  | [optional]
 **cron_expression** | **string** |  | [optional]
+**time_zone_id** | **string** |  | [optional]
 **status** | **string** |  | [optional]
 **last_completed_at** | **\DateTime** |  | [optional]
 **statement_number** | **int** |  | [optional]

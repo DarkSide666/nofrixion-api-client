@@ -25,7 +25,6 @@ Name | Type | Description | Notes
 **status** | **string** | The status of the payment request. | [optional]
 **partial_payment_method** | **string** |  | [optional]
 **stripe_account_id** | **string** | Account ID of connected customers in Stripe | [optional]
-**lightning_invoice** | **string** | Lightning invoice ID, if any. | [optional]
-**lightning_invoice_expires_at** | **\DateTime** | Date and time of expiration of the lightning invoice. | [optional]
+**country_code** | **string** | The country code associated with the payment. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

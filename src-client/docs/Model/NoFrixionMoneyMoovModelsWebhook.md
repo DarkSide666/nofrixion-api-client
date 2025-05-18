@@ -12,5 +12,6 @@ Name | Type | Description | Notes
 **is_active** | **bool** |  | [optional]
 **email_address** | **string** |  | [optional]
 **version** | **int** |  | [optional]
+**merchant_id** | **string** | The ID of the merchant that the webhook is for. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

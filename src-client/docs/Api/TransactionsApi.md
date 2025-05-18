@@ -4,19 +4,19 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**addTags()**](TransactionsApi.md#addTags) | **POST** /api/v1/transactions/{transactionID}/tags | Adds merchant tags to a transaction. |
+| [**addTags()**](TransactionsApi.md#addTags) | **POST** /api/v1/transactions/{id}/tags | Adds merchant tags to a transaction. |
 | [**exportTransactionsForAccount()**](TransactionsApi.md#exportTransactionsForAccount) | **GET** /api/v1/transactions/{accountID}/export | Exports a list of the transactions for a single payment account to a CSV file. |
 | [**getTransactionProof()**](TransactionsApi.md#getTransactionProof) | **GET** /api/v1/transactions/{id}/proof | Generates a proof of payment PDF document with the details of a transaction. |
 | [**getTransactionsByAccountSequenceNumber()**](TransactionsApi.md#getTransactionsByAccountSequenceNumber) | **GET** /api/v1/transactions/{accountID}/from/{sequenceNumber} | Gets an account&#39;s transactions by sequence number |
 | [**getTransactionsForAccountPaged()**](TransactionsApi.md#getTransactionsForAccountPaged) | **GET** /api/v1/transactions/{accountID} | Get a list of the transactions for a single payment account. |
 | [**getTransactionsPaged()**](TransactionsApi.md#getTransactionsPaged) | **GET** /api/v1/transactions | Get a list of the transactions for all payment accounts a user has access to. |
-| [**removeTag()**](TransactionsApi.md#removeTag) | **DELETE** /api/v1/transactions/{transactionID}/tag | Removes a tag from the transaction using the tag ID. |
+| [**removeTag()**](TransactionsApi.md#removeTag) | **DELETE** /api/v1/transactions/{id}/tag | Removes a tag from the transaction using the tag ID. |
 
 
 ## `addTags()`
 
 ```php
-addTags($transaction_id, $request_body)
+addTags($id, $request_body)
 ```
 
 Adds merchant tags to a transaction.
@@ -42,11 +42,11 @@ $apiInstance = new Nofrixion\Client\Api\TransactionsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$transaction_id = 'transaction_id_example'; // string | The ID of the transaction to add tags.
+$id = 'id_example'; // string | The ID of the transaction to add tags.
 $request_body = array('request_body_example'); // string[] | The tags to add to the transaction.
 
 try {
-    $apiInstance->addTags($transaction_id, $request_body);
+    $apiInstance->addTags($id, $request_body);
 } catch (Exception $e) {
     echo 'Exception when calling TransactionsApi->addTags: ', $e->getMessage(), PHP_EOL;
 }
@@ -56,7 +56,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **transaction_id** | **string**| The ID of the transaction to add tags. | |
+| **id** | **string**| The ID of the transaction to add tags. | |
 | **request_body** | [**string[]**](../Model/string.md)| The tags to add to the transaction. | [optional] |
 
 ### Return type
@@ -431,7 +431,7 @@ try {
 ## `removeTag()`
 
 ```php
-removeTag($transaction_id, $tag_id)
+removeTag($id, $tag_id)
 ```
 
 Removes a tag from the transaction using the tag ID.
@@ -457,11 +457,11 @@ $apiInstance = new Nofrixion\Client\Api\TransactionsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$transaction_id = 'transaction_id_example'; // string | The ID of the transaction to remove tag.
+$id = 'id_example'; // string | The ID of the transaction to remove tag.
 $tag_id = 'tag_id_example'; // string | The ID of the tag to remove.
 
 try {
-    $apiInstance->removeTag($transaction_id, $tag_id);
+    $apiInstance->removeTag($id, $tag_id);
 } catch (Exception $e) {
     echo 'Exception when calling TransactionsApi->removeTag: ', $e->getMessage(), PHP_EOL;
 }
@@ -471,7 +471,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **transaction_id** | **string**| The ID of the transaction to remove tag. | |
+| **id** | **string**| The ID of the transaction to remove tag. | |
 | **tag_id** | **string**| The ID of the tag to remove. | [optional] |
 
 ### Return type

@@ -22,5 +22,6 @@ Name | Type | Description | Notes
 **topup_payrun_id** | **string** | Optional, if set it indicates that this payout will be used to top up   a payment account for a pay run by an internal transfer. | [optional]
 **payment_rail** | **string** | Optional field to indicate the payment rail to use for the payout. Currrently only  supports choosing between SEPA-CT and SEPA-INST for EUR payments. If not set, for a EUR  payment, the default behaviour is to attempt SEPA-INST and fallback to SEPA-CT if rejected. | [optional]
 **documents** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayoutDocumentCreate[]**](NoFrixionMoneyMoovModelsPayoutDocumentCreate.md) | List of documents to attach to the payout. Optional.  Used for identifying or associating documents with the payout. | [optional]
+**charge_bearer** | **string** | Optional field to set who should pay any fees for the payout. Typically only  used for international payments and ignored for SEPA and Faster Payments. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

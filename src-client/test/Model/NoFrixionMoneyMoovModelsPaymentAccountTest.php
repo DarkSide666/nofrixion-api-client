@@ -107,9 +107,27 @@ class NoFrixionMoneyMoovModelsPaymentAccountTest extends TestCase
     }
 
     /**
+     * Test attribute "balance_minor_units"
+     */
+    public function testPropertyBalanceMinorUnits()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "submitted_payouts_balance"
      */
     public function testPropertySubmittedPayoutsBalance()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "submitted_payouts_balance_minor_units"
+     */
+    public function testPropertySubmittedPayoutsBalanceMinorUnits()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -191,6 +209,15 @@ class NoFrixionMoneyMoovModelsPaymentAccountTest extends TestCase
      * Test attribute "available_balance"
      */
     public function testPropertyAvailableBalance()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "available_balance_minor_units"
+     */
+    public function testPropertyAvailableBalanceMinorUnits()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

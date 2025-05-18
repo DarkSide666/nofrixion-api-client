@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionMoneyMoovModelsPayrunUpdateSourceAccounts
+ * NoFrixionMoneyMoovModelsPaymentRequestsBankPaymentOptionsDestinationAccounts
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Nofrixion\Client\ObjectSerializer;
 
 /**
- * NoFrixionMoneyMoovModelsPayrunUpdateSourceAccounts Class Doc Comment
+ * NoFrixionMoneyMoovModelsPaymentRequestsBankPaymentOptionsDestinationAccounts Class Doc Comment
  *
  * @category Class
  * @package  Nofrixion\Client
@@ -40,7 +40,7 @@ use \Nofrixion\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class NoFrixionMoneyMoovModelsPayrunUpdateSourceAccounts implements ModelInterface, ArrayAccess, \JsonSerializable
+class NoFrixionMoneyMoovModelsPaymentRequestsBankPaymentOptionsDestinationAccounts implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class NoFrixionMoneyMoovModelsPayrunUpdateSourceAccounts implements ModelInterfa
       *
       * @var string
       */
-    protected static $openAPIModelName = 'NoFrixion_MoneyMoov_Models_PayrunUpdate_sourceAccounts';
+    protected static $openAPIModelName = 'NoFrixion_MoneyMoov_Models_PaymentRequests_BankPaymentOptions_destinationAccounts';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

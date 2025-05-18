@@ -69,7 +69,8 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
         'tag_ids' => 'string[]',
         'scheduled' => 'bool',
         'schedule_date' => '\DateTime',
-        'payment_rail' => 'string'
+        'payment_rail' => 'string',
+        'charge_bearer' => 'string'
     ];
 
     /**
@@ -92,7 +93,8 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
         'tag_ids' => 'uuid',
         'scheduled' => null,
         'schedule_date' => 'date-time',
-        'payment_rail' => null
+        'payment_rail' => null,
+        'charge_bearer' => null
     ];
 
     /**
@@ -113,7 +115,8 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
         'tag_ids' => true,
         'scheduled' => true,
         'schedule_date' => true,
-        'payment_rail' => true
+        'payment_rail' => true,
+        'charge_bearer' => true
     ];
 
     /**
@@ -214,7 +217,8 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
         'tag_ids' => 'tagIds',
         'scheduled' => 'scheduled',
         'schedule_date' => 'scheduleDate',
-        'payment_rail' => 'paymentRail'
+        'payment_rail' => 'paymentRail',
+        'charge_bearer' => 'chargeBearer'
     ];
 
     /**
@@ -235,7 +239,8 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
         'tag_ids' => 'setTagIds',
         'scheduled' => 'setScheduled',
         'schedule_date' => 'setScheduleDate',
-        'payment_rail' => 'setPaymentRail'
+        'payment_rail' => 'setPaymentRail',
+        'charge_bearer' => 'setChargeBearer'
     ];
 
     /**
@@ -256,7 +261,8 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
         'tag_ids' => 'getTagIds',
         'scheduled' => 'getScheduled',
         'schedule_date' => 'getScheduleDate',
-        'payment_rail' => 'getPaymentRail'
+        'payment_rail' => 'getPaymentRail',
+        'charge_bearer' => 'getChargeBearer'
     ];
 
     /**
@@ -315,6 +321,10 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
     public const PAYMENT_RAIL_SEPA_CT = 'SEPA_CT';
     public const PAYMENT_RAIL_SEPA_INST = 'SEPA_INST';
     public const PAYMENT_RAIL_TARGET2 = 'TARGET2';
+    public const CHARGE_BEARER__DEFAULT = 'Default';
+    public const CHARGE_BEARER_BEN = 'BEN';
+    public const CHARGE_BEARER_OUR = 'OUR';
+    public const CHARGE_BEARER_SHA = 'SHA';
 
     /**
      * Gets allowable values of the enum
@@ -365,6 +375,21 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
     }
 
     /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getChargeBearerAllowableValues()
+    {
+        return [
+            self::CHARGE_BEARER__DEFAULT,
+            self::CHARGE_BEARER_BEN,
+            self::CHARGE_BEARER_OUR,
+            self::CHARGE_BEARER_SHA,
+        ];
+    }
+
+    /**
      * Associative array for storing property values
      *
      * @var mixed[]
@@ -392,6 +417,7 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
         $this->setIfExists('scheduled', $data ?? [], null);
         $this->setIfExists('schedule_date', $data ?? [], null);
         $this->setIfExists('payment_rail', $data ?? [], null);
+        $this->setIfExists('charge_bearer', $data ?? [], null);
     }
 
     /**
@@ -444,6 +470,15 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'payment_rail', must be one of '%s'",
                 $this->container['payment_rail'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getChargeBearerAllowableValues();
+        if (!is_null($this->container['charge_bearer']) && !in_array($this->container['charge_bearer'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'charge_bearer', must be one of '%s'",
+                $this->container['charge_bearer'],
                 implode("', '", $allowedValues)
             );
         }
@@ -924,6 +959,50 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
             );
         }
         $this->container['payment_rail'] = $payment_rail;
+
+        return $this;
+    }
+
+    /**
+     * Gets charge_bearer
+     *
+     * @return string|null
+     */
+    public function getChargeBearer()
+    {
+        return $this->container['charge_bearer'];
+    }
+
+    /**
+     * Sets charge_bearer
+     *
+     * @param string|null $charge_bearer Optional field to set who should pay any fees for the payout. Typically only  used for international payments and ignored for SEPA and Faster Payments.
+     *
+     * @return self
+     */
+    public function setChargeBearer($charge_bearer)
+    {
+        if (is_null($charge_bearer)) {
+            array_push($this->openAPINullablesSetToNull, 'charge_bearer');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('charge_bearer', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $allowedValues = $this->getChargeBearerAllowableValues();
+        if (!is_null($charge_bearer) && !in_array($charge_bearer, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'charge_bearer', must be one of '%s'",
+                    $charge_bearer,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['charge_bearer'] = $charge_bearer;
 
         return $this;
     }
