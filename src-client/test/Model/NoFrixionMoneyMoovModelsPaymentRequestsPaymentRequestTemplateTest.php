@@ -134,9 +134,18 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateTest extends 
     }
 
     /**
-     * Test attribute "fields"
+     * Test attribute "default_fields"
      */
-    public function testPropertyFields()
+    public function testPropertyDefaultFields()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "custom_fields"
+     */
+    public function testPropertyCustomFields()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

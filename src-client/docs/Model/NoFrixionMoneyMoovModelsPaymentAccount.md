@@ -38,5 +38,7 @@ Name | Type | Description | Notes
 **rules** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsRuleMinimal[]**](NoFrixionMoneyMoovModelsRuleMinimal.md) | The list of rules associated with this account. | [optional]
 **is_archived** | **bool** | Indicates whether the account is archived. Archived accounts are not displayed in the UI.  If an account receives a payment it will be automatically unarchived. | [optional]
 **supplier_sepa_instant_status** | **string** | Indicates the status of the SEPA Instant payment rail for this account. | [optional]
+**physical_account_id** | **string** | For virtual accounts this is the ID of the physical account that the virtual account is linked to. | [optional]
+**is_virtual** | **bool** | True if the account is a virtual account. | [optional] [readonly]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

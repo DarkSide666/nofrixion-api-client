@@ -82,6 +82,8 @@ createBeneficiary($no_frixion_money_moov_models_beneficiary_create): \Nofrixion\
 
 Creates a new beneficiary.
 
+The authorisation requirements for a new beneficiary depend on each merchant's settings. By              default new beneficiaries do not require authorisation before being enabled.
+
 ### Example
 
 ```php

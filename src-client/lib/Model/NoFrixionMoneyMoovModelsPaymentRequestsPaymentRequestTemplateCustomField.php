@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionMoneyMoovModelsUserRole
+ * NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateCustomField
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Nofrixion\Client\ObjectSerializer;
 
 /**
- * NoFrixionMoneyMoovModelsUserRole Class Doc Comment
+ * NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateCustomField Class Doc Comment
  *
  * @category Class
  * @package  Nofrixion\Client
@@ -40,7 +40,7 @@ use \Nofrixion\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class NoFrixionMoneyMoovModelsUserRole implements ModelInterface, ArrayAccess, \JsonSerializable
+class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateCustomField implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class NoFrixionMoneyMoovModelsUserRole implements ModelInterface, ArrayAccess, \
       *
       * @var string
       */
-    protected static $openAPIModelName = 'NoFrixion.MoneyMoov.Models.UserRole';
+    protected static $openAPIModelName = 'NoFrixion.MoneyMoov.Models.PaymentRequests.PaymentRequestTemplateCustomField';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,16 +57,11 @@ class NoFrixionMoneyMoovModelsUserRole implements ModelInterface, ArrayAccess, \
       * @var string[]
       */
     protected static $openAPITypes = [
-        'is_empty' => 'bool',
-        'id' => 'string',
-        'user_id' => 'string',
-        'merchant_id' => 'string',
-        'first_name' => 'string',
-        'last_name' => 'string',
-        'email_address' => 'string',
-        'role_type' => 'string',
-        'date_joined' => '\DateTime',
-        'invited_by' => 'string'
+        'name' => 'string',
+        'description' => 'string',
+        'display_order' => 'int',
+        'display_for_payer' => 'bool',
+        'requirement' => 'string'
     ];
 
     /**
@@ -77,16 +72,11 @@ class NoFrixionMoneyMoovModelsUserRole implements ModelInterface, ArrayAccess, \
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'is_empty' => null,
-        'id' => 'uuid',
-        'user_id' => 'uuid',
-        'merchant_id' => 'uuid',
-        'first_name' => null,
-        'last_name' => null,
-        'email_address' => null,
-        'role_type' => null,
-        'date_joined' => 'date-time',
-        'invited_by' => null
+        'name' => null,
+        'description' => null,
+        'display_order' => 'int32',
+        'display_for_payer' => null,
+        'requirement' => null
     ];
 
     /**
@@ -95,16 +85,11 @@ class NoFrixionMoneyMoovModelsUserRole implements ModelInterface, ArrayAccess, \
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'is_empty' => false,
-        'id' => false,
-        'user_id' => false,
-        'merchant_id' => false,
-        'first_name' => true,
-        'last_name' => true,
-        'email_address' => true,
-        'role_type' => false,
-        'date_joined' => false,
-        'invited_by' => true
+        'name' => true,
+        'description' => true,
+        'display_order' => false,
+        'display_for_payer' => false,
+        'requirement' => false
     ];
 
     /**
@@ -193,16 +178,11 @@ class NoFrixionMoneyMoovModelsUserRole implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $attributeMap = [
-        'is_empty' => 'isEmpty',
-        'id' => 'id',
-        'user_id' => 'userID',
-        'merchant_id' => 'merchantID',
-        'first_name' => 'firstName',
-        'last_name' => 'lastName',
-        'email_address' => 'emailAddress',
-        'role_type' => 'roleType',
-        'date_joined' => 'dateJoined',
-        'invited_by' => 'invitedBy'
+        'name' => 'name',
+        'description' => 'description',
+        'display_order' => 'displayOrder',
+        'display_for_payer' => 'displayForPayer',
+        'requirement' => 'requirement'
     ];
 
     /**
@@ -211,16 +191,11 @@ class NoFrixionMoneyMoovModelsUserRole implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $setters = [
-        'is_empty' => 'setIsEmpty',
-        'id' => 'setId',
-        'user_id' => 'setUserId',
-        'merchant_id' => 'setMerchantId',
-        'first_name' => 'setFirstName',
-        'last_name' => 'setLastName',
-        'email_address' => 'setEmailAddress',
-        'role_type' => 'setRoleType',
-        'date_joined' => 'setDateJoined',
-        'invited_by' => 'setInvitedBy'
+        'name' => 'setName',
+        'description' => 'setDescription',
+        'display_order' => 'setDisplayOrder',
+        'display_for_payer' => 'setDisplayForPayer',
+        'requirement' => 'setRequirement'
     ];
 
     /**
@@ -229,16 +204,11 @@ class NoFrixionMoneyMoovModelsUserRole implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $getters = [
-        'is_empty' => 'getIsEmpty',
-        'id' => 'getId',
-        'user_id' => 'getUserId',
-        'merchant_id' => 'getMerchantId',
-        'first_name' => 'getFirstName',
-        'last_name' => 'getLastName',
-        'email_address' => 'getEmailAddress',
-        'role_type' => 'getRoleType',
-        'date_joined' => 'getDateJoined',
-        'invited_by' => 'getInvitedBy'
+        'name' => 'getName',
+        'description' => 'getDescription',
+        'display_order' => 'getDisplayOrder',
+        'display_for_payer' => 'getDisplayForPayer',
+        'requirement' => 'getRequirement'
     ];
 
     /**
@@ -282,25 +252,21 @@ class NoFrixionMoneyMoovModelsUserRole implements ModelInterface, ArrayAccess, \
         return self::$openAPIModelName;
     }
 
-    public const ROLE_TYPE_NEWLY_REGISTERED = 'NewlyRegistered';
-    public const ROLE_TYPE_PAYMENT_REQUESTOR = 'PaymentRequestor';
-    public const ROLE_TYPE_USER = 'User';
-    public const ROLE_TYPE_APPROVER = 'Approver';
-    public const ROLE_TYPE_ADMIN_APPROVER = 'AdminApprover';
+    public const REQUIREMENT_OPTIONAL = 'Optional';
+    public const REQUIREMENT_REQUIRED = 'Required';
+    public const REQUIREMENT_HIDDEN = 'Hidden';
 
     /**
      * Gets allowable values of the enum
      *
      * @return string[]
      */
-    public function getRoleTypeAllowableValues()
+    public function getRequirementAllowableValues()
     {
         return [
-            self::ROLE_TYPE_NEWLY_REGISTERED,
-            self::ROLE_TYPE_PAYMENT_REQUESTOR,
-            self::ROLE_TYPE_USER,
-            self::ROLE_TYPE_APPROVER,
-            self::ROLE_TYPE_ADMIN_APPROVER,
+            self::REQUIREMENT_OPTIONAL,
+            self::REQUIREMENT_REQUIRED,
+            self::REQUIREMENT_HIDDEN,
         ];
     }
 
@@ -319,16 +285,11 @@ class NoFrixionMoneyMoovModelsUserRole implements ModelInterface, ArrayAccess, \
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('is_empty', $data ?? [], null);
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('user_id', $data ?? [], null);
-        $this->setIfExists('merchant_id', $data ?? [], null);
-        $this->setIfExists('first_name', $data ?? [], null);
-        $this->setIfExists('last_name', $data ?? [], null);
-        $this->setIfExists('email_address', $data ?? [], null);
-        $this->setIfExists('role_type', $data ?? [], null);
-        $this->setIfExists('date_joined', $data ?? [], null);
-        $this->setIfExists('invited_by', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('display_order', $data ?? [], null);
+        $this->setIfExists('display_for_payer', $data ?? [], null);
+        $this->setIfExists('requirement', $data ?? [], null);
     }
 
     /**
@@ -358,11 +319,17 @@ class NoFrixionMoneyMoovModelsUserRole implements ModelInterface, ArrayAccess, \
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getRoleTypeAllowableValues();
-        if (!is_null($this->container['role_type']) && !in_array($this->container['role_type'], $allowedValues, true)) {
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
+        }
+        if ($this->container['description'] === null) {
+            $invalidProperties[] = "'description' can't be null";
+        }
+        $allowedValues = $this->getRequirementAllowableValues();
+        if (!is_null($this->container['requirement']) && !in_array($this->container['requirement'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'role_type', must be one of '%s'",
-                $this->container['role_type'],
+                "invalid value '%s' for 'requirement', must be one of '%s'",
+                $this->container['requirement'],
                 implode("', '", $allowedValues)
             );
         }
@@ -383,309 +350,160 @@ class NoFrixionMoneyMoovModelsUserRole implements ModelInterface, ArrayAccess, \
 
 
     /**
-     * Gets is_empty
+     * Gets name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string $name name
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+        if (is_null($name)) {
+            array_push($this->openAPINullablesSetToNull, 'name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param string $description description
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+        if (is_null($description)) {
+            array_push($this->openAPINullablesSetToNull, 'description');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('description', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets display_order
+     *
+     * @return int|null
+     */
+    public function getDisplayOrder()
+    {
+        return $this->container['display_order'];
+    }
+
+    /**
+     * Sets display_order
+     *
+     * @param int|null $display_order The display order of the custom field. The lowest number is displayed first.  This can be used to determine the order in which  the fields are displayed when creating a payment request.
+     *
+     * @return self
+     */
+    public function setDisplayOrder($display_order)
+    {
+        if (is_null($display_order)) {
+            throw new \InvalidArgumentException('non-nullable display_order cannot be null');
+        }
+        $this->container['display_order'] = $display_order;
+
+        return $this;
+    }
+
+    /**
+     * Gets display_for_payer
      *
      * @return bool|null
      */
-    public function getIsEmpty()
+    public function getDisplayForPayer()
     {
-        return $this->container['is_empty'];
+        return $this->container['display_for_payer'];
     }
 
     /**
-     * Sets is_empty
+     * Sets display_for_payer
      *
-     * @param bool|null $is_empty is_empty
+     * @param bool|null $display_for_payer display_for_payer
      *
      * @return self
      */
-    public function setIsEmpty($is_empty)
+    public function setDisplayForPayer($display_for_payer)
     {
-        if (is_null($is_empty)) {
-            throw new \InvalidArgumentException('non-nullable is_empty cannot be null');
+        if (is_null($display_for_payer)) {
+            throw new \InvalidArgumentException('non-nullable display_for_payer cannot be null');
         }
-        $this->container['is_empty'] = $is_empty;
+        $this->container['display_for_payer'] = $display_for_payer;
 
         return $this;
     }
 
     /**
-     * Gets id
+     * Gets requirement
      *
      * @return string|null
      */
-    public function getId()
+    public function getRequirement()
     {
-        return $this->container['id'];
+        return $this->container['requirement'];
     }
 
     /**
-     * Sets id
+     * Sets requirement
      *
-     * @param string|null $id id
+     * @param string|null $requirement requirement
      *
      * @return self
      */
-    public function setId($id)
+    public function setRequirement($requirement)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($requirement)) {
+            throw new \InvalidArgumentException('non-nullable requirement cannot be null');
         }
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets user_id
-     *
-     * @return string|null
-     */
-    public function getUserId()
-    {
-        return $this->container['user_id'];
-    }
-
-    /**
-     * Sets user_id
-     *
-     * @param string|null $user_id user_id
-     *
-     * @return self
-     */
-    public function setUserId($user_id)
-    {
-        if (is_null($user_id)) {
-            throw new \InvalidArgumentException('non-nullable user_id cannot be null');
-        }
-        $this->container['user_id'] = $user_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets merchant_id
-     *
-     * @return string|null
-     */
-    public function getMerchantId()
-    {
-        return $this->container['merchant_id'];
-    }
-
-    /**
-     * Sets merchant_id
-     *
-     * @param string|null $merchant_id merchant_id
-     *
-     * @return self
-     */
-    public function setMerchantId($merchant_id)
-    {
-        if (is_null($merchant_id)) {
-            throw new \InvalidArgumentException('non-nullable merchant_id cannot be null');
-        }
-        $this->container['merchant_id'] = $merchant_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets first_name
-     *
-     * @return string|null
-     */
-    public function getFirstName()
-    {
-        return $this->container['first_name'];
-    }
-
-    /**
-     * Sets first_name
-     *
-     * @param string|null $first_name first_name
-     *
-     * @return self
-     */
-    public function setFirstName($first_name)
-    {
-        if (is_null($first_name)) {
-            array_push($this->openAPINullablesSetToNull, 'first_name');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('first_name', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['first_name'] = $first_name;
-
-        return $this;
-    }
-
-    /**
-     * Gets last_name
-     *
-     * @return string|null
-     */
-    public function getLastName()
-    {
-        return $this->container['last_name'];
-    }
-
-    /**
-     * Sets last_name
-     *
-     * @param string|null $last_name last_name
-     *
-     * @return self
-     */
-    public function setLastName($last_name)
-    {
-        if (is_null($last_name)) {
-            array_push($this->openAPINullablesSetToNull, 'last_name');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('last_name', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['last_name'] = $last_name;
-
-        return $this;
-    }
-
-    /**
-     * Gets email_address
-     *
-     * @return string|null
-     */
-    public function getEmailAddress()
-    {
-        return $this->container['email_address'];
-    }
-
-    /**
-     * Sets email_address
-     *
-     * @param string|null $email_address email_address
-     *
-     * @return self
-     */
-    public function setEmailAddress($email_address)
-    {
-        if (is_null($email_address)) {
-            array_push($this->openAPINullablesSetToNull, 'email_address');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('email_address', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['email_address'] = $email_address;
-
-        return $this;
-    }
-
-    /**
-     * Gets role_type
-     *
-     * @return string|null
-     */
-    public function getRoleType()
-    {
-        return $this->container['role_type'];
-    }
-
-    /**
-     * Sets role_type
-     *
-     * @param string|null $role_type role_type
-     *
-     * @return self
-     */
-    public function setRoleType($role_type)
-    {
-        if (is_null($role_type)) {
-            throw new \InvalidArgumentException('non-nullable role_type cannot be null');
-        }
-        $allowedValues = $this->getRoleTypeAllowableValues();
-        if (!in_array($role_type, $allowedValues, true)) {
+        $allowedValues = $this->getRequirementAllowableValues();
+        if (!in_array($requirement, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Invalid value '%s' for 'role_type', must be one of '%s'",
-                    $role_type,
+                    "Invalid value '%s' for 'requirement', must be one of '%s'",
+                    $requirement,
                     implode("', '", $allowedValues)
                 )
             );
         }
-        $this->container['role_type'] = $role_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets date_joined
-     *
-     * @return \DateTime|null
-     */
-    public function getDateJoined()
-    {
-        return $this->container['date_joined'];
-    }
-
-    /**
-     * Sets date_joined
-     *
-     * @param \DateTime|null $date_joined date_joined
-     *
-     * @return self
-     */
-    public function setDateJoined($date_joined)
-    {
-        if (is_null($date_joined)) {
-            throw new \InvalidArgumentException('non-nullable date_joined cannot be null');
-        }
-        $this->container['date_joined'] = $date_joined;
-
-        return $this;
-    }
-
-    /**
-     * Gets invited_by
-     *
-     * @return string|null
-     */
-    public function getInvitedBy()
-    {
-        return $this->container['invited_by'];
-    }
-
-    /**
-     * Sets invited_by
-     *
-     * @param string|null $invited_by invited_by
-     *
-     * @return self
-     */
-    public function setInvitedBy($invited_by)
-    {
-        if (is_null($invited_by)) {
-            array_push($this->openAPINullablesSetToNull, 'invited_by');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('invited_by', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['invited_by'] = $invited_by;
+        $this->container['requirement'] = $requirement;
 
         return $this;
     }

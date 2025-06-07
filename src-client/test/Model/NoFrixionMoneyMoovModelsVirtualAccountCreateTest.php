@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionMoneyMoovModelsUserRoleCreateTest
+ * NoFrixionMoneyMoovModelsVirtualAccountCreateTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Nofrixion\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * NoFrixionMoneyMoovModelsUserRoleCreateTest Class Doc Comment
+ * NoFrixionMoneyMoovModelsVirtualAccountCreateTest Class Doc Comment
  *
  * @category    Class
- * @description NoFrixionMoneyMoovModelsUserRoleCreate
+ * @description NoFrixionMoneyMoovModelsVirtualAccountCreate
  * @package     Nofrixion\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class NoFrixionMoneyMoovModelsUserRoleCreateTest extends TestCase
+class NoFrixionMoneyMoovModelsVirtualAccountCreateTest extends TestCase
 {
 
     /**
@@ -71,36 +71,18 @@ class NoFrixionMoneyMoovModelsUserRoleCreateTest extends TestCase
     }
 
     /**
-     * Test "NoFrixionMoneyMoovModelsUserRoleCreate"
+     * Test "NoFrixionMoneyMoovModelsVirtualAccountCreate"
      */
-    public function testNoFrixionMoneyMoovModelsUserRoleCreate()
+    public function testNoFrixionMoneyMoovModelsVirtualAccountCreate()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "merchant_id"
+     * Test attribute "name"
      */
-    public function testPropertyMerchantId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "email_address"
-     */
-    public function testPropertyEmailAddress()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "user_role"
-     */
-    public function testPropertyUserRole()
+    public function testPropertyName()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateFieldTest
+ * NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateDefaultFieldTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Nofrixion\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateFieldTest Class Doc Comment
+ * NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateDefaultFieldTest Class Doc Comment
  *
  * @category    Class
- * @description NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateField
+ * @description This represents a default field in a payment request template.  Default fields are predefined fields that map to concrete payment request properties.
  * @package     Nofrixion\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateFieldTest extends TestCase
+class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateDefaultFieldTest extends TestCase
 {
 
     /**
@@ -71,27 +71,18 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateFieldTest ext
     }
 
     /**
-     * Test "NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateField"
+     * Test "NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateDefaultField"
      */
-    public function testNoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateField()
+    public function testNoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateDefaultField()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "name"
+     * Test attribute "default_field"
      */
-    public function testPropertyName()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "description"
-     */
-    public function testPropertyDescription()
+    public function testPropertyDefaultField()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -80,6 +80,9 @@ class AccountsApi
         'createAccount' => [
             'application/json',
         ],
+        'createVirtualAccount' => [
+            'application/json',
+        ],
         'exportAccountTransactions' => [
             'application/json',
         ],
@@ -119,6 +122,9 @@ class AccountsApi
         'getTransactionForAccount' => [
             'application/json',
         ],
+        'getVirtualAccounts' => [
+            'application/json',
+        ],
         'topupAccount' => [
             'application/json',
         ],
@@ -126,6 +132,9 @@ class AccountsApi
             'application/json',
         ],
         'updateAccount' => [
+            'application/json',
+        ],
+        'updateVirtualAccount' => [
             'application/json',
         ],
     ];
@@ -854,6 +863,332 @@ class AccountsApi
                 $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($no_frixion_money_moov_models_payment_account_create));
             } else {
                 $httpBody = $no_frixion_money_moov_models_payment_account_create;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation createVirtualAccount
+     *
+     * Creates a new virtual account.
+     *
+     * @param  string $account_id The physical account id to create the virtual account for. (required)
+     * @param  \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsVirtualAccountCreate $no_frixion_money_moov_models_virtual_account_create The details of the virtual account to create. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createVirtualAccount'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount
+     */
+    public function createVirtualAccount($account_id, $no_frixion_money_moov_models_virtual_account_create = null, string $contentType = self::contentTypes['createVirtualAccount'][0])
+    {
+        list($response) = $this->createVirtualAccountWithHttpInfo($account_id, $no_frixion_money_moov_models_virtual_account_create, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation createVirtualAccountWithHttpInfo
+     *
+     * Creates a new virtual account.
+     *
+     * @param  string $account_id The physical account id to create the virtual account for. (required)
+     * @param  \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsVirtualAccountCreate $no_frixion_money_moov_models_virtual_account_create The details of the virtual account to create. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createVirtualAccount'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function createVirtualAccountWithHttpInfo($account_id, $no_frixion_money_moov_models_virtual_account_create = null, string $contentType = self::contentTypes['createVirtualAccount'][0])
+    {
+        $request = $this->createVirtualAccountRequest($account_id, $no_frixion_money_moov_models_virtual_account_create, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation createVirtualAccountAsync
+     *
+     * Creates a new virtual account.
+     *
+     * @param  string $account_id The physical account id to create the virtual account for. (required)
+     * @param  \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsVirtualAccountCreate $no_frixion_money_moov_models_virtual_account_create The details of the virtual account to create. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createVirtualAccount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createVirtualAccountAsync($account_id, $no_frixion_money_moov_models_virtual_account_create = null, string $contentType = self::contentTypes['createVirtualAccount'][0])
+    {
+        return $this->createVirtualAccountAsyncWithHttpInfo($account_id, $no_frixion_money_moov_models_virtual_account_create, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation createVirtualAccountAsyncWithHttpInfo
+     *
+     * Creates a new virtual account.
+     *
+     * @param  string $account_id The physical account id to create the virtual account for. (required)
+     * @param  \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsVirtualAccountCreate $no_frixion_money_moov_models_virtual_account_create The details of the virtual account to create. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createVirtualAccount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createVirtualAccountAsyncWithHttpInfo($account_id, $no_frixion_money_moov_models_virtual_account_create = null, string $contentType = self::contentTypes['createVirtualAccount'][0])
+    {
+        $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount';
+        $request = $this->createVirtualAccountRequest($account_id, $no_frixion_money_moov_models_virtual_account_create, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'createVirtualAccount'
+     *
+     * @param  string $account_id The physical account id to create the virtual account for. (required)
+     * @param  \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsVirtualAccountCreate $no_frixion_money_moov_models_virtual_account_create The details of the virtual account to create. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createVirtualAccount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function createVirtualAccountRequest($account_id, $no_frixion_money_moov_models_virtual_account_create = null, string $contentType = self::contentTypes['createVirtualAccount'][0])
+    {
+
+        // verify the required parameter 'account_id' is set
+        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $account_id when calling createVirtualAccount'
+            );
+        }
+
+
+
+        $resourcePath = '/api/v1/accounts/{accountID}/virtual';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($account_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'accountID' . '}',
+                ObjectSerializer::toPathValue($account_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['text/plain', 'application/json', 'text/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($no_frixion_money_moov_models_virtual_account_create)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($no_frixion_money_moov_models_virtual_account_create));
+            } else {
+                $httpBody = $no_frixion_money_moov_models_virtual_account_create;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -5188,6 +5523,349 @@ class AccountsApi
     }
 
     /**
+     * Operation getVirtualAccounts
+     *
+     * Gets a paged list of virtual accounts for a specific account.
+     *
+     * @param  string $account_id The physical account id to get the virtual accounts for. (required)
+     * @param  int $page_number Optional. The page number to retrieve. (optional, default to 1)
+     * @param  int $page_size Optional. The number of accounts per page. (optional, default to 20)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getVirtualAccounts'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse
+     */
+    public function getVirtualAccounts($account_id, $page_number = 1, $page_size = 20, string $contentType = self::contentTypes['getVirtualAccounts'][0])
+    {
+        list($response) = $this->getVirtualAccountsWithHttpInfo($account_id, $page_number, $page_size, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getVirtualAccountsWithHttpInfo
+     *
+     * Gets a paged list of virtual accounts for a specific account.
+     *
+     * @param  string $account_id The physical account id to get the virtual accounts for. (required)
+     * @param  int $page_number Optional. The page number to retrieve. (optional, default to 1)
+     * @param  int $page_size Optional. The number of accounts per page. (optional, default to 20)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getVirtualAccounts'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getVirtualAccountsWithHttpInfo($account_id, $page_number = 1, $page_size = 20, string $contentType = self::contentTypes['getVirtualAccounts'][0])
+    {
+        $request = $this->getVirtualAccountsRequest($account_id, $page_number, $page_size, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getVirtualAccountsAsync
+     *
+     * Gets a paged list of virtual accounts for a specific account.
+     *
+     * @param  string $account_id The physical account id to get the virtual accounts for. (required)
+     * @param  int $page_number Optional. The page number to retrieve. (optional, default to 1)
+     * @param  int $page_size Optional. The number of accounts per page. (optional, default to 20)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getVirtualAccounts'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getVirtualAccountsAsync($account_id, $page_number = 1, $page_size = 20, string $contentType = self::contentTypes['getVirtualAccounts'][0])
+    {
+        return $this->getVirtualAccountsAsyncWithHttpInfo($account_id, $page_number, $page_size, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getVirtualAccountsAsyncWithHttpInfo
+     *
+     * Gets a paged list of virtual accounts for a specific account.
+     *
+     * @param  string $account_id The physical account id to get the virtual accounts for. (required)
+     * @param  int $page_number Optional. The page number to retrieve. (optional, default to 1)
+     * @param  int $page_size Optional. The number of accounts per page. (optional, default to 20)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getVirtualAccounts'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getVirtualAccountsAsyncWithHttpInfo($account_id, $page_number = 1, $page_size = 20, string $contentType = self::contentTypes['getVirtualAccounts'][0])
+    {
+        $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse';
+        $request = $this->getVirtualAccountsRequest($account_id, $page_number, $page_size, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getVirtualAccounts'
+     *
+     * @param  string $account_id The physical account id to get the virtual accounts for. (required)
+     * @param  int $page_number Optional. The page number to retrieve. (optional, default to 1)
+     * @param  int $page_size Optional. The number of accounts per page. (optional, default to 20)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getVirtualAccounts'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getVirtualAccountsRequest($account_id, $page_number = 1, $page_size = 20, string $contentType = self::contentTypes['getVirtualAccounts'][0])
+    {
+
+        // verify the required parameter 'account_id' is set
+        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $account_id when calling getVirtualAccounts'
+            );
+        }
+
+
+
+
+        $resourcePath = '/api/v1/accounts/{accountID}/virtual';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page_number,
+            'pageNumber', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page_size,
+            'pageSize', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+        // path params
+        if ($account_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'accountID' . '}',
+                ObjectSerializer::toPathValue($account_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['text/plain', 'application/json', 'text/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation topupAccount
      *
      * SANDBOX ONLY. Top-ups a payment account with the amount provided.
@@ -5925,6 +6603,352 @@ class AccountsApi
                 $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($no_frixion_money_moov_models_account_update));
             } else {
                 $httpBody = $no_frixion_money_moov_models_account_update;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'PUT',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation updateVirtualAccount
+     *
+     * Updates a virtual account record.
+     *
+     * @param  string $account_id The physical account id to update the virtual account for. (required)
+     * @param  string $virtual_account_id The virtual accoutt id (required)
+     * @param  \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsVirtualAccountUpdate $no_frixion_money_moov_models_virtual_account_update The details of the virtual account update (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateVirtualAccount'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount
+     */
+    public function updateVirtualAccount($account_id, $virtual_account_id, $no_frixion_money_moov_models_virtual_account_update = null, string $contentType = self::contentTypes['updateVirtualAccount'][0])
+    {
+        list($response) = $this->updateVirtualAccountWithHttpInfo($account_id, $virtual_account_id, $no_frixion_money_moov_models_virtual_account_update, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation updateVirtualAccountWithHttpInfo
+     *
+     * Updates a virtual account record.
+     *
+     * @param  string $account_id The physical account id to update the virtual account for. (required)
+     * @param  string $virtual_account_id The virtual accoutt id (required)
+     * @param  \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsVirtualAccountUpdate $no_frixion_money_moov_models_virtual_account_update The details of the virtual account update (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateVirtualAccount'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function updateVirtualAccountWithHttpInfo($account_id, $virtual_account_id, $no_frixion_money_moov_models_virtual_account_update = null, string $contentType = self::contentTypes['updateVirtualAccount'][0])
+    {
+        $request = $this->updateVirtualAccountRequest($account_id, $virtual_account_id, $no_frixion_money_moov_models_virtual_account_update, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation updateVirtualAccountAsync
+     *
+     * Updates a virtual account record.
+     *
+     * @param  string $account_id The physical account id to update the virtual account for. (required)
+     * @param  string $virtual_account_id The virtual accoutt id (required)
+     * @param  \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsVirtualAccountUpdate $no_frixion_money_moov_models_virtual_account_update The details of the virtual account update (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateVirtualAccount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateVirtualAccountAsync($account_id, $virtual_account_id, $no_frixion_money_moov_models_virtual_account_update = null, string $contentType = self::contentTypes['updateVirtualAccount'][0])
+    {
+        return $this->updateVirtualAccountAsyncWithHttpInfo($account_id, $virtual_account_id, $no_frixion_money_moov_models_virtual_account_update, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation updateVirtualAccountAsyncWithHttpInfo
+     *
+     * Updates a virtual account record.
+     *
+     * @param  string $account_id The physical account id to update the virtual account for. (required)
+     * @param  string $virtual_account_id The virtual accoutt id (required)
+     * @param  \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsVirtualAccountUpdate $no_frixion_money_moov_models_virtual_account_update The details of the virtual account update (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateVirtualAccount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateVirtualAccountAsyncWithHttpInfo($account_id, $virtual_account_id, $no_frixion_money_moov_models_virtual_account_update = null, string $contentType = self::contentTypes['updateVirtualAccount'][0])
+    {
+        $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount';
+        $request = $this->updateVirtualAccountRequest($account_id, $virtual_account_id, $no_frixion_money_moov_models_virtual_account_update, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'updateVirtualAccount'
+     *
+     * @param  string $account_id The physical account id to update the virtual account for. (required)
+     * @param  string $virtual_account_id The virtual accoutt id (required)
+     * @param  \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsVirtualAccountUpdate $no_frixion_money_moov_models_virtual_account_update The details of the virtual account update (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateVirtualAccount'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function updateVirtualAccountRequest($account_id, $virtual_account_id, $no_frixion_money_moov_models_virtual_account_update = null, string $contentType = self::contentTypes['updateVirtualAccount'][0])
+    {
+
+        // verify the required parameter 'account_id' is set
+        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $account_id when calling updateVirtualAccount'
+            );
+        }
+
+        // verify the required parameter 'virtual_account_id' is set
+        if ($virtual_account_id === null || (is_array($virtual_account_id) && count($virtual_account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $virtual_account_id when calling updateVirtualAccount'
+            );
+        }
+
+
+
+        $resourcePath = '/api/v1/accounts/{accountID}/virtual/{virtualAccountID}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($account_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'accountID' . '}',
+                ObjectSerializer::toPathValue($account_id),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($virtual_account_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'virtualAccountID' . '}',
+                ObjectSerializer::toPathValue($virtual_account_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['text/plain', 'application/json', 'text/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($no_frixion_money_moov_models_virtual_account_update)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($no_frixion_money_moov_models_virtual_account_update));
+            } else {
+                $httpBody = $no_frixion_money_moov_models_virtual_account_update;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

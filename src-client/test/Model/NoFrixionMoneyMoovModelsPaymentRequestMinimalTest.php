@@ -116,6 +116,24 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimalTest extends TestCase
     }
 
     /**
+     * Test attribute "merchant_logo_url_png"
+     */
+    public function testPropertyMerchantLogoUrlPng()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "merchant_logo_url_svg"
+     */
+    public function testPropertyMerchantLogoUrlSvg()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "amount"
      */
     public function testPropertyAmount()
@@ -272,6 +290,33 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimalTest extends TestCase
      * Test attribute "country_code"
      */
     public function testPropertyCountryCode()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "custom_fields_to_display"
+     */
+    public function testPropertyCustomFieldsToDisplay()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "due_date"
+     */
+    public function testPropertyDueDate()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "template"
+     */
+    public function testPropertyTemplate()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

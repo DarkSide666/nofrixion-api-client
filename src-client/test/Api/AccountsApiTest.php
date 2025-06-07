@@ -108,6 +108,18 @@ class AccountsApiTest extends TestCase
     }
 
     /**
+     * Test case for createVirtualAccount
+     *
+     * Creates a new virtual account..
+     *
+     */
+    public function testCreateVirtualAccount()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for exportAccountTransactions
      *
      * Exports a list of all transactions for a specific account in CSV format..
@@ -252,6 +264,18 @@ class AccountsApiTest extends TestCase
     }
 
     /**
+     * Test case for getVirtualAccounts
+     *
+     * Gets a paged list of virtual accounts for a specific account..
+     *
+     */
+    public function testGetVirtualAccounts()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for topupAccount
      *
      * SANDBOX ONLY. Top-ups a payment account with the amount provided..
@@ -282,6 +306,18 @@ class AccountsApiTest extends TestCase
      *
      */
     public function testUpdateAccount()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateVirtualAccount
+     *
+     * Updates a virtual account record..
+     *
+     */
+    public function testUpdateVirtualAccount()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

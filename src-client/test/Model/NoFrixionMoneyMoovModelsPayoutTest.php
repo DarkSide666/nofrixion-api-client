@@ -260,15 +260,6 @@ class NoFrixionMoneyMoovModelsPayoutTest extends TestCase
     }
 
     /**
-     * Test attribute "current_user_role"
-     */
-    public function testPropertyCurrentUserRole()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "approve_payout_url"
      */
     public function testPropertyApprovePayoutUrl()
@@ -632,6 +623,24 @@ class NoFrixionMoneyMoovModelsPayoutTest extends TestCase
      * Test attribute "is_settled"
      */
     public function testPropertyIsSettled()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "fx_destination_currency"
+     */
+    public function testPropertyFxDestinationCurrency()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "fx_rate"
+     */
+    public function testPropertyFxRate()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

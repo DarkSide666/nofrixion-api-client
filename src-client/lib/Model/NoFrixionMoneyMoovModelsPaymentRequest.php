@@ -110,7 +110,10 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
         'formatted_amount' => 'string',
         'lightning_invoice_expires_at' => '\DateTime',
         'destination_account' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount',
+        'auto_send_receipt' => 'bool',
+        'custom_fields' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomField[]',
         'sandbox_settle_delay_in_seconds' => 'int',
+        'due_date' => '\DateTime',
         'customer_name' => 'string'
     ];
 
@@ -175,7 +178,10 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
         'formatted_amount' => null,
         'lightning_invoice_expires_at' => 'date-time',
         'destination_account' => null,
+        'auto_send_receipt' => null,
+        'custom_fields' => null,
         'sandbox_settle_delay_in_seconds' => 'int32',
+        'due_date' => 'date-time',
         'customer_name' => null
     ];
 
@@ -238,7 +244,10 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
         'formatted_amount' => true,
         'lightning_invoice_expires_at' => true,
         'destination_account' => false,
+        'auto_send_receipt' => false,
+        'custom_fields' => true,
         'sandbox_settle_delay_in_seconds' => true,
+        'due_date' => true,
         'customer_name' => true
     ];
 
@@ -381,7 +390,10 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
         'formatted_amount' => 'formattedAmount',
         'lightning_invoice_expires_at' => 'lightningInvoiceExpiresAt',
         'destination_account' => 'destinationAccount',
+        'auto_send_receipt' => 'autoSendReceipt',
+        'custom_fields' => 'customFields',
         'sandbox_settle_delay_in_seconds' => 'sandboxSettleDelayInSeconds',
+        'due_date' => 'dueDate',
         'customer_name' => 'customerName'
     ];
 
@@ -444,7 +456,10 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
         'formatted_amount' => 'setFormattedAmount',
         'lightning_invoice_expires_at' => 'setLightningInvoiceExpiresAt',
         'destination_account' => 'setDestinationAccount',
+        'auto_send_receipt' => 'setAutoSendReceipt',
+        'custom_fields' => 'setCustomFields',
         'sandbox_settle_delay_in_seconds' => 'setSandboxSettleDelayInSeconds',
+        'due_date' => 'setDueDate',
         'customer_name' => 'setCustomerName'
     ];
 
@@ -507,7 +522,10 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
         'formatted_amount' => 'getFormattedAmount',
         'lightning_invoice_expires_at' => 'getLightningInvoiceExpiresAt',
         'destination_account' => 'getDestinationAccount',
+        'auto_send_receipt' => 'getAutoSendReceipt',
+        'custom_fields' => 'getCustomFields',
         'sandbox_settle_delay_in_seconds' => 'getSandboxSettleDelayInSeconds',
+        'due_date' => 'getDueDate',
         'customer_name' => 'getCustomerName'
     ];
 
@@ -767,7 +785,10 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
         $this->setIfExists('formatted_amount', $data ?? [], null);
         $this->setIfExists('lightning_invoice_expires_at', $data ?? [], null);
         $this->setIfExists('destination_account', $data ?? [], null);
+        $this->setIfExists('auto_send_receipt', $data ?? [], null);
+        $this->setIfExists('custom_fields', $data ?? [], null);
         $this->setIfExists('sandbox_settle_delay_in_seconds', $data ?? [], null);
+        $this->setIfExists('due_date', $data ?? [], null);
         $this->setIfExists('customer_name', $data ?? [], null);
     }
 
@@ -2566,6 +2587,67 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
     }
 
     /**
+     * Gets auto_send_receipt
+     *
+     * @return bool|null
+     */
+    public function getAutoSendReceipt()
+    {
+        return $this->container['auto_send_receipt'];
+    }
+
+    /**
+     * Sets auto_send_receipt
+     *
+     * @param bool|null $auto_send_receipt If set to true, a receipt will be automatically sent to the CustomerEmailAddress when payments are received.
+     *
+     * @return self
+     */
+    public function setAutoSendReceipt($auto_send_receipt)
+    {
+        if (is_null($auto_send_receipt)) {
+            throw new \InvalidArgumentException('non-nullable auto_send_receipt cannot be null');
+        }
+        $this->container['auto_send_receipt'] = $auto_send_receipt;
+
+        return $this;
+    }
+
+    /**
+     * Gets custom_fields
+     *
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomField[]|null
+     */
+    public function getCustomFields()
+    {
+        return $this->container['custom_fields'];
+    }
+
+    /**
+     * Sets custom_fields
+     *
+     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomField[]|null $custom_fields A list of custom fields attached to the payment request.
+     *
+     * @return self
+     */
+    public function setCustomFields($custom_fields)
+    {
+        if (is_null($custom_fields)) {
+            array_push($this->openAPINullablesSetToNull, 'custom_fields');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('custom_fields', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['custom_fields'] = $custom_fields;
+
+        return $this;
+    }
+
+    /**
      * Gets sandbox_settle_delay_in_seconds
      *
      * @return int|null
@@ -2595,6 +2677,40 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
             }
         }
         $this->container['sandbox_settle_delay_in_seconds'] = $sandbox_settle_delay_in_seconds;
+
+        return $this;
+    }
+
+    /**
+     * Gets due_date
+     *
+     * @return \DateTime|null
+     */
+    public function getDueDate()
+    {
+        return $this->container['due_date'];
+    }
+
+    /**
+     * Sets due_date
+     *
+     * @param \DateTime|null $due_date The due date for the payment request.
+     *
+     * @return self
+     */
+    public function setDueDate($due_date)
+    {
+        if (is_null($due_date)) {
+            array_push($this->openAPINullablesSetToNull, 'due_date');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('due_date', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['due_date'] = $due_date;
 
         return $this;
     }

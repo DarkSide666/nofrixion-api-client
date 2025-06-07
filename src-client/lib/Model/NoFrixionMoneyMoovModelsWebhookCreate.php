@@ -64,7 +64,8 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
         'retry' => 'bool',
         'secret' => 'string',
         'is_active' => 'bool',
-        'email_address' => 'string'
+        'email_address' => 'string',
+        'failed_notification_email_address' => 'string'
     ];
 
     /**
@@ -82,7 +83,8 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
         'retry' => null,
         'secret' => null,
         'is_active' => null,
-        'email_address' => null
+        'email_address' => 'email',
+        'failed_notification_email_address' => 'email'
     ];
 
     /**
@@ -98,7 +100,8 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
         'retry' => false,
         'secret' => false,
         'is_active' => false,
-        'email_address' => true
+        'email_address' => true,
+        'failed_notification_email_address' => true
     ];
 
     /**
@@ -194,7 +197,8 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
         'retry' => 'retry',
         'secret' => 'secret',
         'is_active' => 'isActive',
-        'email_address' => 'emailAddress'
+        'email_address' => 'emailAddress',
+        'failed_notification_email_address' => 'failedNotificationEmailAddress'
     ];
 
     /**
@@ -210,7 +214,8 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
         'retry' => 'setRetry',
         'secret' => 'setSecret',
         'is_active' => 'setIsActive',
-        'email_address' => 'setEmailAddress'
+        'email_address' => 'setEmailAddress',
+        'failed_notification_email_address' => 'setFailedNotificationEmailAddress'
     ];
 
     /**
@@ -226,7 +231,8 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
         'retry' => 'getRetry',
         'secret' => 'getSecret',
         'is_active' => 'getIsActive',
-        'email_address' => 'getEmailAddress'
+        'email_address' => 'getEmailAddress',
+        'failed_notification_email_address' => 'getFailedNotificationEmailAddress'
     ];
 
     /**
@@ -323,6 +329,7 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
         $this->setIfExists('secret', $data ?? [], null);
         $this->setIfExists('is_active', $data ?? [], null);
         $this->setIfExists('email_address', $data ?? [], null);
+        $this->setIfExists('failed_notification_email_address', $data ?? [], null);
     }
 
     /**
@@ -629,6 +636,40 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
             }
         }
         $this->container['email_address'] = $email_address;
+
+        return $this;
+    }
+
+    /**
+     * Gets failed_notification_email_address
+     *
+     * @return string|null
+     */
+    public function getFailedNotificationEmailAddress()
+    {
+        return $this->container['failed_notification_email_address'];
+    }
+
+    /**
+     * Sets failed_notification_email_address
+     *
+     * @param string|null $failed_notification_email_address The email address to which notifications about failed webhook deliveries will be sent.
+     *
+     * @return self
+     */
+    public function setFailedNotificationEmailAddress($failed_notification_email_address)
+    {
+        if (is_null($failed_notification_email_address)) {
+            array_push($this->openAPINullablesSetToNull, 'failed_notification_email_address');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('failed_notification_email_address', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['failed_notification_email_address'] = $failed_notification_email_address;
 
         return $this;
     }

@@ -84,7 +84,8 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
         'can_authorise' => 'bool',
         'has_current_user_authorised' => 'bool',
         'authorisations' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsApproveAuthorisation[]',
-        'nonce' => 'string'
+        'nonce' => 'string',
+        'invoices_minimal' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsInvoicesPayrunInvoiceMinimal[]'
     ];
 
     /**
@@ -122,7 +123,8 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
         'can_authorise' => null,
         'has_current_user_authorised' => null,
         'authorisations' => null,
-        'nonce' => null
+        'nonce' => null,
+        'invoices_minimal' => null
     ];
 
     /**
@@ -158,7 +160,8 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
         'can_authorise' => false,
         'has_current_user_authorised' => false,
         'authorisations' => true,
-        'nonce' => true
+        'nonce' => true,
+        'invoices_minimal' => true
     ];
 
     /**
@@ -274,7 +277,8 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
         'can_authorise' => 'canAuthorise',
         'has_current_user_authorised' => 'hasCurrentUserAuthorised',
         'authorisations' => 'authorisations',
-        'nonce' => 'nonce'
+        'nonce' => 'nonce',
+        'invoices_minimal' => 'invoicesMinimal'
     ];
 
     /**
@@ -310,7 +314,8 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
         'can_authorise' => 'setCanAuthorise',
         'has_current_user_authorised' => 'setHasCurrentUserAuthorised',
         'authorisations' => 'setAuthorisations',
-        'nonce' => 'setNonce'
+        'nonce' => 'setNonce',
+        'invoices_minimal' => 'setInvoicesMinimal'
     ];
 
     /**
@@ -346,7 +351,8 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
         'can_authorise' => 'getCanAuthorise',
         'has_current_user_authorised' => 'getHasCurrentUserAuthorised',
         'authorisations' => 'getAuthorisations',
-        'nonce' => 'getNonce'
+        'nonce' => 'getNonce',
+        'invoices_minimal' => 'getInvoicesMinimal'
     ];
 
     /**
@@ -465,6 +471,7 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('has_current_user_authorised', $data ?? [], null);
         $this->setIfExists('authorisations', $data ?? [], null);
         $this->setIfExists('nonce', $data ?? [], null);
+        $this->setIfExists('invoices_minimal', $data ?? [], null);
     }
 
     /**
@@ -1357,6 +1364,40 @@ class NoFrixionMoneyMoovModelsPayrun implements ModelInterface, ArrayAccess, \Js
             }
         }
         $this->container['nonce'] = $nonce;
+
+        return $this;
+    }
+
+    /**
+     * Gets invoices_minimal
+     *
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsInvoicesPayrunInvoiceMinimal[]|null
+     */
+    public function getInvoicesMinimal()
+    {
+        return $this->container['invoices_minimal'];
+    }
+
+    /**
+     * Sets invoices_minimal
+     *
+     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsInvoicesPayrunInvoiceMinimal[]|null $invoices_minimal invoices_minimal
+     *
+     * @return self
+     */
+    public function setInvoicesMinimal($invoices_minimal)
+    {
+        if (is_null($invoices_minimal)) {
+            array_push($this->openAPINullablesSetToNull, 'invoices_minimal');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('invoices_minimal', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['invoices_minimal'] = $invoices_minimal;
 
         return $this;
     }

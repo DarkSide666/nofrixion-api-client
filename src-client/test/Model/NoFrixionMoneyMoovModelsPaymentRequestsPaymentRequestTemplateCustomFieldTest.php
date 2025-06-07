@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionMoneyMoovModelsUserRoleTest
+ * NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateCustomFieldTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Nofrixion\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * NoFrixionMoneyMoovModelsUserRoleTest Class Doc Comment
+ * NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateCustomFieldTest Class Doc Comment
  *
  * @category    Class
- * @description NoFrixionMoneyMoovModelsUserRole
+ * @description NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateCustomField
  * @package     Nofrixion\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class NoFrixionMoneyMoovModelsUserRoleTest extends TestCase
+class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateCustomFieldTest extends TestCase
 {
 
     /**
@@ -71,99 +71,54 @@ class NoFrixionMoneyMoovModelsUserRoleTest extends TestCase
     }
 
     /**
-     * Test "NoFrixionMoneyMoovModelsUserRole"
+     * Test "NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateCustomField"
      */
-    public function testNoFrixionMoneyMoovModelsUserRole()
+    public function testNoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateCustomField()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "is_empty"
+     * Test attribute "name"
      */
-    public function testPropertyIsEmpty()
+    public function testPropertyName()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "id"
+     * Test attribute "description"
      */
-    public function testPropertyId()
+    public function testPropertyDescription()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "user_id"
+     * Test attribute "display_order"
      */
-    public function testPropertyUserId()
+    public function testPropertyDisplayOrder()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "merchant_id"
+     * Test attribute "display_for_payer"
      */
-    public function testPropertyMerchantId()
+    public function testPropertyDisplayForPayer()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "first_name"
+     * Test attribute "requirement"
      */
-    public function testPropertyFirstName()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "last_name"
-     */
-    public function testPropertyLastName()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "email_address"
-     */
-    public function testPropertyEmailAddress()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "role_type"
-     */
-    public function testPropertyRoleType()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "date_joined"
-     */
-    public function testPropertyDateJoined()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "invited_by"
-     */
-    public function testPropertyInvitedBy()
+    public function testPropertyRequirement()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

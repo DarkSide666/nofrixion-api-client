@@ -384,4 +384,22 @@ class NoFrixionMoneyMoovModelsPaymentAccountTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "physical_account_id"
+     */
+    public function testPropertyPhysicalAccountId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "is_virtual"
+     */
+    public function testPropertyIsVirtual()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

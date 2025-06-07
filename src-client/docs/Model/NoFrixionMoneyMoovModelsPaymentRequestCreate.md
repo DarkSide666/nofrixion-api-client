@@ -45,5 +45,8 @@ Name | Type | Description | Notes
 **sandbox_settle_delay_in_seconds** | **int** | Sandbox only. Optional. If set, the simulated Direct Debit settlement will be delayed by the specified number of seconds.  Must be greater than 0 and less than 600. Otherwise, the default value will be used. | [optional]
 **tag_ids** | **string[]** | An optional list of tag ids to add to the payment request | [optional]
 **tags** | **string[]** | An optional list of tag values to set on the payment request. If no matching  tag exists it will be created. | [optional]
+**auto_send_receipt** | **bool** | If set to true, a receipt will be automatically sent to the CustomerEmailAddress when payments are received. | [optional]
+**custom_fields** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomFieldCreate[]**](NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomFieldCreate.md) | A list of custom fields to add to the payment request. The custom fields  are data type agnostic which means that the API will not do any validation or formatting  in the key-value pairs. The API will store the custom fields as is. | [optional]
+**due_date** | **\DateTime** | An optional due date for the payment request. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

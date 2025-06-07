@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **is_active** | **bool** |  | [optional]
 **email_address** | **string** |  | [optional]
 **version** | **int** |  | [optional]
+**failed_notification_email_address** | **string** | The email address to which notifications about failed webhook deliveries will be sent. | [optional]
 **merchant_id** | **string** | The ID of the merchant that the webhook is for. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

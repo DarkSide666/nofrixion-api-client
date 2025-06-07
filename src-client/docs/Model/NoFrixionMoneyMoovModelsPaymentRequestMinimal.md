@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **merchant_id** | **string** |  | [optional]
 **merchant_name** | **string** |  | [optional]
 **merchant_short_name** | **string** |  | [optional]
+**merchant_logo_url_png** | **string** |  | [optional]
+**merchant_logo_url_svg** | **string** |  | [optional]
 **amount** | **float** | The amount of money to request. | [optional]
 **currency** | **string** | The currency of the request. | [optional]
 **title** | **string** | The title of the payment request. | [optional]
@@ -26,5 +28,8 @@ Name | Type | Description | Notes
 **partial_payment_method** | **string** |  | [optional]
 **stripe_account_id** | **string** | Account ID of connected customers in Stripe | [optional]
 **country_code** | **string** | The country code associated with the payment. | [optional]
+**custom_fields_to_display** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomField[]**](NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomField.md) | Custom fields to display to the customer. | [optional]
+**due_date** | **\DateTime** | The due date of the payment request. | [optional]
+**template** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate**](NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate.md) |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

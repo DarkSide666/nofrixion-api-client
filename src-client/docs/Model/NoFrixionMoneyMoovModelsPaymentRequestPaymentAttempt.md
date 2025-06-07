@@ -29,5 +29,8 @@ Name | Type | Description | Notes
 **reconciled_transaction_id** | **string** | When the payment attempt is settled (only relevant for non-card payments) this is the payin transaction that  the payment request event was reconciled with. | [optional]
 **pisp_authorisation_failed_at** | **\DateTime** | Timestamp for PSIP bank authorisation error or failure. | [optional]
 **status** | **string** |  | [optional] [readonly]
+**is_paid** | **bool** | True once the attempt has actually been paid (card authorised or settled). | [optional] [readonly]
+**paid_at** | **\DateTime** | The time the payment went through (card authorisation time or settlement time). | [optional] [readonly]
+**paid_amount** | **float** | The amount that was actually paid. | [optional] [readonly]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

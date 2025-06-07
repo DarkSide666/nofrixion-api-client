@@ -37,5 +37,8 @@ Name | Type | Description | Notes
 **tag_ids** | **string[]** | An optional list of tag ids to add to the payment request | [optional]
 **lightning_invoice** | **string** | Bitcoin Lightning invoice for the payment request. | [optional]
 **lightning_invoice_expires_at** | **\DateTime** | Date and time of expiration of the lightning invoice. | [optional]
+**auto_send_receipt** | **bool** | If set to true, a receipt will be automatically sent to the CustomerEmailAddress when payments are received. | [optional]
+**custom_fields** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomFieldCreate[]**](NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomFieldCreate.md) | A list of custom fields to add to the payment request. The custom fields  are data type agnostic which means that the API will not do any validation or formatting  in the key-value pairs. The API will store the custom fields as is. | [optional]
+**due_date** | **\DateTime** | The due date of the payment request. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

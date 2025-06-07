@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionMoneyMoovModelsUserTest
+ * NoFrixionMoneyMoovModelsInvoicesPayrunInvoiceMinimalTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Nofrixion\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * NoFrixionMoneyMoovModelsUserTest Class Doc Comment
+ * NoFrixionMoneyMoovModelsInvoicesPayrunInvoiceMinimalTest Class Doc Comment
  *
  * @category    Class
- * @description NoFrixionMoneyMoovModelsUser
+ * @description NoFrixionMoneyMoovModelsInvoicesPayrunInvoiceMinimal
  * @package     Nofrixion\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class NoFrixionMoneyMoovModelsUserTest extends TestCase
+class NoFrixionMoneyMoovModelsInvoicesPayrunInvoiceMinimalTest extends TestCase
 {
 
     /**
@@ -71,9 +71,9 @@ class NoFrixionMoneyMoovModelsUserTest extends TestCase
     }
 
     /**
-     * Test "NoFrixionMoneyMoovModelsUser"
+     * Test "NoFrixionMoneyMoovModelsInvoicesPayrunInvoiceMinimal"
      */
-    public function testNoFrixionMoneyMoovModelsUser()
+    public function testNoFrixionMoneyMoovModelsInvoicesPayrunInvoiceMinimal()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -89,72 +89,18 @@ class NoFrixionMoneyMoovModelsUserTest extends TestCase
     }
 
     /**
-     * Test attribute "first_name"
+     * Test attribute "external_invoice_id"
      */
-    public function testPropertyFirstName()
+    public function testPropertyExternalInvoiceId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "last_name"
+     * Test attribute "external_invoice_provider"
      */
-    public function testPropertyLastName()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "email_address"
-     */
-    public function testPropertyEmailAddress()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "two_factor_enabled"
-     */
-    public function testPropertyTwoFactorEnabled()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "passkey_added"
-     */
-    public function testPropertyPasskeyAdded()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "permissions"
-     */
-    public function testPropertyPermissions()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "roles_with_scope"
-     */
-    public function testPropertyRolesWithScope()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "client_session_timeouts"
-     */
-    public function testPropertyClientSessionTimeouts()
+    public function testPropertyExternalInvoiceProvider()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

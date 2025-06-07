@@ -7,6 +7,7 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 | [**archiveAccount()**](AccountsApi.md#archiveAccount) | **DELETE** /api/v1/accounts/archive/{id} | Sets the specified account as archived. |
 | [**clearAccountStatements()**](AccountsApi.md#clearAccountStatements) | **DELETE** /api/v1/accounts/statements | Clears the cached user statements for a user. |
 | [**createAccount()**](AccountsApi.md#createAccount) | **POST** /api/v1/accounts | Creates a new merchant payment account. |
+| [**createVirtualAccount()**](AccountsApi.md#createVirtualAccount) | **POST** /api/v1/accounts/{accountID}/virtual | Creates a new virtual account. |
 | [**exportAccountTransactions()**](AccountsApi.md#exportAccountTransactions) | **GET** /api/v1/accounts/{accountID}/transactions/export | Exports a list of all transactions for a specific account in CSV format. |
 | [**exportAccounts()**](AccountsApi.md#exportAccounts) | **GET** /api/v1/accounts/export | Exports a list of all payment accounts the user has access to for a specific merchant. |
 | [**generateAccountStatement()**](AccountsApi.md#generateAccountStatement) | **POST** /api/v1/accounts/{accountID}/statements | Sends a message to the transaction statement queue to generate a statement with the supplied parameters. |
@@ -19,9 +20,11 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 | [**getAllAccountStatements()**](AccountsApi.md#getAllAccountStatements) | **GET** /api/v1/accounts/statements | Gets all active statement generation requests for the user. |
 | [**getFailedPayoutsForAccount()**](AccountsApi.md#getFailedPayoutsForAccount) | **GET** /api/v1/accounts/{accountID}/payouts/failed | Get failed payouts for a specific account. |
 | [**getTransactionForAccount()**](AccountsApi.md#getTransactionForAccount) | **GET** /api/v1/accounts/{accountID}/transactions/{id} | Get a transaction. |
+| [**getVirtualAccounts()**](AccountsApi.md#getVirtualAccounts) | **GET** /api/v1/accounts/{accountID}/virtual | Gets a paged list of virtual accounts for a specific account. |
 | [**topupAccount()**](AccountsApi.md#topupAccount) | **PUT** /api/v1/accounts/{accountID}/topup/{amount} | SANDBOX ONLY. Top-ups a payment account with the amount provided. |
 | [**unarchiveAccount()**](AccountsApi.md#unarchiveAccount) | **PUT** /api/v1/accounts/unarchive/{id} | Sets the specified account as unarchived / active. |
 | [**updateAccount()**](AccountsApi.md#updateAccount) | **PUT** /api/v1/accounts/{id} | Updates an account record. |
+| [**updateVirtualAccount()**](AccountsApi.md#updateVirtualAccount) | **PUT** /api/v1/accounts/{accountID}/virtual/{virtualAccountID} | Updates a virtual account record. |
 
 
 ## `archiveAccount()`
@@ -181,6 +184,68 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **no_frixion_money_moov_models_payment_account_create** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountCreate**](../Model/NoFrixionMoneyMoovModelsPaymentAccountCreate.md)| The details of the payment account to create. | [optional] |
+
+### Return type
+
+[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount**](../Model/NoFrixionMoneyMoovModelsPaymentAccount.md)
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `text/plain`, `application/json`, `text/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `createVirtualAccount()`
+
+```php
+createVirtualAccount($account_id, $no_frixion_money_moov_models_virtual_account_create): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount
+```
+
+Creates a new virtual account.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\AccountsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$account_id = 'account_id_example'; // string | The physical account id to create the virtual account for.
+$no_frixion_money_moov_models_virtual_account_create = new \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsVirtualAccountCreate(); // \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsVirtualAccountCreate | The details of the virtual account to create.
+
+try {
+    $result = $apiInstance->createVirtualAccount($account_id, $no_frixion_money_moov_models_virtual_account_create);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AccountsApi->createVirtualAccount: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **account_id** | **string**| The physical account id to create the virtual account for. | |
+| **no_frixion_money_moov_models_virtual_account_create** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsVirtualAccountCreate**](../Model/NoFrixionMoneyMoovModelsVirtualAccountCreate.md)| The details of the virtual account to create. | [optional] |
 
 ### Return type
 
@@ -1023,6 +1088,70 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `getVirtualAccounts()`
+
+```php
+getVirtualAccounts($account_id, $page_number, $page_size): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse
+```
+
+Gets a paged list of virtual accounts for a specific account.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\AccountsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$account_id = 'account_id_example'; // string | The physical account id to get the virtual accounts for.
+$page_number = 1; // int | Optional. The page number to retrieve.
+$page_size = 20; // int | Optional. The number of accounts per page.
+
+try {
+    $result = $apiInstance->getVirtualAccounts($account_id, $page_number, $page_size);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AccountsApi->getVirtualAccounts: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **account_id** | **string**| The physical account id to get the virtual accounts for. | |
+| **page_number** | **int**| Optional. The page number to retrieve. | [optional] [default to 1] |
+| **page_size** | **int**| Optional. The number of accounts per page. | [optional] [default to 20] |
+
+### Return type
+
+[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse**](../Model/NoFrixionMoneyMoovModelsPaymentAccountPageResponse.md)
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `text/plain`, `application/json`, `text/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `topupAccount()`
 
 ```php
@@ -1187,6 +1316,70 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | **string**| The ID of the account to update. | |
 | **no_frixion_money_moov_models_account_update** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsAccountUpdate**](../Model/NoFrixionMoneyMoovModelsAccountUpdate.md)| The object containing the details of account to update (only name is editable). | [optional] |
+
+### Return type
+
+[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount**](../Model/NoFrixionMoneyMoovModelsPaymentAccount.md)
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `text/plain`, `application/json`, `text/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateVirtualAccount()`
+
+```php
+updateVirtualAccount($account_id, $virtual_account_id, $no_frixion_money_moov_models_virtual_account_update): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount
+```
+
+Updates a virtual account record.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\AccountsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$account_id = 'account_id_example'; // string | The physical account id to update the virtual account for.
+$virtual_account_id = 'virtual_account_id_example'; // string | The virtual accoutt id
+$no_frixion_money_moov_models_virtual_account_update = new \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsVirtualAccountUpdate(); // \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsVirtualAccountUpdate | The details of the virtual account update
+
+try {
+    $result = $apiInstance->updateVirtualAccount($account_id, $virtual_account_id, $no_frixion_money_moov_models_virtual_account_update);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AccountsApi->updateVirtualAccount: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **account_id** | **string**| The physical account id to update the virtual account for. | |
+| **virtual_account_id** | **string**| The virtual accoutt id | |
+| **no_frixion_money_moov_models_virtual_account_update** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsVirtualAccountUpdate**](../Model/NoFrixionMoneyMoovModelsVirtualAccountUpdate.md)| The details of the virtual account update | [optional] |
 
 ### Return type
 

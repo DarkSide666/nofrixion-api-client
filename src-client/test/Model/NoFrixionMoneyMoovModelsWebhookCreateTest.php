@@ -150,4 +150,13 @@ class NoFrixionMoneyMoovModelsWebhookCreateTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "failed_notification_email_address"
+     */
+    public function testPropertyFailedNotificationEmailAddress()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateField
+ * NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateDefaultField
  *
  * PHP version 7.4
  *
@@ -32,15 +32,16 @@ use \ArrayAccess;
 use \Nofrixion\Client\ObjectSerializer;
 
 /**
- * NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateField Class Doc Comment
+ * NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateDefaultField Class Doc Comment
  *
  * @category Class
+ * @description This represents a default field in a payment request template.  Default fields are predefined fields that map to concrete payment request properties.
  * @package  Nofrixion\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateField implements ModelInterface, ArrayAccess, \JsonSerializable
+class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateDefaultField implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateField impleme
       *
       * @var string
       */
-    protected static $openAPIModelName = 'NoFrixion.MoneyMoov.Models.PaymentRequests.PaymentRequestTemplateField';
+    protected static $openAPIModelName = 'NoFrixion.MoneyMoov.Models.PaymentRequests.PaymentRequestTemplateDefaultField';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +58,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateField impleme
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'description' => 'string',
+        'default_field' => 'string',
         'display_for_payer' => 'bool',
         'requirement' => 'string'
     ];
@@ -71,8 +71,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateField impleme
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'description' => null,
+        'default_field' => null,
         'display_for_payer' => null,
         'requirement' => null
     ];
@@ -83,8 +82,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateField impleme
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'name' => true,
-        'description' => true,
+        'default_field' => false,
         'display_for_payer' => false,
         'requirement' => false
     ];
@@ -175,8 +173,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateField impleme
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'description' => 'description',
+        'default_field' => 'defaultField',
         'display_for_payer' => 'displayForPayer',
         'requirement' => 'requirement'
     ];
@@ -187,8 +184,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateField impleme
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'description' => 'setDescription',
+        'default_field' => 'setDefaultField',
         'display_for_payer' => 'setDisplayForPayer',
         'requirement' => 'setRequirement'
     ];
@@ -199,8 +195,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateField impleme
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'description' => 'getDescription',
+        'default_field' => 'getDefaultField',
         'display_for_payer' => 'getDisplayForPayer',
         'requirement' => 'getRequirement'
     ];
@@ -246,9 +241,30 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateField impleme
         return self::$openAPIModelName;
     }
 
+    public const DEFAULT_FIELD_NONE = 'None';
+    public const DEFAULT_FIELD_DESCRIPTION = 'Description';
+    public const DEFAULT_FIELD_CUSTOMER = 'Customer';
+    public const DEFAULT_FIELD_DESTINATION_ACCOUNT = 'DestinationAccount';
+    public const DEFAULT_FIELD_DUE_DATE = 'DueDate';
     public const REQUIREMENT_OPTIONAL = 'Optional';
     public const REQUIREMENT_REQUIRED = 'Required';
     public const REQUIREMENT_HIDDEN = 'Hidden';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getDefaultFieldAllowableValues()
+    {
+        return [
+            self::DEFAULT_FIELD_NONE,
+            self::DEFAULT_FIELD_DESCRIPTION,
+            self::DEFAULT_FIELD_CUSTOMER,
+            self::DEFAULT_FIELD_DESTINATION_ACCOUNT,
+            self::DEFAULT_FIELD_DUE_DATE,
+        ];
+    }
 
     /**
      * Gets allowable values of the enum
@@ -279,8 +295,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateField impleme
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('default_field', $data ?? [], null);
         $this->setIfExists('display_for_payer', $data ?? [], null);
         $this->setIfExists('requirement', $data ?? [], null);
     }
@@ -312,12 +327,18 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateField impleme
     {
         $invalidProperties = [];
 
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
+        if ($this->container['default_field'] === null) {
+            $invalidProperties[] = "'default_field' can't be null";
         }
-        if ($this->container['description'] === null) {
-            $invalidProperties[] = "'description' can't be null";
+        $allowedValues = $this->getDefaultFieldAllowableValues();
+        if (!is_null($this->container['default_field']) && !in_array($this->container['default_field'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'default_field', must be one of '%s'",
+                $this->container['default_field'],
+                implode("', '", $allowedValues)
+            );
         }
+
         $allowedValues = $this->getRequirementAllowableValues();
         if (!is_null($this->container['requirement']) && !in_array($this->container['requirement'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
@@ -343,69 +364,38 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateField impleme
 
 
     /**
-     * Gets name
+     * Gets default_field
      *
      * @return string
      */
-    public function getName()
+    public function getDefaultField()
     {
-        return $this->container['name'];
+        return $this->container['default_field'];
     }
 
     /**
-     * Sets name
+     * Sets default_field
      *
-     * @param string $name name
+     * @param string $default_field This enum defines the type of field in a payment request template.  It is one of the predefined types that map to  concrete fields in the payment request.
      *
      * @return self
      */
-    public function setName($name)
+    public function setDefaultField($default_field)
     {
-        if (is_null($name)) {
-            array_push($this->openAPINullablesSetToNull, 'name');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('name', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($default_field)) {
+            throw new \InvalidArgumentException('non-nullable default_field cannot be null');
         }
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param string $description description
-     *
-     * @return self
-     */
-    public function setDescription($description)
-    {
-        if (is_null($description)) {
-            array_push($this->openAPINullablesSetToNull, 'description');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('description', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        $allowedValues = $this->getDefaultFieldAllowableValues();
+        if (!in_array($default_field, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'default_field', must be one of '%s'",
+                    $default_field,
+                    implode("', '", $allowedValues)
+                )
+            );
         }
-        $this->container['description'] = $description;
+        $this->container['default_field'] = $default_field;
 
         return $this;
     }

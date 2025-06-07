@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionMoneyMoovModelsUser
+ * NoFrixionMoneyMoovModelsInvoicesPayrunInvoiceMinimal
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Nofrixion\Client\ObjectSerializer;
 
 /**
- * NoFrixionMoneyMoovModelsUser Class Doc Comment
+ * NoFrixionMoneyMoovModelsInvoicesPayrunInvoiceMinimal Class Doc Comment
  *
  * @category Class
  * @package  Nofrixion\Client
@@ -40,7 +40,7 @@ use \Nofrixion\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class NoFrixionMoneyMoovModelsUser implements ModelInterface, ArrayAccess, \JsonSerializable
+class NoFrixionMoneyMoovModelsInvoicesPayrunInvoiceMinimal implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class NoFrixionMoneyMoovModelsUser implements ModelInterface, ArrayAccess, \Json
       *
       * @var string
       */
-    protected static $openAPIModelName = 'NoFrixion.MoneyMoov.Models.User';
+    protected static $openAPIModelName = 'NoFrixion.MoneyMoov.Models.Invoices.PayrunInvoiceMinimal';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,14 +58,8 @@ class NoFrixionMoneyMoovModelsUser implements ModelInterface, ArrayAccess, \Json
       */
     protected static $openAPITypes = [
         'id' => 'string',
-        'first_name' => 'string',
-        'last_name' => 'string',
-        'email_address' => 'string',
-        'two_factor_enabled' => 'bool',
-        'passkey_added' => 'bool',
-        'permissions' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserPermissions',
-        'roles_with_scope' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsRolesUserRoleWithScope[]',
-        'client_session_timeouts' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsClientSessionTimeout[]'
+        'external_invoice_id' => 'string',
+        'external_invoice_provider' => 'string'
     ];
 
     /**
@@ -77,14 +71,8 @@ class NoFrixionMoneyMoovModelsUser implements ModelInterface, ArrayAccess, \Json
       */
     protected static $openAPIFormats = [
         'id' => 'uuid',
-        'first_name' => null,
-        'last_name' => null,
-        'email_address' => 'email',
-        'two_factor_enabled' => null,
-        'passkey_added' => null,
-        'permissions' => null,
-        'roles_with_scope' => null,
-        'client_session_timeouts' => null
+        'external_invoice_id' => null,
+        'external_invoice_provider' => null
     ];
 
     /**
@@ -94,14 +82,8 @@ class NoFrixionMoneyMoovModelsUser implements ModelInterface, ArrayAccess, \Json
       */
     protected static array $openAPINullables = [
         'id' => false,
-        'first_name' => false,
-        'last_name' => false,
-        'email_address' => false,
-        'two_factor_enabled' => false,
-        'passkey_added' => false,
-        'permissions' => false,
-        'roles_with_scope' => true,
-        'client_session_timeouts' => true
+        'external_invoice_id' => true,
+        'external_invoice_provider' => true
     ];
 
     /**
@@ -191,14 +173,8 @@ class NoFrixionMoneyMoovModelsUser implements ModelInterface, ArrayAccess, \Json
      */
     protected static $attributeMap = [
         'id' => 'id',
-        'first_name' => 'firstName',
-        'last_name' => 'lastName',
-        'email_address' => 'emailAddress',
-        'two_factor_enabled' => 'twoFactorEnabled',
-        'passkey_added' => 'passkeyAdded',
-        'permissions' => 'permissions',
-        'roles_with_scope' => 'rolesWithScope',
-        'client_session_timeouts' => 'clientSessionTimeouts'
+        'external_invoice_id' => 'externalInvoiceID',
+        'external_invoice_provider' => 'externalInvoiceProvider'
     ];
 
     /**
@@ -208,14 +184,8 @@ class NoFrixionMoneyMoovModelsUser implements ModelInterface, ArrayAccess, \Json
      */
     protected static $setters = [
         'id' => 'setId',
-        'first_name' => 'setFirstName',
-        'last_name' => 'setLastName',
-        'email_address' => 'setEmailAddress',
-        'two_factor_enabled' => 'setTwoFactorEnabled',
-        'passkey_added' => 'setPasskeyAdded',
-        'permissions' => 'setPermissions',
-        'roles_with_scope' => 'setRolesWithScope',
-        'client_session_timeouts' => 'setClientSessionTimeouts'
+        'external_invoice_id' => 'setExternalInvoiceId',
+        'external_invoice_provider' => 'setExternalInvoiceProvider'
     ];
 
     /**
@@ -225,14 +195,8 @@ class NoFrixionMoneyMoovModelsUser implements ModelInterface, ArrayAccess, \Json
      */
     protected static $getters = [
         'id' => 'getId',
-        'first_name' => 'getFirstName',
-        'last_name' => 'getLastName',
-        'email_address' => 'getEmailAddress',
-        'two_factor_enabled' => 'getTwoFactorEnabled',
-        'passkey_added' => 'getPasskeyAdded',
-        'permissions' => 'getPermissions',
-        'roles_with_scope' => 'getRolesWithScope',
-        'client_session_timeouts' => 'getClientSessionTimeouts'
+        'external_invoice_id' => 'getExternalInvoiceId',
+        'external_invoice_provider' => 'getExternalInvoiceProvider'
     ];
 
     /**
@@ -293,14 +257,8 @@ class NoFrixionMoneyMoovModelsUser implements ModelInterface, ArrayAccess, \Json
     public function __construct(array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('first_name', $data ?? [], null);
-        $this->setIfExists('last_name', $data ?? [], null);
-        $this->setIfExists('email_address', $data ?? [], null);
-        $this->setIfExists('two_factor_enabled', $data ?? [], null);
-        $this->setIfExists('passkey_added', $data ?? [], null);
-        $this->setIfExists('permissions', $data ?? [], null);
-        $this->setIfExists('roles_with_scope', $data ?? [], null);
-        $this->setIfExists('client_session_timeouts', $data ?? [], null);
+        $this->setIfExists('external_invoice_id', $data ?? [], null);
+        $this->setIfExists('external_invoice_provider', $data ?? [], null);
     }
 
     /**
@@ -330,27 +288,6 @@ class NoFrixionMoneyMoovModelsUser implements ModelInterface, ArrayAccess, \Json
     {
         $invalidProperties = [];
 
-        if ($this->container['first_name'] === null) {
-            $invalidProperties[] = "'first_name' can't be null";
-        }
-        if ((mb_strlen($this->container['first_name']) < 1)) {
-            $invalidProperties[] = "invalid value for 'first_name', the character length must be bigger than or equal to 1.";
-        }
-
-        if ($this->container['last_name'] === null) {
-            $invalidProperties[] = "'last_name' can't be null";
-        }
-        if ((mb_strlen($this->container['last_name']) < 1)) {
-            $invalidProperties[] = "invalid value for 'last_name', the character length must be bigger than or equal to 1.";
-        }
-
-        if ($this->container['email_address'] === null) {
-            $invalidProperties[] = "'email_address' can't be null";
-        }
-        if ((mb_strlen($this->container['email_address']) < 1)) {
-            $invalidProperties[] = "invalid value for 'email_address', the character length must be bigger than or equal to 1.";
-        }
-
         return $invalidProperties;
     }
 
@@ -379,7 +316,7 @@ class NoFrixionMoneyMoovModelsUser implements ModelInterface, ArrayAccess, \Json
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string|null $id The invoice id.
      *
      * @return self
      */
@@ -394,246 +331,69 @@ class NoFrixionMoneyMoovModelsUser implements ModelInterface, ArrayAccess, \Json
     }
 
     /**
-     * Gets first_name
+     * Gets external_invoice_id
      *
-     * @return string
+     * @return string|null
      */
-    public function getFirstName()
+    public function getExternalInvoiceId()
     {
-        return $this->container['first_name'];
+        return $this->container['external_invoice_id'];
     }
 
     /**
-     * Sets first_name
+     * Sets external_invoice_id
      *
-     * @param string $first_name first_name
+     * @param string|null $external_invoice_id If this invoice was created from an external invoice, this will be the ID of the external invoice.
      *
      * @return self
      */
-    public function setFirstName($first_name)
+    public function setExternalInvoiceId($external_invoice_id)
     {
-        if (is_null($first_name)) {
-            throw new \InvalidArgumentException('non-nullable first_name cannot be null');
-        }
-
-        if ((mb_strlen($first_name) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $first_name when calling NoFrixionMoneyMoovModelsUser., must be bigger than or equal to 1.');
-        }
-
-        $this->container['first_name'] = $first_name;
-
-        return $this;
-    }
-
-    /**
-     * Gets last_name
-     *
-     * @return string
-     */
-    public function getLastName()
-    {
-        return $this->container['last_name'];
-    }
-
-    /**
-     * Sets last_name
-     *
-     * @param string $last_name last_name
-     *
-     * @return self
-     */
-    public function setLastName($last_name)
-    {
-        if (is_null($last_name)) {
-            throw new \InvalidArgumentException('non-nullable last_name cannot be null');
-        }
-
-        if ((mb_strlen($last_name) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $last_name when calling NoFrixionMoneyMoovModelsUser., must be bigger than or equal to 1.');
-        }
-
-        $this->container['last_name'] = $last_name;
-
-        return $this;
-    }
-
-    /**
-     * Gets email_address
-     *
-     * @return string
-     */
-    public function getEmailAddress()
-    {
-        return $this->container['email_address'];
-    }
-
-    /**
-     * Sets email_address
-     *
-     * @param string $email_address email_address
-     *
-     * @return self
-     */
-    public function setEmailAddress($email_address)
-    {
-        if (is_null($email_address)) {
-            throw new \InvalidArgumentException('non-nullable email_address cannot be null');
-        }
-
-        if ((mb_strlen($email_address) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $email_address when calling NoFrixionMoneyMoovModelsUser., must be bigger than or equal to 1.');
-        }
-
-        $this->container['email_address'] = $email_address;
-
-        return $this;
-    }
-
-    /**
-     * Gets two_factor_enabled
-     *
-     * @return bool|null
-     */
-    public function getTwoFactorEnabled()
-    {
-        return $this->container['two_factor_enabled'];
-    }
-
-    /**
-     * Sets two_factor_enabled
-     *
-     * @param bool|null $two_factor_enabled two_factor_enabled
-     *
-     * @return self
-     */
-    public function setTwoFactorEnabled($two_factor_enabled)
-    {
-        if (is_null($two_factor_enabled)) {
-            throw new \InvalidArgumentException('non-nullable two_factor_enabled cannot be null');
-        }
-        $this->container['two_factor_enabled'] = $two_factor_enabled;
-
-        return $this;
-    }
-
-    /**
-     * Gets passkey_added
-     *
-     * @return bool|null
-     */
-    public function getPasskeyAdded()
-    {
-        return $this->container['passkey_added'];
-    }
-
-    /**
-     * Sets passkey_added
-     *
-     * @param bool|null $passkey_added passkey_added
-     *
-     * @return self
-     */
-    public function setPasskeyAdded($passkey_added)
-    {
-        if (is_null($passkey_added)) {
-            throw new \InvalidArgumentException('non-nullable passkey_added cannot be null');
-        }
-        $this->container['passkey_added'] = $passkey_added;
-
-        return $this;
-    }
-
-    /**
-     * Gets permissions
-     *
-     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserPermissions|null
-     */
-    public function getPermissions()
-    {
-        return $this->container['permissions'];
-    }
-
-    /**
-     * Sets permissions
-     *
-     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserPermissions|null $permissions permissions
-     *
-     * @return self
-     */
-    public function setPermissions($permissions)
-    {
-        if (is_null($permissions)) {
-            throw new \InvalidArgumentException('non-nullable permissions cannot be null');
-        }
-        $this->container['permissions'] = $permissions;
-
-        return $this;
-    }
-
-    /**
-     * Gets roles_with_scope
-     *
-     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsRolesUserRoleWithScope[]|null
-     */
-    public function getRolesWithScope()
-    {
-        return $this->container['roles_with_scope'];
-    }
-
-    /**
-     * Sets roles_with_scope
-     *
-     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsRolesUserRoleWithScope[]|null $roles_with_scope roles_with_scope
-     *
-     * @return self
-     */
-    public function setRolesWithScope($roles_with_scope)
-    {
-        if (is_null($roles_with_scope)) {
-            array_push($this->openAPINullablesSetToNull, 'roles_with_scope');
+        if (is_null($external_invoice_id)) {
+            array_push($this->openAPINullablesSetToNull, 'external_invoice_id');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('roles_with_scope', $nullablesSetToNull);
+            $index = array_search('external_invoice_id', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['roles_with_scope'] = $roles_with_scope;
+        $this->container['external_invoice_id'] = $external_invoice_id;
 
         return $this;
     }
 
     /**
-     * Gets client_session_timeouts
+     * Gets external_invoice_provider
      *
-     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsClientSessionTimeout[]|null
+     * @return string|null
      */
-    public function getClientSessionTimeouts()
+    public function getExternalInvoiceProvider()
     {
-        return $this->container['client_session_timeouts'];
+        return $this->container['external_invoice_provider'];
     }
 
     /**
-     * Sets client_session_timeouts
+     * Sets external_invoice_provider
      *
-     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsClientSessionTimeout[]|null $client_session_timeouts The number of seconds a session for this user should last before expiring.  This is based on the user's role on the merchant.  This is used to set the session timeout in the client. If not set the client's default  session timeout will be used.
+     * @param string|null $external_invoice_provider If this invoice was created from an external invoice, this will be the provider of the external invoice.  E.g., \"Xero\", \"QuickBooks\", etc.
      *
      * @return self
      */
-    public function setClientSessionTimeouts($client_session_timeouts)
+    public function setExternalInvoiceProvider($external_invoice_provider)
     {
-        if (is_null($client_session_timeouts)) {
-            array_push($this->openAPINullablesSetToNull, 'client_session_timeouts');
+        if (is_null($external_invoice_provider)) {
+            array_push($this->openAPINullablesSetToNull, 'external_invoice_provider');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('client_session_timeouts', $nullablesSetToNull);
+            $index = array_search('external_invoice_provider', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['client_session_timeouts'] = $client_session_timeouts;
+        $this->container['external_invoice_provider'] = $external_invoice_provider;
 
         return $this;
     }

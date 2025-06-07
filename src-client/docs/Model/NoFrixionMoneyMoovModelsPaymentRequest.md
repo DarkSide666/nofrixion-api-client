@@ -57,7 +57,10 @@ Name | Type | Description | Notes
 **formatted_amount** | **string** |  | [optional] [readonly]
 **lightning_invoice_expires_at** | **\DateTime** | Date and time of expiration of the lightning invoice. | [optional]
 **destination_account** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount**](NoFrixionMoneyMoovModelsPaymentAccount.md) |  | [optional]
+**auto_send_receipt** | **bool** | If set to true, a receipt will be automatically sent to the CustomerEmailAddress when payments are received. | [optional]
+**custom_fields** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomField[]**](NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomField.md) | A list of custom fields attached to the payment request. | [optional]
 **sandbox_settle_delay_in_seconds** | **int** | Sandbox only. Optional. If set, simulated settlements will be delayed by the specified number of seconds. | [optional]
+**due_date** | **\DateTime** | The due date for the payment request. | [optional]
 **customer_name** | **string** |  | [optional] [readonly]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

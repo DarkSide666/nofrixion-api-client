@@ -252,6 +252,18 @@ class PaymentRequestsApiTest extends TestCase
     }
 
     /**
+     * Test case for getPaymentRequestReceipt
+     *
+     * Gets the PDF receipt for a payment request..
+     *
+     */
+    public function testGetPaymentRequestReceipt()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getPaymentRequestResult
      *
      * Gets a payment request result..

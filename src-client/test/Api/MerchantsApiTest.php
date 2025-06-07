@@ -84,36 +84,12 @@ class MerchantsApiTest extends TestCase
     }
 
     /**
-     * Test case for createMerchantUserRole
-     *
-     * Assigns role to user..
-     *
-     */
-    public function testCreateMerchantUserRole()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test case for deleteMerchantTag
      *
      * Deletes a tag from a merchant.
      *
      */
     public function testDeleteMerchantTag()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for deleteMerchantUserRole
-     *
-     * Deletes user role..
-     *
-     */
-    public function testDeleteMerchantUserRole()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -330,18 +306,6 @@ class MerchantsApiTest extends TestCase
      *
      */
     public function testGetMerchantUserInvites()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for getMerchantUserRoles
-     *
-     * Gets user roles associated with merchant..
-     *
-     */
-    public function testGetMerchantUserRoles()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

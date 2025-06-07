@@ -32,5 +32,6 @@ Name | Type | Description | Notes
 **has_current_user_authorised** | **bool** | True if the payrun was loaded for a user and that user has already authorised the latest version of the payrun. | [optional]
 **authorisations** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsApproveAuthorisation[]**](NoFrixionMoneyMoovModelsApproveAuthorisation.md) | A list of the users who have successfully authorised the latest version of the payrun and when. | [optional]
 **nonce** | **string** |  | [optional]
+**invoices_minimal** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsInvoicesPayrunInvoiceMinimal[]**](NoFrixionMoneyMoovModelsInvoicesPayrunInvoiceMinimal.md) |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

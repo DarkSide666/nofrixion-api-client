@@ -557,9 +557,36 @@ class NoFrixionMoneyMoovModelsPaymentRequestTest extends TestCase
     }
 
     /**
+     * Test attribute "auto_send_receipt"
+     */
+    public function testPropertyAutoSendReceipt()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "custom_fields"
+     */
+    public function testPropertyCustomFields()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "sandbox_settle_delay_in_seconds"
      */
     public function testPropertySandboxSettleDelayInSeconds()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "due_date"
+     */
+    public function testPropertyDueDate()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

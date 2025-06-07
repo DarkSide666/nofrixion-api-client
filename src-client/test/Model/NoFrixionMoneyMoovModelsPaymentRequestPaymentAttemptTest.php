@@ -303,4 +303,31 @@ class NoFrixionMoneyMoovModelsPaymentRequestPaymentAttemptTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "is_paid"
+     */
+    public function testPropertyIsPaid()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "paid_at"
+     */
+    public function testPropertyPaidAt()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "paid_amount"
+     */
+    public function testPropertyPaidAmount()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

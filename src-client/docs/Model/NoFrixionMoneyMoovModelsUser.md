@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **first_name** | **string** |  |
 **last_name** | **string** |  |
 **email_address** | **string** |  |
-**roles** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserRole[]**](NoFrixionMoneyMoovModelsUserRole.md) |  | [optional]
 **two_factor_enabled** | **bool** |  | [optional]
 **passkey_added** | **bool** |  | [optional]
 **permissions** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserPermissions**](NoFrixionMoneyMoovModelsUserPermissions.md) |  | [optional]

@@ -61,6 +61,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         'merchant_id' => 'string',
         'merchant_name' => 'string',
         'merchant_short_name' => 'string',
+        'merchant_logo_url_png' => 'string',
+        'merchant_logo_url_svg' => 'string',
         'amount' => 'float',
         'currency' => 'string',
         'title' => 'string',
@@ -78,7 +80,10 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         'status' => 'string',
         'partial_payment_method' => 'string',
         'stripe_account_id' => 'string',
-        'country_code' => 'string'
+        'country_code' => 'string',
+        'custom_fields_to_display' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomField[]',
+        'due_date' => '\DateTime',
+        'template' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate'
     ];
 
     /**
@@ -93,6 +98,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         'merchant_id' => 'uuid',
         'merchant_name' => null,
         'merchant_short_name' => null,
+        'merchant_logo_url_png' => null,
+        'merchant_logo_url_svg' => null,
         'amount' => 'double',
         'currency' => null,
         'title' => null,
@@ -110,7 +117,10 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         'status' => null,
         'partial_payment_method' => null,
         'stripe_account_id' => null,
-        'country_code' => null
+        'country_code' => null,
+        'custom_fields_to_display' => null,
+        'due_date' => 'date-time',
+        'template' => null
     ];
 
     /**
@@ -123,6 +133,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         'merchant_id' => false,
         'merchant_name' => true,
         'merchant_short_name' => true,
+        'merchant_logo_url_png' => true,
+        'merchant_logo_url_svg' => true,
         'amount' => false,
         'currency' => false,
         'title' => true,
@@ -140,7 +152,10 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         'status' => false,
         'partial_payment_method' => false,
         'stripe_account_id' => true,
-        'country_code' => true
+        'country_code' => true,
+        'custom_fields_to_display' => true,
+        'due_date' => true,
+        'template' => false
     ];
 
     /**
@@ -233,6 +248,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         'merchant_id' => 'merchantID',
         'merchant_name' => 'merchantName',
         'merchant_short_name' => 'merchantShortName',
+        'merchant_logo_url_png' => 'merchantLogoUrlPng',
+        'merchant_logo_url_svg' => 'merchantLogoUrlSvg',
         'amount' => 'amount',
         'currency' => 'currency',
         'title' => 'title',
@@ -250,7 +267,10 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         'status' => 'status',
         'partial_payment_method' => 'partialPaymentMethod',
         'stripe_account_id' => 'stripeAccountID',
-        'country_code' => 'countryCode'
+        'country_code' => 'countryCode',
+        'custom_fields_to_display' => 'customFieldsToDisplay',
+        'due_date' => 'dueDate',
+        'template' => 'template'
     ];
 
     /**
@@ -263,6 +283,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         'merchant_id' => 'setMerchantId',
         'merchant_name' => 'setMerchantName',
         'merchant_short_name' => 'setMerchantShortName',
+        'merchant_logo_url_png' => 'setMerchantLogoUrlPng',
+        'merchant_logo_url_svg' => 'setMerchantLogoUrlSvg',
         'amount' => 'setAmount',
         'currency' => 'setCurrency',
         'title' => 'setTitle',
@@ -280,7 +302,10 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         'status' => 'setStatus',
         'partial_payment_method' => 'setPartialPaymentMethod',
         'stripe_account_id' => 'setStripeAccountId',
-        'country_code' => 'setCountryCode'
+        'country_code' => 'setCountryCode',
+        'custom_fields_to_display' => 'setCustomFieldsToDisplay',
+        'due_date' => 'setDueDate',
+        'template' => 'setTemplate'
     ];
 
     /**
@@ -293,6 +318,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         'merchant_id' => 'getMerchantId',
         'merchant_name' => 'getMerchantName',
         'merchant_short_name' => 'getMerchantShortName',
+        'merchant_logo_url_png' => 'getMerchantLogoUrlPng',
+        'merchant_logo_url_svg' => 'getMerchantLogoUrlSvg',
         'amount' => 'getAmount',
         'currency' => 'getCurrency',
         'title' => 'getTitle',
@@ -310,7 +337,10 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         'status' => 'getStatus',
         'partial_payment_method' => 'getPartialPaymentMethod',
         'stripe_account_id' => 'getStripeAccountId',
-        'country_code' => 'getCountryCode'
+        'country_code' => 'getCountryCode',
+        'custom_fields_to_display' => 'getCustomFieldsToDisplay',
+        'due_date' => 'getDueDate',
+        'template' => 'getTemplate'
     ];
 
     /**
@@ -503,6 +533,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         $this->setIfExists('merchant_id', $data ?? [], null);
         $this->setIfExists('merchant_name', $data ?? [], null);
         $this->setIfExists('merchant_short_name', $data ?? [], null);
+        $this->setIfExists('merchant_logo_url_png', $data ?? [], null);
+        $this->setIfExists('merchant_logo_url_svg', $data ?? [], null);
         $this->setIfExists('amount', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
         $this->setIfExists('title', $data ?? [], null);
@@ -521,6 +553,9 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         $this->setIfExists('partial_payment_method', $data ?? [], null);
         $this->setIfExists('stripe_account_id', $data ?? [], null);
         $this->setIfExists('country_code', $data ?? [], null);
+        $this->setIfExists('custom_fields_to_display', $data ?? [], null);
+        $this->setIfExists('due_date', $data ?? [], null);
+        $this->setIfExists('template', $data ?? [], null);
     }
 
     /**
@@ -719,6 +754,74 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
             }
         }
         $this->container['merchant_short_name'] = $merchant_short_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets merchant_logo_url_png
+     *
+     * @return string|null
+     */
+    public function getMerchantLogoUrlPng()
+    {
+        return $this->container['merchant_logo_url_png'];
+    }
+
+    /**
+     * Sets merchant_logo_url_png
+     *
+     * @param string|null $merchant_logo_url_png merchant_logo_url_png
+     *
+     * @return self
+     */
+    public function setMerchantLogoUrlPng($merchant_logo_url_png)
+    {
+        if (is_null($merchant_logo_url_png)) {
+            array_push($this->openAPINullablesSetToNull, 'merchant_logo_url_png');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('merchant_logo_url_png', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['merchant_logo_url_png'] = $merchant_logo_url_png;
+
+        return $this;
+    }
+
+    /**
+     * Gets merchant_logo_url_svg
+     *
+     * @return string|null
+     */
+    public function getMerchantLogoUrlSvg()
+    {
+        return $this->container['merchant_logo_url_svg'];
+    }
+
+    /**
+     * Sets merchant_logo_url_svg
+     *
+     * @param string|null $merchant_logo_url_svg merchant_logo_url_svg
+     *
+     * @return self
+     */
+    public function setMerchantLogoUrlSvg($merchant_logo_url_svg)
+    {
+        if (is_null($merchant_logo_url_svg)) {
+            array_push($this->openAPINullablesSetToNull, 'merchant_logo_url_svg');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('merchant_logo_url_svg', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['merchant_logo_url_svg'] = $merchant_logo_url_svg;
 
         return $this;
     }
@@ -1345,6 +1448,101 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
             }
         }
         $this->container['country_code'] = $country_code;
+
+        return $this;
+    }
+
+    /**
+     * Gets custom_fields_to_display
+     *
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomField[]|null
+     */
+    public function getCustomFieldsToDisplay()
+    {
+        return $this->container['custom_fields_to_display'];
+    }
+
+    /**
+     * Sets custom_fields_to_display
+     *
+     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomField[]|null $custom_fields_to_display Custom fields to display to the customer.
+     *
+     * @return self
+     */
+    public function setCustomFieldsToDisplay($custom_fields_to_display)
+    {
+        if (is_null($custom_fields_to_display)) {
+            array_push($this->openAPINullablesSetToNull, 'custom_fields_to_display');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('custom_fields_to_display', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['custom_fields_to_display'] = $custom_fields_to_display;
+
+        return $this;
+    }
+
+    /**
+     * Gets due_date
+     *
+     * @return \DateTime|null
+     */
+    public function getDueDate()
+    {
+        return $this->container['due_date'];
+    }
+
+    /**
+     * Sets due_date
+     *
+     * @param \DateTime|null $due_date The due date of the payment request.
+     *
+     * @return self
+     */
+    public function setDueDate($due_date)
+    {
+        if (is_null($due_date)) {
+            array_push($this->openAPINullablesSetToNull, 'due_date');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('due_date', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['due_date'] = $due_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets template
+     *
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate|null
+     */
+    public function getTemplate()
+    {
+        return $this->container['template'];
+    }
+
+    /**
+     * Sets template
+     *
+     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate|null $template template
+     *
+     * @return self
+     */
+    public function setTemplate($template)
+    {
+        if (is_null($template)) {
+            throw new \InvalidArgumentException('non-nullable template cannot be null');
+        }
+        $this->container['template'] = $template;
 
         return $this;
     }

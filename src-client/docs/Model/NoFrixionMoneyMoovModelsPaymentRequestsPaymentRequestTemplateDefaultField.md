@@ -1,11 +1,10 @@
-# # NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateField
+# # NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateDefaultField
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **string** |  |
-**description** | **string** |  |
+**default_field** | **string** | This enum defines the type of field in a payment request template.  It is one of the predefined types that map to  concrete fields in the payment request. |
 **display_for_payer** | **bool** |  | [optional]
 **requirement** | **string** |  | [optional]
 

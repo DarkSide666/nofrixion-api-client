@@ -70,9 +70,9 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         'web_hook_limit' => 'int',
         'display_qr_on_hosted_pay' => 'bool',
         'supported_payment_methods_list' => 'string[]',
-        'your_role' => 'string',
         'your_role_name' => 'string',
-        'user_roles' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserRole[]',
+        'logo_url_png' => 'string',
+        'logo_url_svg' => 'string',
         'tags' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTag[]',
         'payment_accounts' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]',
         'account_currencies' => 'string[]'
@@ -99,9 +99,9 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         'web_hook_limit' => 'int32',
         'display_qr_on_hosted_pay' => null,
         'supported_payment_methods_list' => null,
-        'your_role' => null,
         'your_role_name' => null,
-        'user_roles' => null,
+        'logo_url_png' => null,
+        'logo_url_svg' => null,
         'tags' => null,
         'payment_accounts' => null,
         'account_currencies' => null
@@ -126,9 +126,9 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         'web_hook_limit' => false,
         'display_qr_on_hosted_pay' => false,
         'supported_payment_methods_list' => true,
-        'your_role' => false,
         'your_role_name' => true,
-        'user_roles' => true,
+        'logo_url_png' => true,
+        'logo_url_svg' => true,
         'tags' => true,
         'payment_accounts' => true,
         'account_currencies' => true
@@ -233,9 +233,9 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         'web_hook_limit' => 'webHookLimit',
         'display_qr_on_hosted_pay' => 'displayQrOnHostedPay',
         'supported_payment_methods_list' => 'supportedPaymentMethodsList',
-        'your_role' => 'yourRole',
         'your_role_name' => 'yourRoleName',
-        'user_roles' => 'userRoles',
+        'logo_url_png' => 'logoUrlPng',
+        'logo_url_svg' => 'logoUrlSvg',
         'tags' => 'tags',
         'payment_accounts' => 'paymentAccounts',
         'account_currencies' => 'accountCurrencies'
@@ -260,9 +260,9 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         'web_hook_limit' => 'setWebHookLimit',
         'display_qr_on_hosted_pay' => 'setDisplayQrOnHostedPay',
         'supported_payment_methods_list' => 'setSupportedPaymentMethodsList',
-        'your_role' => 'setYourRole',
         'your_role_name' => 'setYourRoleName',
-        'user_roles' => 'setUserRoles',
+        'logo_url_png' => 'setLogoUrlPng',
+        'logo_url_svg' => 'setLogoUrlSvg',
         'tags' => 'setTags',
         'payment_accounts' => 'setPaymentAccounts',
         'account_currencies' => 'setAccountCurrencies'
@@ -287,9 +287,9 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         'web_hook_limit' => 'getWebHookLimit',
         'display_qr_on_hosted_pay' => 'getDisplayQrOnHostedPay',
         'supported_payment_methods_list' => 'getSupportedPaymentMethodsList',
-        'your_role' => 'getYourRole',
         'your_role_name' => 'getYourRoleName',
-        'user_roles' => 'getUserRoles',
+        'logo_url_png' => 'getLogoUrlPng',
+        'logo_url_svg' => 'getLogoUrlSvg',
         'tags' => 'getTags',
         'payment_accounts' => 'getPaymentAccounts',
         'account_currencies' => 'getAccountCurrencies'
@@ -347,11 +347,6 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
     public const SUPPORTED_PAYMENT_METHODS_LIST_APPLE_PAY = 'applePay';
     public const SUPPORTED_PAYMENT_METHODS_LIST_GOOGLE_PAY = 'googlePay';
     public const SUPPORTED_PAYMENT_METHODS_LIST_DIRECT_DEBIT = 'directDebit';
-    public const YOUR_ROLE_NEWLY_REGISTERED = 'NewlyRegistered';
-    public const YOUR_ROLE_PAYMENT_REQUESTOR = 'PaymentRequestor';
-    public const YOUR_ROLE_USER = 'User';
-    public const YOUR_ROLE_APPROVER = 'Approver';
-    public const YOUR_ROLE_ADMIN_APPROVER = 'AdminApprover';
     public const ACCOUNT_CURRENCIES_NONE = 'NONE';
     public const ACCOUNT_CURRENCIES_GBP = 'GBP';
     public const ACCOUNT_CURRENCIES_EUR = 'EUR';
@@ -388,22 +383,6 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
             self::SUPPORTED_PAYMENT_METHODS_LIST_APPLE_PAY,
             self::SUPPORTED_PAYMENT_METHODS_LIST_GOOGLE_PAY,
             self::SUPPORTED_PAYMENT_METHODS_LIST_DIRECT_DEBIT,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getYourRoleAllowableValues()
-    {
-        return [
-            self::YOUR_ROLE_NEWLY_REGISTERED,
-            self::YOUR_ROLE_PAYMENT_REQUESTOR,
-            self::YOUR_ROLE_USER,
-            self::YOUR_ROLE_APPROVER,
-            self::YOUR_ROLE_ADMIN_APPROVER,
         ];
     }
 
@@ -451,9 +430,9 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         $this->setIfExists('web_hook_limit', $data ?? [], null);
         $this->setIfExists('display_qr_on_hosted_pay', $data ?? [], null);
         $this->setIfExists('supported_payment_methods_list', $data ?? [], null);
-        $this->setIfExists('your_role', $data ?? [], null);
         $this->setIfExists('your_role_name', $data ?? [], null);
-        $this->setIfExists('user_roles', $data ?? [], null);
+        $this->setIfExists('logo_url_png', $data ?? [], null);
+        $this->setIfExists('logo_url_svg', $data ?? [], null);
         $this->setIfExists('tags', $data ?? [], null);
         $this->setIfExists('payment_accounts', $data ?? [], null);
         $this->setIfExists('account_currencies', $data ?? [], null);
@@ -491,15 +470,6 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'jurisdiction', must be one of '%s'",
                 $this->container['jurisdiction'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        $allowedValues = $this->getYourRoleAllowableValues();
-        if (!is_null($this->container['your_role']) && !in_array($this->container['your_role'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'your_role', must be one of '%s'",
-                $this->container['your_role'],
                 implode("', '", $allowedValues)
             );
         }
@@ -932,43 +902,6 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
     }
 
     /**
-     * Gets your_role
-     *
-     * @return string|null
-     */
-    public function getYourRole()
-    {
-        return $this->container['your_role'];
-    }
-
-    /**
-     * Sets your_role
-     *
-     * @param string|null $your_role The role of the identity that loaded the merchant record.
-     *
-     * @return self
-     */
-    public function setYourRole($your_role)
-    {
-        if (is_null($your_role)) {
-            throw new \InvalidArgumentException('non-nullable your_role cannot be null');
-        }
-        $allowedValues = $this->getYourRoleAllowableValues();
-        if (!in_array($your_role, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'your_role', must be one of '%s'",
-                    $your_role,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['your_role'] = $your_role;
-
-        return $this;
-    }
-
-    /**
      * Gets your_role_name
      *
      * @return string|null
@@ -1003,35 +936,69 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
     }
 
     /**
-     * Gets user_roles
+     * Gets logo_url_png
      *
-     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserRole[]|null
+     * @return string|null
      */
-    public function getUserRoles()
+    public function getLogoUrlPng()
     {
-        return $this->container['user_roles'];
+        return $this->container['logo_url_png'];
     }
 
     /**
-     * Sets user_roles
+     * Sets logo_url_png
      *
-     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserRole[]|null $user_roles The list of users that have been assigned a role on the merchant.
+     * @param string|null $logo_url_png The CDN URL of the merchant's logo in PNG format.
      *
      * @return self
      */
-    public function setUserRoles($user_roles)
+    public function setLogoUrlPng($logo_url_png)
     {
-        if (is_null($user_roles)) {
-            array_push($this->openAPINullablesSetToNull, 'user_roles');
+        if (is_null($logo_url_png)) {
+            array_push($this->openAPINullablesSetToNull, 'logo_url_png');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('user_roles', $nullablesSetToNull);
+            $index = array_search('logo_url_png', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['user_roles'] = $user_roles;
+        $this->container['logo_url_png'] = $logo_url_png;
+
+        return $this;
+    }
+
+    /**
+     * Gets logo_url_svg
+     *
+     * @return string|null
+     */
+    public function getLogoUrlSvg()
+    {
+        return $this->container['logo_url_svg'];
+    }
+
+    /**
+     * Sets logo_url_svg
+     *
+     * @param string|null $logo_url_svg The CDN URL of the merchant's logo in SVG format.
+     *
+     * @return self
+     */
+    public function setLogoUrlSvg($logo_url_svg)
+    {
+        if (is_null($logo_url_svg)) {
+            array_push($this->openAPINullablesSetToNull, 'logo_url_svg');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('logo_url_svg', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['logo_url_svg'] = $logo_url_svg;
 
         return $this;
     }

@@ -90,7 +90,9 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'default_payment_rail' => 'string',
         'rules' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsRuleMinimal[]',
         'is_archived' => 'bool',
-        'supplier_sepa_instant_status' => 'string'
+        'supplier_sepa_instant_status' => 'string',
+        'physical_account_id' => 'string',
+        'is_virtual' => 'bool'
     ];
 
     /**
@@ -134,7 +136,9 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'default_payment_rail' => null,
         'rules' => null,
         'is_archived' => null,
-        'supplier_sepa_instant_status' => null
+        'supplier_sepa_instant_status' => null,
+        'physical_account_id' => 'uuid',
+        'is_virtual' => null
     ];
 
     /**
@@ -176,7 +180,9 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'default_payment_rail' => false,
         'rules' => true,
         'is_archived' => false,
-        'supplier_sepa_instant_status' => true
+        'supplier_sepa_instant_status' => true,
+        'physical_account_id' => true,
+        'is_virtual' => false
     ];
 
     /**
@@ -298,7 +304,9 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'default_payment_rail' => 'defaultPaymentRail',
         'rules' => 'rules',
         'is_archived' => 'isArchived',
-        'supplier_sepa_instant_status' => 'supplierSepaInstantStatus'
+        'supplier_sepa_instant_status' => 'supplierSepaInstantStatus',
+        'physical_account_id' => 'physicalAccountID',
+        'is_virtual' => 'isVirtual'
     ];
 
     /**
@@ -340,7 +348,9 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'default_payment_rail' => 'setDefaultPaymentRail',
         'rules' => 'setRules',
         'is_archived' => 'setIsArchived',
-        'supplier_sepa_instant_status' => 'setSupplierSepaInstantStatus'
+        'supplier_sepa_instant_status' => 'setSupplierSepaInstantStatus',
+        'physical_account_id' => 'setPhysicalAccountId',
+        'is_virtual' => 'setIsVirtual'
     ];
 
     /**
@@ -382,7 +392,9 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'default_payment_rail' => 'getDefaultPaymentRail',
         'rules' => 'getRules',
         'is_archived' => 'getIsArchived',
-        'supplier_sepa_instant_status' => 'getSupplierSepaInstantStatus'
+        'supplier_sepa_instant_status' => 'getSupplierSepaInstantStatus',
+        'physical_account_id' => 'getPhysicalAccountId',
+        'is_virtual' => 'getIsVirtual'
     ];
 
     /**
@@ -622,6 +634,8 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         $this->setIfExists('rules', $data ?? [], null);
         $this->setIfExists('is_archived', $data ?? [], null);
         $this->setIfExists('supplier_sepa_instant_status', $data ?? [], null);
+        $this->setIfExists('physical_account_id', $data ?? [], null);
+        $this->setIfExists('is_virtual', $data ?? [], null);
     }
 
     /**
@@ -1792,6 +1806,67 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
             );
         }
         $this->container['supplier_sepa_instant_status'] = $supplier_sepa_instant_status;
+
+        return $this;
+    }
+
+    /**
+     * Gets physical_account_id
+     *
+     * @return string|null
+     */
+    public function getPhysicalAccountId()
+    {
+        return $this->container['physical_account_id'];
+    }
+
+    /**
+     * Sets physical_account_id
+     *
+     * @param string|null $physical_account_id For virtual accounts this is the ID of the physical account that the virtual account is linked to.
+     *
+     * @return self
+     */
+    public function setPhysicalAccountId($physical_account_id)
+    {
+        if (is_null($physical_account_id)) {
+            array_push($this->openAPINullablesSetToNull, 'physical_account_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('physical_account_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['physical_account_id'] = $physical_account_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_virtual
+     *
+     * @return bool|null
+     */
+    public function getIsVirtual()
+    {
+        return $this->container['is_virtual'];
+    }
+
+    /**
+     * Sets is_virtual
+     *
+     * @param bool|null $is_virtual True if the account is a virtual account.
+     *
+     * @return self
+     */
+    public function setIsVirtual($is_virtual)
+    {
+        if (is_null($is_virtual)) {
+            throw new \InvalidArgumentException('non-nullable is_virtual cannot be null');
+        }
+        $this->container['is_virtual'] = $is_virtual;
 
         return $this;
     }

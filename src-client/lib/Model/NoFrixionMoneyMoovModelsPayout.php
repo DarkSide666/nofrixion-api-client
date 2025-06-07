@@ -77,7 +77,6 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'merchant_token_description' => 'string',
         'status' => 'string',
         'current_user_id' => 'string',
-        'current_user_role' => 'string',
         'approve_payout_url' => 'string',
         'created_by' => 'string',
         'created_by_email_address' => 'string',
@@ -118,7 +117,9 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'charge_bearer' => 'string',
         'is_submitted' => 'bool',
         'is_failed' => 'bool',
-        'is_settled' => 'bool'
+        'is_settled' => 'bool',
+        'fx_destination_currency' => 'string',
+        'fx_rate' => 'float'
     ];
 
     /**
@@ -149,7 +150,6 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'merchant_token_description' => null,
         'status' => null,
         'current_user_id' => 'uuid',
-        'current_user_role' => null,
         'approve_payout_url' => null,
         'created_by' => null,
         'created_by_email_address' => null,
@@ -190,7 +190,9 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'charge_bearer' => null,
         'is_submitted' => null,
         'is_failed' => null,
-        'is_settled' => null
+        'is_settled' => null,
+        'fx_destination_currency' => null,
+        'fx_rate' => 'double'
     ];
 
     /**
@@ -219,7 +221,6 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'merchant_token_description' => true,
         'status' => false,
         'current_user_id' => true,
-        'current_user_role' => true,
         'approve_payout_url' => true,
         'created_by' => true,
         'created_by_email_address' => true,
@@ -260,7 +261,9 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'charge_bearer' => false,
         'is_submitted' => false,
         'is_failed' => false,
-        'is_settled' => false
+        'is_settled' => false,
+        'fx_destination_currency' => true,
+        'fx_rate' => true
     ];
 
     /**
@@ -369,7 +372,6 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'merchant_token_description' => 'merchantTokenDescription',
         'status' => 'status',
         'current_user_id' => 'currentUserID',
-        'current_user_role' => 'currentUserRole',
         'approve_payout_url' => 'approvePayoutUrl',
         'created_by' => 'createdBy',
         'created_by_email_address' => 'createdByEmailAddress',
@@ -410,7 +412,9 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'charge_bearer' => 'chargeBearer',
         'is_submitted' => 'isSubmitted',
         'is_failed' => 'isFailed',
-        'is_settled' => 'isSettled'
+        'is_settled' => 'isSettled',
+        'fx_destination_currency' => 'fxDestinationCurrency',
+        'fx_rate' => 'fxRate'
     ];
 
     /**
@@ -439,7 +443,6 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'merchant_token_description' => 'setMerchantTokenDescription',
         'status' => 'setStatus',
         'current_user_id' => 'setCurrentUserId',
-        'current_user_role' => 'setCurrentUserRole',
         'approve_payout_url' => 'setApprovePayoutUrl',
         'created_by' => 'setCreatedBy',
         'created_by_email_address' => 'setCreatedByEmailAddress',
@@ -480,7 +483,9 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'charge_bearer' => 'setChargeBearer',
         'is_submitted' => 'setIsSubmitted',
         'is_failed' => 'setIsFailed',
-        'is_settled' => 'setIsSettled'
+        'is_settled' => 'setIsSettled',
+        'fx_destination_currency' => 'setFxDestinationCurrency',
+        'fx_rate' => 'setFxRate'
     ];
 
     /**
@@ -509,7 +514,6 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'merchant_token_description' => 'getMerchantTokenDescription',
         'status' => 'getStatus',
         'current_user_id' => 'getCurrentUserId',
-        'current_user_role' => 'getCurrentUserRole',
         'approve_payout_url' => 'getApprovePayoutUrl',
         'created_by' => 'getCreatedBy',
         'created_by_email_address' => 'getCreatedByEmailAddress',
@@ -550,7 +554,9 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'charge_bearer' => 'getChargeBearer',
         'is_submitted' => 'getIsSubmitted',
         'is_failed' => 'getIsFailed',
-        'is_settled' => 'getIsSettled'
+        'is_settled' => 'getIsSettled',
+        'fx_destination_currency' => 'getFxDestinationCurrency',
+        'fx_rate' => 'getFxRate'
     ];
 
     /**
@@ -616,11 +622,6 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
     public const STATUS_PENDING_INPUT = 'PENDING_INPUT';
     public const STATUS_SCHEDULED = 'SCHEDULED';
     public const STATUS_REJECTED_APPROVAL = 'REJECTED_APPROVAL';
-    public const CURRENT_USER_ROLE_NEWLY_REGISTERED = 'NewlyRegistered';
-    public const CURRENT_USER_ROLE_PAYMENT_REQUESTOR = 'PaymentRequestor';
-    public const CURRENT_USER_ROLE_USER = 'User';
-    public const CURRENT_USER_ROLE_APPROVER = 'Approver';
-    public const CURRENT_USER_ROLE_ADMIN_APPROVER = 'AdminApprover';
     public const SOURCE_ACCOUNT_CURRENCY_NONE = 'NONE';
     public const SOURCE_ACCOUNT_CURRENCY_GBP = 'GBP';
     public const SOURCE_ACCOUNT_CURRENCY_EUR = 'EUR';
@@ -653,6 +654,11 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
     public const CHARGE_BEARER_BEN = 'BEN';
     public const CHARGE_BEARER_OUR = 'OUR';
     public const CHARGE_BEARER_SHA = 'SHA';
+    public const FX_DESTINATION_CURRENCY_NONE = 'NONE';
+    public const FX_DESTINATION_CURRENCY_GBP = 'GBP';
+    public const FX_DESTINATION_CURRENCY_EUR = 'EUR';
+    public const FX_DESTINATION_CURRENCY_USD = 'USD';
+    public const FX_DESTINATION_CURRENCY_BTC = 'BTC';
 
     /**
      * Gets allowable values of the enum
@@ -706,22 +712,6 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
             self::STATUS_PENDING_INPUT,
             self::STATUS_SCHEDULED,
             self::STATUS_REJECTED_APPROVAL,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getCurrentUserRoleAllowableValues()
-    {
-        return [
-            self::CURRENT_USER_ROLE_NEWLY_REGISTERED,
-            self::CURRENT_USER_ROLE_PAYMENT_REQUESTOR,
-            self::CURRENT_USER_ROLE_USER,
-            self::CURRENT_USER_ROLE_APPROVER,
-            self::CURRENT_USER_ROLE_ADMIN_APPROVER,
         ];
     }
 
@@ -813,6 +803,22 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
     }
 
     /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getFxDestinationCurrencyAllowableValues()
+    {
+        return [
+            self::FX_DESTINATION_CURRENCY_NONE,
+            self::FX_DESTINATION_CURRENCY_GBP,
+            self::FX_DESTINATION_CURRENCY_EUR,
+            self::FX_DESTINATION_CURRENCY_USD,
+            self::FX_DESTINATION_CURRENCY_BTC,
+        ];
+    }
+
+    /**
      * Associative array for storing property values
      *
      * @var mixed[]
@@ -847,7 +853,6 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('merchant_token_description', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('current_user_id', $data ?? [], null);
-        $this->setIfExists('current_user_role', $data ?? [], null);
         $this->setIfExists('approve_payout_url', $data ?? [], null);
         $this->setIfExists('created_by', $data ?? [], null);
         $this->setIfExists('created_by_email_address', $data ?? [], null);
@@ -889,6 +894,8 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('is_submitted', $data ?? [], null);
         $this->setIfExists('is_failed', $data ?? [], null);
         $this->setIfExists('is_settled', $data ?? [], null);
+        $this->setIfExists('fx_destination_currency', $data ?? [], null);
+        $this->setIfExists('fx_rate', $data ?? [], null);
     }
 
     /**
@@ -945,15 +952,6 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
             );
         }
 
-        $allowedValues = $this->getCurrentUserRoleAllowableValues();
-        if (!is_null($this->container['current_user_role']) && !in_array($this->container['current_user_role'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'current_user_role', must be one of '%s'",
-                $this->container['current_user_role'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         $allowedValues = $this->getSourceAccountCurrencyAllowableValues();
         if (!is_null($this->container['source_account_currency']) && !in_array($this->container['source_account_currency'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
@@ -986,6 +984,15 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'charge_bearer', must be one of '%s'",
                 $this->container['charge_bearer'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getFxDestinationCurrencyAllowableValues();
+        if (!is_null($this->container['fx_destination_currency']) && !in_array($this->container['fx_destination_currency'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'fx_destination_currency', must be one of '%s'",
+                $this->container['fx_destination_currency'],
                 implode("', '", $allowedValues)
             );
         }
@@ -1648,50 +1655,6 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
             }
         }
         $this->container['current_user_id'] = $current_user_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets current_user_role
-     *
-     * @return string|null
-     */
-    public function getCurrentUserRole()
-    {
-        return $this->container['current_user_role'];
-    }
-
-    /**
-     * Sets current_user_role
-     *
-     * @param string|null $current_user_role The role of the user that requested access to the PayOut record. Note  this is NOT necessarily the user that created it. For example one user  may create the payout and then a different user will load the record to  approve it.
-     *
-     * @return self
-     */
-    public function setCurrentUserRole($current_user_role)
-    {
-        if (is_null($current_user_role)) {
-            array_push($this->openAPINullablesSetToNull, 'current_user_role');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('current_user_role', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $allowedValues = $this->getCurrentUserRoleAllowableValues();
-        if (!is_null($current_user_role) && !in_array($current_user_role, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'current_user_role', must be one of '%s'",
-                    $current_user_role,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['current_user_role'] = $current_user_role;
 
         return $this;
     }
@@ -3009,6 +2972,84 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
             throw new \InvalidArgumentException('non-nullable is_settled cannot be null');
         }
         $this->container['is_settled'] = $is_settled;
+
+        return $this;
+    }
+
+    /**
+     * Gets fx_destination_currency
+     *
+     * @return string|null
+     */
+    public function getFxDestinationCurrency()
+    {
+        return $this->container['fx_destination_currency'];
+    }
+
+    /**
+     * Sets fx_destination_currency
+     *
+     * @param string|null $fx_destination_currency For an FX payout this is the currency to send to the beneficiary.
+     *
+     * @return self
+     */
+    public function setFxDestinationCurrency($fx_destination_currency)
+    {
+        if (is_null($fx_destination_currency)) {
+            array_push($this->openAPINullablesSetToNull, 'fx_destination_currency');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('fx_destination_currency', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $allowedValues = $this->getFxDestinationCurrencyAllowableValues();
+        if (!is_null($fx_destination_currency) && !in_array($fx_destination_currency, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'fx_destination_currency', must be one of '%s'",
+                    $fx_destination_currency,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['fx_destination_currency'] = $fx_destination_currency;
+
+        return $this;
+    }
+
+    /**
+     * Gets fx_rate
+     *
+     * @return float|null
+     */
+    public function getFxRate()
+    {
+        return $this->container['fx_rate'];
+    }
+
+    /**
+     * Sets fx_rate
+     *
+     * @param float|null $fx_rate For an FX payout this is the exchange rate to use for the payout.
+     *
+     * @return self
+     */
+    public function setFxRate($fx_rate)
+    {
+        if (is_null($fx_rate)) {
+            array_push($this->openAPINullablesSetToNull, 'fx_rate');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('fx_rate', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['fx_rate'] = $fx_rate;
 
         return $this;
     }

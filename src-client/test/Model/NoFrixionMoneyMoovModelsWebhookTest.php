@@ -152,6 +152,15 @@ class NoFrixionMoneyMoovModelsWebhookTest extends TestCase
     }
 
     /**
+     * Test attribute "failed_notification_email_address"
+     */
+    public function testPropertyFailedNotificationEmailAddress()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "merchant_id"
      */
     public function testPropertyMerchantId()

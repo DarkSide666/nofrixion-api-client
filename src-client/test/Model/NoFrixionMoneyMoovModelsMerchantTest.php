@@ -197,15 +197,6 @@ class NoFrixionMoneyMoovModelsMerchantTest extends TestCase
     }
 
     /**
-     * Test attribute "your_role"
-     */
-    public function testPropertyYourRole()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "your_role_name"
      */
     public function testPropertyYourRoleName()
@@ -215,9 +206,18 @@ class NoFrixionMoneyMoovModelsMerchantTest extends TestCase
     }
 
     /**
-     * Test attribute "user_roles"
+     * Test attribute "logo_url_png"
      */
-    public function testPropertyUserRoles()
+    public function testPropertyLogoUrlPng()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "logo_url_svg"
+     */
+    public function testPropertyLogoUrlSvg()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

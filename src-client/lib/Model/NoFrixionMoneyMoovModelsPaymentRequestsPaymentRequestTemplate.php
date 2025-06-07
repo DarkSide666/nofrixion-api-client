@@ -63,7 +63,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate implements M
         'bank_payment_options' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsBankPaymentOptions',
         'card_payment_address_options' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsCardPaymentAddressOptions',
         'card_payment_capture_options' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsCardPaymentCaptureOptions',
-        'fields' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateField[]'
+        'default_fields' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateDefaultField[]',
+        'custom_fields' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateCustomField[]'
     ];
 
     /**
@@ -80,7 +81,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate implements M
         'bank_payment_options' => null,
         'card_payment_address_options' => null,
         'card_payment_capture_options' => null,
-        'fields' => null
+        'default_fields' => null,
+        'custom_fields' => null
     ];
 
     /**
@@ -95,7 +97,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate implements M
         'bank_payment_options' => false,
         'card_payment_address_options' => false,
         'card_payment_capture_options' => false,
-        'fields' => true
+        'default_fields' => true,
+        'custom_fields' => true
     ];
 
     /**
@@ -190,7 +193,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate implements M
         'bank_payment_options' => 'bankPaymentOptions',
         'card_payment_address_options' => 'cardPaymentAddressOptions',
         'card_payment_capture_options' => 'cardPaymentCaptureOptions',
-        'fields' => 'fields'
+        'default_fields' => 'defaultFields',
+        'custom_fields' => 'customFields'
     ];
 
     /**
@@ -205,7 +209,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate implements M
         'bank_payment_options' => 'setBankPaymentOptions',
         'card_payment_address_options' => 'setCardPaymentAddressOptions',
         'card_payment_capture_options' => 'setCardPaymentCaptureOptions',
-        'fields' => 'setFields'
+        'default_fields' => 'setDefaultFields',
+        'custom_fields' => 'setCustomFields'
     ];
 
     /**
@@ -220,7 +225,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate implements M
         'bank_payment_options' => 'getBankPaymentOptions',
         'card_payment_address_options' => 'getCardPaymentAddressOptions',
         'card_payment_capture_options' => 'getCardPaymentCaptureOptions',
-        'fields' => 'getFields'
+        'default_fields' => 'getDefaultFields',
+        'custom_fields' => 'getCustomFields'
     ];
 
     /**
@@ -286,7 +292,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate implements M
         $this->setIfExists('bank_payment_options', $data ?? [], null);
         $this->setIfExists('card_payment_address_options', $data ?? [], null);
         $this->setIfExists('card_payment_capture_options', $data ?? [], null);
-        $this->setIfExists('fields', $data ?? [], null);
+        $this->setIfExists('default_fields', $data ?? [], null);
+        $this->setIfExists('custom_fields', $data ?? [], null);
     }
 
     /**
@@ -494,35 +501,69 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate implements M
     }
 
     /**
-     * Gets fields
+     * Gets default_fields
      *
-     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateField[]|null
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateDefaultField[]|null
      */
-    public function getFields()
+    public function getDefaultFields()
     {
-        return $this->container['fields'];
+        return $this->container['default_fields'];
     }
 
     /**
-     * Sets fields
+     * Sets default_fields
      *
-     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateField[]|null $fields fields
+     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateDefaultField[]|null $default_fields A list of default fields that are included in the payment request template.  These fields are predefined and map to concrete fields in the payment request.
      *
      * @return self
      */
-    public function setFields($fields)
+    public function setDefaultFields($default_fields)
     {
-        if (is_null($fields)) {
-            array_push($this->openAPINullablesSetToNull, 'fields');
+        if (is_null($default_fields)) {
+            array_push($this->openAPINullablesSetToNull, 'default_fields');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('fields', $nullablesSetToNull);
+            $index = array_search('default_fields', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['fields'] = $fields;
+        $this->container['default_fields'] = $default_fields;
+
+        return $this;
+    }
+
+    /**
+     * Gets custom_fields
+     *
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateCustomField[]|null
+     */
+    public function getCustomFields()
+    {
+        return $this->container['custom_fields'];
+    }
+
+    /**
+     * Sets custom_fields
+     *
+     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateCustomField[]|null $custom_fields A list of custom fields that can be included in the payment request template.
+     *
+     * @return self
+     */
+    public function setCustomFields($custom_fields)
+    {
+        if (is_null($custom_fields)) {
+            array_push($this->openAPINullablesSetToNull, 'custom_fields');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('custom_fields', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['custom_fields'] = $custom_fields;
 
         return $this;
     }

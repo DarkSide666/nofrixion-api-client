@@ -5,9 +5,7 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**createMerchantTag()**](MerchantsApi.md#createMerchantTag) | **POST** /api/v1/merchants/{merchantID}/tags | Adds a tag to a merchant. |
-| [**createMerchantUserRole()**](MerchantsApi.md#createMerchantUserRole) | **POST** /api/v1/merchants/userroles | Assigns role to user. |
 | [**deleteMerchantTag()**](MerchantsApi.md#deleteMerchantTag) | **DELETE** /api/v1/merchants/{merchantID}/tags/{tagID} | Deletes a tag from a merchant |
-| [**deleteMerchantUserRole()**](MerchantsApi.md#deleteMerchantUserRole) | **DELETE** /api/v1/merchants/userroles/{id} | Deletes user role. |
 | [**deleteUserFromMerchant()**](MerchantsApi.md#deleteUserFromMerchant) | **DELETE** /api/v1/merchants/{merchantId}/users/{userId} | Deletes all roles for a user in a merchant. |
 | [**exportMerchantBeneficiaries()**](MerchantsApi.md#exportMerchantBeneficiaries) | **GET** /api/v1/merchants/{merchantID}/beneficiaries/export | Exports a list of all beneficiaries. |
 | [**exportMerchantPayouts()**](MerchantsApi.md#exportMerchantPayouts) | **GET** /api/v1/merchants/{merchantID}/payouts/export | Exports a list of all payouts for a specific merchant as a CSV file. |
@@ -26,7 +24,6 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 | [**getMerchantTokens()**](MerchantsApi.md#getMerchantTokens) | **GET** /api/v1/merchants/{merchantID}/tokens | Gets a list of a merchant&#39;s issued API tokens. |
 | [**getMerchantTransactionsPaged()**](MerchantsApi.md#getMerchantTransactionsPaged) | **GET** /api/v1/merchants/{merchantID}/transactions | Gets a list of transactions for all a merchant&#39;s accounts. |
 | [**getMerchantUserInvites()**](MerchantsApi.md#getMerchantUserInvites) | **GET** /api/v1/merchants/{merchantID}/userinvites | Gets user invites associated with merchant. |
-| [**getMerchantUserRoles()**](MerchantsApi.md#getMerchantUserRoles) | **GET** /api/v1/merchants/{merchantID}/userroles | Gets user roles associated with merchant. |
 | [**getMerchantUsers()**](MerchantsApi.md#getMerchantUsers) | **GET** /api/v1/merchants/{merchantID}/users | Gets all users including invitees for a merchant. |
 | [**getMerchantWebhooks()**](MerchantsApi.md#getMerchantWebhooks) | **GET** /api/v1/merchants/{merchantID}/webhooks | Get all configured webhooks for a merchant. |
 | [**getMerchants()**](MerchantsApi.md#getMerchants) | **GET** /api/v1/merchants | Get&#39;s a list of merchants the caller has access to. |
@@ -96,66 +93,6 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `createMerchantUserRole()`
-
-```php
-createMerchantUserRole($no_frixion_money_moov_models_user_role_create): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserRole
-```
-
-Assigns role to user.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure API key authorization: Bearer
-$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
-
-
-$apiInstance = new Nofrixion\Client\Api\MerchantsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$no_frixion_money_moov_models_user_role_create = new \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserRoleCreate(); // \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserRoleCreate
-
-try {
-    $result = $apiInstance->createMerchantUserRole($no_frixion_money_moov_models_user_role_create);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling MerchantsApi->createMerchantUserRole: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **no_frixion_money_moov_models_user_role_create** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserRoleCreate**](../Model/NoFrixionMoneyMoovModelsUserRoleCreate.md)|  | [optional] |
-
-### Return type
-
-[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserRole**](../Model/NoFrixionMoneyMoovModelsUserRole.md)
-
-### Authorization
-
-[Bearer](../../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: `application/json`
-- **Accept**: `text/plain`, `application/json`, `text/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
 ## `deleteMerchantTag()`
 
 ```php
@@ -199,65 +136,6 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **merchant_id** | **string**| The merchant id | |
 | **tag_id** | **string**| The tag id | |
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[Bearer](../../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: Not defined
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `deleteMerchantUserRole()`
-
-```php
-deleteMerchantUserRole($id)
-```
-
-Deletes user role.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure API key authorization: Bearer
-$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
-
-
-$apiInstance = new Nofrixion\Client\Api\MerchantsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$id = 'id_example'; // string | User Role Id
-
-try {
-    $apiInstance->deleteMerchantUserRole($id);
-} catch (Exception $e) {
-    echo 'Exception when calling MerchantsApi->deleteMerchantUserRole: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **id** | **string**| User Role Id | |
 
 ### Return type
 
@@ -1441,66 +1319,6 @@ try {
 ### Return type
 
 [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserInvite[]**](../Model/NoFrixionMoneyMoovModelsUserInvite.md)
-
-### Authorization
-
-[Bearer](../../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `text/plain`, `application/json`, `text/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `getMerchantUserRoles()`
-
-```php
-getMerchantUserRoles($merchant_id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserRole[]
-```
-
-Gets user roles associated with merchant.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure API key authorization: Bearer
-$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
-
-
-$apiInstance = new Nofrixion\Client\Api\MerchantsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$merchant_id = 'merchant_id_example'; // string | The ID of the merchant to get the user roles for.
-
-try {
-    $result = $apiInstance->getMerchantUserRoles($merchant_id);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling MerchantsApi->getMerchantUserRoles: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **merchant_id** | **string**| The ID of the merchant to get the user roles for. | |
-
-### Return type
-
-[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserRole[]**](../Model/NoFrixionMoneyMoovModelsUserRole.md)
 
 ### Authorization
 

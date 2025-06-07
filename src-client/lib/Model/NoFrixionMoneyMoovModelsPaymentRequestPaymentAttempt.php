@@ -81,7 +81,10 @@ class NoFrixionMoneyMoovModelsPaymentRequestPaymentAttempt implements ModelInter
         'tokenised_card_id' => 'string',
         'reconciled_transaction_id' => 'string',
         'pisp_authorisation_failed_at' => '\DateTime',
-        'status' => 'string'
+        'status' => 'string',
+        'is_paid' => 'bool',
+        'paid_at' => '\DateTime',
+        'paid_amount' => 'float'
     ];
 
     /**
@@ -116,7 +119,10 @@ class NoFrixionMoneyMoovModelsPaymentRequestPaymentAttempt implements ModelInter
         'tokenised_card_id' => null,
         'reconciled_transaction_id' => 'uuid',
         'pisp_authorisation_failed_at' => 'date-time',
-        'status' => null
+        'status' => null,
+        'is_paid' => null,
+        'paid_at' => 'date-time',
+        'paid_amount' => 'double'
     ];
 
     /**
@@ -149,7 +155,10 @@ class NoFrixionMoneyMoovModelsPaymentRequestPaymentAttempt implements ModelInter
         'tokenised_card_id' => true,
         'reconciled_transaction_id' => true,
         'pisp_authorisation_failed_at' => true,
-        'status' => false
+        'status' => false,
+        'is_paid' => false,
+        'paid_at' => true,
+        'paid_amount' => false
     ];
 
     /**
@@ -262,7 +271,10 @@ class NoFrixionMoneyMoovModelsPaymentRequestPaymentAttempt implements ModelInter
         'tokenised_card_id' => 'tokenisedCardID',
         'reconciled_transaction_id' => 'reconciledTransactionID',
         'pisp_authorisation_failed_at' => 'pispAuthorisationFailedAt',
-        'status' => 'status'
+        'status' => 'status',
+        'is_paid' => 'isPaid',
+        'paid_at' => 'paidAt',
+        'paid_amount' => 'paidAmount'
     ];
 
     /**
@@ -295,7 +307,10 @@ class NoFrixionMoneyMoovModelsPaymentRequestPaymentAttempt implements ModelInter
         'tokenised_card_id' => 'setTokenisedCardId',
         'reconciled_transaction_id' => 'setReconciledTransactionId',
         'pisp_authorisation_failed_at' => 'setPispAuthorisationFailedAt',
-        'status' => 'setStatus'
+        'status' => 'setStatus',
+        'is_paid' => 'setIsPaid',
+        'paid_at' => 'setPaidAt',
+        'paid_amount' => 'setPaidAmount'
     ];
 
     /**
@@ -328,7 +343,10 @@ class NoFrixionMoneyMoovModelsPaymentRequestPaymentAttempt implements ModelInter
         'tokenised_card_id' => 'getTokenisedCardId',
         'reconciled_transaction_id' => 'getReconciledTransactionId',
         'pisp_authorisation_failed_at' => 'getPispAuthorisationFailedAt',
-        'status' => 'getStatus'
+        'status' => 'getStatus',
+        'is_paid' => 'getIsPaid',
+        'paid_at' => 'getPaidAt',
+        'paid_amount' => 'getPaidAmount'
     ];
 
     /**
@@ -542,6 +560,9 @@ class NoFrixionMoneyMoovModelsPaymentRequestPaymentAttempt implements ModelInter
         $this->setIfExists('reconciled_transaction_id', $data ?? [], null);
         $this->setIfExists('pisp_authorisation_failed_at', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('is_paid', $data ?? [], null);
+        $this->setIfExists('paid_at', $data ?? [], null);
+        $this->setIfExists('paid_amount', $data ?? [], null);
     }
 
     /**
@@ -1457,6 +1478,94 @@ class NoFrixionMoneyMoovModelsPaymentRequestPaymentAttempt implements ModelInter
             );
         }
         $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_paid
+     *
+     * @return bool|null
+     */
+    public function getIsPaid()
+    {
+        return $this->container['is_paid'];
+    }
+
+    /**
+     * Sets is_paid
+     *
+     * @param bool|null $is_paid True once the attempt has actually been paid (card authorised or settled).
+     *
+     * @return self
+     */
+    public function setIsPaid($is_paid)
+    {
+        if (is_null($is_paid)) {
+            throw new \InvalidArgumentException('non-nullable is_paid cannot be null');
+        }
+        $this->container['is_paid'] = $is_paid;
+
+        return $this;
+    }
+
+    /**
+     * Gets paid_at
+     *
+     * @return \DateTime|null
+     */
+    public function getPaidAt()
+    {
+        return $this->container['paid_at'];
+    }
+
+    /**
+     * Sets paid_at
+     *
+     * @param \DateTime|null $paid_at The time the payment went through (card authorisation time or settlement time).
+     *
+     * @return self
+     */
+    public function setPaidAt($paid_at)
+    {
+        if (is_null($paid_at)) {
+            array_push($this->openAPINullablesSetToNull, 'paid_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('paid_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['paid_at'] = $paid_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets paid_amount
+     *
+     * @return float|null
+     */
+    public function getPaidAmount()
+    {
+        return $this->container['paid_amount'];
+    }
+
+    /**
+     * Sets paid_amount
+     *
+     * @param float|null $paid_amount The amount that was actually paid.
+     *
+     * @return self
+     */
+    public function setPaidAmount($paid_amount)
+    {
+        if (is_null($paid_amount)) {
+            throw new \InvalidArgumentException('non-nullable paid_amount cannot be null');
+        }
+        $this->container['paid_amount'] = $paid_amount;
 
         return $this;
     }

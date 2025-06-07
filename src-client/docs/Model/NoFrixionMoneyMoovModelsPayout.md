@@ -24,7 +24,6 @@ Name | Type | Description | Notes
 **merchant_token_description** | **string** |  | [optional]
 **status** | **string** | Gets or Sets the status of payout request | [optional]
 **current_user_id** | **string** | The ID of the user that requested access to the PayOut record. Note  this is NOT necessarily the user that created it. | [optional]
-**current_user_role** | **string** | The role of the user that requested access to the PayOut record. Note  this is NOT necessarily the user that created it. For example one user  may create the payout and then a different user will load the record to  approve it. | [optional]
 **approve_payout_url** | **string** | This field is used when returning an payout record to a client. If set it holds the URL  the user needs to visit in order to complete a strong authentication check in order to approve   the payout. | [optional]
 **created_by** | **string** |  | [optional]
 **created_by_email_address** | **string** |  | [optional]
@@ -66,5 +65,7 @@ Name | Type | Description | Notes
 **is_submitted** | **bool** | Indicates whether the payout has been submitted for processing. Once submitted the payout  amount is reserved until the payout is marked as failed or settled. | [optional]
 **is_failed** | **bool** | Set to true if a submitted payout subsequently fails. If a payout fails the amount is  remvoed from the account&#39;s reserved balance. | [optional]
 **is_settled** | **bool** | Set to true if a payout was successfully processed and the corresponding transaction has been  recorded on the ledger. | [optional]
+**fx_destination_currency** | **string** | For an FX payout this is the currency to send to the beneficiary. | [optional]
+**fx_rate** | **float** | For an FX payout this is the exchange rate to use for the payout. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

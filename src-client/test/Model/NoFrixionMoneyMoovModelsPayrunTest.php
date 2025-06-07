@@ -330,4 +330,13 @@ class NoFrixionMoneyMoovModelsPayrunTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "invoices_minimal"
+     */
+    public function testPropertyInvoicesMinimal()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }
