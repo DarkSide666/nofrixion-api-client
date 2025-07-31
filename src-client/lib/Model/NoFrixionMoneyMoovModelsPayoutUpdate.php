@@ -70,7 +70,10 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
         'scheduled' => 'bool',
         'schedule_date' => '\DateTime',
         'payment_rail' => 'string',
-        'charge_bearer' => 'string'
+        'charge_bearer' => 'string',
+        'fx_destination_currency' => 'string',
+        'fx_destination_amount' => 'float',
+        'fx_use_destination_amount' => 'bool'
     ];
 
     /**
@@ -94,7 +97,10 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
         'scheduled' => null,
         'schedule_date' => 'date-time',
         'payment_rail' => null,
-        'charge_bearer' => null
+        'charge_bearer' => null,
+        'fx_destination_currency' => null,
+        'fx_destination_amount' => 'double',
+        'fx_use_destination_amount' => null
     ];
 
     /**
@@ -116,7 +122,10 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
         'scheduled' => true,
         'schedule_date' => true,
         'payment_rail' => true,
-        'charge_bearer' => true
+        'charge_bearer' => true,
+        'fx_destination_currency' => true,
+        'fx_destination_amount' => true,
+        'fx_use_destination_amount' => true
     ];
 
     /**
@@ -218,7 +227,10 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
         'scheduled' => 'scheduled',
         'schedule_date' => 'scheduleDate',
         'payment_rail' => 'paymentRail',
-        'charge_bearer' => 'chargeBearer'
+        'charge_bearer' => 'chargeBearer',
+        'fx_destination_currency' => 'fxDestinationCurrency',
+        'fx_destination_amount' => 'fxDestinationAmount',
+        'fx_use_destination_amount' => 'fxUseDestinationAmount'
     ];
 
     /**
@@ -240,7 +252,10 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
         'scheduled' => 'setScheduled',
         'schedule_date' => 'setScheduleDate',
         'payment_rail' => 'setPaymentRail',
-        'charge_bearer' => 'setChargeBearer'
+        'charge_bearer' => 'setChargeBearer',
+        'fx_destination_currency' => 'setFxDestinationCurrency',
+        'fx_destination_amount' => 'setFxDestinationAmount',
+        'fx_use_destination_amount' => 'setFxUseDestinationAmount'
     ];
 
     /**
@@ -262,7 +277,10 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
         'scheduled' => 'getScheduled',
         'schedule_date' => 'getScheduleDate',
         'payment_rail' => 'getPaymentRail',
-        'charge_bearer' => 'getChargeBearer'
+        'charge_bearer' => 'getChargeBearer',
+        'fx_destination_currency' => 'getFxDestinationCurrency',
+        'fx_destination_amount' => 'getFxDestinationAmount',
+        'fx_use_destination_amount' => 'getFxUseDestinationAmount'
     ];
 
     /**
@@ -325,6 +343,11 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
     public const CHARGE_BEARER_BEN = 'BEN';
     public const CHARGE_BEARER_OUR = 'OUR';
     public const CHARGE_BEARER_SHA = 'SHA';
+    public const FX_DESTINATION_CURRENCY_NONE = 'NONE';
+    public const FX_DESTINATION_CURRENCY_GBP = 'GBP';
+    public const FX_DESTINATION_CURRENCY_EUR = 'EUR';
+    public const FX_DESTINATION_CURRENCY_USD = 'USD';
+    public const FX_DESTINATION_CURRENCY_BTC = 'BTC';
 
     /**
      * Gets allowable values of the enum
@@ -390,6 +413,22 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
     }
 
     /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getFxDestinationCurrencyAllowableValues()
+    {
+        return [
+            self::FX_DESTINATION_CURRENCY_NONE,
+            self::FX_DESTINATION_CURRENCY_GBP,
+            self::FX_DESTINATION_CURRENCY_EUR,
+            self::FX_DESTINATION_CURRENCY_USD,
+            self::FX_DESTINATION_CURRENCY_BTC,
+        ];
+    }
+
+    /**
      * Associative array for storing property values
      *
      * @var mixed[]
@@ -418,6 +457,9 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
         $this->setIfExists('schedule_date', $data ?? [], null);
         $this->setIfExists('payment_rail', $data ?? [], null);
         $this->setIfExists('charge_bearer', $data ?? [], null);
+        $this->setIfExists('fx_destination_currency', $data ?? [], null);
+        $this->setIfExists('fx_destination_amount', $data ?? [], null);
+        $this->setIfExists('fx_use_destination_amount', $data ?? [], null);
     }
 
     /**
@@ -465,6 +507,10 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
             );
         }
 
+        if (!is_null($this->container['amount']) && ($this->container['amount'] < 0.01)) {
+            $invalidProperties[] = "invalid value for 'amount', must be bigger than or equal to 0.01.";
+        }
+
         $allowedValues = $this->getPaymentRailAllowableValues();
         if (!is_null($this->container['payment_rail']) && !in_array($this->container['payment_rail'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
@@ -481,6 +527,19 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
                 $this->container['charge_bearer'],
                 implode("', '", $allowedValues)
             );
+        }
+
+        $allowedValues = $this->getFxDestinationCurrencyAllowableValues();
+        if (!is_null($this->container['fx_destination_currency']) && !in_array($this->container['fx_destination_currency'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'fx_destination_currency', must be one of '%s'",
+                $this->container['fx_destination_currency'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if (!is_null($this->container['fx_destination_amount']) && ($this->container['fx_destination_amount'] < 1)) {
+            $invalidProperties[] = "invalid value for 'fx_destination_amount', must be bigger than or equal to 1.";
         }
 
         return $invalidProperties;
@@ -683,6 +742,11 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
+
+        if (!is_null($amount) && ($amount < 0.01)) {
+            throw new \InvalidArgumentException('invalid value for $amount when calling NoFrixionMoneyMoovModelsPayoutUpdate., must be bigger than or equal to 0.01.');
+        }
+
         $this->container['amount'] = $amount;
 
         return $this;
@@ -1003,6 +1067,123 @@ class NoFrixionMoneyMoovModelsPayoutUpdate implements ModelInterface, ArrayAcces
             );
         }
         $this->container['charge_bearer'] = $charge_bearer;
+
+        return $this;
+    }
+
+    /**
+     * Gets fx_destination_currency
+     *
+     * @return string|null
+     */
+    public function getFxDestinationCurrency()
+    {
+        return $this->container['fx_destination_currency'];
+    }
+
+    /**
+     * Sets fx_destination_currency
+     *
+     * @param string|null $fx_destination_currency Optional. For an FX payout this is the currency that the beneficiary should be sent.
+     *
+     * @return self
+     */
+    public function setFxDestinationCurrency($fx_destination_currency)
+    {
+        if (is_null($fx_destination_currency)) {
+            array_push($this->openAPINullablesSetToNull, 'fx_destination_currency');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('fx_destination_currency', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $allowedValues = $this->getFxDestinationCurrencyAllowableValues();
+        if (!is_null($fx_destination_currency) && !in_array($fx_destination_currency, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'fx_destination_currency', must be one of '%s'",
+                    $fx_destination_currency,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['fx_destination_currency'] = $fx_destination_currency;
+
+        return $this;
+    }
+
+    /**
+     * Gets fx_destination_amount
+     *
+     * @return float|null
+     */
+    public function getFxDestinationAmount()
+    {
+        return $this->container['fx_destination_amount'];
+    }
+
+    /**
+     * Sets fx_destination_amount
+     *
+     * @param float|null $fx_destination_amount Optional but one of Amount or FxDestinationAmount must be set. If specified this will be the amount sent to the payee.  The payout's Amount will be dynamically adjusted based on this amount and the FX rate.
+     *
+     * @return self
+     */
+    public function setFxDestinationAmount($fx_destination_amount)
+    {
+        if (is_null($fx_destination_amount)) {
+            array_push($this->openAPINullablesSetToNull, 'fx_destination_amount');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('fx_destination_amount', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        if (!is_null($fx_destination_amount) && ($fx_destination_amount < 1)) {
+            throw new \InvalidArgumentException('invalid value for $fx_destination_amount when calling NoFrixionMoneyMoovModelsPayoutUpdate., must be bigger than or equal to 1.');
+        }
+
+        $this->container['fx_destination_amount'] = $fx_destination_amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets fx_use_destination_amount
+     *
+     * @return bool|null
+     */
+    public function getFxUseDestinationAmount()
+    {
+        return $this->container['fx_use_destination_amount'];
+    }
+
+    /**
+     * Sets fx_use_destination_amount
+     *
+     * @param bool|null $fx_use_destination_amount For a multi-currency payout this indicates how the Amount and FxDestinaationAmount are treated.  If true the FxDestinationAmount is authoritative and the Amount is set based on the FxRate. If false then the Amount is authoritative  and the FxDestinationAmount is set based on the Amount and FxRate.
+     *
+     * @return self
+     */
+    public function setFxUseDestinationAmount($fx_use_destination_amount)
+    {
+        if (is_null($fx_use_destination_amount)) {
+            array_push($this->openAPINullablesSetToNull, 'fx_use_destination_amount');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('fx_use_destination_amount', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['fx_use_destination_amount'] = $fx_use_destination_amount;
 
         return $this;
     }

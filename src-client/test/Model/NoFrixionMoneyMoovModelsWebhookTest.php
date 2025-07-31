@@ -168,4 +168,13 @@ class NoFrixionMoneyMoovModelsWebhookTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "notification_method"
+     */
+    public function testPropertyNotificationMethod()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

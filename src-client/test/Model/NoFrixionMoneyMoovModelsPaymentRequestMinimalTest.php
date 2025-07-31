@@ -314,9 +314,36 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimalTest extends TestCase
     }
 
     /**
-     * Test attribute "template"
+     * Test attribute "field_display_settings"
      */
-    public function testPropertyTemplate()
+    public function testPropertyFieldDisplaySettings()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "amount_received"
+     */
+    public function testPropertyAmountReceived()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "amount_refunded"
+     */
+    public function testPropertyAmountRefunded()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "amount_pending"
+     */
+    public function testPropertyAmountPending()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -274,6 +274,10 @@ class NoFrixionMoneyMoovModelsTokenAdd implements ModelInterface, ArrayAccess, \
     public const PERMISSION_TYPES_VIEW_TRANSACTIONS = 'ViewTransactions';
     public const PERMISSION_TYPES_VIEW_PAYMENT_ACCOUNT = 'ViewPaymentAccount';
     public const PERMISSION_TYPES_VIEW_PAYOUT = 'ViewPayout';
+    public const PERMISSION_TYPES_CREATE_PAYRUN = 'CreatePayrun';
+    public const PERMISSION_TYPES_VIEW_PAYRUN = 'ViewPayrun';
+    public const PERMISSION_TYPES_EDIT_PAYRUN = 'EditPayrun';
+    public const PERMISSION_TYPES_DELETE_PAYRUN = 'DeletePayrun';
 
     /**
      * Gets allowable values of the enum
@@ -322,6 +326,10 @@ class NoFrixionMoneyMoovModelsTokenAdd implements ModelInterface, ArrayAccess, \
             self::PERMISSION_TYPES_VIEW_TRANSACTIONS,
             self::PERMISSION_TYPES_VIEW_PAYMENT_ACCOUNT,
             self::PERMISSION_TYPES_VIEW_PAYOUT,
+            self::PERMISSION_TYPES_CREATE_PAYRUN,
+            self::PERMISSION_TYPES_VIEW_PAYRUN,
+            self::PERMISSION_TYPES_EDIT_PAYRUN,
+            self::PERMISSION_TYPES_DELETE_PAYRUN,
         ];
     }
 

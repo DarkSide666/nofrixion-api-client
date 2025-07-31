@@ -27,5 +27,9 @@ Name | Type | Description | Notes
 **tags** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTag[]**](NoFrixionMoneyMoovModelsTag.md) | An optional list of descriptive tags attached to the transaction. | [optional]
 **account_sequence_number** | **int** | The sequence number of transaction on a per account basis. This sequence number is guaranteed to be an arithemtic sequence   number for all transactions belonging to the same account. | [optional]
 **payment_request_id** | **string** | For Pay by Bank and Direct Debit transactions this will contain the ID of the payment request. | [optional]
+**fx_currency** | **string** | For an FX payout this is the currency that was received or that was instructed. | [optional]
+**fx_amount** | **float** | For an FX payout this is the amound in the FX currency. | [optional]
+**fx_rate** | **float** | For an FX payout this is the exchange rate between the transaction currency and the FX currency. | [optional]
+**payment_request_custom_fields** | **array<string,string>** | The custom fields that were attached to the payment request that resulted in this transaction. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

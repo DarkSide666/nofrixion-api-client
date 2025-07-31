@@ -204,4 +204,31 @@ class NoFrixionMoneyMoovModelsPayoutUpdateTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "fx_destination_currency"
+     */
+    public function testPropertyFxDestinationCurrency()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "fx_destination_amount"
+     */
+    public function testPropertyFxDestinationAmount()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "fx_use_destination_amount"
+     */
+    public function testPropertyFxUseDestinationAmount()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

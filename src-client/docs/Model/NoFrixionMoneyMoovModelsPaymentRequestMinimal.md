@@ -30,6 +30,9 @@ Name | Type | Description | Notes
 **country_code** | **string** | The country code associated with the payment. | [optional]
 **custom_fields_to_display** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomField[]**](NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomField.md) | Custom fields to display to the customer. | [optional]
 **due_date** | **\DateTime** | The due date of the payment request. | [optional]
-**template** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate**](NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate.md) |  | [optional]
+**field_display_settings** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestFieldDisplaySetting[]**](NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestFieldDisplaySetting.md) |  | [optional]
+**amount_received** | **float** | The amount of money that has been received for this payment request. | [optional]
+**amount_refunded** | **float** | The amount of money that has been refunded for this payment request. | [optional]
+**amount_pending** | **float** | The amount of money that was authorised but has not arrived in the account yet. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

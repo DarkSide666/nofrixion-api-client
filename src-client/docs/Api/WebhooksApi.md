@@ -18,6 +18,8 @@ createWebhook($no_frixion_money_moov_models_webhook_create): \Nofrixion\Client\M
 
 Creates a webhook for the given merchant.
 
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanCreateWebhooks
+
 ### Example
 
 ```php
@@ -78,6 +80,8 @@ deleteWebhook($id)
 
 Deletes a webhook.
 
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanDeleteWebhooks
+
 ### Example
 
 ```php
@@ -136,6 +140,8 @@ getWebhooks($merchant_id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsWebho
 ```
 
 Get all configured webhooks for a merchant.
+
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanViewWebhooks
 
 ### Example
 
@@ -196,6 +202,8 @@ updateWebhook($id, $no_frixion_money_moov_models_webhook_create): \Nofrixion\Cli
 ```
 
 Updates a webhook for the given merchant.
+
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanCreateWebhooks
 
 ### Example
 

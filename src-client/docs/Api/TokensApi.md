@@ -17,6 +17,8 @@ archiveToken($id)
 
 Archives a merchant API token.
 
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanArchiveTokens
+
 ### Example
 
 ```php
@@ -76,6 +78,8 @@ authoriseMerchantToken($id)
 
 Authorises a beneficiary.
 
+<b>Authorization</b>: Strong end user token is required.  <b>User permissions required</b>: CanAuthoriseTokens
+
 ### Example
 
 ```php
@@ -134,6 +138,8 @@ createMerchantToken($no_frixion_money_moov_models_token_add): \Nofrixion\Client\
 ```
 
 Creates a new merchant API token.
+
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanCreateTokens
 
 ### Example
 

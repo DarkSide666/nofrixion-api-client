@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **last_updated** | **\DateTime** |  | [optional]
 **last_authorised** | **\DateTime** |  | [optional]
 **created_by** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUser**](NoFrixionMoneyMoovModelsUser.md) |  | [optional]
+**their_reference** | **string** | The reference that will be used by default as TheirReference when creating payouts to this beneficiary  if no TheirReference is specified for the payout. | [optional]
 **beneficiary_events** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryEvent[]**](NoFrixionMoneyMoovModelsBeneficiaryEvent.md) |  | [optional]
 **source_accounts** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]**](NoFrixionMoneyMoovModelsPaymentAccount.md) |  | [optional]
 

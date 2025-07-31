@@ -278,6 +278,15 @@ class NoFrixionMoneyMoovModelsPaymentAccountTest extends TestCase
     }
 
     /**
+     * Test attribute "is_trust_account"
+     */
+    public function testPropertyIsTrustAccount()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "xero_bank_feed_connection_status"
      */
     public function testPropertyXeroBankFeedConnectionStatus()
@@ -344,6 +353,15 @@ class NoFrixionMoneyMoovModelsPaymentAccountTest extends TestCase
      * Test attribute "created_by"
      */
     public function testPropertyCreatedBy()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "created_by_display_name"
+     */
+    public function testPropertyCreatedByDisplayName()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

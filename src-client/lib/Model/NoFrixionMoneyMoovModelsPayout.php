@@ -119,7 +119,11 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'is_failed' => 'bool',
         'is_settled' => 'bool',
         'fx_destination_currency' => 'string',
-        'fx_rate' => 'float'
+        'fx_rate' => 'float',
+        'fx_destination_amount' => 'float',
+        'fx_use_destination_amount' => 'bool',
+        'fx_destination_amount_minor_units' => 'int',
+        'formatted_fx_destination_amount' => 'string'
     ];
 
     /**
@@ -192,7 +196,11 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'is_failed' => null,
         'is_settled' => null,
         'fx_destination_currency' => null,
-        'fx_rate' => 'double'
+        'fx_rate' => 'double',
+        'fx_destination_amount' => 'double',
+        'fx_use_destination_amount' => null,
+        'fx_destination_amount_minor_units' => 'int64',
+        'formatted_fx_destination_amount' => null
     ];
 
     /**
@@ -263,7 +271,11 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'is_failed' => false,
         'is_settled' => false,
         'fx_destination_currency' => true,
-        'fx_rate' => true
+        'fx_rate' => true,
+        'fx_destination_amount' => true,
+        'fx_use_destination_amount' => false,
+        'fx_destination_amount_minor_units' => true,
+        'formatted_fx_destination_amount' => true
     ];
 
     /**
@@ -414,7 +426,11 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'is_failed' => 'isFailed',
         'is_settled' => 'isSettled',
         'fx_destination_currency' => 'fxDestinationCurrency',
-        'fx_rate' => 'fxRate'
+        'fx_rate' => 'fxRate',
+        'fx_destination_amount' => 'fxDestinationAmount',
+        'fx_use_destination_amount' => 'fxUseDestinationAmount',
+        'fx_destination_amount_minor_units' => 'fxDestinationAmountMinorUnits',
+        'formatted_fx_destination_amount' => 'formattedFxDestinationAmount'
     ];
 
     /**
@@ -485,7 +501,11 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'is_failed' => 'setIsFailed',
         'is_settled' => 'setIsSettled',
         'fx_destination_currency' => 'setFxDestinationCurrency',
-        'fx_rate' => 'setFxRate'
+        'fx_rate' => 'setFxRate',
+        'fx_destination_amount' => 'setFxDestinationAmount',
+        'fx_use_destination_amount' => 'setFxUseDestinationAmount',
+        'fx_destination_amount_minor_units' => 'setFxDestinationAmountMinorUnits',
+        'formatted_fx_destination_amount' => 'setFormattedFxDestinationAmount'
     ];
 
     /**
@@ -556,7 +576,11 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'is_failed' => 'getIsFailed',
         'is_settled' => 'getIsSettled',
         'fx_destination_currency' => 'getFxDestinationCurrency',
-        'fx_rate' => 'getFxRate'
+        'fx_rate' => 'getFxRate',
+        'fx_destination_amount' => 'getFxDestinationAmount',
+        'fx_use_destination_amount' => 'getFxUseDestinationAmount',
+        'fx_destination_amount_minor_units' => 'getFxDestinationAmountMinorUnits',
+        'formatted_fx_destination_amount' => 'getFormattedFxDestinationAmount'
     ];
 
     /**
@@ -896,6 +920,10 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('is_settled', $data ?? [], null);
         $this->setIfExists('fx_destination_currency', $data ?? [], null);
         $this->setIfExists('fx_rate', $data ?? [], null);
+        $this->setIfExists('fx_destination_amount', $data ?? [], null);
+        $this->setIfExists('fx_use_destination_amount', $data ?? [], null);
+        $this->setIfExists('fx_destination_amount_minor_units', $data ?? [], null);
+        $this->setIfExists('formatted_fx_destination_amount', $data ?? [], null);
     }
 
     /**
@@ -3050,6 +3078,135 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
             }
         }
         $this->container['fx_rate'] = $fx_rate;
+
+        return $this;
+    }
+
+    /**
+     * Gets fx_destination_amount
+     *
+     * @return float|null
+     */
+    public function getFxDestinationAmount()
+    {
+        return $this->container['fx_destination_amount'];
+    }
+
+    /**
+     * Sets fx_destination_amount
+     *
+     * @param float|null $fx_destination_amount If specified this will be the amount sent to the payee. The payout's Amount will be dynamically adjusted based on   this amount and the FX rate.
+     *
+     * @return self
+     */
+    public function setFxDestinationAmount($fx_destination_amount)
+    {
+        if (is_null($fx_destination_amount)) {
+            array_push($this->openAPINullablesSetToNull, 'fx_destination_amount');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('fx_destination_amount', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['fx_destination_amount'] = $fx_destination_amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets fx_use_destination_amount
+     *
+     * @return bool|null
+     */
+    public function getFxUseDestinationAmount()
+    {
+        return $this->container['fx_use_destination_amount'];
+    }
+
+    /**
+     * Sets fx_use_destination_amount
+     *
+     * @param bool|null $fx_use_destination_amount For a multi-currency payout this indicates how the Amount and FxDestinationAmount are treated.  If true the FxDestinationAmount is authoritative and the Amount is set based on the FxRate. If false then the Amount is authoritative  and the FxDestinationAmount is set based on the Amount and FxRate.
+     *
+     * @return self
+     */
+    public function setFxUseDestinationAmount($fx_use_destination_amount)
+    {
+        if (is_null($fx_use_destination_amount)) {
+            throw new \InvalidArgumentException('non-nullable fx_use_destination_amount cannot be null');
+        }
+        $this->container['fx_use_destination_amount'] = $fx_use_destination_amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets fx_destination_amount_minor_units
+     *
+     * @return int|null
+     */
+    public function getFxDestinationAmountMinorUnits()
+    {
+        return $this->container['fx_destination_amount_minor_units'];
+    }
+
+    /**
+     * Sets fx_destination_amount_minor_units
+     *
+     * @param int|null $fx_destination_amount_minor_units The payout FxDestinationAmount expressed in the currency’s minor units (e.g. cents, pence).
+     *
+     * @return self
+     */
+    public function setFxDestinationAmountMinorUnits($fx_destination_amount_minor_units)
+    {
+        if (is_null($fx_destination_amount_minor_units)) {
+            array_push($this->openAPINullablesSetToNull, 'fx_destination_amount_minor_units');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('fx_destination_amount_minor_units', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['fx_destination_amount_minor_units'] = $fx_destination_amount_minor_units;
+
+        return $this;
+    }
+
+    /**
+     * Gets formatted_fx_destination_amount
+     *
+     * @return string|null
+     */
+    public function getFormattedFxDestinationAmount()
+    {
+        return $this->container['formatted_fx_destination_amount'];
+    }
+
+    /**
+     * Sets formatted_fx_destination_amount
+     *
+     * @param string|null $formatted_fx_destination_amount FX destination currency and amount formatted string.
+     *
+     * @return self
+     */
+    public function setFormattedFxDestinationAmount($formatted_fx_destination_amount)
+    {
+        if (is_null($formatted_fx_destination_amount)) {
+            array_push($this->openAPINullablesSetToNull, 'formatted_fx_destination_amount');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('formatted_fx_destination_amount', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['formatted_fx_destination_amount'] = $formatted_fx_destination_amount;
 
         return $this;
     }

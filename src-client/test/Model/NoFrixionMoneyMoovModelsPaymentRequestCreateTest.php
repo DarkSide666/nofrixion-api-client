@@ -242,15 +242,6 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreateTest extends TestCase
     }
 
     /**
-     * Test attribute "base_origin_url"
-     */
-    public function testPropertyBaseOriginUrl()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "callback_url"
      */
     public function testPropertyCallbackUrl()
@@ -470,6 +461,24 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreateTest extends TestCase
      * Test attribute "due_date"
      */
     public function testPropertyDueDate()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "field_display_settings"
+     */
+    public function testPropertyFieldDisplaySettings()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "notification_role_ids"
+     */
+    public function testPropertyNotificationRoleIds()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -24,6 +24,8 @@ createConsent($no_frixion_money_moov_models_open_banking_consent_request): \Nofr
 
 Creates a consent thats used to initiate an authorisation to a financial institution.
 
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanConnectAccounts
+
 ### Example
 
 ```php
@@ -83,6 +85,8 @@ deleteAllConsents($merchant_id, $email)
 ```
 
 Delete all the open banking consents for a single user.
+
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanConnectAccounts
 
 ### Example
 
@@ -145,6 +149,8 @@ deleteConnectedAccount($account_id)
 
 Deletes the specified connected account and all associated transactions.
 
+<b>Authorization</b>: End user or Merchant token is required.
+
 ### Example
 
 ```php
@@ -203,6 +209,8 @@ deleteConsent($id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsOpenBankingC
 ```
 
 Deletes a single open banking consent.
+
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanConnectAccounts
 
 ### Example
 
@@ -263,6 +271,8 @@ getConnectedAccountTransactions($id, $account_id, $offset, $limit, $transaction_
 ```
 
 Retrieves transactions from financial institution.
+
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanConnectAccounts
 
 ### Example
 
@@ -336,6 +346,8 @@ getConnectedAccounts($id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsOpenB
 
 Retrieves list of accounts from financial institution.
 
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanConnectAccounts
+
 ### Example
 
 ```php
@@ -396,6 +408,8 @@ getConsent($id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsOpenBankingCons
 
 Retrieve a single open banking consent.
 
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanConnectAccounts
+
 ### Example
 
 ```php
@@ -455,6 +469,8 @@ getConsents($merchant_id, $email): \Nofrixion\Client\Model\NoFrixionMoneyMoovMod
 ```
 
 Retrieve all the open banking consents for a single user.
+
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanConnectAccounts
 
 ### Example
 
@@ -518,6 +534,8 @@ reauthoriseConsent($id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsOpenBan
 
 Creates a new authorisation to a financial institution based on a consent that has   already been authorised.
 
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanConnectAccounts
+
 ### Example
 
 ```php
@@ -577,6 +595,8 @@ synchroniseConnectedAccount($account_id)
 ```
 
 Attempts to synchronise the balance and transactions of a connected account.
+
+<b>Authorization</b>: End user or Merchant token is required.
 
 ### Example
 

@@ -75,7 +75,7 @@ class NoFrixionBizBizModelsPagingPayrunPageResponse implements ModelInterface, A
         'content' => null,
         'page_number' => 'int32',
         'page_size' => 'int32',
-        'total_pages' => 'int32',
+        'total_pages' => 'int64',
         'total_size' => 'int64'
     ];
 

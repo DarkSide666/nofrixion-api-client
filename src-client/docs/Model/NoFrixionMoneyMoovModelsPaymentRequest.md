@@ -61,6 +61,8 @@ Name | Type | Description | Notes
 **custom_fields** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomField[]**](NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomField.md) | A list of custom fields attached to the payment request. | [optional]
 **sandbox_settle_delay_in_seconds** | **int** | Sandbox only. Optional. If set, simulated settlements will be delayed by the specified number of seconds. | [optional]
 **due_date** | **\DateTime** | The due date for the payment request. | [optional]
+**field_display_settings** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestFieldDisplaySetting[]**](NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestFieldDisplaySetting.md) | A list of field display settings that control which fields are displayed to the payer. | [optional]
+**notification_role_ids** | **string[]** | A list of roles whose members will receive notifications about this payment request. | [optional]
 **customer_name** | **string** |  | [optional] [readonly]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

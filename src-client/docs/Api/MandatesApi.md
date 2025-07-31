@@ -17,6 +17,8 @@ createMandate($no_frixion_money_moov_models_mandates_mandate_create): \Nofrixion
 
 Creates a Direct Debit mandate.
 
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanCreateMandates
+
 ### Example
 
 ```php
@@ -77,6 +79,8 @@ getMandate($id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsMandatesMandate
 
 Gets a specific mandate's information.
 
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanViewMandates
+
 ### Example
 
 ```php
@@ -136,6 +140,8 @@ getMandatesPaged($merchant_id, $page, $size, $from_date, $to_date, $status, $sea
 ```
 
 Gets all mandates from a specific merchant with the supplied parameters.
+
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanViewMandates
 
 ### Example
 

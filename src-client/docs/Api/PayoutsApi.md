@@ -33,7 +33,7 @@ cancelScheduledPayout($id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayo
 
 Attempts to cancel a scheduled payout.
 
-If successful the payout will be reverted to a pending state.
+If successful the payout will be reverted to a pending state.  <b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanEditPayouts
 
 ### Example
 
@@ -95,6 +95,8 @@ createBatchPayout($request_body): \Nofrixion\Client\Model\NoFrixionMoneyMoovMode
 
 Creates a new batch payout.
 
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanCreateBatchPayouts
+
 ### Example
 
 ```php
@@ -154,6 +156,8 @@ createPayout($no_frixion_money_moov_models_payout_create): \Nofrixion\Client\Mod
 ```
 
 Creates a new payout.
+
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanCreatePayouts
 
 ### Example
 
@@ -215,6 +219,8 @@ createPayouts($no_frixion_money_moov_models_payout_create): \Nofrixion\Client\Mo
 
 Creates payouts.
 
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanCreateBatchPayouts
+
 ### Example
 
 ```php
@@ -275,6 +281,8 @@ deletePayout($id)
 
 Deletes a payout record.
 
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanDeletePayouts
+
 ### Example
 
 ```php
@@ -334,6 +342,8 @@ deletePayouts($request_body)
 
 Deletes a list of payout records.
 
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanDeletePayouts
+
 ### Example
 
 ```php
@@ -392,6 +402,8 @@ exportPayouts($merchant_id, $page_number, $page_size, $statuses, $from_date, $to
 ```
 
 Exports a list of all payouts for a specific merchant to a CSV file.
+
+<b>Authorization</b>: End user token is required.
 
 ### Example
 
@@ -475,6 +487,8 @@ getBatchPayout($id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBatchPayout
 
 Gets a list of all the payouts contained in a batch.
 
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanViewPayouts
+
 ### Example
 
 ```php
@@ -534,6 +548,8 @@ getFailedPayouts($merchant_id, $from_date_utc, $page_size): \Nofrixion\Client\Mo
 ```
 
 Get failed payouts for a specific merchant.
+
+<b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.
 
 ### Example
 
@@ -599,6 +615,8 @@ getPayout($id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayout
 
 Gets a single payout.
 
+<b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.  <b>User permissions required</b>: CanViewPayouts
+
 ### Example
 
 ```php
@@ -658,6 +676,8 @@ getPayoutMetrics($merchant_id, $from_date, $to_date, $search, $currency, $min_am
 ```
 
 Gets a list of all payout metrics for a specific merchant.
+
+<b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.
 
 ### Example
 
@@ -733,6 +753,8 @@ getPayoutProof($id)
 
 Generates a proof of payment PDF document with the details of a payout.
 
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanViewPayouts
+
 ### Example
 
 ```php
@@ -791,6 +813,8 @@ getPayoutsPaged($merchant_id, $page_number, $page_size, $statuses, $from_date, $
 ```
 
 Gets a list of all payouts for a specific merchant.
+
+<b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.
 
 ### Example
 
@@ -874,7 +898,7 @@ rejectPayout($id, $no_frixion_money_moov_models_payout_reject): \Nofrixion\Clien
 
 Rejects the authorisation for a payout.
 
-If successful the payout will be set to REJECTED_APPROVAL state.
+If successful the payout will be set to REJECTED_APPROVAL state.  <b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanRejectPayouts
 
 ### Example
 
@@ -938,7 +962,7 @@ sendPayout($no_frixion_money_moov_models_payout_create): \Nofrixion\Client\Model
 
 Creates and submits a payout for a trusted caller.
 
-Access to this endpoint is restricted, please contact support for more information.
+Access to this endpoint is restricted, please contact support for more information.  <b>Authorization</b>: API key (HMAC signed and IP address whitelisted) is required.
 
 ### Example
 
@@ -1000,7 +1024,7 @@ sendToBeneficiary($no_frixion_money_moov_models_payout_create): \Nofrixion\Clien
 
 Creates and submits a payout to a pre-authorised beneficiary.
 
-Access to this endpoint is restricted to merchant tokens using a digital signature and IP address whitelist.
+Access to this endpoint is restricted to merchant tokens using a digital signature and IP address whitelist.  <b>Authorization</b>: Merchant token (HMAC signed and IP address whitelisted) is required.
 
 ### Example
 
@@ -1062,6 +1086,8 @@ submitBatchPayout($id)
 
 Submits a batch payout for processing.
 
+<b>Authorization</b>: Strong end user token is required.  <b>User permissions required</b>: CanAuthorisePayouts
+
 ### Example
 
 ```php
@@ -1121,6 +1147,8 @@ submitPayout($id)
 
 Submits a payout for processing.
 
+<b>Authorization</b>: Strong end user token is required.  <b>User permissions required</b>: CanAuthorisePayouts
+
 ### Example
 
 ```php
@@ -1179,6 +1207,8 @@ updatePayout($id, $no_frixion_money_moov_models_payout_update): \Nofrixion\Clien
 ```
 
 Updates a payout record.
+
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanEditPayouts
 
 ### Example
 

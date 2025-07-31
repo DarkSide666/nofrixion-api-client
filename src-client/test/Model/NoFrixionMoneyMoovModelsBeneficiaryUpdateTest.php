@@ -114,4 +114,13 @@ class NoFrixionMoneyMoovModelsBeneficiaryUpdateTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "their_reference"
+     */
+    public function testPropertyTheirReference()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

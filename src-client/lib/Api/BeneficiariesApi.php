@@ -1932,15 +1932,16 @@ class BeneficiariesApi
      * @param  string $currency The currency filter used to retrieve the records.. (optional)
      * @param  bool $include_disabled If set to true will include disabled beneficiaries as well (optional, default to false)
      * @param  string $sort Optional expression to sort the order of the beneficiaries. (optional)
+     * @param  string $source_account_id Optional. The ID of the source account to filter beneficiaries by. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBeneficiaries'] to see the possible values for this operation
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse
      */
-    public function getBeneficiaries($merchant_id = null, $page_number = null, $page_size = null, $search = null, $currency = null, $include_disabled = false, $sort = null, string $contentType = self::contentTypes['getBeneficiaries'][0])
+    public function getBeneficiaries($merchant_id = null, $page_number = null, $page_size = null, $search = null, $currency = null, $include_disabled = false, $sort = null, $source_account_id = null, string $contentType = self::contentTypes['getBeneficiaries'][0])
     {
-        list($response) = $this->getBeneficiariesWithHttpInfo($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort, $contentType);
+        list($response) = $this->getBeneficiariesWithHttpInfo($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort, $source_account_id, $contentType);
         return $response;
     }
 
@@ -1956,15 +1957,16 @@ class BeneficiariesApi
      * @param  string $currency The currency filter used to retrieve the records.. (optional)
      * @param  bool $include_disabled If set to true will include disabled beneficiaries as well (optional, default to false)
      * @param  string $sort Optional expression to sort the order of the beneficiaries. (optional)
+     * @param  string $source_account_id Optional. The ID of the source account to filter beneficiaries by. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBeneficiaries'] to see the possible values for this operation
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getBeneficiariesWithHttpInfo($merchant_id = null, $page_number = null, $page_size = null, $search = null, $currency = null, $include_disabled = false, $sort = null, string $contentType = self::contentTypes['getBeneficiaries'][0])
+    public function getBeneficiariesWithHttpInfo($merchant_id = null, $page_number = null, $page_size = null, $search = null, $currency = null, $include_disabled = false, $sort = null, $source_account_id = null, string $contentType = self::contentTypes['getBeneficiaries'][0])
     {
-        $request = $this->getBeneficiariesRequest($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort, $contentType);
+        $request = $this->getBeneficiariesRequest($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort, $source_account_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2087,14 +2089,15 @@ class BeneficiariesApi
      * @param  string $currency The currency filter used to retrieve the records.. (optional)
      * @param  bool $include_disabled If set to true will include disabled beneficiaries as well (optional, default to false)
      * @param  string $sort Optional expression to sort the order of the beneficiaries. (optional)
+     * @param  string $source_account_id Optional. The ID of the source account to filter beneficiaries by. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBeneficiaries'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getBeneficiariesAsync($merchant_id = null, $page_number = null, $page_size = null, $search = null, $currency = null, $include_disabled = false, $sort = null, string $contentType = self::contentTypes['getBeneficiaries'][0])
+    public function getBeneficiariesAsync($merchant_id = null, $page_number = null, $page_size = null, $search = null, $currency = null, $include_disabled = false, $sort = null, $source_account_id = null, string $contentType = self::contentTypes['getBeneficiaries'][0])
     {
-        return $this->getBeneficiariesAsyncWithHttpInfo($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort, $contentType)
+        return $this->getBeneficiariesAsyncWithHttpInfo($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort, $source_account_id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2114,15 +2117,16 @@ class BeneficiariesApi
      * @param  string $currency The currency filter used to retrieve the records.. (optional)
      * @param  bool $include_disabled If set to true will include disabled beneficiaries as well (optional, default to false)
      * @param  string $sort Optional expression to sort the order of the beneficiaries. (optional)
+     * @param  string $source_account_id Optional. The ID of the source account to filter beneficiaries by. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBeneficiaries'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getBeneficiariesAsyncWithHttpInfo($merchant_id = null, $page_number = null, $page_size = null, $search = null, $currency = null, $include_disabled = false, $sort = null, string $contentType = self::contentTypes['getBeneficiaries'][0])
+    public function getBeneficiariesAsyncWithHttpInfo($merchant_id = null, $page_number = null, $page_size = null, $search = null, $currency = null, $include_disabled = false, $sort = null, $source_account_id = null, string $contentType = self::contentTypes['getBeneficiaries'][0])
     {
         $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse';
-        $request = $this->getBeneficiariesRequest($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort, $contentType);
+        $request = $this->getBeneficiariesRequest($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort, $source_account_id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2170,13 +2174,15 @@ class BeneficiariesApi
      * @param  string $currency The currency filter used to retrieve the records.. (optional)
      * @param  bool $include_disabled If set to true will include disabled beneficiaries as well (optional, default to false)
      * @param  string $sort Optional expression to sort the order of the beneficiaries. (optional)
+     * @param  string $source_account_id Optional. The ID of the source account to filter beneficiaries by. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBeneficiaries'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getBeneficiariesRequest($merchant_id = null, $page_number = null, $page_size = null, $search = null, $currency = null, $include_disabled = false, $sort = null, string $contentType = self::contentTypes['getBeneficiaries'][0])
+    public function getBeneficiariesRequest($merchant_id = null, $page_number = null, $page_size = null, $search = null, $currency = null, $include_disabled = false, $sort = null, $source_account_id = null, string $contentType = self::contentTypes['getBeneficiaries'][0])
     {
+
 
 
 
@@ -2251,6 +2257,15 @@ class BeneficiariesApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $sort,
             'sort', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $source_account_id,
+            'sourceAccountID', // param base name
             'string', // openApiType
             'form', // style
             true, // explode

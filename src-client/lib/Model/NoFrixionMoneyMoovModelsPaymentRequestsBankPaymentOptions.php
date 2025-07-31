@@ -58,7 +58,6 @@ class NoFrixionMoneyMoovModelsPaymentRequestsBankPaymentOptions implements Model
       */
     protected static $openAPITypes = [
         'destination_accounts' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsBankPaymentOptionsDestinationAccounts',
-        'priority_bank' => 'string',
         'allow_override' => 'bool'
     ];
 
@@ -71,7 +70,6 @@ class NoFrixionMoneyMoovModelsPaymentRequestsBankPaymentOptions implements Model
       */
     protected static $openAPIFormats = [
         'destination_accounts' => null,
-        'priority_bank' => null,
         'allow_override' => null
     ];
 
@@ -82,7 +80,6 @@ class NoFrixionMoneyMoovModelsPaymentRequestsBankPaymentOptions implements Model
       */
     protected static array $openAPINullables = [
         'destination_accounts' => true,
-        'priority_bank' => true,
         'allow_override' => false
     ];
 
@@ -173,7 +170,6 @@ class NoFrixionMoneyMoovModelsPaymentRequestsBankPaymentOptions implements Model
      */
     protected static $attributeMap = [
         'destination_accounts' => 'destinationAccounts',
-        'priority_bank' => 'priorityBank',
         'allow_override' => 'allowOverride'
     ];
 
@@ -184,7 +180,6 @@ class NoFrixionMoneyMoovModelsPaymentRequestsBankPaymentOptions implements Model
      */
     protected static $setters = [
         'destination_accounts' => 'setDestinationAccounts',
-        'priority_bank' => 'setPriorityBank',
         'allow_override' => 'setAllowOverride'
     ];
 
@@ -195,7 +190,6 @@ class NoFrixionMoneyMoovModelsPaymentRequestsBankPaymentOptions implements Model
      */
     protected static $getters = [
         'destination_accounts' => 'getDestinationAccounts',
-        'priority_bank' => 'getPriorityBank',
         'allow_override' => 'getAllowOverride'
     ];
 
@@ -257,7 +251,6 @@ class NoFrixionMoneyMoovModelsPaymentRequestsBankPaymentOptions implements Model
     public function __construct(array $data = null)
     {
         $this->setIfExists('destination_accounts', $data ?? [], null);
-        $this->setIfExists('priority_bank', $data ?? [], null);
         $this->setIfExists('allow_override', $data ?? [], null);
     }
 
@@ -333,40 +326,6 @@ class NoFrixionMoneyMoovModelsPaymentRequestsBankPaymentOptions implements Model
             }
         }
         $this->container['destination_accounts'] = $destination_accounts;
-
-        return $this;
-    }
-
-    /**
-     * Gets priority_bank
-     *
-     * @return string|null
-     */
-    public function getPriorityBank()
-    {
-        return $this->container['priority_bank'];
-    }
-
-    /**
-     * Sets priority_bank
-     *
-     * @param string|null $priority_bank priority_bank
-     *
-     * @return self
-     */
-    public function setPriorityBank($priority_bank)
-    {
-        if (is_null($priority_bank)) {
-            array_push($this->openAPINullablesSetToNull, 'priority_bank');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('priority_bank', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['priority_bank'] = $priority_bank;
 
         return $this;
     }

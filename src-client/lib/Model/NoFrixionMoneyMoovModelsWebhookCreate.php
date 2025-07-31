@@ -65,7 +65,8 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
         'secret' => 'string',
         'is_active' => 'bool',
         'email_address' => 'string',
-        'failed_notification_email_address' => 'string'
+        'failed_notification_email_address' => 'string',
+        'notification_method' => 'string'
     ];
 
     /**
@@ -84,7 +85,8 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
         'secret' => null,
         'is_active' => null,
         'email_address' => 'email',
-        'failed_notification_email_address' => 'email'
+        'failed_notification_email_address' => 'email',
+        'notification_method' => null
     ];
 
     /**
@@ -96,12 +98,13 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
         'id' => false,
         'merchant_id' => false,
         'resource_types' => true,
-        'destination_url' => false,
+        'destination_url' => true,
         'retry' => false,
-        'secret' => false,
+        'secret' => true,
         'is_active' => false,
         'email_address' => true,
-        'failed_notification_email_address' => true
+        'failed_notification_email_address' => true,
+        'notification_method' => false
     ];
 
     /**
@@ -198,7 +201,8 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
         'secret' => 'secret',
         'is_active' => 'isActive',
         'email_address' => 'emailAddress',
-        'failed_notification_email_address' => 'failedNotificationEmailAddress'
+        'failed_notification_email_address' => 'failedNotificationEmailAddress',
+        'notification_method' => 'notificationMethod'
     ];
 
     /**
@@ -215,7 +219,8 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
         'secret' => 'setSecret',
         'is_active' => 'setIsActive',
         'email_address' => 'setEmailAddress',
-        'failed_notification_email_address' => 'setFailedNotificationEmailAddress'
+        'failed_notification_email_address' => 'setFailedNotificationEmailAddress',
+        'notification_method' => 'setNotificationMethod'
     ];
 
     /**
@@ -232,7 +237,8 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
         'secret' => 'getSecret',
         'is_active' => 'getIsActive',
         'email_address' => 'getEmailAddress',
-        'failed_notification_email_address' => 'getFailedNotificationEmailAddress'
+        'failed_notification_email_address' => 'getFailedNotificationEmailAddress',
+        'notification_method' => 'getNotificationMethod'
     ];
 
     /**
@@ -285,6 +291,9 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
     public const RESOURCE_TYPES_TRANSACTION_PAYOUT = 'TransactionPayout';
     public const RESOURCE_TYPES_REPORT = 'Report';
     public const RESOURCE_TYPES_PAYRUN = 'Payrun';
+    public const NOTIFICATION_METHOD_NONE = 'None';
+    public const NOTIFICATION_METHOD_WEBHOOK = 'Webhook';
+    public const NOTIFICATION_METHOD_EMAIL = 'Email';
 
     /**
      * Gets allowable values of the enum
@@ -303,6 +312,20 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
             self::RESOURCE_TYPES_TRANSACTION_PAYOUT,
             self::RESOURCE_TYPES_REPORT,
             self::RESOURCE_TYPES_PAYRUN,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getNotificationMethodAllowableValues()
+    {
+        return [
+            self::NOTIFICATION_METHOD_NONE,
+            self::NOTIFICATION_METHOD_WEBHOOK,
+            self::NOTIFICATION_METHOD_EMAIL,
         ];
     }
 
@@ -330,6 +353,7 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
         $this->setIfExists('is_active', $data ?? [], null);
         $this->setIfExists('email_address', $data ?? [], null);
         $this->setIfExists('failed_notification_email_address', $data ?? [], null);
+        $this->setIfExists('notification_method', $data ?? [], null);
     }
 
     /**
@@ -362,18 +386,16 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
         if ($this->container['merchant_id'] === null) {
             $invalidProperties[] = "'merchant_id' can't be null";
         }
-        if ($this->container['destination_url'] === null) {
-            $invalidProperties[] = "'destination_url' can't be null";
+        if ($this->container['notification_method'] === null) {
+            $invalidProperties[] = "'notification_method' can't be null";
         }
-        if ((mb_strlen($this->container['destination_url']) < 1)) {
-            $invalidProperties[] = "invalid value for 'destination_url', the character length must be bigger than or equal to 1.";
-        }
-
-        if ($this->container['secret'] === null) {
-            $invalidProperties[] = "'secret' can't be null";
-        }
-        if ((mb_strlen($this->container['secret']) < 1)) {
-            $invalidProperties[] = "invalid value for 'secret', the character length must be bigger than or equal to 1.";
+        $allowedValues = $this->getNotificationMethodAllowableValues();
+        if (!is_null($this->container['notification_method']) && !in_array($this->container['notification_method'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'notification_method', must be one of '%s'",
+                $this->container['notification_method'],
+                implode("', '", $allowedValues)
+            );
         }
 
         return $invalidProperties;
@@ -491,7 +513,7 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
     /**
      * Gets destination_url
      *
-     * @return string
+     * @return string|null
      */
     public function getDestinationUrl()
     {
@@ -501,20 +523,22 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
     /**
      * Sets destination_url
      *
-     * @param string $destination_url destination_url
+     * @param string|null $destination_url The destination URL for the webhook.  Required for webhook notifications.
      *
      * @return self
      */
     public function setDestinationUrl($destination_url)
     {
         if (is_null($destination_url)) {
-            throw new \InvalidArgumentException('non-nullable destination_url cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'destination_url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('destination_url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-
-        if ((mb_strlen($destination_url) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $destination_url when calling NoFrixionMoneyMoovModelsWebhookCreate., must be bigger than or equal to 1.');
-        }
-
         $this->container['destination_url'] = $destination_url;
 
         return $this;
@@ -550,7 +574,7 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
     /**
      * Gets secret
      *
-     * @return string
+     * @return string|null
      */
     public function getSecret()
     {
@@ -560,20 +584,22 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
     /**
      * Sets secret
      *
-     * @param string $secret secret
+     * @param string|null $secret The secret key required to authenticate webhook notifications.  Required for webhook notifications.
      *
      * @return self
      */
     public function setSecret($secret)
     {
         if (is_null($secret)) {
-            throw new \InvalidArgumentException('non-nullable secret cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'secret');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('secret', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-
-        if ((mb_strlen($secret) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $secret when calling NoFrixionMoneyMoovModelsWebhookCreate., must be bigger than or equal to 1.');
-        }
-
         $this->container['secret'] = $secret;
 
         return $this;
@@ -619,7 +645,7 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
     /**
      * Sets email_address
      *
-     * @param string|null $email_address email_address
+     * @param string|null $email_address The recipient email address(es) for notifications. Multiple addresses can be separated by a comma, semicolon, or space.  Reruired for email notifications.
      *
      * @return self
      */
@@ -670,6 +696,43 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
             }
         }
         $this->container['failed_notification_email_address'] = $failed_notification_email_address;
+
+        return $this;
+    }
+
+    /**
+     * Gets notification_method
+     *
+     * @return string
+     */
+    public function getNotificationMethod()
+    {
+        return $this->container['notification_method'];
+    }
+
+    /**
+     * Sets notification_method
+     *
+     * @param string $notification_method The type of notification that will be sent.
+     *
+     * @return self
+     */
+    public function setNotificationMethod($notification_method)
+    {
+        if (is_null($notification_method)) {
+            throw new \InvalidArgumentException('non-nullable notification_method cannot be null');
+        }
+        $allowedValues = $this->getNotificationMethodAllowableValues();
+        if (!in_array($notification_method, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'notification_method', must be one of '%s'",
+                    $notification_method,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['notification_method'] = $notification_method;
 
         return $this;
     }

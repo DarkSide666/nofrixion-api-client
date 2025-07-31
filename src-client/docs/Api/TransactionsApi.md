@@ -21,7 +21,7 @@ addTags($id, $request_body)
 
 Adds merchant tags to a transaction.
 
-Merchant tokens can only use this endpoint if an IP address whitelist is set.
+Merchant tokens can only use this endpoint if an IP address whitelist is set.  <b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.  <b>User permissions required</b>: CanViewTransactions
 
 ### Example
 
@@ -84,7 +84,7 @@ exportTransactionsForAccount($account_id, $from_date, $page_number, $page_size, 
 
 Exports a list of the transactions for a single payment account to a CSV file.
 
-Merchant tokens can only use this endpoint if an IP address whitelist is set.
+Merchant tokens can only use this endpoint if an IP address whitelist is set.  <b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.  <b>User permissions required</b>: CanViewTransactions
 
 ### Example
 
@@ -164,6 +164,8 @@ getTransactionProof($id)
 
 Generates a proof of payment PDF document with the details of a transaction.
 
+<b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.  <b>User permissions required</b>: CanViewTransactions
+
 ### Example
 
 ```php
@@ -222,6 +224,8 @@ getTransactionsByAccountSequenceNumber($account_id, $sequence_number, $page_size
 ```
 
 Gets an account's transactions by sequence number
+
+<b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.  <b>User permissions required</b>: CanViewTransactions
 
 ### Example
 
@@ -286,7 +290,7 @@ getTransactionsForAccountPaged($account_id, $from_date, $page_number, $page_size
 
 Get a list of the transactions for a single payment account.
 
-Merchant tokens can only use this endpoint if an IP address whitelist is set.
+Merchant tokens can only use this endpoint if an IP address whitelist is set.  <b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.  <b>User permissions required</b>: CanViewTransactions
 
 ### Example
 
@@ -366,7 +370,7 @@ getTransactionsPaged($from_date, $page_number, $page_size, $to_date, $credit_typ
 
 Get a list of the transactions for all payment accounts a user has access to.
 
-Merchant tokens can only use this endpoint if an IP address whitelist is set.
+Merchant tokens can only use this endpoint if an IP address whitelist is set.  <b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.
 
 ### Example
 
@@ -436,7 +440,7 @@ removeTag($id, $tag_id)
 
 Removes a tag from the transaction using the tag ID.
 
-Merchant tokens can only use this endpoint if an IP address whitelist is set.
+Merchant tokens can only use this endpoint if an IP address whitelist is set.  <b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.  <b>User permissions required</b>: CanViewTransactions
 
 ### Example
 

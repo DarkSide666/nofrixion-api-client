@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomFieldTest
+ * NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestFieldDisplaySettingTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Nofrixion\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomFieldTest Class Doc Comment
+ * NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestFieldDisplaySettingTest Class Doc Comment
  *
  * @category    Class
- * @description NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomField
+ * @description NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestFieldDisplaySetting
  * @package     Nofrixion\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomFieldTest extends TestCase
+class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestFieldDisplaySettingTest extends TestCase
 {
 
     /**
@@ -71,27 +71,18 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomFieldTest exten
     }
 
     /**
-     * Test "NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomField"
+     * Test "NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestFieldDisplaySetting"
      */
-    public function testNoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomField()
+    public function testNoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestFieldDisplaySetting()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "name"
+     * Test attribute "field"
      */
-    public function testPropertyName()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "value"
-     */
-    public function testPropertyValue()
+    public function testPropertyField()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -110,15 +101,6 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomFieldTest exten
      * Test attribute "display_on_payment_receipt"
      */
     public function testPropertyDisplayOnPaymentReceipt()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "display_order"
-     */
-    public function testPropertyDisplayOrder()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -35,6 +35,8 @@ archiveAccount($id)
 
 Sets the specified account as archived.
 
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanArchiveAccounts
+
 ### Example
 
 ```php
@@ -94,6 +96,8 @@ clearAccountStatements()
 
 Clears the cached user statements for a user.
 
+<b>Authorization</b>: End user token is required.
+
 ### Example
 
 ```php
@@ -149,6 +153,8 @@ createAccount($no_frixion_money_moov_models_payment_account_create): \Nofrixion\
 ```
 
 Creates a new merchant payment account.
+
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanCreateAccounts
 
 ### Example
 
@@ -209,6 +215,8 @@ createVirtualAccount($account_id, $no_frixion_money_moov_models_virtual_account_
 ```
 
 Creates a new virtual account.
+
+<b>Authorization</b>: End user or Merchant token is required.
 
 ### Example
 
@@ -271,6 +279,8 @@ exportAccountTransactions($account_id, $from_date, $page_number, $page_size, $to
 ```
 
 Exports a list of all transactions for a specific account in CSV format.
+
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanViewTransactions
 
 ### Example
 
@@ -350,6 +360,8 @@ exportAccounts($merchant_id, $connected_accounts, $page_number, $page_size, $cur
 
 Exports a list of all payment accounts the user has access to for a specific merchant.
 
+<b>Authorization</b>: End user token is required.
+
 ### Example
 
 ```php
@@ -428,6 +440,8 @@ generateAccountStatement($account_id, $no_frixion_money_moov_models_generate_sta
 
 Sends a message to the transaction statement queue to generate a statement with the supplied parameters.
 
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanExportData
+
 ### Example
 
 ```php
@@ -489,6 +503,8 @@ getAccount($account_id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayment
 
 Get an account.
 
+<b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.
+
 ### Example
 
 ```php
@@ -548,6 +564,8 @@ getAccountPayouts($account_id, $page_number, $page_size, $statuses, $from_date, 
 ```
 
 Gets a list of all payouts for a specific account.
+
+<b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.  <b>User permissions required</b>: CanViewPayouts
 
 ### Example
 
@@ -631,6 +649,8 @@ getAccountStatement($account_id, $id)
 
 Gets the specified statement from the user's cache.
 
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanExportData
+
 ### Example
 
 ```php
@@ -691,6 +711,8 @@ getAccountTransactionsPaged($account_id, $from_date, $page_number, $page_size, $
 ```
 
 Get a list of the transactions for a single payment account.
+
+<b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.  <b>User permissions required</b>: CanViewTransactions
 
 ### Example
 
@@ -770,6 +792,8 @@ getAccounts($merchant_id, $connected_accounts, $only_connect_accounts, $include_
 
 Get a list of all payment accounts the user has access to.
 
+<b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.
+
 ### Example
 
 ```php
@@ -835,6 +859,8 @@ getAccountsPaged($merchant_id, $currency, $connected_accounts, $page_number, $pa
 ```
 
 Get a paged list of all payment accounts the user has access to for a specific merchant.
+
+<b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.
 
 ### Example
 
@@ -914,6 +940,8 @@ getAllAccountStatements()
 
 Gets all active statement generation requests for the user.
 
+<b>Authorization</b>: End user token is required.
+
 ### Example
 
 ```php
@@ -969,6 +997,8 @@ getFailedPayoutsForAccount($account_id, $from_date_utc, $page_size): \Nofrixion\
 ```
 
 Get failed payouts for a specific account.
+
+<b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.  <b>User permissions required</b>: CanViewPayouts
 
 ### Example
 
@@ -1034,6 +1064,8 @@ getTransactionForAccount($account_id, $id): \Nofrixion\Client\Model\NoFrixionMon
 
 Get a transaction.
 
+<b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.  <b>User permissions required</b>: CanViewTransactions
+
 ### Example
 
 ```php
@@ -1095,6 +1127,8 @@ getVirtualAccounts($account_id, $page_number, $page_size): \Nofrixion\Client\Mod
 ```
 
 Gets a paged list of virtual accounts for a specific account.
+
+<b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.
 
 ### Example
 
@@ -1160,6 +1194,8 @@ topupAccount($account_id, $amount)
 
 SANDBOX ONLY. Top-ups a payment account with the amount provided.
 
+<b>Authorization</b>: End user token is required.
+
 ### Example
 
 ```php
@@ -1221,6 +1257,8 @@ unarchiveAccount($id)
 
 Sets the specified account as unarchived / active.
 
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanArchiveAccounts
+
 ### Example
 
 ```php
@@ -1279,6 +1317,8 @@ updateAccount($id, $no_frixion_money_moov_models_account_update): \Nofrixion\Cli
 ```
 
 Updates an account record.
+
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanUpdateAccount
 
 ### Example
 
@@ -1341,6 +1381,8 @@ updateVirtualAccount($account_id, $virtual_account_id, $no_frixion_money_moov_mo
 ```
 
 Updates a virtual account record.
+
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanUpdateAccount
 
 ### Example
 

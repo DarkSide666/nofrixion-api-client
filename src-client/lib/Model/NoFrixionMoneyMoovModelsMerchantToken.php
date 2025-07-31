@@ -371,6 +371,10 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
     public const PERMISSION_TYPES_VIEW_TRANSACTIONS = 'ViewTransactions';
     public const PERMISSION_TYPES_VIEW_PAYMENT_ACCOUNT = 'ViewPaymentAccount';
     public const PERMISSION_TYPES_VIEW_PAYOUT = 'ViewPayout';
+    public const PERMISSION_TYPES_CREATE_PAYRUN = 'CreatePayrun';
+    public const PERMISSION_TYPES_VIEW_PAYRUN = 'ViewPayrun';
+    public const PERMISSION_TYPES_EDIT_PAYRUN = 'EditPayrun';
+    public const PERMISSION_TYPES_DELETE_PAYRUN = 'DeletePayrun';
     public const SHARED_SECRET_ALGORITHM_NONE = 'None';
     public const SHARED_SECRET_ALGORITHM_HMAC_SHA1 = 'HMAC_SHA1';
     public const SHARED_SECRET_ALGORITHM_HMAC_SHA256 = 'HMAC_SHA256';
@@ -411,6 +415,10 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
             self::PERMISSION_TYPES_VIEW_TRANSACTIONS,
             self::PERMISSION_TYPES_VIEW_PAYMENT_ACCOUNT,
             self::PERMISSION_TYPES_VIEW_PAYOUT,
+            self::PERMISSION_TYPES_CREATE_PAYRUN,
+            self::PERMISSION_TYPES_VIEW_PAYRUN,
+            self::PERMISSION_TYPES_EDIT_PAYRUN,
+            self::PERMISSION_TYPES_DELETE_PAYRUN,
         ];
     }
 

@@ -62,7 +62,8 @@ class NoFrixionMoneyMoovModelsBeneficiaryCreate implements ModelInterface, Array
         'source_account_ids' => 'string[]',
         'name' => 'string',
         'currency' => 'string',
-        'destination' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsCounterpartyCreate'
+        'destination' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsCounterpartyCreate',
+        'their_reference' => 'string'
     ];
 
     /**
@@ -78,7 +79,8 @@ class NoFrixionMoneyMoovModelsBeneficiaryCreate implements ModelInterface, Array
         'source_account_ids' => 'uuid',
         'name' => null,
         'currency' => null,
-        'destination' => null
+        'destination' => null,
+        'their_reference' => null
     ];
 
     /**
@@ -92,7 +94,8 @@ class NoFrixionMoneyMoovModelsBeneficiaryCreate implements ModelInterface, Array
         'source_account_ids' => true,
         'name' => false,
         'currency' => false,
-        'destination' => false
+        'destination' => false,
+        'their_reference' => true
     ];
 
     /**
@@ -186,7 +189,8 @@ class NoFrixionMoneyMoovModelsBeneficiaryCreate implements ModelInterface, Array
         'source_account_ids' => 'sourceAccountIDs',
         'name' => 'name',
         'currency' => 'currency',
-        'destination' => 'destination'
+        'destination' => 'destination',
+        'their_reference' => 'theirReference'
     ];
 
     /**
@@ -200,7 +204,8 @@ class NoFrixionMoneyMoovModelsBeneficiaryCreate implements ModelInterface, Array
         'source_account_ids' => 'setSourceAccountIds',
         'name' => 'setName',
         'currency' => 'setCurrency',
-        'destination' => 'setDestination'
+        'destination' => 'setDestination',
+        'their_reference' => 'setTheirReference'
     ];
 
     /**
@@ -214,7 +219,8 @@ class NoFrixionMoneyMoovModelsBeneficiaryCreate implements ModelInterface, Array
         'source_account_ids' => 'getSourceAccountIds',
         'name' => 'getName',
         'currency' => 'getCurrency',
-        'destination' => 'getDestination'
+        'destination' => 'getDestination',
+        'their_reference' => 'getTheirReference'
     ];
 
     /**
@@ -301,6 +307,7 @@ class NoFrixionMoneyMoovModelsBeneficiaryCreate implements ModelInterface, Array
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('currency', $data ?? [], null);
         $this->setIfExists('destination', $data ?? [], null);
+        $this->setIfExists('their_reference', $data ?? [], null);
     }
 
     /**
@@ -550,6 +557,40 @@ class NoFrixionMoneyMoovModelsBeneficiaryCreate implements ModelInterface, Array
             throw new \InvalidArgumentException('non-nullable destination cannot be null');
         }
         $this->container['destination'] = $destination;
+
+        return $this;
+    }
+
+    /**
+     * Gets their_reference
+     *
+     * @return string|null
+     */
+    public function getTheirReference()
+    {
+        return $this->container['their_reference'];
+    }
+
+    /**
+     * Sets their_reference
+     *
+     * @param string|null $their_reference Optional reference that will be used by default as TheirReference when creating payouts to this beneficiary   if no TheirReference is specified for the payout.
+     *
+     * @return self
+     */
+    public function setTheirReference($their_reference)
+    {
+        if (is_null($their_reference)) {
+            array_push($this->openAPINullablesSetToNull, 'their_reference');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('their_reference', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['their_reference'] = $their_reference;
 
         return $this;
     }

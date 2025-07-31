@@ -67,5 +67,9 @@ Name | Type | Description | Notes
 **is_settled** | **bool** | Set to true if a payout was successfully processed and the corresponding transaction has been  recorded on the ledger. | [optional]
 **fx_destination_currency** | **string** | For an FX payout this is the currency to send to the beneficiary. | [optional]
 **fx_rate** | **float** | For an FX payout this is the exchange rate to use for the payout. | [optional]
+**fx_destination_amount** | **float** | If specified this will be the amount sent to the payee. The payout&#39;s Amount will be dynamically adjusted based on   this amount and the FX rate. | [optional]
+**fx_use_destination_amount** | **bool** | For a multi-currency payout this indicates how the Amount and FxDestinationAmount are treated.  If true the FxDestinationAmount is authoritative and the Amount is set based on the FxRate. If false then the Amount is authoritative  and the FxDestinationAmount is set based on the Amount and FxRate. | [optional]
+**fx_destination_amount_minor_units** | **int** | The payout FxDestinationAmount expressed in the currency’s minor units (e.g. cents, pence). | [optional] [readonly]
+**formatted_fx_destination_amount** | **string** | FX destination currency and amount formatted string. | [optional] [readonly]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

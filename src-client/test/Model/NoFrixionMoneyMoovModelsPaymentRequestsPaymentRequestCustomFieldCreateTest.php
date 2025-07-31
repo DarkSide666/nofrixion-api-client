@@ -98,9 +98,18 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomFieldCreateTest
     }
 
     /**
-     * Test attribute "display_for_payer"
+     * Test attribute "display_on_hosted_payment_page"
      */
-    public function testPropertyDisplayForPayer()
+    public function testPropertyDisplayOnHostedPaymentPage()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "display_on_payment_receipt"
+     */
+    public function testPropertyDisplayOnPaymentReceipt()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

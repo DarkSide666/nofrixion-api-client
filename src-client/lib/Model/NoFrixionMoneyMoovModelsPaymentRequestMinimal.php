@@ -83,7 +83,10 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         'country_code' => 'string',
         'custom_fields_to_display' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomField[]',
         'due_date' => '\DateTime',
-        'template' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate'
+        'field_display_settings' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestFieldDisplaySetting[]',
+        'amount_received' => 'float',
+        'amount_refunded' => 'float',
+        'amount_pending' => 'float'
     ];
 
     /**
@@ -120,7 +123,10 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         'country_code' => null,
         'custom_fields_to_display' => null,
         'due_date' => 'date-time',
-        'template' => null
+        'field_display_settings' => null,
+        'amount_received' => 'double',
+        'amount_refunded' => 'double',
+        'amount_pending' => 'double'
     ];
 
     /**
@@ -155,7 +161,10 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         'country_code' => true,
         'custom_fields_to_display' => true,
         'due_date' => true,
-        'template' => false
+        'field_display_settings' => true,
+        'amount_received' => false,
+        'amount_refunded' => false,
+        'amount_pending' => false
     ];
 
     /**
@@ -270,7 +279,10 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         'country_code' => 'countryCode',
         'custom_fields_to_display' => 'customFieldsToDisplay',
         'due_date' => 'dueDate',
-        'template' => 'template'
+        'field_display_settings' => 'fieldDisplaySettings',
+        'amount_received' => 'amountReceived',
+        'amount_refunded' => 'amountRefunded',
+        'amount_pending' => 'amountPending'
     ];
 
     /**
@@ -305,7 +317,10 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         'country_code' => 'setCountryCode',
         'custom_fields_to_display' => 'setCustomFieldsToDisplay',
         'due_date' => 'setDueDate',
-        'template' => 'setTemplate'
+        'field_display_settings' => 'setFieldDisplaySettings',
+        'amount_received' => 'setAmountReceived',
+        'amount_refunded' => 'setAmountRefunded',
+        'amount_pending' => 'setAmountPending'
     ];
 
     /**
@@ -340,7 +355,10 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         'country_code' => 'getCountryCode',
         'custom_fields_to_display' => 'getCustomFieldsToDisplay',
         'due_date' => 'getDueDate',
-        'template' => 'getTemplate'
+        'field_display_settings' => 'getFieldDisplaySettings',
+        'amount_received' => 'getAmountReceived',
+        'amount_refunded' => 'getAmountRefunded',
+        'amount_pending' => 'getAmountPending'
     ];
 
     /**
@@ -555,7 +573,10 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
         $this->setIfExists('country_code', $data ?? [], null);
         $this->setIfExists('custom_fields_to_display', $data ?? [], null);
         $this->setIfExists('due_date', $data ?? [], null);
-        $this->setIfExists('template', $data ?? [], null);
+        $this->setIfExists('field_display_settings', $data ?? [], null);
+        $this->setIfExists('amount_received', $data ?? [], null);
+        $this->setIfExists('amount_refunded', $data ?? [], null);
+        $this->setIfExists('amount_pending', $data ?? [], null);
     }
 
     /**
@@ -1521,28 +1542,116 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
     }
 
     /**
-     * Gets template
+     * Gets field_display_settings
      *
-     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate|null
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestFieldDisplaySetting[]|null
      */
-    public function getTemplate()
+    public function getFieldDisplaySettings()
     {
-        return $this->container['template'];
+        return $this->container['field_display_settings'];
     }
 
     /**
-     * Sets template
+     * Sets field_display_settings
      *
-     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate|null $template template
+     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestFieldDisplaySetting[]|null $field_display_settings field_display_settings
      *
      * @return self
      */
-    public function setTemplate($template)
+    public function setFieldDisplaySettings($field_display_settings)
     {
-        if (is_null($template)) {
-            throw new \InvalidArgumentException('non-nullable template cannot be null');
+        if (is_null($field_display_settings)) {
+            array_push($this->openAPINullablesSetToNull, 'field_display_settings');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('field_display_settings', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['template'] = $template;
+        $this->container['field_display_settings'] = $field_display_settings;
+
+        return $this;
+    }
+
+    /**
+     * Gets amount_received
+     *
+     * @return float|null
+     */
+    public function getAmountReceived()
+    {
+        return $this->container['amount_received'];
+    }
+
+    /**
+     * Sets amount_received
+     *
+     * @param float|null $amount_received The amount of money that has been received for this payment request.
+     *
+     * @return self
+     */
+    public function setAmountReceived($amount_received)
+    {
+        if (is_null($amount_received)) {
+            throw new \InvalidArgumentException('non-nullable amount_received cannot be null');
+        }
+        $this->container['amount_received'] = $amount_received;
+
+        return $this;
+    }
+
+    /**
+     * Gets amount_refunded
+     *
+     * @return float|null
+     */
+    public function getAmountRefunded()
+    {
+        return $this->container['amount_refunded'];
+    }
+
+    /**
+     * Sets amount_refunded
+     *
+     * @param float|null $amount_refunded The amount of money that has been refunded for this payment request.
+     *
+     * @return self
+     */
+    public function setAmountRefunded($amount_refunded)
+    {
+        if (is_null($amount_refunded)) {
+            throw new \InvalidArgumentException('non-nullable amount_refunded cannot be null');
+        }
+        $this->container['amount_refunded'] = $amount_refunded;
+
+        return $this;
+    }
+
+    /**
+     * Gets amount_pending
+     *
+     * @return float|null
+     */
+    public function getAmountPending()
+    {
+        return $this->container['amount_pending'];
+    }
+
+    /**
+     * Sets amount_pending
+     *
+     * @param float|null $amount_pending The amount of money that was authorised but has not arrived in the account yet.
+     *
+     * @return self
+     */
+    public function setAmountPending($amount_pending)
+    {
+        if (is_null($amount_pending)) {
+            throw new \InvalidArgumentException('non-nullable amount_pending cannot be null');
+        }
+        $this->container['amount_pending'] = $amount_pending;
 
         return $this;
     }

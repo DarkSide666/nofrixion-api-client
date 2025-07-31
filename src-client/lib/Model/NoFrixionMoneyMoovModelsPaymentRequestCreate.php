@@ -75,7 +75,6 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
         'shipping_address_country_code' => 'string',
         'shipping_phone' => 'string',
         'shipping_email' => 'string',
-        'base_origin_url' => 'string',
         'callback_url' => 'string',
         'failure_callback_url' => 'string',
         'success_web_hook_url' => 'string',
@@ -100,7 +99,9 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
         'tags' => 'string[]',
         'auto_send_receipt' => 'bool',
         'custom_fields' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomFieldCreate[]',
-        'due_date' => '\DateTime'
+        'due_date' => '\DateTime',
+        'field_display_settings' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestFieldDisplaySetting[]',
+        'notification_role_ids' => 'string[]'
     ];
 
     /**
@@ -129,7 +130,6 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
         'shipping_address_country_code' => null,
         'shipping_phone' => null,
         'shipping_email' => null,
-        'base_origin_url' => null,
         'callback_url' => null,
         'failure_callback_url' => null,
         'success_web_hook_url' => null,
@@ -154,7 +154,9 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
         'tags' => null,
         'auto_send_receipt' => null,
         'custom_fields' => null,
-        'due_date' => 'date-time'
+        'due_date' => 'date-time',
+        'field_display_settings' => null,
+        'notification_role_ids' => 'uuid'
     ];
 
     /**
@@ -181,7 +183,6 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
         'shipping_address_country_code' => true,
         'shipping_phone' => true,
         'shipping_email' => true,
-        'base_origin_url' => true,
         'callback_url' => true,
         'failure_callback_url' => true,
         'success_web_hook_url' => true,
@@ -206,7 +207,9 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
         'tags' => true,
         'auto_send_receipt' => false,
         'custom_fields' => true,
-        'due_date' => true
+        'due_date' => true,
+        'field_display_settings' => true,
+        'notification_role_ids' => true
     ];
 
     /**
@@ -313,7 +316,6 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
         'shipping_address_country_code' => 'shippingAddressCountryCode',
         'shipping_phone' => 'shippingPhone',
         'shipping_email' => 'shippingEmail',
-        'base_origin_url' => 'baseOriginUrl',
         'callback_url' => 'callbackUrl',
         'failure_callback_url' => 'failureCallbackUrl',
         'success_web_hook_url' => 'successWebHookUrl',
@@ -338,7 +340,9 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
         'tags' => 'tags',
         'auto_send_receipt' => 'autoSendReceipt',
         'custom_fields' => 'customFields',
-        'due_date' => 'dueDate'
+        'due_date' => 'dueDate',
+        'field_display_settings' => 'fieldDisplaySettings',
+        'notification_role_ids' => 'notificationRoleIDs'
     ];
 
     /**
@@ -365,7 +369,6 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
         'shipping_address_country_code' => 'setShippingAddressCountryCode',
         'shipping_phone' => 'setShippingPhone',
         'shipping_email' => 'setShippingEmail',
-        'base_origin_url' => 'setBaseOriginUrl',
         'callback_url' => 'setCallbackUrl',
         'failure_callback_url' => 'setFailureCallbackUrl',
         'success_web_hook_url' => 'setSuccessWebHookUrl',
@@ -390,7 +393,9 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
         'tags' => 'setTags',
         'auto_send_receipt' => 'setAutoSendReceipt',
         'custom_fields' => 'setCustomFields',
-        'due_date' => 'setDueDate'
+        'due_date' => 'setDueDate',
+        'field_display_settings' => 'setFieldDisplaySettings',
+        'notification_role_ids' => 'setNotificationRoleIds'
     ];
 
     /**
@@ -417,7 +422,6 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
         'shipping_address_country_code' => 'getShippingAddressCountryCode',
         'shipping_phone' => 'getShippingPhone',
         'shipping_email' => 'getShippingEmail',
-        'base_origin_url' => 'getBaseOriginUrl',
         'callback_url' => 'getCallbackUrl',
         'failure_callback_url' => 'getFailureCallbackUrl',
         'success_web_hook_url' => 'getSuccessWebHookUrl',
@@ -442,7 +446,9 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
         'tags' => 'getTags',
         'auto_send_receipt' => 'getAutoSendReceipt',
         'custom_fields' => 'getCustomFields',
-        'due_date' => 'getDueDate'
+        'due_date' => 'getDueDate',
+        'field_display_settings' => 'getFieldDisplaySettings',
+        'notification_role_ids' => 'getNotificationRoleIds'
     ];
 
     /**
@@ -600,7 +606,6 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
         $this->setIfExists('shipping_address_country_code', $data ?? [], null);
         $this->setIfExists('shipping_phone', $data ?? [], null);
         $this->setIfExists('shipping_email', $data ?? [], null);
-        $this->setIfExists('base_origin_url', $data ?? [], null);
         $this->setIfExists('callback_url', $data ?? [], null);
         $this->setIfExists('failure_callback_url', $data ?? [], null);
         $this->setIfExists('success_web_hook_url', $data ?? [], null);
@@ -626,6 +631,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
         $this->setIfExists('auto_send_receipt', $data ?? [], null);
         $this->setIfExists('custom_fields', $data ?? [], null);
         $this->setIfExists('due_date', $data ?? [], null);
+        $this->setIfExists('field_display_settings', $data ?? [], null);
+        $this->setIfExists('notification_role_ids', $data ?? [], null);
     }
 
     /**
@@ -1409,40 +1416,6 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
             }
         }
         $this->container['shipping_email'] = $shipping_email;
-
-        return $this;
-    }
-
-    /**
-     * Gets base_origin_url
-     *
-     * @return string|null
-     */
-    public function getBaseOriginUrl()
-    {
-        return $this->container['base_origin_url'];
-    }
-
-    /**
-     * Sets base_origin_url
-     *
-     * @param string|null $base_origin_url For card payments the origin of the payment page needs to be set in advance.  A public key context is generated to encrypt sensitive card details and is bound  to a single origin URL.
-     *
-     * @return self
-     */
-    public function setBaseOriginUrl($base_origin_url)
-    {
-        if (is_null($base_origin_url)) {
-            array_push($this->openAPINullablesSetToNull, 'base_origin_url');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('base_origin_url', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['base_origin_url'] = $base_origin_url;
 
         return $this;
     }
@@ -2248,6 +2221,74 @@ class NoFrixionMoneyMoovModelsPaymentRequestCreate implements ModelInterface, Ar
             }
         }
         $this->container['due_date'] = $due_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets field_display_settings
+     *
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestFieldDisplaySetting[]|null
+     */
+    public function getFieldDisplaySettings()
+    {
+        return $this->container['field_display_settings'];
+    }
+
+    /**
+     * Sets field_display_settings
+     *
+     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestFieldDisplaySetting[]|null $field_display_settings An optional display settings for the payment request fields. This allows the merchant to control how  the fields are displayed on the hosted payment page, receipt, etc.
+     *
+     * @return self
+     */
+    public function setFieldDisplaySettings($field_display_settings)
+    {
+        if (is_null($field_display_settings)) {
+            array_push($this->openAPINullablesSetToNull, 'field_display_settings');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('field_display_settings', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['field_display_settings'] = $field_display_settings;
+
+        return $this;
+    }
+
+    /**
+     * Gets notification_role_ids
+     *
+     * @return string[]|null
+     */
+    public function getNotificationRoleIds()
+    {
+        return $this->container['notification_role_ids'];
+    }
+
+    /**
+     * Sets notification_role_ids
+     *
+     * @param string[]|null $notification_role_ids An optional list of notification role IDs that will receive notifications  about the payment request. This is useful for roles that need to be notified  about payment request events.
+     *
+     * @return self
+     */
+    public function setNotificationRoleIds($notification_role_ids)
+    {
+        if (is_null($notification_role_ids)) {
+            array_push($this->openAPINullablesSetToNull, 'notification_role_ids');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('notification_role_ids', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['notification_role_ids'] = $notification_role_ids;
 
         return $this;
     }

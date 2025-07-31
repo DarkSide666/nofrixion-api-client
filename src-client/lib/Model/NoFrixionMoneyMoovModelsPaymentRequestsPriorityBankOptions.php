@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionMoneyMoovModelsPaymentAccountPageResponse
+ * NoFrixionMoneyMoovModelsPaymentRequestsPriorityBankOptions
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Nofrixion\Client\ObjectSerializer;
 
 /**
- * NoFrixionMoneyMoovModelsPaymentAccountPageResponse Class Doc Comment
+ * NoFrixionMoneyMoovModelsPaymentRequestsPriorityBankOptions Class Doc Comment
  *
  * @category Class
  * @package  Nofrixion\Client
@@ -40,7 +40,7 @@ use \Nofrixion\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class NoFrixionMoneyMoovModelsPaymentAccountPageResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class NoFrixionMoneyMoovModelsPaymentRequestsPriorityBankOptions implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class NoFrixionMoneyMoovModelsPaymentAccountPageResponse implements ModelInterfa
       *
       * @var string
       */
-    protected static $openAPIModelName = 'NoFrixion.MoneyMoov.Models.PaymentAccountPageResponse';
+    protected static $openAPIModelName = 'NoFrixion.MoneyMoov.Models.PaymentRequests.PriorityBankOptions';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,11 +57,8 @@ class NoFrixionMoneyMoovModelsPaymentAccountPageResponse implements ModelInterfa
       * @var string[]
       */
     protected static $openAPITypes = [
-        'content' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]',
-        'page_number' => 'int',
-        'page_size' => 'int',
-        'total_pages' => 'int',
-        'total_size' => 'int'
+        'priority_bank_ids' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsBankPaymentOptionsDestinationAccounts',
+        'allow_override' => 'bool'
     ];
 
     /**
@@ -72,11 +69,8 @@ class NoFrixionMoneyMoovModelsPaymentAccountPageResponse implements ModelInterfa
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'content' => null,
-        'page_number' => 'int32',
-        'page_size' => 'int32',
-        'total_pages' => 'int64',
-        'total_size' => 'int64'
+        'priority_bank_ids' => null,
+        'allow_override' => null
     ];
 
     /**
@@ -85,11 +79,8 @@ class NoFrixionMoneyMoovModelsPaymentAccountPageResponse implements ModelInterfa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'content' => true,
-        'page_number' => false,
-        'page_size' => false,
-        'total_pages' => false,
-        'total_size' => false
+        'priority_bank_ids' => true,
+        'allow_override' => false
     ];
 
     /**
@@ -178,11 +169,8 @@ class NoFrixionMoneyMoovModelsPaymentAccountPageResponse implements ModelInterfa
      * @var string[]
      */
     protected static $attributeMap = [
-        'content' => 'content',
-        'page_number' => 'pageNumber',
-        'page_size' => 'pageSize',
-        'total_pages' => 'totalPages',
-        'total_size' => 'totalSize'
+        'priority_bank_ids' => 'priorityBankIDs',
+        'allow_override' => 'allowOverride'
     ];
 
     /**
@@ -191,11 +179,8 @@ class NoFrixionMoneyMoovModelsPaymentAccountPageResponse implements ModelInterfa
      * @var string[]
      */
     protected static $setters = [
-        'content' => 'setContent',
-        'page_number' => 'setPageNumber',
-        'page_size' => 'setPageSize',
-        'total_pages' => 'setTotalPages',
-        'total_size' => 'setTotalSize'
+        'priority_bank_ids' => 'setPriorityBankIds',
+        'allow_override' => 'setAllowOverride'
     ];
 
     /**
@@ -204,11 +189,8 @@ class NoFrixionMoneyMoovModelsPaymentAccountPageResponse implements ModelInterfa
      * @var string[]
      */
     protected static $getters = [
-        'content' => 'getContent',
-        'page_number' => 'getPageNumber',
-        'page_size' => 'getPageSize',
-        'total_pages' => 'getTotalPages',
-        'total_size' => 'getTotalSize'
+        'priority_bank_ids' => 'getPriorityBankIds',
+        'allow_override' => 'getAllowOverride'
     ];
 
     /**
@@ -268,11 +250,8 @@ class NoFrixionMoneyMoovModelsPaymentAccountPageResponse implements ModelInterfa
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('content', $data ?? [], null);
-        $this->setIfExists('page_number', $data ?? [], null);
-        $this->setIfExists('page_size', $data ?? [], null);
-        $this->setIfExists('total_pages', $data ?? [], null);
-        $this->setIfExists('total_size', $data ?? [], null);
+        $this->setIfExists('priority_bank_ids', $data ?? [], null);
+        $this->setIfExists('allow_override', $data ?? [], null);
     }
 
     /**
@@ -318,143 +297,62 @@ class NoFrixionMoneyMoovModelsPaymentAccountPageResponse implements ModelInterfa
 
 
     /**
-     * Gets content
+     * Gets priority_bank_ids
      *
-     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]|null
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsBankPaymentOptionsDestinationAccounts|null
      */
-    public function getContent()
+    public function getPriorityBankIds()
     {
-        return $this->container['content'];
+        return $this->container['priority_bank_ids'];
     }
 
     /**
-     * Sets content
+     * Sets priority_bank_ids
      *
-     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]|null $content content
+     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsBankPaymentOptionsDestinationAccounts|null $priority_bank_ids priority_bank_ids
      *
      * @return self
      */
-    public function setContent($content)
+    public function setPriorityBankIds($priority_bank_ids)
     {
-        if (is_null($content)) {
-            array_push($this->openAPINullablesSetToNull, 'content');
+        if (is_null($priority_bank_ids)) {
+            array_push($this->openAPINullablesSetToNull, 'priority_bank_ids');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('content', $nullablesSetToNull);
+            $index = array_search('priority_bank_ids', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['content'] = $content;
+        $this->container['priority_bank_ids'] = $priority_bank_ids;
 
         return $this;
     }
 
     /**
-     * Gets page_number
+     * Gets allow_override
      *
-     * @return int|null
+     * @return bool|null
      */
-    public function getPageNumber()
+    public function getAllowOverride()
     {
-        return $this->container['page_number'];
+        return $this->container['allow_override'];
     }
 
     /**
-     * Sets page_number
+     * Sets allow_override
      *
-     * @param int|null $page_number Current page number. Its 1 based. i.e firstpage is 1, secondpage is 2
+     * @param bool|null $allow_override allow_override
      *
      * @return self
      */
-    public function setPageNumber($page_number)
+    public function setAllowOverride($allow_override)
     {
-        if (is_null($page_number)) {
-            throw new \InvalidArgumentException('non-nullable page_number cannot be null');
+        if (is_null($allow_override)) {
+            throw new \InvalidArgumentException('non-nullable allow_override cannot be null');
         }
-        $this->container['page_number'] = $page_number;
-
-        return $this;
-    }
-
-    /**
-     * Gets page_size
-     *
-     * @return int|null
-     */
-    public function getPageSize()
-    {
-        return $this->container['page_size'];
-    }
-
-    /**
-     * Sets page_size
-     *
-     * @param int|null $page_size Page size
-     *
-     * @return self
-     */
-    public function setPageSize($page_size)
-    {
-        if (is_null($page_size)) {
-            throw new \InvalidArgumentException('non-nullable page_size cannot be null');
-        }
-        $this->container['page_size'] = $page_size;
-
-        return $this;
-    }
-
-    /**
-     * Gets total_pages
-     *
-     * @return int|null
-     */
-    public function getTotalPages()
-    {
-        return $this->container['total_pages'];
-    }
-
-    /**
-     * Sets total_pages
-     *
-     * @param int|null $total_pages Total pages
-     *
-     * @return self
-     */
-    public function setTotalPages($total_pages)
-    {
-        if (is_null($total_pages)) {
-            throw new \InvalidArgumentException('non-nullable total_pages cannot be null');
-        }
-        $this->container['total_pages'] = $total_pages;
-
-        return $this;
-    }
-
-    /**
-     * Gets total_size
-     *
-     * @return int|null
-     */
-    public function getTotalSize()
-    {
-        return $this->container['total_size'];
-    }
-
-    /**
-     * Sets total_size
-     *
-     * @param int|null $total_size Total count
-     *
-     * @return self
-     */
-    public function setTotalSize($total_size)
-    {
-        if (is_null($total_size)) {
-            throw new \InvalidArgumentException('non-nullable total_size cannot be null');
-        }
-        $this->container['total_size'] = $total_size;
+        $this->container['allow_override'] = $allow_override;
 
         return $this;
     }

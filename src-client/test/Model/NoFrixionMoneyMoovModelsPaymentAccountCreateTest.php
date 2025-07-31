@@ -141,4 +141,22 @@ class NoFrixionMoneyMoovModelsPaymentAccountCreateTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "is_trust_account"
+     */
+    public function testPropertyIsTrustAccount()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "role_ids"
+     */
+    public function testPropertyRoleIds()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

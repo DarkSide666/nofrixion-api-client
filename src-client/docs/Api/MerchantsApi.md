@@ -39,6 +39,8 @@ createMerchantTag($merchant_id, $no_frixion_money_moov_models_tag): \Nofrixion\C
 
 Adds a tag to a merchant.
 
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanUpdateMerchant
+
 ### Example
 
 ```php
@@ -101,6 +103,8 @@ deleteMerchantTag($merchant_id, $tag_id)
 
 Deletes a tag from a merchant
 
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanUpdateMerchant
+
 ### Example
 
 ```php
@@ -162,6 +166,8 @@ deleteUserFromMerchant($merchant_id, $user_id)
 
 Deletes all roles for a user in a merchant.
 
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanEditRoles
+
 ### Example
 
 ```php
@@ -222,6 +228,8 @@ exportMerchantBeneficiaries($merchant_id, $page_number, $page_size, $search, $cu
 ```
 
 Exports a list of all beneficiaries.
+
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanViewBeneficiaries
 
 ### Example
 
@@ -294,6 +302,8 @@ exportMerchantPayouts($merchant_id, $page_number, $page_size, $statuses, $from_d
 ```
 
 Exports a list of all payouts for a specific merchant as a CSV file.
+
+<b>Authorization</b>: End user token is required.
 
 ### Example
 
@@ -377,6 +387,8 @@ getAuthorisationSettings($merchant_id): \Nofrixion\Client\Model\NoFrixionMoneyMo
 
 Gets a list of merchant authorisation settings for a merchant
 
+<b>Authorization</b>: End user token is required.
+
 ### Example
 
 ```php
@@ -436,6 +448,8 @@ getFailedPayoutsForMerchant($merchant_id, $from_date_utc, $page_size): \Nofrixio
 ```
 
 Get failed payouts for a specific merchant.
+
+<b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.
 
 ### Example
 
@@ -501,6 +515,8 @@ getMerchant($merchant_id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsMerch
 
 Get's a merchant.
 
+<b>Authorization</b>: End user token is required.
+
 ### Example
 
 ```php
@@ -560,6 +576,8 @@ getMerchantAccount($merchant_id, $account_id): \Nofrixion\Client\Model\NoFrixion
 ```
 
 Get an account.
+
+<b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.
 
 ### Example
 
@@ -622,6 +640,8 @@ getMerchantAccounts($merchant_id, $connected_accounts): \Nofrixion\Client\Model\
 ```
 
 Get a list of merchant's payment accounts.
+
+<b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.
 
 ### Example
 
@@ -744,10 +764,12 @@ try {
 ## `getMerchantBeneficiaries()`
 
 ```php
-getMerchantBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse
+getMerchantBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort, $source_account_id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse
 ```
 
 Gets a list of all beneficiaries.
+
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanViewBeneficiaries
 
 ### Example
 
@@ -775,9 +797,10 @@ $search = 'search_example'; // string | The text filter used to retrieve the rec
 $currency = 'currency_example'; // string | The currency filter used to retrieve the records..
 $include_disabled = false; // bool | If set to true will include disabled beneficiaries as well
 $sort = 'sort_example'; // string | Optional expression to sort the order of the beneficiaries.
+$source_account_id = 'source_account_id_example'; // string | Optional source account ID to filter beneficiaries by their source account.
 
 try {
-    $result = $apiInstance->getMerchantBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort);
+    $result = $apiInstance->getMerchantBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort, $source_account_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling MerchantsApi->getMerchantBeneficiaries: ', $e->getMessage(), PHP_EOL;
@@ -795,6 +818,7 @@ try {
 | **currency** | **string**| The currency filter used to retrieve the records.. | [optional] |
 | **include_disabled** | **bool**| If set to true will include disabled beneficiaries as well | [optional] [default to false] |
 | **sort** | **string**| Optional expression to sort the order of the beneficiaries. | [optional] |
+| **source_account_id** | **string**| Optional source account ID to filter beneficiaries by their source account. | [optional] |
 
 ### Return type
 
@@ -820,6 +844,8 @@ getMerchantBeneficiary($merchant_id, $id): \Nofrixion\Client\Model\NoFrixionMone
 ```
 
 Get's a beneficiary by beneficiary ID.
+
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanViewBeneficiaries
 
 ### Example
 
@@ -882,6 +908,8 @@ getMerchantBeneficiaryGroups($merchant_id, $page_number, $page_size): \Nofrixion
 ```
 
 Gets a list of all beneficiary groups.
+
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanViewBeneficiaries
 
 ### Example
 
@@ -946,6 +974,8 @@ getMerchantPayoutsPaged($merchant_id, $page_number, $page_size, $statuses, $from
 ```
 
 Gets a list of all payouts for a specific merchant.
+
+<b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.
 
 ### Example
 
@@ -1029,6 +1059,8 @@ getMerchantTags($merchant_id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsT
 
 Get a list of merchant tags
 
+<b>Authorization</b>: End user token is required.
+
 ### Example
 
 ```php
@@ -1089,6 +1121,8 @@ getMerchantToken($id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsMerchantT
 
 Gets the details of a merchant API token.
 
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanViewTokens
+
 ### Example
 
 ```php
@@ -1148,6 +1182,8 @@ getMerchantTokens($merchant_id, $page_number, $page_size): \Nofrixion\Client\Mod
 ```
 
 Gets a list of a merchant's issued API tokens.
+
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanViewTokens
 
 ### Example
 
@@ -1212,6 +1248,8 @@ getMerchantTransactionsPaged($merchant_id, $page_number, $page_size, $from_date,
 ```
 
 Gets a list of transactions for all a merchant's accounts.
+
+<b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.
 
 ### Example
 
@@ -1281,6 +1319,8 @@ getMerchantUserInvites($merchant_id): \Nofrixion\Client\Model\NoFrixionMoneyMoov
 
 Gets user invites associated with merchant.
 
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanViewUsers
+
 ### Example
 
 ```php
@@ -1340,6 +1380,8 @@ getMerchantUsers($merchant_id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModels
 ```
 
 Gets all users including invitees for a merchant.
+
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanViewUsers
 
 ### Example
 
@@ -1401,6 +1443,8 @@ getMerchantWebhooks($merchant_id): \Nofrixion\Client\Model\NoFrixionMoneyMoovMod
 
 Get all configured webhooks for a merchant.
 
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanViewWebhooks
+
 ### Example
 
 ```php
@@ -1461,6 +1505,8 @@ getMerchants(): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsMerchant[]
 
 Get's a list of merchants the caller has access to.
 
+<b>Authorization</b>: End user token is required.
+
 ### Example
 
 ```php
@@ -1513,10 +1559,12 @@ This endpoint does not need any parameter.
 ## `getMerchantsPaged()`
 
 ```php
-getMerchantsPaged($page_number, $page_size, $search, $sort): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsMerchantPageResponse
+getMerchantsPaged($page_number, $page_size, $search, $sort, $include_suspended): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsMerchantPageResponse
 ```
 
 Get a paged list of all the merchants the caller has access to.
+
+<b>Authorization</b>: End user token is required.
 
 ### Example
 
@@ -1541,9 +1589,10 @@ $page_number = 1; // int | Optional. The page number to retrieve.
 $page_size = 10; // int | Optional. The number of merchants per page.
 $search = 'search_example'; // string | The text filter to apply to retrieve merchants with a similar name, ID etc.
 $sort = 'sort_example'; // string | Optional expression to sort the order of the merchants. Example \"Name desc,Inserted asc\".
+$include_suspended = false; // bool
 
 try {
-    $result = $apiInstance->getMerchantsPaged($page_number, $page_size, $search, $sort);
+    $result = $apiInstance->getMerchantsPaged($page_number, $page_size, $search, $sort, $include_suspended);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling MerchantsApi->getMerchantsPaged: ', $e->getMessage(), PHP_EOL;
@@ -1558,6 +1607,7 @@ try {
 | **page_size** | **int**| Optional. The number of merchants per page. | [optional] [default to 10] |
 | **search** | **string**| The text filter to apply to retrieve merchants with a similar name, ID etc. | [optional] |
 | **sort** | **string**| Optional expression to sort the order of the merchants. Example \&quot;Name desc,Inserted asc\&quot;. | [optional] |
+| **include_suspended** | **bool**|  | [optional] [default to false] |
 
 ### Return type
 
@@ -1583,6 +1633,8 @@ suspendMerchant($merchant_id, $no_frixion_money_moov_models_merchant_suspend)
 ```
 
 Suspends a merchant
+
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanCreateRoles,CanEditRoles
 
 ### Example
 

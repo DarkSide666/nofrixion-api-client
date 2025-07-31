@@ -116,6 +116,15 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateTest extends 
     }
 
     /**
+     * Test attribute "priority_bank_options"
+     */
+    public function testPropertyPriorityBankOptions()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "card_payment_address_options"
      */
     public function testPropertyCardPaymentAddressOptions()

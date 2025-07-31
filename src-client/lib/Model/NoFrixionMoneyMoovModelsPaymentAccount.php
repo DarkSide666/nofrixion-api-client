@@ -79,6 +79,7 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'external_account_icon' => 'string',
         'bank_name' => 'string',
         'expiry_date' => '\DateTime',
+        'is_trust_account' => 'bool',
         'xero_bank_feed_connection_status' => 'string',
         'xero_bank_feed_sync_status' => 'string',
         'xero_bank_feed_last_synced_at' => '\DateTime',
@@ -87,6 +88,7 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'xero_unsynchronised_transactions_count' => 'int',
         'last_transaction' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsLastTransaction',
         'created_by' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUser',
+        'created_by_display_name' => 'string',
         'default_payment_rail' => 'string',
         'rules' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsRuleMinimal[]',
         'is_archived' => 'bool',
@@ -125,6 +127,7 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'external_account_icon' => null,
         'bank_name' => null,
         'expiry_date' => 'date-time',
+        'is_trust_account' => null,
         'xero_bank_feed_connection_status' => null,
         'xero_bank_feed_sync_status' => null,
         'xero_bank_feed_last_synced_at' => 'date-time',
@@ -133,6 +136,7 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'xero_unsynchronised_transactions_count' => 'int32',
         'last_transaction' => null,
         'created_by' => null,
+        'created_by_display_name' => null,
         'default_payment_rail' => null,
         'rules' => null,
         'is_archived' => null,
@@ -169,6 +173,7 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'external_account_icon' => true,
         'bank_name' => true,
         'expiry_date' => true,
+        'is_trust_account' => false,
         'xero_bank_feed_connection_status' => true,
         'xero_bank_feed_sync_status' => false,
         'xero_bank_feed_last_synced_at' => true,
@@ -177,6 +182,7 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'xero_unsynchronised_transactions_count' => true,
         'last_transaction' => false,
         'created_by' => false,
+        'created_by_display_name' => true,
         'default_payment_rail' => false,
         'rules' => true,
         'is_archived' => false,
@@ -293,6 +299,7 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'external_account_icon' => 'externalAccountIcon',
         'bank_name' => 'bankName',
         'expiry_date' => 'expiryDate',
+        'is_trust_account' => 'isTrustAccount',
         'xero_bank_feed_connection_status' => 'xeroBankFeedConnectionStatus',
         'xero_bank_feed_sync_status' => 'xeroBankFeedSyncStatus',
         'xero_bank_feed_last_synced_at' => 'xeroBankFeedLastSyncedAt',
@@ -301,6 +308,7 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'xero_unsynchronised_transactions_count' => 'xeroUnsynchronisedTransactionsCount',
         'last_transaction' => 'lastTransaction',
         'created_by' => 'createdBy',
+        'created_by_display_name' => 'createdByDisplayName',
         'default_payment_rail' => 'defaultPaymentRail',
         'rules' => 'rules',
         'is_archived' => 'isArchived',
@@ -337,6 +345,7 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'external_account_icon' => 'setExternalAccountIcon',
         'bank_name' => 'setBankName',
         'expiry_date' => 'setExpiryDate',
+        'is_trust_account' => 'setIsTrustAccount',
         'xero_bank_feed_connection_status' => 'setXeroBankFeedConnectionStatus',
         'xero_bank_feed_sync_status' => 'setXeroBankFeedSyncStatus',
         'xero_bank_feed_last_synced_at' => 'setXeroBankFeedLastSyncedAt',
@@ -345,6 +354,7 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'xero_unsynchronised_transactions_count' => 'setXeroUnsynchronisedTransactionsCount',
         'last_transaction' => 'setLastTransaction',
         'created_by' => 'setCreatedBy',
+        'created_by_display_name' => 'setCreatedByDisplayName',
         'default_payment_rail' => 'setDefaultPaymentRail',
         'rules' => 'setRules',
         'is_archived' => 'setIsArchived',
@@ -381,6 +391,7 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'external_account_icon' => 'getExternalAccountIcon',
         'bank_name' => 'getBankName',
         'expiry_date' => 'getExpiryDate',
+        'is_trust_account' => 'getIsTrustAccount',
         'xero_bank_feed_connection_status' => 'getXeroBankFeedConnectionStatus',
         'xero_bank_feed_sync_status' => 'getXeroBankFeedSyncStatus',
         'xero_bank_feed_last_synced_at' => 'getXeroBankFeedLastSyncedAt',
@@ -389,6 +400,7 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         'xero_unsynchronised_transactions_count' => 'getXeroUnsynchronisedTransactionsCount',
         'last_transaction' => 'getLastTransaction',
         'created_by' => 'getCreatedBy',
+        'created_by_display_name' => 'getCreatedByDisplayName',
         'default_payment_rail' => 'getDefaultPaymentRail',
         'rules' => 'getRules',
         'is_archived' => 'getIsArchived',
@@ -622,6 +634,7 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         $this->setIfExists('external_account_icon', $data ?? [], null);
         $this->setIfExists('bank_name', $data ?? [], null);
         $this->setIfExists('expiry_date', $data ?? [], null);
+        $this->setIfExists('is_trust_account', $data ?? [], null);
         $this->setIfExists('xero_bank_feed_connection_status', $data ?? [], null);
         $this->setIfExists('xero_bank_feed_sync_status', $data ?? [], null);
         $this->setIfExists('xero_bank_feed_last_synced_at', $data ?? [], null);
@@ -630,6 +643,7 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
         $this->setIfExists('xero_unsynchronised_transactions_count', $data ?? [], null);
         $this->setIfExists('last_transaction', $data ?? [], null);
         $this->setIfExists('created_by', $data ?? [], null);
+        $this->setIfExists('created_by_display_name', $data ?? [], null);
         $this->setIfExists('default_payment_rail', $data ?? [], null);
         $this->setIfExists('rules', $data ?? [], null);
         $this->setIfExists('is_archived', $data ?? [], null);
@@ -1398,6 +1412,33 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
     }
 
     /**
+     * Gets is_trust_account
+     *
+     * @return bool|null
+     */
+    public function getIsTrustAccount()
+    {
+        return $this->container['is_trust_account'];
+    }
+
+    /**
+     * Sets is_trust_account
+     *
+     * @param bool|null $is_trust_account Indicates if the payment account is a trust account. The account name is displayed in the statement  instead of the merchant name for trust accounts.
+     *
+     * @return self
+     */
+    public function setIsTrustAccount($is_trust_account)
+    {
+        if (is_null($is_trust_account)) {
+            throw new \InvalidArgumentException('non-nullable is_trust_account cannot be null');
+        }
+        $this->container['is_trust_account'] = $is_trust_account;
+
+        return $this;
+    }
+
+    /**
      * Gets xero_bank_feed_connection_status
      *
      * @return string|null
@@ -1664,6 +1705,40 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
             throw new \InvalidArgumentException('non-nullable created_by cannot be null');
         }
         $this->container['created_by'] = $created_by;
+
+        return $this;
+    }
+
+    /**
+     * Gets created_by_display_name
+     *
+     * @return string|null
+     */
+    public function getCreatedByDisplayName()
+    {
+        return $this->container['created_by_display_name'];
+    }
+
+    /**
+     * Sets created_by_display_name
+     *
+     * @param string|null $created_by_display_name Either the name of the user, merchant token or api key that created the account
+     *
+     * @return self
+     */
+    public function setCreatedByDisplayName($created_by_display_name)
+    {
+        if (is_null($created_by_display_name)) {
+            array_push($this->openAPINullablesSetToNull, 'created_by_display_name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('created_by_display_name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['created_by_display_name'] = $created_by_display_name;
 
         return $this;
     }

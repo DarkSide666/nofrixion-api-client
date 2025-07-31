@@ -25,6 +25,8 @@ archivePayrun($id)
 
 Archives a pay run, excluding it from most actions.
 
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanDeletePayruns
+
 ### Example
 
 ```php
@@ -84,6 +86,8 @@ cancelPayrun($id)
 
 Cancels the schedule of a pay run and delete's all it's payouts.
 
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanEditPayruns
+
 ### Example
 
 ```php
@@ -142,6 +146,8 @@ createPayrun($merchant_id, $no_frixion_money_moov_models_payrun_create): \Nofrix
 ```
 
 Create a new Payrun from a list of invoices.
+
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanCreatePayruns
 
 ### Example
 
@@ -205,6 +211,8 @@ deletePayrun($id)
 
 Deletes a pay run, along with its invoices, if it's in a Draft state.
 
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanDeletePayruns
+
 ### Example
 
 ```php
@@ -263,6 +271,8 @@ getPayrun($id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayrun
 ```
 
 Gets a single payrun.
+
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanViewPayruns
 
 ### Example
 
@@ -323,6 +333,8 @@ getPayrunsPaged($merchant_id, $page_number, $page_size, $from_date, $to_date, $s
 ```
 
 Gets all payruns for a merchant.
+
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanViewPayruns
 
 ### Example
 
@@ -400,6 +412,8 @@ rejectPayrun($id, $no_frixion_money_moov_models_payrun_reject): \Nofrixion\Clien
 
 Rejects a payrun.
 
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanApprovePayruns
+
 ### Example
 
 ```php
@@ -462,6 +476,8 @@ requestPayrunAuthorisation($id, $no_frixion_money_moov_models_payrun_authorisati
 
 Request authorisation from authorisers for this payrun.
 
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanCreatePayruns
+
 ### Example
 
 ```php
@@ -522,6 +538,8 @@ submitPayrun($id, $no_frixion_money_moov_models_payrun_approve)
 ```
 
 Submits a payrun for processing.
+
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanApprovePayruns
 
 ### Example
 
@@ -584,6 +602,8 @@ unarchivePayrun($id)
 
 Restores an archived pay run, making it retrievable from most actions.
 
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanDeletePayruns
+
 ### Example
 
 ```php
@@ -642,6 +662,8 @@ updatePayrun($id, $no_frixion_money_moov_models_payrun_update): \Nofrixion\Clien
 ```
 
 Updates a payrun.
+
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanEditPayruns
 
 ### Example
 

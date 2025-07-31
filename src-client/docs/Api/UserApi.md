@@ -17,6 +17,8 @@ getUser(): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUser
 
 Get the profile for the authenticated user.
 
+<b>Authorization</b>: End user token is required.
+
 ### Example
 
 ```php
@@ -73,6 +75,8 @@ getUsers($merchant_id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUser
 ```
 
 Gets all users including invitees for a merchant.
+
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanViewUsers
 
 ### Example
 
@@ -133,6 +137,8 @@ updateUser($id, $no_frixion_money_moov_models_user_update): \Nofrixion\Client\Mo
 ```
 
 Updates a user record and optionally accepts an invite to join a merchant.
+
+<b>Authorization</b>: End user token is required.
 
 ### Example
 

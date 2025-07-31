@@ -16,6 +16,8 @@ getReportResult($id, $statement_number): \Nofrixion\Client\Model\NoFrixionMoneyM
 
 Attempts to get the aggregated results of report execution. If the   report is still in progress an accepted response will be returned.
 
+<b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.  <b>User permissions required</b>: CanViewReports
+
 ### Example
 
 ```php
@@ -77,6 +79,8 @@ initiateReport($id)
 ```
 
 Initiates the execution of a merchant report.
+
+<b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.  <b>User permissions required</b>: CanCreateReports
 
 ### Example
 

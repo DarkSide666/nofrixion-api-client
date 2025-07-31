@@ -77,6 +77,7 @@ class NoFrixionMoneyMoovModelsBeneficiary implements ModelInterface, ArrayAccess
         'last_updated' => '\DateTime',
         'last_authorised' => '\DateTime',
         'created_by' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUser',
+        'their_reference' => 'string',
         'beneficiary_events' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryEvent[]',
         'source_accounts' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]'
     ];
@@ -109,6 +110,7 @@ class NoFrixionMoneyMoovModelsBeneficiary implements ModelInterface, ArrayAccess
         'last_updated' => 'date-time',
         'last_authorised' => 'date-time',
         'created_by' => null,
+        'their_reference' => null,
         'beneficiary_events' => null,
         'source_accounts' => null
     ];
@@ -139,6 +141,7 @@ class NoFrixionMoneyMoovModelsBeneficiary implements ModelInterface, ArrayAccess
         'last_updated' => false,
         'last_authorised' => true,
         'created_by' => false,
+        'their_reference' => true,
         'beneficiary_events' => true,
         'source_accounts' => true
     ];
@@ -249,6 +252,7 @@ class NoFrixionMoneyMoovModelsBeneficiary implements ModelInterface, ArrayAccess
         'last_updated' => 'lastUpdated',
         'last_authorised' => 'lastAuthorised',
         'created_by' => 'createdBy',
+        'their_reference' => 'theirReference',
         'beneficiary_events' => 'beneficiaryEvents',
         'source_accounts' => 'sourceAccounts'
     ];
@@ -279,6 +283,7 @@ class NoFrixionMoneyMoovModelsBeneficiary implements ModelInterface, ArrayAccess
         'last_updated' => 'setLastUpdated',
         'last_authorised' => 'setLastAuthorised',
         'created_by' => 'setCreatedBy',
+        'their_reference' => 'setTheirReference',
         'beneficiary_events' => 'setBeneficiaryEvents',
         'source_accounts' => 'setSourceAccounts'
     ];
@@ -309,6 +314,7 @@ class NoFrixionMoneyMoovModelsBeneficiary implements ModelInterface, ArrayAccess
         'last_updated' => 'getLastUpdated',
         'last_authorised' => 'getLastAuthorised',
         'created_by' => 'getCreatedBy',
+        'their_reference' => 'getTheirReference',
         'beneficiary_events' => 'getBeneficiaryEvents',
         'source_accounts' => 'getSourceAccounts'
     ];
@@ -428,6 +434,7 @@ class NoFrixionMoneyMoovModelsBeneficiary implements ModelInterface, ArrayAccess
         $this->setIfExists('last_updated', $data ?? [], null);
         $this->setIfExists('last_authorised', $data ?? [], null);
         $this->setIfExists('created_by', $data ?? [], null);
+        $this->setIfExists('their_reference', $data ?? [], null);
         $this->setIfExists('beneficiary_events', $data ?? [], null);
         $this->setIfExists('source_accounts', $data ?? [], null);
     }
@@ -1095,6 +1102,40 @@ class NoFrixionMoneyMoovModelsBeneficiary implements ModelInterface, ArrayAccess
             throw new \InvalidArgumentException('non-nullable created_by cannot be null');
         }
         $this->container['created_by'] = $created_by;
+
+        return $this;
+    }
+
+    /**
+     * Gets their_reference
+     *
+     * @return string|null
+     */
+    public function getTheirReference()
+    {
+        return $this->container['their_reference'];
+    }
+
+    /**
+     * Sets their_reference
+     *
+     * @param string|null $their_reference The reference that will be used by default as TheirReference when creating payouts to this beneficiary  if no TheirReference is specified for the payout.
+     *
+     * @return self
+     */
+    public function setTheirReference($their_reference)
+    {
+        if (is_null($their_reference)) {
+            array_push($this->openAPINullablesSetToNull, 'their_reference');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('their_reference', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['their_reference'] = $their_reference;
 
         return $this;
     }

@@ -3870,15 +3870,16 @@ class MerchantsApi
      * @param  string $currency The currency filter used to retrieve the records.. (optional)
      * @param  bool $include_disabled If set to true will include disabled beneficiaries as well (optional, default to false)
      * @param  string $sort Optional expression to sort the order of the beneficiaries. (optional)
+     * @param  string $source_account_id Optional source account ID to filter beneficiaries by their source account. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMerchantBeneficiaries'] to see the possible values for this operation
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse
      */
-    public function getMerchantBeneficiaries($merchant_id, $page_number = null, $page_size = null, $search = null, $currency = null, $include_disabled = false, $sort = null, string $contentType = self::contentTypes['getMerchantBeneficiaries'][0])
+    public function getMerchantBeneficiaries($merchant_id, $page_number = null, $page_size = null, $search = null, $currency = null, $include_disabled = false, $sort = null, $source_account_id = null, string $contentType = self::contentTypes['getMerchantBeneficiaries'][0])
     {
-        list($response) = $this->getMerchantBeneficiariesWithHttpInfo($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort, $contentType);
+        list($response) = $this->getMerchantBeneficiariesWithHttpInfo($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort, $source_account_id, $contentType);
         return $response;
     }
 
@@ -3894,15 +3895,16 @@ class MerchantsApi
      * @param  string $currency The currency filter used to retrieve the records.. (optional)
      * @param  bool $include_disabled If set to true will include disabled beneficiaries as well (optional, default to false)
      * @param  string $sort Optional expression to sort the order of the beneficiaries. (optional)
+     * @param  string $source_account_id Optional source account ID to filter beneficiaries by their source account. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMerchantBeneficiaries'] to see the possible values for this operation
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getMerchantBeneficiariesWithHttpInfo($merchant_id, $page_number = null, $page_size = null, $search = null, $currency = null, $include_disabled = false, $sort = null, string $contentType = self::contentTypes['getMerchantBeneficiaries'][0])
+    public function getMerchantBeneficiariesWithHttpInfo($merchant_id, $page_number = null, $page_size = null, $search = null, $currency = null, $include_disabled = false, $sort = null, $source_account_id = null, string $contentType = self::contentTypes['getMerchantBeneficiaries'][0])
     {
-        $request = $this->getMerchantBeneficiariesRequest($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort, $contentType);
+        $request = $this->getMerchantBeneficiariesRequest($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort, $source_account_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -4025,14 +4027,15 @@ class MerchantsApi
      * @param  string $currency The currency filter used to retrieve the records.. (optional)
      * @param  bool $include_disabled If set to true will include disabled beneficiaries as well (optional, default to false)
      * @param  string $sort Optional expression to sort the order of the beneficiaries. (optional)
+     * @param  string $source_account_id Optional source account ID to filter beneficiaries by their source account. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMerchantBeneficiaries'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getMerchantBeneficiariesAsync($merchant_id, $page_number = null, $page_size = null, $search = null, $currency = null, $include_disabled = false, $sort = null, string $contentType = self::contentTypes['getMerchantBeneficiaries'][0])
+    public function getMerchantBeneficiariesAsync($merchant_id, $page_number = null, $page_size = null, $search = null, $currency = null, $include_disabled = false, $sort = null, $source_account_id = null, string $contentType = self::contentTypes['getMerchantBeneficiaries'][0])
     {
-        return $this->getMerchantBeneficiariesAsyncWithHttpInfo($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort, $contentType)
+        return $this->getMerchantBeneficiariesAsyncWithHttpInfo($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort, $source_account_id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -4052,15 +4055,16 @@ class MerchantsApi
      * @param  string $currency The currency filter used to retrieve the records.. (optional)
      * @param  bool $include_disabled If set to true will include disabled beneficiaries as well (optional, default to false)
      * @param  string $sort Optional expression to sort the order of the beneficiaries. (optional)
+     * @param  string $source_account_id Optional source account ID to filter beneficiaries by their source account. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMerchantBeneficiaries'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getMerchantBeneficiariesAsyncWithHttpInfo($merchant_id, $page_number = null, $page_size = null, $search = null, $currency = null, $include_disabled = false, $sort = null, string $contentType = self::contentTypes['getMerchantBeneficiaries'][0])
+    public function getMerchantBeneficiariesAsyncWithHttpInfo($merchant_id, $page_number = null, $page_size = null, $search = null, $currency = null, $include_disabled = false, $sort = null, $source_account_id = null, string $contentType = self::contentTypes['getMerchantBeneficiaries'][0])
     {
         $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse';
-        $request = $this->getMerchantBeneficiariesRequest($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort, $contentType);
+        $request = $this->getMerchantBeneficiariesRequest($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort, $source_account_id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -4108,12 +4112,13 @@ class MerchantsApi
      * @param  string $currency The currency filter used to retrieve the records.. (optional)
      * @param  bool $include_disabled If set to true will include disabled beneficiaries as well (optional, default to false)
      * @param  string $sort Optional expression to sort the order of the beneficiaries. (optional)
+     * @param  string $source_account_id Optional source account ID to filter beneficiaries by their source account. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMerchantBeneficiaries'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getMerchantBeneficiariesRequest($merchant_id, $page_number = null, $page_size = null, $search = null, $currency = null, $include_disabled = false, $sort = null, string $contentType = self::contentTypes['getMerchantBeneficiaries'][0])
+    public function getMerchantBeneficiariesRequest($merchant_id, $page_number = null, $page_size = null, $search = null, $currency = null, $include_disabled = false, $sort = null, $source_account_id = null, string $contentType = self::contentTypes['getMerchantBeneficiaries'][0])
     {
 
         // verify the required parameter 'merchant_id' is set
@@ -4122,6 +4127,7 @@ class MerchantsApi
                 'Missing the required parameter $merchant_id when calling getMerchantBeneficiaries'
             );
         }
+
 
 
 
@@ -4186,6 +4192,15 @@ class MerchantsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $sort,
             'sort', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $source_account_id,
+            'sourceAccountID', // param base name
             'string', // openApiType
             'form', // style
             true, // explode
@@ -7998,15 +8013,16 @@ class MerchantsApi
      * @param  int $page_size Optional. The number of merchants per page. (optional, default to 10)
      * @param  string $search The text filter to apply to retrieve merchants with a similar name, ID etc. (optional)
      * @param  string $sort Optional expression to sort the order of the merchants. Example \&quot;Name desc,Inserted asc\&quot;. (optional)
+     * @param  bool $include_suspended include_suspended (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMerchantsPaged'] to see the possible values for this operation
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsMerchantPageResponse
      */
-    public function getMerchantsPaged($page_number = 1, $page_size = 10, $search = null, $sort = null, string $contentType = self::contentTypes['getMerchantsPaged'][0])
+    public function getMerchantsPaged($page_number = 1, $page_size = 10, $search = null, $sort = null, $include_suspended = false, string $contentType = self::contentTypes['getMerchantsPaged'][0])
     {
-        list($response) = $this->getMerchantsPagedWithHttpInfo($page_number, $page_size, $search, $sort, $contentType);
+        list($response) = $this->getMerchantsPagedWithHttpInfo($page_number, $page_size, $search, $sort, $include_suspended, $contentType);
         return $response;
     }
 
@@ -8019,15 +8035,16 @@ class MerchantsApi
      * @param  int $page_size Optional. The number of merchants per page. (optional, default to 10)
      * @param  string $search The text filter to apply to retrieve merchants with a similar name, ID etc. (optional)
      * @param  string $sort Optional expression to sort the order of the merchants. Example \&quot;Name desc,Inserted asc\&quot;. (optional)
+     * @param  bool $include_suspended (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMerchantsPaged'] to see the possible values for this operation
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsMerchantPageResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getMerchantsPagedWithHttpInfo($page_number = 1, $page_size = 10, $search = null, $sort = null, string $contentType = self::contentTypes['getMerchantsPaged'][0])
+    public function getMerchantsPagedWithHttpInfo($page_number = 1, $page_size = 10, $search = null, $sort = null, $include_suspended = false, string $contentType = self::contentTypes['getMerchantsPaged'][0])
     {
-        $request = $this->getMerchantsPagedRequest($page_number, $page_size, $search, $sort, $contentType);
+        $request = $this->getMerchantsPagedRequest($page_number, $page_size, $search, $sort, $include_suspended, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -8147,14 +8164,15 @@ class MerchantsApi
      * @param  int $page_size Optional. The number of merchants per page. (optional, default to 10)
      * @param  string $search The text filter to apply to retrieve merchants with a similar name, ID etc. (optional)
      * @param  string $sort Optional expression to sort the order of the merchants. Example \&quot;Name desc,Inserted asc\&quot;. (optional)
+     * @param  bool $include_suspended (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMerchantsPaged'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getMerchantsPagedAsync($page_number = 1, $page_size = 10, $search = null, $sort = null, string $contentType = self::contentTypes['getMerchantsPaged'][0])
+    public function getMerchantsPagedAsync($page_number = 1, $page_size = 10, $search = null, $sort = null, $include_suspended = false, string $contentType = self::contentTypes['getMerchantsPaged'][0])
     {
-        return $this->getMerchantsPagedAsyncWithHttpInfo($page_number, $page_size, $search, $sort, $contentType)
+        return $this->getMerchantsPagedAsyncWithHttpInfo($page_number, $page_size, $search, $sort, $include_suspended, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -8171,15 +8189,16 @@ class MerchantsApi
      * @param  int $page_size Optional. The number of merchants per page. (optional, default to 10)
      * @param  string $search The text filter to apply to retrieve merchants with a similar name, ID etc. (optional)
      * @param  string $sort Optional expression to sort the order of the merchants. Example \&quot;Name desc,Inserted asc\&quot;. (optional)
+     * @param  bool $include_suspended (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMerchantsPaged'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getMerchantsPagedAsyncWithHttpInfo($page_number = 1, $page_size = 10, $search = null, $sort = null, string $contentType = self::contentTypes['getMerchantsPaged'][0])
+    public function getMerchantsPagedAsyncWithHttpInfo($page_number = 1, $page_size = 10, $search = null, $sort = null, $include_suspended = false, string $contentType = self::contentTypes['getMerchantsPaged'][0])
     {
         $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsMerchantPageResponse';
-        $request = $this->getMerchantsPagedRequest($page_number, $page_size, $search, $sort, $contentType);
+        $request = $this->getMerchantsPagedRequest($page_number, $page_size, $search, $sort, $include_suspended, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -8224,13 +8243,15 @@ class MerchantsApi
      * @param  int $page_size Optional. The number of merchants per page. (optional, default to 10)
      * @param  string $search The text filter to apply to retrieve merchants with a similar name, ID etc. (optional)
      * @param  string $sort Optional expression to sort the order of the merchants. Example \&quot;Name desc,Inserted asc\&quot;. (optional)
+     * @param  bool $include_suspended (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getMerchantsPaged'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getMerchantsPagedRequest($page_number = 1, $page_size = 10, $search = null, $sort = null, string $contentType = self::contentTypes['getMerchantsPaged'][0])
+    public function getMerchantsPagedRequest($page_number = 1, $page_size = 10, $search = null, $sort = null, $include_suspended = false, string $contentType = self::contentTypes['getMerchantsPaged'][0])
     {
+
 
 
 
@@ -8276,6 +8297,15 @@ class MerchantsApi
             $sort,
             'sort', // param base name
             'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $include_suspended,
+            'includeSuspended', // param base name
+            'boolean', // openApiType
             'form', // style
             true, // explode
             false // required

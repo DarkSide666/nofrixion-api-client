@@ -21,6 +21,8 @@ createRule($no_frixion_money_moov_models_rule_create): \Nofrixion\Client\Model\N
 
 Creates a new rule for a MoneyMoov payment account.
 
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanCreateRules
+
 ### Example
 
 ```php
@@ -81,6 +83,8 @@ deleteRule($id)
 
 Deletes a rule and any associated events.
 
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanDeleteRules
+
 ### Example
 
 ```php
@@ -139,6 +143,8 @@ disableRule($id)
 ```
 
 Disables a rule.
+
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanEditRules
 
 ### Example
 
@@ -199,6 +205,8 @@ getRule($id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsRule
 
 Get a single rule by ID.
 
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanViewRules
+
 ### Example
 
 ```php
@@ -258,6 +266,8 @@ getRuleEvents($id, $page, $size, $event_types): \Nofrixion\Client\Model\NoFrixio
 ```
 
 Gets a list of the events for a single rule.
+
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanViewRules
 
 ### Example
 
@@ -324,6 +334,8 @@ getRulesPaged($merchant_id, $page, $size, $sort, $search, $archived_only): \Nofr
 ```
 
 Gets all the rules for a merchant.
+
+<b>Authorization</b>: End user token is required.
 
 ### Example
 
@@ -394,6 +406,8 @@ updateRule($id, $no_frixion_money_moov_models_rule_update): \Nofrixion\Client\Mo
 ```
 
 Update an existing rule.
+
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanEditRules
 
 ### Example
 

@@ -18,6 +18,8 @@ createUserInvite($no_frixion_money_moov_models_user_invite_create): \Nofrixion\C
 
 Creates a new user invite and optionally sends the invitee an email with the details.
 
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanEditRoles
+
 ### Example
 
 ```php
@@ -77,6 +79,8 @@ deleteUserInvite($id)
 ```
 
 Deletes user invite.
+
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanEditRoles
 
 ### Example
 

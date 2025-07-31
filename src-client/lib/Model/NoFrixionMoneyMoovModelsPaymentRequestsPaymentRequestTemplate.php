@@ -61,6 +61,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate implements M
         'payment_terms' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentTerms',
         'notification_options' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsNotificationOptions',
         'bank_payment_options' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsBankPaymentOptions',
+        'priority_bank_options' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPriorityBankOptions',
         'card_payment_address_options' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsCardPaymentAddressOptions',
         'card_payment_capture_options' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsCardPaymentCaptureOptions',
         'default_fields' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateDefaultField[]',
@@ -79,6 +80,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate implements M
         'payment_terms' => null,
         'notification_options' => null,
         'bank_payment_options' => null,
+        'priority_bank_options' => null,
         'card_payment_address_options' => null,
         'card_payment_capture_options' => null,
         'default_fields' => null,
@@ -95,6 +97,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate implements M
         'payment_terms' => false,
         'notification_options' => false,
         'bank_payment_options' => false,
+        'priority_bank_options' => false,
         'card_payment_address_options' => false,
         'card_payment_capture_options' => false,
         'default_fields' => true,
@@ -191,6 +194,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate implements M
         'payment_terms' => 'paymentTerms',
         'notification_options' => 'notificationOptions',
         'bank_payment_options' => 'bankPaymentOptions',
+        'priority_bank_options' => 'priorityBankOptions',
         'card_payment_address_options' => 'cardPaymentAddressOptions',
         'card_payment_capture_options' => 'cardPaymentCaptureOptions',
         'default_fields' => 'defaultFields',
@@ -207,6 +211,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate implements M
         'payment_terms' => 'setPaymentTerms',
         'notification_options' => 'setNotificationOptions',
         'bank_payment_options' => 'setBankPaymentOptions',
+        'priority_bank_options' => 'setPriorityBankOptions',
         'card_payment_address_options' => 'setCardPaymentAddressOptions',
         'card_payment_capture_options' => 'setCardPaymentCaptureOptions',
         'default_fields' => 'setDefaultFields',
@@ -223,6 +228,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate implements M
         'payment_terms' => 'getPaymentTerms',
         'notification_options' => 'getNotificationOptions',
         'bank_payment_options' => 'getBankPaymentOptions',
+        'priority_bank_options' => 'getPriorityBankOptions',
         'card_payment_address_options' => 'getCardPaymentAddressOptions',
         'card_payment_capture_options' => 'getCardPaymentCaptureOptions',
         'default_fields' => 'getDefaultFields',
@@ -290,6 +296,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate implements M
         $this->setIfExists('payment_terms', $data ?? [], null);
         $this->setIfExists('notification_options', $data ?? [], null);
         $this->setIfExists('bank_payment_options', $data ?? [], null);
+        $this->setIfExists('priority_bank_options', $data ?? [], null);
         $this->setIfExists('card_payment_address_options', $data ?? [], null);
         $this->setIfExists('card_payment_capture_options', $data ?? [], null);
         $this->setIfExists('default_fields', $data ?? [], null);
@@ -442,6 +449,33 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplate implements M
             throw new \InvalidArgumentException('non-nullable bank_payment_options cannot be null');
         }
         $this->container['bank_payment_options'] = $bank_payment_options;
+
+        return $this;
+    }
+
+    /**
+     * Gets priority_bank_options
+     *
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPriorityBankOptions|null
+     */
+    public function getPriorityBankOptions()
+    {
+        return $this->container['priority_bank_options'];
+    }
+
+    /**
+     * Sets priority_bank_options
+     *
+     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPriorityBankOptions|null $priority_bank_options priority_bank_options
+     *
+     * @return self
+     */
+    public function setPriorityBankOptions($priority_bank_options)
+    {
+        if (is_null($priority_bank_options)) {
+            throw new \InvalidArgumentException('non-nullable priority_bank_options cannot be null');
+        }
+        $this->container['priority_bank_options'] = $priority_bank_options;
 
         return $this;
     }

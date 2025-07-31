@@ -66,7 +66,8 @@ class NoFrixionMoneyMoovModelsWebhook implements ModelInterface, ArrayAccess, \J
         'email_address' => 'string',
         'version' => 'int',
         'failed_notification_email_address' => 'string',
-        'merchant_id' => 'string'
+        'merchant_id' => 'string',
+        'notification_method' => 'string'
     ];
 
     /**
@@ -86,7 +87,8 @@ class NoFrixionMoneyMoovModelsWebhook implements ModelInterface, ArrayAccess, \J
         'email_address' => null,
         'version' => 'int32',
         'failed_notification_email_address' => null,
-        'merchant_id' => 'uuid'
+        'merchant_id' => 'uuid',
+        'notification_method' => null
     ];
 
     /**
@@ -104,7 +106,8 @@ class NoFrixionMoneyMoovModelsWebhook implements ModelInterface, ArrayAccess, \J
         'email_address' => true,
         'version' => false,
         'failed_notification_email_address' => true,
-        'merchant_id' => false
+        'merchant_id' => false,
+        'notification_method' => false
     ];
 
     /**
@@ -202,7 +205,8 @@ class NoFrixionMoneyMoovModelsWebhook implements ModelInterface, ArrayAccess, \J
         'email_address' => 'emailAddress',
         'version' => 'version',
         'failed_notification_email_address' => 'failedNotificationEmailAddress',
-        'merchant_id' => 'merchantID'
+        'merchant_id' => 'merchantID',
+        'notification_method' => 'notificationMethod'
     ];
 
     /**
@@ -220,7 +224,8 @@ class NoFrixionMoneyMoovModelsWebhook implements ModelInterface, ArrayAccess, \J
         'email_address' => 'setEmailAddress',
         'version' => 'setVersion',
         'failed_notification_email_address' => 'setFailedNotificationEmailAddress',
-        'merchant_id' => 'setMerchantId'
+        'merchant_id' => 'setMerchantId',
+        'notification_method' => 'setNotificationMethod'
     ];
 
     /**
@@ -238,7 +243,8 @@ class NoFrixionMoneyMoovModelsWebhook implements ModelInterface, ArrayAccess, \J
         'email_address' => 'getEmailAddress',
         'version' => 'getVersion',
         'failed_notification_email_address' => 'getFailedNotificationEmailAddress',
-        'merchant_id' => 'getMerchantId'
+        'merchant_id' => 'getMerchantId',
+        'notification_method' => 'getNotificationMethod'
     ];
 
     /**
@@ -291,6 +297,9 @@ class NoFrixionMoneyMoovModelsWebhook implements ModelInterface, ArrayAccess, \J
     public const RESOURCE_TYPES_TRANSACTION_PAYOUT = 'TransactionPayout';
     public const RESOURCE_TYPES_REPORT = 'Report';
     public const RESOURCE_TYPES_PAYRUN = 'Payrun';
+    public const NOTIFICATION_METHOD_NONE = 'None';
+    public const NOTIFICATION_METHOD_WEBHOOK = 'Webhook';
+    public const NOTIFICATION_METHOD_EMAIL = 'Email';
 
     /**
      * Gets allowable values of the enum
@@ -309,6 +318,20 @@ class NoFrixionMoneyMoovModelsWebhook implements ModelInterface, ArrayAccess, \J
             self::RESOURCE_TYPES_TRANSACTION_PAYOUT,
             self::RESOURCE_TYPES_REPORT,
             self::RESOURCE_TYPES_PAYRUN,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getNotificationMethodAllowableValues()
+    {
+        return [
+            self::NOTIFICATION_METHOD_NONE,
+            self::NOTIFICATION_METHOD_WEBHOOK,
+            self::NOTIFICATION_METHOD_EMAIL,
         ];
     }
 
@@ -337,6 +360,7 @@ class NoFrixionMoneyMoovModelsWebhook implements ModelInterface, ArrayAccess, \J
         $this->setIfExists('version', $data ?? [], null);
         $this->setIfExists('failed_notification_email_address', $data ?? [], null);
         $this->setIfExists('merchant_id', $data ?? [], null);
+        $this->setIfExists('notification_method', $data ?? [], null);
     }
 
     /**
@@ -365,6 +389,15 @@ class NoFrixionMoneyMoovModelsWebhook implements ModelInterface, ArrayAccess, \J
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        $allowedValues = $this->getNotificationMethodAllowableValues();
+        if (!is_null($this->container['notification_method']) && !in_array($this->container['notification_method'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'notification_method', must be one of '%s'",
+                $this->container['notification_method'],
+                implode("', '", $allowedValues)
+            );
+        }
 
         return $invalidProperties;
     }
@@ -691,6 +724,43 @@ class NoFrixionMoneyMoovModelsWebhook implements ModelInterface, ArrayAccess, \J
             throw new \InvalidArgumentException('non-nullable merchant_id cannot be null');
         }
         $this->container['merchant_id'] = $merchant_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets notification_method
+     *
+     * @return string|null
+     */
+    public function getNotificationMethod()
+    {
+        return $this->container['notification_method'];
+    }
+
+    /**
+     * Sets notification_method
+     *
+     * @param string|null $notification_method The type of notification that will be sent.
+     *
+     * @return self
+     */
+    public function setNotificationMethod($notification_method)
+    {
+        if (is_null($notification_method)) {
+            throw new \InvalidArgumentException('non-nullable notification_method cannot be null');
+        }
+        $allowedValues = $this->getNotificationMethodAllowableValues();
+        if (!in_array($notification_method, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'notification_method', must be one of '%s'",
+                    $notification_method,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['notification_method'] = $notification_method;
 
         return $this;
     }

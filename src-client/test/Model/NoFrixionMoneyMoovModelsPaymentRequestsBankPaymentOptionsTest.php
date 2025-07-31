@@ -89,15 +89,6 @@ class NoFrixionMoneyMoovModelsPaymentRequestsBankPaymentOptionsTest extends Test
     }
 
     /**
-     * Test attribute "priority_bank"
-     */
-    public function testPropertyPriorityBank()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "allow_override"
      */
     public function testPropertyAllowOverride()

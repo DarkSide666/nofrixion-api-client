@@ -285,4 +285,40 @@ class NoFrixionMoneyMoovModelsTransactionTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "fx_currency"
+     */
+    public function testPropertyFxCurrency()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "fx_amount"
+     */
+    public function testPropertyFxAmount()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "fx_rate"
+     */
+    public function testPropertyFxRate()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "payment_request_custom_fields"
+     */
+    public function testPropertyPaymentRequestCustomFields()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

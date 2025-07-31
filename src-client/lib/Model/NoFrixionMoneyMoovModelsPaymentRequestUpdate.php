@@ -92,7 +92,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestUpdate implements ModelInterface, Ar
         'lightning_invoice_expires_at' => '\DateTime',
         'auto_send_receipt' => 'bool',
         'custom_fields' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomFieldCreate[]',
-        'due_date' => '\DateTime'
+        'due_date' => '\DateTime',
+        'success_web_hook_url' => 'string'
     ];
 
     /**
@@ -138,7 +139,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestUpdate implements ModelInterface, Ar
         'lightning_invoice_expires_at' => 'date-time',
         'auto_send_receipt' => null,
         'custom_fields' => null,
-        'due_date' => 'date-time'
+        'due_date' => 'date-time',
+        'success_web_hook_url' => null
     ];
 
     /**
@@ -182,7 +184,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestUpdate implements ModelInterface, Ar
         'lightning_invoice_expires_at' => true,
         'auto_send_receipt' => true,
         'custom_fields' => true,
-        'due_date' => true
+        'due_date' => true,
+        'success_web_hook_url' => true
     ];
 
     /**
@@ -306,7 +309,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestUpdate implements ModelInterface, Ar
         'lightning_invoice_expires_at' => 'lightningInvoiceExpiresAt',
         'auto_send_receipt' => 'autoSendReceipt',
         'custom_fields' => 'customFields',
-        'due_date' => 'dueDate'
+        'due_date' => 'dueDate',
+        'success_web_hook_url' => 'successWebHookUrl'
     ];
 
     /**
@@ -350,7 +354,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestUpdate implements ModelInterface, Ar
         'lightning_invoice_expires_at' => 'setLightningInvoiceExpiresAt',
         'auto_send_receipt' => 'setAutoSendReceipt',
         'custom_fields' => 'setCustomFields',
-        'due_date' => 'setDueDate'
+        'due_date' => 'setDueDate',
+        'success_web_hook_url' => 'setSuccessWebHookUrl'
     ];
 
     /**
@@ -394,7 +399,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestUpdate implements ModelInterface, Ar
         'lightning_invoice_expires_at' => 'getLightningInvoiceExpiresAt',
         'auto_send_receipt' => 'getAutoSendReceipt',
         'custom_fields' => 'getCustomFields',
-        'due_date' => 'getDueDate'
+        'due_date' => 'getDueDate',
+        'success_web_hook_url' => 'getSuccessWebHookUrl'
     ];
 
     /**
@@ -555,6 +561,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestUpdate implements ModelInterface, Ar
         $this->setIfExists('auto_send_receipt', $data ?? [], null);
         $this->setIfExists('custom_fields', $data ?? [], null);
         $this->setIfExists('due_date', $data ?? [], null);
+        $this->setIfExists('success_web_hook_url', $data ?? [], null);
     }
 
     /**
@@ -1974,6 +1981,40 @@ class NoFrixionMoneyMoovModelsPaymentRequestUpdate implements ModelInterface, Ar
             }
         }
         $this->container['due_date'] = $due_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets success_web_hook_url
+     *
+     * @return string|null
+     */
+    public function getSuccessWebHookUrl()
+    {
+        return $this->container['success_web_hook_url'];
+    }
+
+    /**
+     * Sets success_web_hook_url
+     *
+     * @param string|null $success_web_hook_url If a payment event results in the payment request being classified as fully paid this  success webhook URL will be invoked. The URL will be invoked as a GET request, i.e.  there will be no request body. Two query parameters will be added to the URL. The   first one will be \"id\" and will hold the payment request ID. The second one will be  \"orderid\" and will hold the payment request OrderID, note the OrderID could be empty  if it was not set when the payment request was created.  The recommended approach when receiving a success web hook is to use the \"id\" parameter  to call the moneymoov get payment request endpoint to retrieve the full details of the  payment request and check the status. Web hooks can be easily spoofed and should not be  relied upon.
+     *
+     * @return self
+     */
+    public function setSuccessWebHookUrl($success_web_hook_url)
+    {
+        if (is_null($success_web_hook_url)) {
+            array_push($this->openAPINullablesSetToNull, 'success_web_hook_url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('success_web_hook_url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['success_web_hook_url'] = $success_web_hook_url;
 
         return $this;
     }

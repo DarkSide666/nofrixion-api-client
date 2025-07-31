@@ -79,7 +79,11 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         'virtual_iban' => 'string',
         'tags' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTag[]',
         'account_sequence_number' => 'int',
-        'payment_request_id' => 'string'
+        'payment_request_id' => 'string',
+        'fx_currency' => 'string',
+        'fx_amount' => 'float',
+        'fx_rate' => 'float',
+        'payment_request_custom_fields' => 'array<string,string>'
     ];
 
     /**
@@ -112,7 +116,11 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         'virtual_iban' => null,
         'tags' => null,
         'account_sequence_number' => 'int32',
-        'payment_request_id' => 'uuid'
+        'payment_request_id' => 'uuid',
+        'fx_currency' => null,
+        'fx_amount' => 'double',
+        'fx_rate' => 'double',
+        'payment_request_custom_fields' => null
     ];
 
     /**
@@ -143,7 +151,11 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         'virtual_iban' => true,
         'tags' => true,
         'account_sequence_number' => false,
-        'payment_request_id' => true
+        'payment_request_id' => true,
+        'fx_currency' => true,
+        'fx_amount' => true,
+        'fx_rate' => true,
+        'payment_request_custom_fields' => true
     ];
 
     /**
@@ -254,7 +266,11 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         'virtual_iban' => 'virtualIBAN',
         'tags' => 'tags',
         'account_sequence_number' => 'accountSequenceNumber',
-        'payment_request_id' => 'paymentRequestID'
+        'payment_request_id' => 'paymentRequestID',
+        'fx_currency' => 'fxCurrency',
+        'fx_amount' => 'fxAmount',
+        'fx_rate' => 'fxRate',
+        'payment_request_custom_fields' => 'paymentRequestCustomFields'
     ];
 
     /**
@@ -285,7 +301,11 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         'virtual_iban' => 'setVirtualIban',
         'tags' => 'setTags',
         'account_sequence_number' => 'setAccountSequenceNumber',
-        'payment_request_id' => 'setPaymentRequestId'
+        'payment_request_id' => 'setPaymentRequestId',
+        'fx_currency' => 'setFxCurrency',
+        'fx_amount' => 'setFxAmount',
+        'fx_rate' => 'setFxRate',
+        'payment_request_custom_fields' => 'setPaymentRequestCustomFields'
     ];
 
     /**
@@ -316,7 +336,11 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         'virtual_iban' => 'getVirtualIban',
         'tags' => 'getTags',
         'account_sequence_number' => 'getAccountSequenceNumber',
-        'payment_request_id' => 'getPaymentRequestId'
+        'payment_request_id' => 'getPaymentRequestId',
+        'fx_currency' => 'getFxCurrency',
+        'fx_amount' => 'getFxAmount',
+        'fx_rate' => 'getFxRate',
+        'payment_request_custom_fields' => 'getPaymentRequestCustomFields'
     ];
 
     /**
@@ -376,11 +400,17 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
     public const TYPE_TARGET2 = 'TARGET2';
     public const TYPE_SEPA_DD_REJECT = 'SEPA_DD_REJECT';
     public const TYPE_CROSS_BORDER = 'CROSS_BORDER';
+    public const TYPE_UK_CHAPS = 'UK_CHAPS';
     public const CURRENCY_NONE = 'NONE';
     public const CURRENCY_GBP = 'GBP';
     public const CURRENCY_EUR = 'EUR';
     public const CURRENCY_USD = 'USD';
     public const CURRENCY_BTC = 'BTC';
+    public const FX_CURRENCY_NONE = 'NONE';
+    public const FX_CURRENCY_GBP = 'GBP';
+    public const FX_CURRENCY_EUR = 'EUR';
+    public const FX_CURRENCY_USD = 'USD';
+    public const FX_CURRENCY_BTC = 'BTC';
 
     /**
      * Gets allowable values of the enum
@@ -406,6 +436,7 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
             self::TYPE_TARGET2,
             self::TYPE_SEPA_DD_REJECT,
             self::TYPE_CROSS_BORDER,
+            self::TYPE_UK_CHAPS,
         ];
     }
 
@@ -422,6 +453,22 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
             self::CURRENCY_EUR,
             self::CURRENCY_USD,
             self::CURRENCY_BTC,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getFxCurrencyAllowableValues()
+    {
+        return [
+            self::FX_CURRENCY_NONE,
+            self::FX_CURRENCY_GBP,
+            self::FX_CURRENCY_EUR,
+            self::FX_CURRENCY_USD,
+            self::FX_CURRENCY_BTC,
         ];
     }
 
@@ -463,6 +510,10 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
         $this->setIfExists('tags', $data ?? [], null);
         $this->setIfExists('account_sequence_number', $data ?? [], null);
         $this->setIfExists('payment_request_id', $data ?? [], null);
+        $this->setIfExists('fx_currency', $data ?? [], null);
+        $this->setIfExists('fx_amount', $data ?? [], null);
+        $this->setIfExists('fx_rate', $data ?? [], null);
+        $this->setIfExists('payment_request_custom_fields', $data ?? [], null);
     }
 
     /**
@@ -506,6 +557,15 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'currency', must be one of '%s'",
                 $this->container['currency'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getFxCurrencyAllowableValues();
+        if (!is_null($this->container['fx_currency']) && !in_array($this->container['fx_currency'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'fx_currency', must be one of '%s'",
+                $this->container['fx_currency'],
                 implode("', '", $allowedValues)
             );
         }
@@ -1232,6 +1292,152 @@ class NoFrixionMoneyMoovModelsTransaction implements ModelInterface, ArrayAccess
             }
         }
         $this->container['payment_request_id'] = $payment_request_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets fx_currency
+     *
+     * @return string|null
+     */
+    public function getFxCurrency()
+    {
+        return $this->container['fx_currency'];
+    }
+
+    /**
+     * Sets fx_currency
+     *
+     * @param string|null $fx_currency For an FX payout this is the currency that was received or that was instructed.
+     *
+     * @return self
+     */
+    public function setFxCurrency($fx_currency)
+    {
+        if (is_null($fx_currency)) {
+            array_push($this->openAPINullablesSetToNull, 'fx_currency');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('fx_currency', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $allowedValues = $this->getFxCurrencyAllowableValues();
+        if (!is_null($fx_currency) && !in_array($fx_currency, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'fx_currency', must be one of '%s'",
+                    $fx_currency,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['fx_currency'] = $fx_currency;
+
+        return $this;
+    }
+
+    /**
+     * Gets fx_amount
+     *
+     * @return float|null
+     */
+    public function getFxAmount()
+    {
+        return $this->container['fx_amount'];
+    }
+
+    /**
+     * Sets fx_amount
+     *
+     * @param float|null $fx_amount For an FX payout this is the amound in the FX currency.
+     *
+     * @return self
+     */
+    public function setFxAmount($fx_amount)
+    {
+        if (is_null($fx_amount)) {
+            array_push($this->openAPINullablesSetToNull, 'fx_amount');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('fx_amount', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['fx_amount'] = $fx_amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets fx_rate
+     *
+     * @return float|null
+     */
+    public function getFxRate()
+    {
+        return $this->container['fx_rate'];
+    }
+
+    /**
+     * Sets fx_rate
+     *
+     * @param float|null $fx_rate For an FX payout this is the exchange rate between the transaction currency and the FX currency.
+     *
+     * @return self
+     */
+    public function setFxRate($fx_rate)
+    {
+        if (is_null($fx_rate)) {
+            array_push($this->openAPINullablesSetToNull, 'fx_rate');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('fx_rate', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['fx_rate'] = $fx_rate;
+
+        return $this;
+    }
+
+    /**
+     * Gets payment_request_custom_fields
+     *
+     * @return array<string,string>|null
+     */
+    public function getPaymentRequestCustomFields()
+    {
+        return $this->container['payment_request_custom_fields'];
+    }
+
+    /**
+     * Sets payment_request_custom_fields
+     *
+     * @param array<string,string>|null $payment_request_custom_fields The custom fields that were attached to the payment request that resulted in this transaction.
+     *
+     * @return self
+     */
+    public function setPaymentRequestCustomFields($payment_request_custom_fields)
+    {
+        if (is_null($payment_request_custom_fields)) {
+            array_push($this->openAPINullablesSetToNull, 'payment_request_custom_fields');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('payment_request_custom_fields', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['payment_request_custom_fields'] = $payment_request_custom_fields;
 
         return $this;
     }

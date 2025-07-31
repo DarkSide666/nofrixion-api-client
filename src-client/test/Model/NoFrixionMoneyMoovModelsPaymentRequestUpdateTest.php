@@ -402,4 +402,13 @@ class NoFrixionMoneyMoovModelsPaymentRequestUpdateTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "success_web_hook_url"
+     */
+    public function testPropertySuccessWebHookUrl()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

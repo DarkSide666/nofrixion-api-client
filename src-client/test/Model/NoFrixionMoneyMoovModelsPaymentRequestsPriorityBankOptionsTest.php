@@ -1,6 +1,6 @@
 <?php
 /**
- * NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomFieldTest
+ * NoFrixionMoneyMoovModelsPaymentRequestsPriorityBankOptionsTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Nofrixion\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomFieldTest Class Doc Comment
+ * NoFrixionMoneyMoovModelsPaymentRequestsPriorityBankOptionsTest Class Doc Comment
  *
  * @category    Class
- * @description NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomField
+ * @description NoFrixionMoneyMoovModelsPaymentRequestsPriorityBankOptions
  * @package     Nofrixion\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomFieldTest extends TestCase
+class NoFrixionMoneyMoovModelsPaymentRequestsPriorityBankOptionsTest extends TestCase
 {
 
     /**
@@ -71,54 +71,27 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomFieldTest exten
     }
 
     /**
-     * Test "NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomField"
+     * Test "NoFrixionMoneyMoovModelsPaymentRequestsPriorityBankOptions"
      */
-    public function testNoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomField()
+    public function testNoFrixionMoneyMoovModelsPaymentRequestsPriorityBankOptions()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "name"
+     * Test attribute "priority_bank_ids"
      */
-    public function testPropertyName()
+    public function testPropertyPriorityBankIds()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "value"
+     * Test attribute "allow_override"
      */
-    public function testPropertyValue()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "display_on_hosted_payment_page"
-     */
-    public function testPropertyDisplayOnHostedPaymentPage()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "display_on_payment_receipt"
-     */
-    public function testPropertyDisplayOnPaymentReceipt()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "display_order"
-     */
-    public function testPropertyDisplayOrder()
+    public function testPropertyAllowOverride()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

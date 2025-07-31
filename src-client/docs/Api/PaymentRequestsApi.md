@@ -46,6 +46,8 @@ captureCardPayment($id, $authorization_id, $amount): \Nofrixion\Client\Model\NoF
 
 Submits a request to capture a previously authorised card payment.
 
+<b>Authorization</b>: End user or Merchant token is required.
+
 ### Example
 
 ```php
@@ -105,10 +107,12 @@ try {
 ## `createAndPayPaymentRequest()`
 
 ```php
-createAndPayPaymentRequest($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id, $payment_request_create_currency, $payment_request_create_customer_id, $payment_request_create_order_id, $payment_request_create_payment_method_types, $payment_request_create_payment_methods, $payment_request_create_description, $payment_request_create_pisp_account_id, $payment_request_create_shipping_first_name, $payment_request_create_shipping_last_name, $payment_request_create_shipping_address_line1, $payment_request_create_shipping_address_line2, $payment_request_create_shipping_address_city, $payment_request_create_shipping_address_county, $payment_request_create_shipping_address_post_code, $payment_request_create_shipping_address_country_code, $payment_request_create_shipping_phone, $payment_request_create_shipping_email, $payment_request_create_origin_url, $payment_request_create_base_origin_url, $payment_request_create_callback_url, $payment_request_create_failure_callback_url, $payment_request_create_success_web_hook_url, $payment_request_create_card_authorize_only, $payment_request_create_card_create_token, $payment_request_create_card_create_token_mode, $payment_request_create_card_transmit_raw_details, $payment_request_create_card_processor_merchant_id, $payment_request_create_ignore_address_verification, $payment_request_create_card_ignore_cvn, $payment_request_create_pisp_recipient_reference, $payment_request_create_use_hosted_payment_page, $payment_request_create_card_no_payer_authentication, $payment_request_create_partial_payment_method, $payment_request_create_customer_email_address, $payment_request_create_payment_processor, $payment_request_create_lightning_invoice, $payment_request_create_lightning_invoice_expires_at, $payment_request_create_notification_email_addresses, $payment_request_create_priority_bank_id, $payment_request_create_title, $payment_request_create_partial_payment_steps, $payment_request_create_payrun_id, $payment_request_create_sandbox_settle_delay_in_seconds, $payment_request_create_tag_ids, $payment_request_create_tags, $payment_request_create_auto_send_receipt, $payment_request_create_custom_fields, $payment_request_create_due_date, $card_sensitive_jwt_token, $card_sensitive_number_token, $card_sensitive_cvc_token, $card_sensitive_card_holder_first_name, $card_sensitive_card_holder_last_name, $card_sensitive_billing_address_line1, $card_sensitive_billing_address_line2, $card_sensitive_billing_address_city, $card_sensitive_billing_address_county, $card_sensitive_billing_address_post_code, $card_sensitive_billing_address_country_code, $card_sensitive_billing_phone, $card_sensitive_billing_email, $card_sensitive_save_card_consent, $card_sensitive_partial_amount, $card_jwt_token, $card_number_token, $card_cvc_token, $card_card_holder_first_name, $card_card_holder_last_name, $card_billing_address_line1, $card_billing_address_line2, $card_billing_address_city, $card_billing_address_county, $card_billing_address_post_code, $card_billing_address_country_code, $card_billing_phone, $card_billing_email, $card_save_card_consent, $card_partial_amount, $payment_method, $card_token_tokenised_card_id, $card_token_payment_initiator, $card_token_card_security_code, $card_token_partial_amount, $payment_initiation_request_partial_amount, $payment_initiation_request_redirect_to_origin_url, $payment_initiation_request_origin_url): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsIPaymentResponse
+createAndPayPaymentRequest($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id, $payment_request_create_currency, $payment_request_create_customer_id, $payment_request_create_order_id, $payment_request_create_payment_method_types, $payment_request_create_payment_methods, $payment_request_create_description, $payment_request_create_pisp_account_id, $payment_request_create_shipping_first_name, $payment_request_create_shipping_last_name, $payment_request_create_shipping_address_line1, $payment_request_create_shipping_address_line2, $payment_request_create_shipping_address_city, $payment_request_create_shipping_address_county, $payment_request_create_shipping_address_post_code, $payment_request_create_shipping_address_country_code, $payment_request_create_shipping_phone, $payment_request_create_shipping_email, $payment_request_create_origin_url, $payment_request_create_base_origin_url, $payment_request_create_callback_url, $payment_request_create_failure_callback_url, $payment_request_create_success_web_hook_url, $payment_request_create_card_authorize_only, $payment_request_create_card_create_token, $payment_request_create_card_create_token_mode, $payment_request_create_card_transmit_raw_details, $payment_request_create_card_processor_merchant_id, $payment_request_create_ignore_address_verification, $payment_request_create_card_ignore_cvn, $payment_request_create_pisp_recipient_reference, $payment_request_create_use_hosted_payment_page, $payment_request_create_card_no_payer_authentication, $payment_request_create_partial_payment_method, $payment_request_create_customer_email_address, $payment_request_create_payment_processor, $payment_request_create_lightning_invoice, $payment_request_create_lightning_invoice_expires_at, $payment_request_create_notification_email_addresses, $payment_request_create_priority_bank_id, $payment_request_create_title, $payment_request_create_partial_payment_steps, $payment_request_create_payrun_id, $payment_request_create_sandbox_settle_delay_in_seconds, $payment_request_create_tag_ids, $payment_request_create_tags, $payment_request_create_auto_send_receipt, $payment_request_create_custom_fields, $payment_request_create_due_date, $payment_request_create_field_display_settings, $payment_request_create_notification_role_ids, $card_sensitive_jwt_token, $card_sensitive_number_token, $card_sensitive_cvc_token, $card_sensitive_card_holder_first_name, $card_sensitive_card_holder_last_name, $card_sensitive_billing_address_line1, $card_sensitive_billing_address_line2, $card_sensitive_billing_address_city, $card_sensitive_billing_address_county, $card_sensitive_billing_address_post_code, $card_sensitive_billing_address_country_code, $card_sensitive_billing_phone, $card_sensitive_billing_email, $card_sensitive_save_card_consent, $card_sensitive_partial_amount, $card_jwt_token, $card_number_token, $card_cvc_token, $card_card_holder_first_name, $card_card_holder_last_name, $card_billing_address_line1, $card_billing_address_line2, $card_billing_address_city, $card_billing_address_county, $card_billing_address_post_code, $card_billing_address_country_code, $card_billing_phone, $card_billing_email, $card_save_card_consent, $card_partial_amount, $payment_method, $card_token_tokenised_card_id, $card_token_payment_initiator, $card_token_card_security_code, $card_token_partial_amount, $payment_initiation_request_partial_amount, $payment_initiation_request_redirect_to_origin_url, $payment_initiation_request_origin_url): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsIPaymentResponse
 ```
 
 Creates a payment request record and processes the payment.
+
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanCreatePaymentRequests
 
 ### Example
 
@@ -186,6 +190,8 @@ $payment_request_create_tags = array('payment_request_create_tags_example'); // 
 $payment_request_create_auto_send_receipt = True; // bool | If set to true, a receipt will be automatically sent to the CustomerEmailAddress when payments are received.
 $payment_request_create_custom_fields = array(new \Nofrixion\Client\Model\\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomFieldCreate()); // \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomFieldCreate[] | A list of custom fields to add to the payment request. The custom fields  are data type agnostic which means that the API will not do any validation or formatting  in the key-value pairs. The API will store the custom fields as is.
 $payment_request_create_due_date = new \DateTime("2013-10-20T19:20:30+01:00"); // \DateTime | An optional due date for the payment request.
+$payment_request_create_field_display_settings = array(new \Nofrixion\Client\Model\\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestFieldDisplaySetting()); // \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestFieldDisplaySetting[] | An optional display settings for the payment request fields. This allows the merchant to control how  the fields are displayed on the hosted payment page, receipt, etc.
+$payment_request_create_notification_role_ids = array('payment_request_create_notification_role_ids_example'); // string[] | An optional list of notification role IDs that will receive notifications  about the payment request. This is useful for roles that need to be notified  about payment request events.
 $card_sensitive_jwt_token = 'card_sensitive_jwt_token_example'; // string | The JWT token is not used if the raw card details are provided. This  property is to override the base card property and stop it being required.
 $card_sensitive_number_token = 'card_sensitive_number_token_example'; // string | The Number Token is not used if the raw card details are provided. This  property is to override the base card property and stop it being required.
 $card_sensitive_cvc_token = 'card_sensitive_cvc_token_example'; // string | The Cvc Token is not used if the raw card details are provided. This  property is to override the base card property and stop it being required.
@@ -226,7 +232,7 @@ $payment_initiation_request_redirect_to_origin_url = 'payment_initiation_request
 $payment_initiation_request_origin_url = 'payment_initiation_request_origin_url_example'; // string | Optional. If set should indicate the origin URL the payer is making the   payment from. If a pay by bank attempt fails and the payment request does not  have a FailureCallbackUrl set then the payer will be redirected to this URL.
 
 try {
-    $result = $apiInstance->createAndPayPaymentRequest($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id, $payment_request_create_currency, $payment_request_create_customer_id, $payment_request_create_order_id, $payment_request_create_payment_method_types, $payment_request_create_payment_methods, $payment_request_create_description, $payment_request_create_pisp_account_id, $payment_request_create_shipping_first_name, $payment_request_create_shipping_last_name, $payment_request_create_shipping_address_line1, $payment_request_create_shipping_address_line2, $payment_request_create_shipping_address_city, $payment_request_create_shipping_address_county, $payment_request_create_shipping_address_post_code, $payment_request_create_shipping_address_country_code, $payment_request_create_shipping_phone, $payment_request_create_shipping_email, $payment_request_create_origin_url, $payment_request_create_base_origin_url, $payment_request_create_callback_url, $payment_request_create_failure_callback_url, $payment_request_create_success_web_hook_url, $payment_request_create_card_authorize_only, $payment_request_create_card_create_token, $payment_request_create_card_create_token_mode, $payment_request_create_card_transmit_raw_details, $payment_request_create_card_processor_merchant_id, $payment_request_create_ignore_address_verification, $payment_request_create_card_ignore_cvn, $payment_request_create_pisp_recipient_reference, $payment_request_create_use_hosted_payment_page, $payment_request_create_card_no_payer_authentication, $payment_request_create_partial_payment_method, $payment_request_create_customer_email_address, $payment_request_create_payment_processor, $payment_request_create_lightning_invoice, $payment_request_create_lightning_invoice_expires_at, $payment_request_create_notification_email_addresses, $payment_request_create_priority_bank_id, $payment_request_create_title, $payment_request_create_partial_payment_steps, $payment_request_create_payrun_id, $payment_request_create_sandbox_settle_delay_in_seconds, $payment_request_create_tag_ids, $payment_request_create_tags, $payment_request_create_auto_send_receipt, $payment_request_create_custom_fields, $payment_request_create_due_date, $card_sensitive_jwt_token, $card_sensitive_number_token, $card_sensitive_cvc_token, $card_sensitive_card_holder_first_name, $card_sensitive_card_holder_last_name, $card_sensitive_billing_address_line1, $card_sensitive_billing_address_line2, $card_sensitive_billing_address_city, $card_sensitive_billing_address_county, $card_sensitive_billing_address_post_code, $card_sensitive_billing_address_country_code, $card_sensitive_billing_phone, $card_sensitive_billing_email, $card_sensitive_save_card_consent, $card_sensitive_partial_amount, $card_jwt_token, $card_number_token, $card_cvc_token, $card_card_holder_first_name, $card_card_holder_last_name, $card_billing_address_line1, $card_billing_address_line2, $card_billing_address_city, $card_billing_address_county, $card_billing_address_post_code, $card_billing_address_country_code, $card_billing_phone, $card_billing_email, $card_save_card_consent, $card_partial_amount, $payment_method, $card_token_tokenised_card_id, $card_token_payment_initiator, $card_token_card_security_code, $card_token_partial_amount, $payment_initiation_request_partial_amount, $payment_initiation_request_redirect_to_origin_url, $payment_initiation_request_origin_url);
+    $result = $apiInstance->createAndPayPaymentRequest($payment_request_create_amount, $card_sensitive_card_number, $card_sensitive_card_security_code, $card_sensitive_expiry_month, $card_sensitive_expiry_year, $card_expiry_month, $card_expiry_year, $payment_initiation_request_provider_id, $payment_request_create_merchant_id, $payment_request_create_currency, $payment_request_create_customer_id, $payment_request_create_order_id, $payment_request_create_payment_method_types, $payment_request_create_payment_methods, $payment_request_create_description, $payment_request_create_pisp_account_id, $payment_request_create_shipping_first_name, $payment_request_create_shipping_last_name, $payment_request_create_shipping_address_line1, $payment_request_create_shipping_address_line2, $payment_request_create_shipping_address_city, $payment_request_create_shipping_address_county, $payment_request_create_shipping_address_post_code, $payment_request_create_shipping_address_country_code, $payment_request_create_shipping_phone, $payment_request_create_shipping_email, $payment_request_create_origin_url, $payment_request_create_base_origin_url, $payment_request_create_callback_url, $payment_request_create_failure_callback_url, $payment_request_create_success_web_hook_url, $payment_request_create_card_authorize_only, $payment_request_create_card_create_token, $payment_request_create_card_create_token_mode, $payment_request_create_card_transmit_raw_details, $payment_request_create_card_processor_merchant_id, $payment_request_create_ignore_address_verification, $payment_request_create_card_ignore_cvn, $payment_request_create_pisp_recipient_reference, $payment_request_create_use_hosted_payment_page, $payment_request_create_card_no_payer_authentication, $payment_request_create_partial_payment_method, $payment_request_create_customer_email_address, $payment_request_create_payment_processor, $payment_request_create_lightning_invoice, $payment_request_create_lightning_invoice_expires_at, $payment_request_create_notification_email_addresses, $payment_request_create_priority_bank_id, $payment_request_create_title, $payment_request_create_partial_payment_steps, $payment_request_create_payrun_id, $payment_request_create_sandbox_settle_delay_in_seconds, $payment_request_create_tag_ids, $payment_request_create_tags, $payment_request_create_auto_send_receipt, $payment_request_create_custom_fields, $payment_request_create_due_date, $payment_request_create_field_display_settings, $payment_request_create_notification_role_ids, $card_sensitive_jwt_token, $card_sensitive_number_token, $card_sensitive_cvc_token, $card_sensitive_card_holder_first_name, $card_sensitive_card_holder_last_name, $card_sensitive_billing_address_line1, $card_sensitive_billing_address_line2, $card_sensitive_billing_address_city, $card_sensitive_billing_address_county, $card_sensitive_billing_address_post_code, $card_sensitive_billing_address_country_code, $card_sensitive_billing_phone, $card_sensitive_billing_email, $card_sensitive_save_card_consent, $card_sensitive_partial_amount, $card_jwt_token, $card_number_token, $card_cvc_token, $card_card_holder_first_name, $card_card_holder_last_name, $card_billing_address_line1, $card_billing_address_line2, $card_billing_address_city, $card_billing_address_county, $card_billing_address_post_code, $card_billing_address_country_code, $card_billing_phone, $card_billing_email, $card_save_card_consent, $card_partial_amount, $payment_method, $card_token_tokenised_card_id, $card_token_payment_initiator, $card_token_card_security_code, $card_token_partial_amount, $payment_initiation_request_partial_amount, $payment_initiation_request_redirect_to_origin_url, $payment_initiation_request_origin_url);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PaymentRequestsApi->createAndPayPaymentRequest: ', $e->getMessage(), PHP_EOL;
@@ -294,6 +300,8 @@ try {
 | **payment_request_create_auto_send_receipt** | **bool**| If set to true, a receipt will be automatically sent to the CustomerEmailAddress when payments are received. | [optional] |
 | **payment_request_create_custom_fields** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomFieldCreate[]**](../Model/\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomFieldCreate.md)| A list of custom fields to add to the payment request. The custom fields  are data type agnostic which means that the API will not do any validation or formatting  in the key-value pairs. The API will store the custom fields as is. | [optional] |
 | **payment_request_create_due_date** | **\DateTime**| An optional due date for the payment request. | [optional] |
+| **payment_request_create_field_display_settings** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestFieldDisplaySetting[]**](../Model/\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestFieldDisplaySetting.md)| An optional display settings for the payment request fields. This allows the merchant to control how  the fields are displayed on the hosted payment page, receipt, etc. | [optional] |
+| **payment_request_create_notification_role_ids** | [**string[]**](../Model/string.md)| An optional list of notification role IDs that will receive notifications  about the payment request. This is useful for roles that need to be notified  about payment request events. | [optional] |
 | **card_sensitive_jwt_token** | **string**| The JWT token is not used if the raw card details are provided. This  property is to override the base card property and stop it being required. | [optional] |
 | **card_sensitive_number_token** | **string**| The Number Token is not used if the raw card details are provided. This  property is to override the base card property and stop it being required. | [optional] |
 | **card_sensitive_cvc_token** | **string**| The Cvc Token is not used if the raw card details are provided. This  property is to override the base card property and stop it being required. | [optional] |
@@ -358,6 +366,8 @@ createPaymentRequest($no_frixion_money_moov_models_payment_request_create): \Nof
 
 Creates a payment request record.
 
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanCreatePaymentRequests
+
 ### Example
 
 ```php
@@ -418,6 +428,8 @@ deleteAllTokenisedCards($customer_email_address): \Nofrixion\Client\Model\NoFrix
 
 Deletes all the card tokens for a customer.
 
+<b>Authorization</b>: Merchant token is required.
+
 ### Example
 
 ```php
@@ -477,6 +489,8 @@ deleteAllTokenisedCardsForMerchant($merchant_id, $customer_email_address): \Nofr
 ```
 
 Deletes all the card tokens for a customer.
+
+<b>Authorization</b>: End user token is required.
 
 ### Example
 
@@ -540,6 +554,8 @@ deletePaymentRequest($id)
 
 Deletes a payment request, along with its keys and addresses, if there's  no payment event associated with it.
 
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanDeletePaymentRequests
+
 ### Example
 
 ```php
@@ -598,6 +614,8 @@ deletePaymentRequestTemplate($merchant_id, $template_id): \Nofrixion\Client\Mode
 ```
 
 Deletes a payment request template for a merchant.
+
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanDeletePaymentRequestTemplates
 
 ### Example
 
@@ -661,6 +679,8 @@ deleteTokenisedCard($id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsCardCu
 
 Deletes a single card token.
 
+<b>Authorization</b>: End user or Merchant token is required.
+
 ### Example
 
 ```php
@@ -720,6 +740,8 @@ exportPaymentRequests($merchant_id, $page, $size, $from_date, $to_date, $status,
 ```
 
 Export a list of all payment requests to a CSV file.
+
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanViewPaymentRequests
 
 ### Example
 
@@ -803,6 +825,8 @@ getAllPaymentRequestsPaged($merchant_id, $page, $size, $from_date, $to_date, $st
 
 Gets a list of all payment requests.
 
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanViewPaymentRequests
+
 ### Example
 
 ```php
@@ -885,6 +909,8 @@ getPaymentRequest($id, $include_events): \Nofrixion\Client\Model\NoFrixionMoneyM
 
 Gets a payment request.
 
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanViewPaymentRequests
+
 ### Example
 
 ```php
@@ -947,6 +973,8 @@ getPaymentRequestEvents($id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPa
 
 Gets a payment requests's events.
 
+<b>Authorization</b>: End user or Merchant token is required.
+
 ### Example
 
 ```php
@@ -1007,6 +1035,8 @@ getPaymentRequestForOrder($order_id): \Nofrixion\Client\Model\NoFrixionMoneyMoov
 
 Gets a payment request by its order ID.
 
+<b>Authorization</b>: Merchant token is required.
+
 ### Example
 
 ```php
@@ -1066,6 +1096,8 @@ getPaymentRequestMetricsForMerchant($merchant_id, $from_date, $to_date, $search,
 ```
 
 Gets payment request metrics of a merchant.
+
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanViewPaymentRequests
 
 ### Example
 
@@ -1201,6 +1233,8 @@ getPaymentRequestReceipt($id)
 
 Gets the PDF receipt for a payment request.
 
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanViewPaymentRequests
+
 ### Example
 
 ```php
@@ -1259,6 +1293,8 @@ getPaymentRequestResult($id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPa
 ```
 
 Gets a payment request result.
+
+<b>Authorization</b>: End user or Merchant token is required.
 
 ### Example
 
@@ -1319,6 +1355,8 @@ getPaymentRequestTemplate($merchant_id, $template_id): \Nofrixion\Client\Model\N
 ```
 
 Gets a payment request template for a merchant.
+
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanViewPaymentRequestTemplates
 
 ### Example
 
@@ -1381,6 +1419,8 @@ getPaymentRequestTemplates($merchant_id): \Nofrixion\Client\Model\NoFrixionMoney
 ```
 
 Gets a list of payment request templates for a merchant.
+
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanViewPaymentRequestTemplates
 
 ### Example
 
@@ -1504,6 +1544,8 @@ getTokenisedCards($customer_email_address): \Nofrixion\Client\Model\NoFrixionMon
 
 Gets a list of the tokenised cards stored for a single customer.
 
+<b>Authorization</b>: Merchant token is required.
+
 ### Example
 
 ```php
@@ -1563,6 +1605,8 @@ getTokenisedCardsForMerchant($merchant_id, $customer_email_address): \Nofrixion\
 ```
 
 Gets a list of the tokenised cards stored for a single customer.
+
+<b>Authorization</b>: End user token is required.
 
 ### Example
 
@@ -1625,6 +1669,8 @@ refundCardPayment($id, $partial_refund_amount, $authorization_id): \Nofrixion\Cl
 ```
 
 Submits a request to refund a card payment.
+
+<b>Authorization</b>: End user or Merchant token is required.
 
 ### Example
 
@@ -1848,6 +1894,8 @@ submitDirectDebitForMandate($id, $mandate_id, $submit_after)
 
 Submits a Direct Debit payment attempt.
 
+<b>Authorization</b>: End user or Merchant token is required.
+
 ### Example
 
 ```php
@@ -1979,6 +2027,8 @@ submitTokenisedCardPayment($id, $tokenised_card_id, $payment_initiator, $card_se
 
 Submits a payment request, using a tokenised card, to a payment gateway.
 
+<b>Authorization</b>: End user or Merchant token is required.
+
 ### Example
 
 ```php
@@ -2047,6 +2097,8 @@ updatePaymentRequest($id, $no_frixion_money_moov_models_payment_request_update):
 
 Updates a payment request.
 
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanUpdatePaymentRequests
+
 ### Example
 
 ```php
@@ -2108,6 +2160,8 @@ updatePaymentRequestTemplate($merchant_id, $template_id, $no_frixion_money_moov_
 ```
 
 Updates a payment request template for a merchant.
+
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanUpdatePaymentRequestTemplates
 
 ### Example
 
@@ -2173,6 +2227,8 @@ voidAllCardPayments($id): \Nofrixion\Client\Model\NoFrixionBizBizModelsPaymentsC
 
 Submits a request to void all payments for a payment request.
 
+<b>Authorization</b>: End user or Merchant token is required.
+
 ### Example
 
 ```php
@@ -2232,6 +2288,8 @@ voidCardPayment($id, $authorization_id): \Nofrixion\Client\Model\NoFrixionBizBiz
 ```
 
 Submits a request to void a card payment.
+
+<b>Authorization</b>: End user or Merchant token is required.
 
 ### Example
 

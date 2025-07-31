@@ -114,6 +114,8 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
         'custom_fields' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestCustomField[]',
         'sandbox_settle_delay_in_seconds' => 'int',
         'due_date' => '\DateTime',
+        'field_display_settings' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestFieldDisplaySetting[]',
+        'notification_role_ids' => 'string[]',
         'customer_name' => 'string'
     ];
 
@@ -182,6 +184,8 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
         'custom_fields' => null,
         'sandbox_settle_delay_in_seconds' => 'int32',
         'due_date' => 'date-time',
+        'field_display_settings' => null,
+        'notification_role_ids' => 'uuid',
         'customer_name' => null
     ];
 
@@ -248,6 +252,8 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
         'custom_fields' => true,
         'sandbox_settle_delay_in_seconds' => true,
         'due_date' => true,
+        'field_display_settings' => true,
+        'notification_role_ids' => true,
         'customer_name' => true
     ];
 
@@ -394,6 +400,8 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
         'custom_fields' => 'customFields',
         'sandbox_settle_delay_in_seconds' => 'sandboxSettleDelayInSeconds',
         'due_date' => 'dueDate',
+        'field_display_settings' => 'fieldDisplaySettings',
+        'notification_role_ids' => 'notificationRoleIDs',
         'customer_name' => 'customerName'
     ];
 
@@ -460,6 +468,8 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
         'custom_fields' => 'setCustomFields',
         'sandbox_settle_delay_in_seconds' => 'setSandboxSettleDelayInSeconds',
         'due_date' => 'setDueDate',
+        'field_display_settings' => 'setFieldDisplaySettings',
+        'notification_role_ids' => 'setNotificationRoleIds',
         'customer_name' => 'setCustomerName'
     ];
 
@@ -526,6 +536,8 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
         'custom_fields' => 'getCustomFields',
         'sandbox_settle_delay_in_seconds' => 'getSandboxSettleDelayInSeconds',
         'due_date' => 'getDueDate',
+        'field_display_settings' => 'getFieldDisplaySettings',
+        'notification_role_ids' => 'getNotificationRoleIds',
         'customer_name' => 'getCustomerName'
     ];
 
@@ -789,6 +801,8 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
         $this->setIfExists('custom_fields', $data ?? [], null);
         $this->setIfExists('sandbox_settle_delay_in_seconds', $data ?? [], null);
         $this->setIfExists('due_date', $data ?? [], null);
+        $this->setIfExists('field_display_settings', $data ?? [], null);
+        $this->setIfExists('notification_role_ids', $data ?? [], null);
         $this->setIfExists('customer_name', $data ?? [], null);
     }
 
@@ -2711,6 +2725,74 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
             }
         }
         $this->container['due_date'] = $due_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets field_display_settings
+     *
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestFieldDisplaySetting[]|null
+     */
+    public function getFieldDisplaySettings()
+    {
+        return $this->container['field_display_settings'];
+    }
+
+    /**
+     * Sets field_display_settings
+     *
+     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestFieldDisplaySetting[]|null $field_display_settings A list of field display settings that control which fields are displayed to the payer.
+     *
+     * @return self
+     */
+    public function setFieldDisplaySettings($field_display_settings)
+    {
+        if (is_null($field_display_settings)) {
+            array_push($this->openAPINullablesSetToNull, 'field_display_settings');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('field_display_settings', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['field_display_settings'] = $field_display_settings;
+
+        return $this;
+    }
+
+    /**
+     * Gets notification_role_ids
+     *
+     * @return string[]|null
+     */
+    public function getNotificationRoleIds()
+    {
+        return $this->container['notification_role_ids'];
+    }
+
+    /**
+     * Sets notification_role_ids
+     *
+     * @param string[]|null $notification_role_ids A list of roles whose members will receive notifications about this payment request.
+     *
+     * @return self
+     */
+    public function setNotificationRoleIds($notification_role_ids)
+    {
+        if (is_null($notification_role_ids)) {
+            array_push($this->openAPINullablesSetToNull, 'notification_role_ids');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('notification_role_ids', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['notification_role_ids'] = $notification_role_ids;
 
         return $this;
     }

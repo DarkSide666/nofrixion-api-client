@@ -23,6 +23,8 @@ authoriseBeneficiary($id)
 
 Authorises a beneficiary.
 
+<b>Authorization</b>: Strong end user token is required.  <b>User permissions required</b>: CanAuthoriseBeneficiaries
+
 ### Example
 
 ```php
@@ -82,7 +84,7 @@ createBeneficiary($no_frixion_money_moov_models_beneficiary_create): \Nofrixion\
 
 Creates a new beneficiary.
 
-The authorisation requirements for a new beneficiary depend on each merchant's settings. By              default new beneficiaries do not require authorisation before being enabled.
+The authorisation requirements for a new beneficiary depend on each merchant's settings. By              default new beneficiaries do not require authorisation before being enabled.  <b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanCreateBeneficiaries
 
 ### Example
 
@@ -144,6 +146,8 @@ deleteBeneficiary($id)
 
 Deletes a beneficiary
 
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanDeleteBeneficiaries
+
 ### Example
 
 ```php
@@ -202,6 +206,8 @@ disableBeneficiary($id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBenefic
 ```
 
 Attempts to disable a beneficiary. If successful the beneficiary will be disabled.
+
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanEditBeneficiaries
 
 ### Example
 
@@ -263,6 +269,8 @@ enableBeneficiary($id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBenefici
 
 Attempts to enable a beneficiary. If successful the beneficiary will be enabled.
 
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanEditBeneficiaries
+
 ### Example
 
 ```php
@@ -322,6 +330,8 @@ exportBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, 
 ```
 
 Export beneficiaries to CSV.
+
+<b>Authorization</b>: End user token is required.
 
 ### Example
 
@@ -390,10 +400,12 @@ try {
 ## `getBeneficiaries()`
 
 ```php
-getBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse
+getBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort, $source_account_id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryPageResponse
 ```
 
 Gets a list of all beneficiaries.
+
+<b>Authorization</b>: End user token is required.
 
 ### Example
 
@@ -421,9 +433,10 @@ $search = 'search_example'; // string | The text filter used to retrieve the rec
 $currency = 'currency_example'; // string | The currency filter used to retrieve the records..
 $include_disabled = false; // bool | If set to true will include disabled beneficiaries as well
 $sort = 'sort_example'; // string | Optional expression to sort the order of the beneficiaries.
+$source_account_id = 'source_account_id_example'; // string | Optional. The ID of the source account to filter beneficiaries by.
 
 try {
-    $result = $apiInstance->getBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort);
+    $result = $apiInstance->getBeneficiaries($merchant_id, $page_number, $page_size, $search, $currency, $include_disabled, $sort, $source_account_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling BeneficiariesApi->getBeneficiaries: ', $e->getMessage(), PHP_EOL;
@@ -441,6 +454,7 @@ try {
 | **currency** | **string**| The currency filter used to retrieve the records.. | [optional] |
 | **include_disabled** | **bool**| If set to true will include disabled beneficiaries as well | [optional] [default to false] |
 | **sort** | **string**| Optional expression to sort the order of the beneficiaries. | [optional] |
+| **source_account_id** | **string**| Optional. The ID of the source account to filter beneficiaries by. | [optional] |
 
 ### Return type
 
@@ -466,6 +480,8 @@ getBeneficiary($id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiary
 ```
 
 Get's a beneficiary by beneficiary ID.
+
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanViewBeneficiaries
 
 ### Example
 
@@ -526,6 +542,8 @@ updateBeneficiary($id, $no_frixion_money_moov_models_beneficiary_update): \Nofri
 ```
 
 Updates a beneficiary.
+
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanEditBeneficiaries
 
 ### Example
 

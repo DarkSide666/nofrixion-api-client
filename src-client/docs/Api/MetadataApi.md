@@ -202,6 +202,8 @@ whoAmI(): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUser
 
 Returns the profile of the requesting user.
 
+<b>Authorization</b>: End user token is required.
+
 ### Example
 
 ```php
@@ -258,6 +260,8 @@ whoAmIMerchant(): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsMerchant
 ```
 
 Returns the name of the merchant that authentication token was issued for.
+
+<b>Authorization</b>: Merchant token is required.
 
 ### Example
 
@@ -316,6 +320,8 @@ whoAmIMerchantSigned(): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsMerchant
 
 Returns the name of a merchant that signed merchant token request was authenticated for.
 
+<b>Authorization</b>: Merchant token (HMAC signed and IP address whitelisted) is required.
+
 ### Example
 
 ```php
@@ -373,6 +379,8 @@ whoAmIMerchantWhitelist(): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsMerch
 
 Returns the name of the merchant that IP address whitelisted merchants token was issued for.
 
+<b>Authorization</b>:
+
 ### Example
 
 ```php
@@ -429,6 +437,8 @@ whoAmITrustedApplication(): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUser
 ```
 
 Returns the name of the trusted third party application user the request was authenticated for.
+
+<b>Authorization</b>: API key (HMAC signed and IP address whitelisted) is required.
 
 ### Example
 

@@ -60,7 +60,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateCustomField i
         'name' => 'string',
         'description' => 'string',
         'display_order' => 'int',
-        'display_for_payer' => 'bool',
+        'display_on_hosted_payment_page' => 'bool',
+        'display_on_payment_receipt' => 'bool',
         'requirement' => 'string'
     ];
 
@@ -75,7 +76,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateCustomField i
         'name' => null,
         'description' => null,
         'display_order' => 'int32',
-        'display_for_payer' => null,
+        'display_on_hosted_payment_page' => null,
+        'display_on_payment_receipt' => null,
         'requirement' => null
     ];
 
@@ -88,7 +90,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateCustomField i
         'name' => true,
         'description' => true,
         'display_order' => false,
-        'display_for_payer' => false,
+        'display_on_hosted_payment_page' => false,
+        'display_on_payment_receipt' => false,
         'requirement' => false
     ];
 
@@ -181,7 +184,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateCustomField i
         'name' => 'name',
         'description' => 'description',
         'display_order' => 'displayOrder',
-        'display_for_payer' => 'displayForPayer',
+        'display_on_hosted_payment_page' => 'displayOnHostedPaymentPage',
+        'display_on_payment_receipt' => 'displayOnPaymentReceipt',
         'requirement' => 'requirement'
     ];
 
@@ -194,7 +198,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateCustomField i
         'name' => 'setName',
         'description' => 'setDescription',
         'display_order' => 'setDisplayOrder',
-        'display_for_payer' => 'setDisplayForPayer',
+        'display_on_hosted_payment_page' => 'setDisplayOnHostedPaymentPage',
+        'display_on_payment_receipt' => 'setDisplayOnPaymentReceipt',
         'requirement' => 'setRequirement'
     ];
 
@@ -207,7 +212,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateCustomField i
         'name' => 'getName',
         'description' => 'getDescription',
         'display_order' => 'getDisplayOrder',
-        'display_for_payer' => 'getDisplayForPayer',
+        'display_on_hosted_payment_page' => 'getDisplayOnHostedPaymentPage',
+        'display_on_payment_receipt' => 'getDisplayOnPaymentReceipt',
         'requirement' => 'getRequirement'
     ];
 
@@ -288,7 +294,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateCustomField i
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('display_order', $data ?? [], null);
-        $this->setIfExists('display_for_payer', $data ?? [], null);
+        $this->setIfExists('display_on_hosted_payment_page', $data ?? [], null);
+        $this->setIfExists('display_on_payment_receipt', $data ?? [], null);
         $this->setIfExists('requirement', $data ?? [], null);
     }
 
@@ -445,28 +452,55 @@ class NoFrixionMoneyMoovModelsPaymentRequestsPaymentRequestTemplateCustomField i
     }
 
     /**
-     * Gets display_for_payer
+     * Gets display_on_hosted_payment_page
      *
      * @return bool|null
      */
-    public function getDisplayForPayer()
+    public function getDisplayOnHostedPaymentPage()
     {
-        return $this->container['display_for_payer'];
+        return $this->container['display_on_hosted_payment_page'];
     }
 
     /**
-     * Sets display_for_payer
+     * Sets display_on_hosted_payment_page
      *
-     * @param bool|null $display_for_payer display_for_payer
+     * @param bool|null $display_on_hosted_payment_page display_on_hosted_payment_page
      *
      * @return self
      */
-    public function setDisplayForPayer($display_for_payer)
+    public function setDisplayOnHostedPaymentPage($display_on_hosted_payment_page)
     {
-        if (is_null($display_for_payer)) {
-            throw new \InvalidArgumentException('non-nullable display_for_payer cannot be null');
+        if (is_null($display_on_hosted_payment_page)) {
+            throw new \InvalidArgumentException('non-nullable display_on_hosted_payment_page cannot be null');
         }
-        $this->container['display_for_payer'] = $display_for_payer;
+        $this->container['display_on_hosted_payment_page'] = $display_on_hosted_payment_page;
+
+        return $this;
+    }
+
+    /**
+     * Gets display_on_payment_receipt
+     *
+     * @return bool|null
+     */
+    public function getDisplayOnPaymentReceipt()
+    {
+        return $this->container['display_on_payment_receipt'];
+    }
+
+    /**
+     * Sets display_on_payment_receipt
+     *
+     * @param bool|null $display_on_payment_receipt display_on_payment_receipt
+     *
+     * @return self
+     */
+    public function setDisplayOnPaymentReceipt($display_on_payment_receipt)
+    {
+        if (is_null($display_on_payment_receipt)) {
+            throw new \InvalidArgumentException('non-nullable display_on_payment_receipt cannot be null');
+        }
+        $this->container['display_on_payment_receipt'] = $display_on_payment_receipt;
 
         return $this;
     }
