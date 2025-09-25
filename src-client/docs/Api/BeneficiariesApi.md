@@ -5,6 +5,7 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**authoriseBeneficiary()**](BeneficiariesApi.md#authoriseBeneficiary) | **POST** /api/v1/beneficiaries/authorise/{id} | Authorises a beneficiary. |
+| [**createBeneficiaries()**](BeneficiariesApi.md#createBeneficiaries) | **POST** /api/v1/beneficiaries/batchcreate | Creates beneficiaries in batch. |
 | [**createBeneficiary()**](BeneficiariesApi.md#createBeneficiary) | **POST** /api/v1/beneficiaries | Creates a new beneficiary. |
 | [**deleteBeneficiary()**](BeneficiariesApi.md#deleteBeneficiary) | **DELETE** /api/v1/beneficiaries/{id} | Deletes a beneficiary |
 | [**disableBeneficiary()**](BeneficiariesApi.md#disableBeneficiary) | **PUT** /api/v1/beneficiaries/disable/{id} | Attempts to disable a beneficiary. If successful the beneficiary will be disabled. |
@@ -71,6 +72,68 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `createBeneficiaries()`
+
+```php
+createBeneficiaries($no_frixion_money_moov_models_beneficiary_create): \Nofrixion\Client\Model\NoFrixionMoneyMoovApiFeaturesBeneficiariesBeneficiariesCreateResponse
+```
+
+Creates beneficiaries in batch.
+
+<b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanCreateBeneficiaries
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\BeneficiariesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$no_frixion_money_moov_models_beneficiary_create = array(new \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryCreate()); // \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryCreate[] | A list of objects containing the details of the beneficiaries to create.
+
+try {
+    $result = $apiInstance->createBeneficiaries($no_frixion_money_moov_models_beneficiary_create);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling BeneficiariesApi->createBeneficiaries: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **no_frixion_money_moov_models_beneficiary_create** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsBeneficiaryCreate[]**](../Model/NoFrixionMoneyMoovModelsBeneficiaryCreate.md)| A list of objects containing the details of the beneficiaries to create. | [optional] |
+
+### Return type
+
+[**\Nofrixion\Client\Model\NoFrixionMoneyMoovApiFeaturesBeneficiariesBeneficiariesCreateResponse**](../Model/NoFrixionMoneyMoovApiFeaturesBeneficiariesBeneficiariesCreateResponse.md)
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `text/plain`, `application/json`, `text/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)

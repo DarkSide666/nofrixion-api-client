@@ -614,6 +614,7 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
     public const PAYMENT_PROCESSOR_LIGHTNING = 'Lightning';
     public const PAYMENT_PROCESSOR_LIGHTNING_TESTNET = 'LightningTestnet';
     public const PAYMENT_PROCESSOR_BANKING_CIRCLE_DIRECT_DEBIT = 'BankingCircleDirectDebit';
+    public const PAYMENT_PROCESSOR_TECHNOXANDER = 'Technoxander';
     public const STATUS_NONE = 'None';
     public const STATUS_FULLY_PAID = 'FullyPaid';
     public const STATUS_PARTIALLY_PAID = 'PartiallyPaid';
@@ -696,6 +697,7 @@ class NoFrixionMoneyMoovModelsPaymentRequest implements ModelInterface, ArrayAcc
             self::PAYMENT_PROCESSOR_LIGHTNING,
             self::PAYMENT_PROCESSOR_LIGHTNING_TESTNET,
             self::PAYMENT_PROCESSOR_BANKING_CIRCLE_DIRECT_DEBIT,
+            self::PAYMENT_PROCESSOR_TECHNOXANDER,
         ];
     }
 

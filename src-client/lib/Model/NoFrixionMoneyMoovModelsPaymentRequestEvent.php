@@ -91,7 +91,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestEvent implements ModelInterface, Arr
         'card_expiry_month' => 'int',
         'card_last_four_digits' => 'string',
         'card_issuer' => 'string',
-        'card_issuer_country' => 'string'
+        'card_issuer_country' => 'string',
+        'payment_method_type' => 'string'
     ];
 
     /**
@@ -136,7 +137,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestEvent implements ModelInterface, Arr
         'card_expiry_month' => 'int32',
         'card_last_four_digits' => null,
         'card_issuer' => null,
-        'card_issuer_country' => null
+        'card_issuer_country' => null,
+        'payment_method_type' => null
     ];
 
     /**
@@ -179,7 +181,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestEvent implements ModelInterface, Arr
         'card_expiry_month' => true,
         'card_last_four_digits' => true,
         'card_issuer' => true,
-        'card_issuer_country' => true
+        'card_issuer_country' => true,
+        'payment_method_type' => false
     ];
 
     /**
@@ -302,7 +305,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestEvent implements ModelInterface, Arr
         'card_expiry_month' => 'cardExpiryMonth',
         'card_last_four_digits' => 'cardLastFourDigits',
         'card_issuer' => 'cardIssuer',
-        'card_issuer_country' => 'cardIssuerCountry'
+        'card_issuer_country' => 'cardIssuerCountry',
+        'payment_method_type' => 'paymentMethodType'
     ];
 
     /**
@@ -345,7 +349,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestEvent implements ModelInterface, Arr
         'card_expiry_month' => 'setCardExpiryMonth',
         'card_last_four_digits' => 'setCardLastFourDigits',
         'card_issuer' => 'setCardIssuer',
-        'card_issuer_country' => 'setCardIssuerCountry'
+        'card_issuer_country' => 'setCardIssuerCountry',
+        'payment_method_type' => 'setPaymentMethodType'
     ];
 
     /**
@@ -388,7 +393,8 @@ class NoFrixionMoneyMoovModelsPaymentRequestEvent implements ModelInterface, Arr
         'card_expiry_month' => 'getCardExpiryMonth',
         'card_last_four_digits' => 'getCardLastFourDigits',
         'card_issuer' => 'getCardIssuer',
-        'card_issuer_country' => 'getCardIssuerCountry'
+        'card_issuer_country' => 'getCardIssuerCountry',
+        'payment_method_type' => 'getPaymentMethodType'
     ];
 
     /**
@@ -479,8 +485,17 @@ class NoFrixionMoneyMoovModelsPaymentRequestEvent implements ModelInterface, Arr
     public const PAYMENT_PROCESSOR_NAME_LIGHTNING = 'Lightning';
     public const PAYMENT_PROCESSOR_NAME_LIGHTNING_TESTNET = 'LightningTestnet';
     public const PAYMENT_PROCESSOR_NAME_BANKING_CIRCLE_DIRECT_DEBIT = 'BankingCircleDirectDebit';
+    public const PAYMENT_PROCESSOR_NAME_TECHNOXANDER = 'Technoxander';
     public const WALLET_NAME_APPLE_PAY = 'ApplePay';
     public const WALLET_NAME_GOOGLE_PAY = 'GooglePay';
+    public const PAYMENT_METHOD_TYPE_NONE = 'None';
+    public const PAYMENT_METHOD_TYPE_CARD = 'card';
+    public const PAYMENT_METHOD_TYPE_PISP = 'pisp';
+    public const PAYMENT_METHOD_TYPE_LIGHTNING = 'lightning';
+    public const PAYMENT_METHOD_TYPE_CARDTOKEN = 'cardtoken';
+    public const PAYMENT_METHOD_TYPE_APPLE_PAY = 'applePay';
+    public const PAYMENT_METHOD_TYPE_GOOGLE_PAY = 'googlePay';
+    public const PAYMENT_METHOD_TYPE_DIRECT_DEBIT = 'directDebit';
 
     /**
      * Gets allowable values of the enum
@@ -559,6 +574,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestEvent implements ModelInterface, Arr
             self::PAYMENT_PROCESSOR_NAME_LIGHTNING,
             self::PAYMENT_PROCESSOR_NAME_LIGHTNING_TESTNET,
             self::PAYMENT_PROCESSOR_NAME_BANKING_CIRCLE_DIRECT_DEBIT,
+            self::PAYMENT_PROCESSOR_NAME_TECHNOXANDER,
         ];
     }
 
@@ -572,6 +588,25 @@ class NoFrixionMoneyMoovModelsPaymentRequestEvent implements ModelInterface, Arr
         return [
             self::WALLET_NAME_APPLE_PAY,
             self::WALLET_NAME_GOOGLE_PAY,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getPaymentMethodTypeAllowableValues()
+    {
+        return [
+            self::PAYMENT_METHOD_TYPE_NONE,
+            self::PAYMENT_METHOD_TYPE_CARD,
+            self::PAYMENT_METHOD_TYPE_PISP,
+            self::PAYMENT_METHOD_TYPE_LIGHTNING,
+            self::PAYMENT_METHOD_TYPE_CARDTOKEN,
+            self::PAYMENT_METHOD_TYPE_APPLE_PAY,
+            self::PAYMENT_METHOD_TYPE_GOOGLE_PAY,
+            self::PAYMENT_METHOD_TYPE_DIRECT_DEBIT,
         ];
     }
 
@@ -625,6 +660,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestEvent implements ModelInterface, Arr
         $this->setIfExists('card_last_four_digits', $data ?? [], null);
         $this->setIfExists('card_issuer', $data ?? [], null);
         $this->setIfExists('card_issuer_country', $data ?? [], null);
+        $this->setIfExists('payment_method_type', $data ?? [], null);
     }
 
     /**
@@ -689,6 +725,15 @@ class NoFrixionMoneyMoovModelsPaymentRequestEvent implements ModelInterface, Arr
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'wallet_name', must be one of '%s'",
                 $this->container['wallet_name'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getPaymentMethodTypeAllowableValues();
+        if (!is_null($this->container['payment_method_type']) && !in_array($this->container['payment_method_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'payment_method_type', must be one of '%s'",
+                $this->container['payment_method_type'],
                 implode("', '", $allowedValues)
             );
         }
@@ -1885,6 +1930,43 @@ class NoFrixionMoneyMoovModelsPaymentRequestEvent implements ModelInterface, Arr
             }
         }
         $this->container['card_issuer_country'] = $card_issuer_country;
+
+        return $this;
+    }
+
+    /**
+     * Gets payment_method_type
+     *
+     * @return string|null
+     */
+    public function getPaymentMethodType()
+    {
+        return $this->container['payment_method_type'];
+    }
+
+    /**
+     * Sets payment_method_type
+     *
+     * @param string|null $payment_method_type The type of payment method the event relates to, e.g. card, pisp, etc.
+     *
+     * @return self
+     */
+    public function setPaymentMethodType($payment_method_type)
+    {
+        if (is_null($payment_method_type)) {
+            throw new \InvalidArgumentException('non-nullable payment_method_type cannot be null');
+        }
+        $allowedValues = $this->getPaymentMethodTypeAllowableValues();
+        if (!in_array($payment_method_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'payment_method_type', must be one of '%s'",
+                    $payment_method_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['payment_method_type'] = $payment_method_type;
 
         return $this;
     }

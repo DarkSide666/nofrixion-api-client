@@ -11,8 +11,11 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 | [**deletePayout()**](PayoutsApi.md#deletePayout) | **DELETE** /api/v1/payouts/{id} | Deletes a payout record. |
 | [**deletePayouts()**](PayoutsApi.md#deletePayouts) | **DELETE** /api/v1/payouts/batchdelete | Deletes a list of payout records. |
 | [**exportPayouts()**](PayoutsApi.md#exportPayouts) | **GET** /api/v1/payouts/export | Exports a list of all payouts for a specific merchant to a CSV file. |
+| [**getAllFxHeldRates()**](PayoutsApi.md#getAllFxHeldRates) | **GET** /api/v1/payouts/fxallheldrates/{source}/{destination} | Get all FX held rates. |
 | [**getBatchPayout()**](PayoutsApi.md#getBatchPayout) | **GET** /api/v1/payouts/batch/{id} | Gets a list of all the payouts contained in a batch. |
 | [**getFailedPayouts()**](PayoutsApi.md#getFailedPayouts) | **GET** /api/v1/payouts/{merchantID}/failed | Get failed payouts for a specific merchant. |
+| [**getFxHeldRate()**](PayoutsApi.md#getFxHeldRate) | **GET** /api/v1/payouts/fxheldrate/{source}/{destination}/{validForMinutes} | Gets an FX held rate. |
+| [**getFxQuote()**](PayoutsApi.md#getFxQuote) | **GET** /api/v1/payouts/fxquote/{source}/{destination}/{amount} | Gets an FX quote. |
 | [**getPayout()**](PayoutsApi.md#getPayout) | **GET** /api/v1/payouts/{id} | Gets a single payout. |
 | [**getPayoutMetrics()**](PayoutsApi.md#getPayoutMetrics) | **GET** /api/v1/payouts/metrics | Gets a list of all payout metrics for a specific merchant. |
 | [**getPayoutProof()**](PayoutsApi.md#getPayoutProof) | **GET** /api/v1/payouts/{id}/proof | Generates a proof of payment PDF document with the details of a payout. |
@@ -479,6 +482,70 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `getAllFxHeldRates()`
+
+```php
+getAllFxHeldRates($source, $destination): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsFxRate[]
+```
+
+Get all FX held rates.
+
+Gets all the available FX held rates for a specific source and destination currency. A held rate can be used  with a multi-currency payout by setting the quote ID on the payout.  <b>Authorization</b>: End user or Merchant token is required.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\PayoutsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$source = 'source_example'; // string | The source currency to get the the FX held rates for.
+$destination = 'destination_example'; // string | The destination currency to get the FX held rates for.
+
+try {
+    $result = $apiInstance->getAllFxHeldRates($source, $destination);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PayoutsApi->getAllFxHeldRates: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **source** | **string**| The source currency to get the the FX held rates for. | |
+| **destination** | **string**| The destination currency to get the FX held rates for. | |
+
+### Return type
+
+[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsFxRate[]**](../Model/NoFrixionMoneyMoovModelsFxRate.md)
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `text/plain`, `application/json`, `text/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `getBatchPayout()`
 
 ```php
@@ -593,6 +660,138 @@ try {
 ### Return type
 
 [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPayoutKeysetPageResponse**](../Model/NoFrixionMoneyMoovModelsPayoutKeysetPageResponse.md)
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `text/plain`, `application/json`, `text/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getFxHeldRate()`
+
+```php
+getFxHeldRate($source, $destination, $valid_for_minutes): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsFxRate
+```
+
+Gets an FX held rate.
+
+A held rate differs from an indicative rate in that it is a guaranteed rate for a specific period of time.  The maximum validity validity period a held rate can be obtained for is 24 hours.  <b>Authorization</b>: End user or Merchant token is required.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\PayoutsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$source = 'source_example'; // string | The source currency for the FX held rate.
+$destination = 'destination_example'; // string | The destination currency for the FX held rate.
+$valid_for_minutes = 56; // int | The number of minutes the held rate is being requested for.
+
+try {
+    $result = $apiInstance->getFxHeldRate($source, $destination, $valid_for_minutes);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PayoutsApi->getFxHeldRate: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **source** | **string**| The source currency for the FX held rate. | |
+| **destination** | **string**| The destination currency for the FX held rate. | |
+| **valid_for_minutes** | **int**| The number of minutes the held rate is being requested for. | |
+
+### Return type
+
+[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsFxRate**](../Model/NoFrixionMoneyMoovModelsFxRate.md)
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `text/plain`, `application/json`, `text/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getFxQuote()`
+
+```php
+getFxQuote($source, $destination, $amount): float
+```
+
+Gets an FX quote.
+
+An FX quote is an indicative FX rate for the amount, source and destination currencies. The  rate is not guaranteed and is subject to change.  <b>Authorization</b>: End user or Merchant token is required.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\PayoutsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$source = 'source_example'; // string | The source currency for the FX quote.
+$destination = 'destination_example'; // string | The destination currency for the FX quote.
+$amount = 3.4; // float | The amount to convert from the source to the destination currency.
+
+try {
+    $result = $apiInstance->getFxQuote($source, $destination, $amount);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PayoutsApi->getFxQuote: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **source** | **string**| The source currency for the FX quote. | |
+| **destination** | **string**| The destination currency for the FX quote. | |
+| **amount** | **float**| The amount to convert from the source to the destination currency. | |
+
+### Return type
+
+**float**
 
 ### Authorization
 

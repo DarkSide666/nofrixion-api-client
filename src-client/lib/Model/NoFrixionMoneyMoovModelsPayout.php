@@ -123,7 +123,9 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'fx_destination_amount' => 'float',
         'fx_use_destination_amount' => 'bool',
         'fx_destination_amount_minor_units' => 'int',
-        'formatted_fx_destination_amount' => 'string'
+        'formatted_fx_destination_amount' => 'string',
+        'fx_quote_id' => 'string',
+        'fx_quote_expires_at' => '\DateTime'
     ];
 
     /**
@@ -200,7 +202,9 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'fx_destination_amount' => 'double',
         'fx_use_destination_amount' => null,
         'fx_destination_amount_minor_units' => 'int64',
-        'formatted_fx_destination_amount' => null
+        'formatted_fx_destination_amount' => null,
+        'fx_quote_id' => null,
+        'fx_quote_expires_at' => 'date-time'
     ];
 
     /**
@@ -275,7 +279,9 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'fx_destination_amount' => true,
         'fx_use_destination_amount' => false,
         'fx_destination_amount_minor_units' => true,
-        'formatted_fx_destination_amount' => true
+        'formatted_fx_destination_amount' => true,
+        'fx_quote_id' => true,
+        'fx_quote_expires_at' => true
     ];
 
     /**
@@ -430,7 +436,9 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'fx_destination_amount' => 'fxDestinationAmount',
         'fx_use_destination_amount' => 'fxUseDestinationAmount',
         'fx_destination_amount_minor_units' => 'fxDestinationAmountMinorUnits',
-        'formatted_fx_destination_amount' => 'formattedFxDestinationAmount'
+        'formatted_fx_destination_amount' => 'formattedFxDestinationAmount',
+        'fx_quote_id' => 'fxQuoteID',
+        'fx_quote_expires_at' => 'fxQuoteExpiresAt'
     ];
 
     /**
@@ -505,7 +513,9 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'fx_destination_amount' => 'setFxDestinationAmount',
         'fx_use_destination_amount' => 'setFxUseDestinationAmount',
         'fx_destination_amount_minor_units' => 'setFxDestinationAmountMinorUnits',
-        'formatted_fx_destination_amount' => 'setFormattedFxDestinationAmount'
+        'formatted_fx_destination_amount' => 'setFormattedFxDestinationAmount',
+        'fx_quote_id' => 'setFxQuoteId',
+        'fx_quote_expires_at' => 'setFxQuoteExpiresAt'
     ];
 
     /**
@@ -580,7 +590,9 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         'fx_destination_amount' => 'getFxDestinationAmount',
         'fx_use_destination_amount' => 'getFxUseDestinationAmount',
         'fx_destination_amount_minor_units' => 'getFxDestinationAmountMinorUnits',
-        'formatted_fx_destination_amount' => 'getFormattedFxDestinationAmount'
+        'formatted_fx_destination_amount' => 'getFormattedFxDestinationAmount',
+        'fx_quote_id' => 'getFxQuoteId',
+        'fx_quote_expires_at' => 'getFxQuoteExpiresAt'
     ];
 
     /**
@@ -670,6 +682,7 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
     public const PAYMENT_PROCESSOR_LIGHTNING = 'Lightning';
     public const PAYMENT_PROCESSOR_LIGHTNING_TESTNET = 'LightningTestnet';
     public const PAYMENT_PROCESSOR_BANKING_CIRCLE_DIRECT_DEBIT = 'BankingCircleDirectDebit';
+    public const PAYMENT_PROCESSOR_TECHNOXANDER = 'Technoxander';
     public const PAYMENT_RAIL__DEFAULT = 'Default';
     public const PAYMENT_RAIL_SEPA_CT = 'SEPA_CT';
     public const PAYMENT_RAIL_SEPA_INST = 'SEPA_INST';
@@ -793,6 +806,7 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
             self::PAYMENT_PROCESSOR_LIGHTNING,
             self::PAYMENT_PROCESSOR_LIGHTNING_TESTNET,
             self::PAYMENT_PROCESSOR_BANKING_CIRCLE_DIRECT_DEBIT,
+            self::PAYMENT_PROCESSOR_TECHNOXANDER,
         ];
     }
 
@@ -924,6 +938,8 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('fx_use_destination_amount', $data ?? [], null);
         $this->setIfExists('fx_destination_amount_minor_units', $data ?? [], null);
         $this->setIfExists('formatted_fx_destination_amount', $data ?? [], null);
+        $this->setIfExists('fx_quote_id', $data ?? [], null);
+        $this->setIfExists('fx_quote_expires_at', $data ?? [], null);
     }
 
     /**
@@ -3207,6 +3223,74 @@ class NoFrixionMoneyMoovModelsPayout implements ModelInterface, ArrayAccess, \Js
             }
         }
         $this->container['formatted_fx_destination_amount'] = $formatted_fx_destination_amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets fx_quote_id
+     *
+     * @return string|null
+     */
+    public function getFxQuoteId()
+    {
+        return $this->container['fx_quote_id'];
+    }
+
+    /**
+     * Sets fx_quote_id
+     *
+     * @param string|null $fx_quote_id Optional. For multi-currency payouts this is the ID of the held rate that was set for the FX conversion. If  empty it indicates the mid-market FX rate is being be used.
+     *
+     * @return self
+     */
+    public function setFxQuoteId($fx_quote_id)
+    {
+        if (is_null($fx_quote_id)) {
+            array_push($this->openAPINullablesSetToNull, 'fx_quote_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('fx_quote_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['fx_quote_id'] = $fx_quote_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets fx_quote_expires_at
+     *
+     * @return \DateTime|null
+     */
+    public function getFxQuoteExpiresAt()
+    {
+        return $this->container['fx_quote_expires_at'];
+    }
+
+    /**
+     * Sets fx_quote_expires_at
+     *
+     * @param \DateTime|null $fx_quote_expires_at If an FX held rate quote ID is being used this is the time the quote expires.
+     *
+     * @return self
+     */
+    public function setFxQuoteExpiresAt($fx_quote_expires_at)
+    {
+        if (is_null($fx_quote_expires_at)) {
+            array_push($this->openAPINullablesSetToNull, 'fx_quote_expires_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('fx_quote_expires_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['fx_quote_expires_at'] = $fx_quote_expires_at;
 
         return $this;
     }

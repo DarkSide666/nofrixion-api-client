@@ -74,7 +74,7 @@ class UserApi
         'getUser' => [
             'application/json',
         ],
-        'getUsers' => [
+        'getUsersPaged' => [
             'application/json',
         ],
         'updateUser' => [
@@ -422,38 +422,46 @@ class UserApi
     }
 
     /**
-     * Operation getUsers
+     * Operation getUsersPaged
      *
-     * Gets all users including invitees for a merchant.
+     * Gets a paged list of users.
      *
-     * @param  string $merchant_id The ID of the merchant to get the user roles for. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUsers'] to see the possible values for this operation
+     * @param  string $merchant_id The ID of the merchant to get the users for. (required)
+     * @param  int $page_number The page number (optional, default to 1)
+     * @param  int $page_size The page size (optional, default to 20)
+     * @param  string $search A search filter to apply to the user list. Typically searches against first name, last name and email address. (optional)
+     * @param  string $sort The sort expression for the result set, e.g., \&quot;FirstName asc\&quot;. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUsersPaged'] to see the possible values for this operation
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUser
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserPageResponse
      */
-    public function getUsers($merchant_id, string $contentType = self::contentTypes['getUsers'][0])
+    public function getUsersPaged($merchant_id, $page_number = 1, $page_size = 20, $search = null, $sort = null, string $contentType = self::contentTypes['getUsersPaged'][0])
     {
-        list($response) = $this->getUsersWithHttpInfo($merchant_id, $contentType);
+        list($response) = $this->getUsersPagedWithHttpInfo($merchant_id, $page_number, $page_size, $search, $sort, $contentType);
         return $response;
     }
 
     /**
-     * Operation getUsersWithHttpInfo
+     * Operation getUsersPagedWithHttpInfo
      *
-     * Gets all users including invitees for a merchant.
+     * Gets a paged list of users.
      *
-     * @param  string $merchant_id The ID of the merchant to get the user roles for. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUsers'] to see the possible values for this operation
+     * @param  string $merchant_id The ID of the merchant to get the users for. (required)
+     * @param  int $page_number The page number (optional, default to 1)
+     * @param  int $page_size The page size (optional, default to 20)
+     * @param  string $search A search filter to apply to the user list. Typically searches against first name, last name and email address. (optional)
+     * @param  string $sort The sort expression for the result set, e.g., \&quot;FirstName asc\&quot;. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUsersPaged'] to see the possible values for this operation
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUser, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserPageResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getUsersWithHttpInfo($merchant_id, string $contentType = self::contentTypes['getUsers'][0])
+    public function getUsersPagedWithHttpInfo($merchant_id, $page_number = 1, $page_size = 20, $search = null, $sort = null, string $contentType = self::contentTypes['getUsersPaged'][0])
     {
-        $request = $this->getUsersRequest($merchant_id, $contentType);
+        $request = $this->getUsersPagedRequest($merchant_id, $page_number, $page_size, $search, $sort, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -480,11 +488,11 @@ class UserApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUser' === '\SplFileObject') {
+                    if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserPageResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUser' !== 'string') {
+                        if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserPageResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -502,7 +510,7 @@ class UserApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUser', []),
+                        ObjectSerializer::deserialize($content, '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserPageResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -521,7 +529,7 @@ class UserApi
                 );
             }
 
-            $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUser';
+            $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserPageResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -554,7 +562,7 @@ class UserApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUser',
+                        '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserPageResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -565,19 +573,23 @@ class UserApi
     }
 
     /**
-     * Operation getUsersAsync
+     * Operation getUsersPagedAsync
      *
-     * Gets all users including invitees for a merchant.
+     * Gets a paged list of users.
      *
-     * @param  string $merchant_id The ID of the merchant to get the user roles for. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUsers'] to see the possible values for this operation
+     * @param  string $merchant_id The ID of the merchant to get the users for. (required)
+     * @param  int $page_number The page number (optional, default to 1)
+     * @param  int $page_size The page size (optional, default to 20)
+     * @param  string $search A search filter to apply to the user list. Typically searches against first name, last name and email address. (optional)
+     * @param  string $sort The sort expression for the result set, e.g., \&quot;FirstName asc\&quot;. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUsersPaged'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getUsersAsync($merchant_id, string $contentType = self::contentTypes['getUsers'][0])
+    public function getUsersPagedAsync($merchant_id, $page_number = 1, $page_size = 20, $search = null, $sort = null, string $contentType = self::contentTypes['getUsersPaged'][0])
     {
-        return $this->getUsersAsyncWithHttpInfo($merchant_id, $contentType)
+        return $this->getUsersPagedAsyncWithHttpInfo($merchant_id, $page_number, $page_size, $search, $sort, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -586,20 +598,24 @@ class UserApi
     }
 
     /**
-     * Operation getUsersAsyncWithHttpInfo
+     * Operation getUsersPagedAsyncWithHttpInfo
      *
-     * Gets all users including invitees for a merchant.
+     * Gets a paged list of users.
      *
-     * @param  string $merchant_id The ID of the merchant to get the user roles for. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUsers'] to see the possible values for this operation
+     * @param  string $merchant_id The ID of the merchant to get the users for. (required)
+     * @param  int $page_number The page number (optional, default to 1)
+     * @param  int $page_size The page size (optional, default to 20)
+     * @param  string $search A search filter to apply to the user list. Typically searches against first name, last name and email address. (optional)
+     * @param  string $sort The sort expression for the result set, e.g., \&quot;FirstName asc\&quot;. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUsersPaged'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getUsersAsyncWithHttpInfo($merchant_id, string $contentType = self::contentTypes['getUsers'][0])
+    public function getUsersPagedAsyncWithHttpInfo($merchant_id, $page_number = 1, $page_size = 20, $search = null, $sort = null, string $contentType = self::contentTypes['getUsersPaged'][0])
     {
-        $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUser';
-        $request = $this->getUsersRequest($merchant_id, $contentType);
+        $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserPageResponse';
+        $request = $this->getUsersPagedRequest($merchant_id, $page_number, $page_size, $search, $sort, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -638,32 +654,76 @@ class UserApi
     }
 
     /**
-     * Create request for operation 'getUsers'
+     * Create request for operation 'getUsersPaged'
      *
-     * @param  string $merchant_id The ID of the merchant to get the user roles for. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUsers'] to see the possible values for this operation
+     * @param  string $merchant_id The ID of the merchant to get the users for. (required)
+     * @param  int $page_number The page number (optional, default to 1)
+     * @param  int $page_size The page size (optional, default to 20)
+     * @param  string $search A search filter to apply to the user list. Typically searches against first name, last name and email address. (optional)
+     * @param  string $sort The sort expression for the result set, e.g., \&quot;FirstName asc\&quot;. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getUsersPaged'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getUsersRequest($merchant_id, string $contentType = self::contentTypes['getUsers'][0])
+    public function getUsersPagedRequest($merchant_id, $page_number = 1, $page_size = 20, $search = null, $sort = null, string $contentType = self::contentTypes['getUsersPaged'][0])
     {
 
         // verify the required parameter 'merchant_id' is set
         if ($merchant_id === null || (is_array($merchant_id) && count($merchant_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $merchant_id when calling getUsers'
+                'Missing the required parameter $merchant_id when calling getUsersPaged'
             );
         }
 
 
-        $resourcePath = '/api/v1/user/{merchantID}/users';
+
+
+
+
+        $resourcePath = '/api/v1/user/{merchantID}/userspaged';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page_number,
+            'pageNumber', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page_size,
+            'pageSize', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $search,
+            'search', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params

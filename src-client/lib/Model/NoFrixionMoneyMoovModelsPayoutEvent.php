@@ -63,7 +63,9 @@ class NoFrixionMoneyMoovModelsPayoutEvent implements ModelInterface, ArrayAccess
         'status' => 'string',
         'event_type' => 'string',
         'rule_name' => 'string',
-        'error_reason' => 'string'
+        'error_reason' => 'string',
+        'supplier_payee_verification_result' => 'string',
+        'payee_verified_account_name' => 'string'
     ];
 
     /**
@@ -80,7 +82,9 @@ class NoFrixionMoneyMoovModelsPayoutEvent implements ModelInterface, ArrayAccess
         'status' => null,
         'event_type' => null,
         'rule_name' => null,
-        'error_reason' => null
+        'error_reason' => null,
+        'supplier_payee_verification_result' => null,
+        'payee_verified_account_name' => null
     ];
 
     /**
@@ -95,7 +99,9 @@ class NoFrixionMoneyMoovModelsPayoutEvent implements ModelInterface, ArrayAccess
         'status' => false,
         'event_type' => false,
         'rule_name' => true,
-        'error_reason' => true
+        'error_reason' => true,
+        'supplier_payee_verification_result' => true,
+        'payee_verified_account_name' => true
     ];
 
     /**
@@ -190,7 +196,9 @@ class NoFrixionMoneyMoovModelsPayoutEvent implements ModelInterface, ArrayAccess
         'status' => 'status',
         'event_type' => 'eventType',
         'rule_name' => 'ruleName',
-        'error_reason' => 'errorReason'
+        'error_reason' => 'errorReason',
+        'supplier_payee_verification_result' => 'supplierPayeeVerificationResult',
+        'payee_verified_account_name' => 'payeeVerifiedAccountName'
     ];
 
     /**
@@ -205,7 +213,9 @@ class NoFrixionMoneyMoovModelsPayoutEvent implements ModelInterface, ArrayAccess
         'status' => 'setStatus',
         'event_type' => 'setEventType',
         'rule_name' => 'setRuleName',
-        'error_reason' => 'setErrorReason'
+        'error_reason' => 'setErrorReason',
+        'supplier_payee_verification_result' => 'setSupplierPayeeVerificationResult',
+        'payee_verified_account_name' => 'setPayeeVerifiedAccountName'
     ];
 
     /**
@@ -220,7 +230,9 @@ class NoFrixionMoneyMoovModelsPayoutEvent implements ModelInterface, ArrayAccess
         'status' => 'getStatus',
         'event_type' => 'getEventType',
         'rule_name' => 'getRuleName',
-        'error_reason' => 'getErrorReason'
+        'error_reason' => 'getErrorReason',
+        'supplier_payee_verification_result' => 'getSupplierPayeeVerificationResult',
+        'payee_verified_account_name' => 'getPayeeVerifiedAccountName'
     ];
 
     /**
@@ -291,6 +303,10 @@ class NoFrixionMoneyMoovModelsPayoutEvent implements ModelInterface, ArrayAccess
     public const EVENT_TYPE_TRUSTED_AUTHORISE = 'TrustedAuthorise';
     public const EVENT_TYPE_SIGNED = 'Signed';
     public const EVENT_TYPE_BENEFICIARY_ENABLED = 'BeneficiaryEnabled';
+    public const EVENT_TYPE_SUBMIT_ATTEMPT_ERROR = 'SubmitAttemptError';
+    public const EVENT_TYPE_PAYEE_VERIFICATION_INITIATED = 'PayeeVerificationInitiated';
+    public const EVENT_TYPE_PAYEE_VERIFICATION_COMPLETE = 'PayeeVerificationComplete';
+    public const EVENT_TYPE_PAYEE_VERIFICATION_FAILED = 'PayeeVerificationFailed';
 
     /**
      * Gets allowable values of the enum
@@ -338,6 +354,10 @@ class NoFrixionMoneyMoovModelsPayoutEvent implements ModelInterface, ArrayAccess
             self::EVENT_TYPE_TRUSTED_AUTHORISE,
             self::EVENT_TYPE_SIGNED,
             self::EVENT_TYPE_BENEFICIARY_ENABLED,
+            self::EVENT_TYPE_SUBMIT_ATTEMPT_ERROR,
+            self::EVENT_TYPE_PAYEE_VERIFICATION_INITIATED,
+            self::EVENT_TYPE_PAYEE_VERIFICATION_COMPLETE,
+            self::EVENT_TYPE_PAYEE_VERIFICATION_FAILED,
         ];
     }
 
@@ -363,6 +383,8 @@ class NoFrixionMoneyMoovModelsPayoutEvent implements ModelInterface, ArrayAccess
         $this->setIfExists('event_type', $data ?? [], null);
         $this->setIfExists('rule_name', $data ?? [], null);
         $this->setIfExists('error_reason', $data ?? [], null);
+        $this->setIfExists('supplier_payee_verification_result', $data ?? [], null);
+        $this->setIfExists('payee_verified_account_name', $data ?? [], null);
     }
 
     /**
@@ -651,6 +673,74 @@ class NoFrixionMoneyMoovModelsPayoutEvent implements ModelInterface, ArrayAccess
             }
         }
         $this->container['error_reason'] = $error_reason;
+
+        return $this;
+    }
+
+    /**
+     * Gets supplier_payee_verification_result
+     *
+     * @return string|null
+     */
+    public function getSupplierPayeeVerificationResult()
+    {
+        return $this->container['supplier_payee_verification_result'];
+    }
+
+    /**
+     * Sets supplier_payee_verification_result
+     *
+     * @param string|null $supplier_payee_verification_result If this event is a payee verification event, this contains the result of the verification.
+     *
+     * @return self
+     */
+    public function setSupplierPayeeVerificationResult($supplier_payee_verification_result)
+    {
+        if (is_null($supplier_payee_verification_result)) {
+            array_push($this->openAPINullablesSetToNull, 'supplier_payee_verification_result');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('supplier_payee_verification_result', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['supplier_payee_verification_result'] = $supplier_payee_verification_result;
+
+        return $this;
+    }
+
+    /**
+     * Gets payee_verified_account_name
+     *
+     * @return string|null
+     */
+    public function getPayeeVerifiedAccountName()
+    {
+        return $this->container['payee_verified_account_name'];
+    }
+
+    /**
+     * Sets payee_verified_account_name
+     *
+     * @param string|null $payee_verified_account_name If this event is a payee verification complete event and the result is a close match,  this contains the actual verified name returned by the payee verification supplier.
+     *
+     * @return self
+     */
+    public function setPayeeVerifiedAccountName($payee_verified_account_name)
+    {
+        if (is_null($payee_verified_account_name)) {
+            array_push($this->openAPINullablesSetToNull, 'payee_verified_account_name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('payee_verified_account_name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['payee_verified_account_name'] = $payee_verified_account_name;
 
         return $this;
     }

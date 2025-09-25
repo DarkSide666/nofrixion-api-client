@@ -73,6 +73,12 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         'your_role_name' => 'string',
         'logo_url_png' => 'string',
         'logo_url_svg' => 'string',
+        'notes' => 'string',
+        'is_blocked' => 'bool',
+        'is_exited' => 'bool',
+        'is_suspended' => 'bool',
+        'suspension_reason' => 'string',
+        'time_zone_id' => 'string',
         'tags' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsTag[]',
         'payment_accounts' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount[]',
         'account_currencies' => 'string[]'
@@ -102,6 +108,12 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         'your_role_name' => null,
         'logo_url_png' => null,
         'logo_url_svg' => null,
+        'notes' => null,
+        'is_blocked' => null,
+        'is_exited' => null,
+        'is_suspended' => null,
+        'suspension_reason' => null,
+        'time_zone_id' => null,
         'tags' => null,
         'payment_accounts' => null,
         'account_currencies' => null
@@ -129,6 +141,12 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         'your_role_name' => true,
         'logo_url_png' => true,
         'logo_url_svg' => true,
+        'notes' => true,
+        'is_blocked' => false,
+        'is_exited' => false,
+        'is_suspended' => false,
+        'suspension_reason' => true,
+        'time_zone_id' => true,
         'tags' => true,
         'payment_accounts' => true,
         'account_currencies' => true
@@ -236,6 +254,12 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         'your_role_name' => 'yourRoleName',
         'logo_url_png' => 'logoUrlPng',
         'logo_url_svg' => 'logoUrlSvg',
+        'notes' => 'notes',
+        'is_blocked' => 'isBlocked',
+        'is_exited' => 'isExited',
+        'is_suspended' => 'isSuspended',
+        'suspension_reason' => 'suspensionReason',
+        'time_zone_id' => 'timeZoneId',
         'tags' => 'tags',
         'payment_accounts' => 'paymentAccounts',
         'account_currencies' => 'accountCurrencies'
@@ -263,6 +287,12 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         'your_role_name' => 'setYourRoleName',
         'logo_url_png' => 'setLogoUrlPng',
         'logo_url_svg' => 'setLogoUrlSvg',
+        'notes' => 'setNotes',
+        'is_blocked' => 'setIsBlocked',
+        'is_exited' => 'setIsExited',
+        'is_suspended' => 'setIsSuspended',
+        'suspension_reason' => 'setSuspensionReason',
+        'time_zone_id' => 'setTimeZoneId',
         'tags' => 'setTags',
         'payment_accounts' => 'setPaymentAccounts',
         'account_currencies' => 'setAccountCurrencies'
@@ -290,6 +320,12 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         'your_role_name' => 'getYourRoleName',
         'logo_url_png' => 'getLogoUrlPng',
         'logo_url_svg' => 'getLogoUrlSvg',
+        'notes' => 'getNotes',
+        'is_blocked' => 'getIsBlocked',
+        'is_exited' => 'getIsExited',
+        'is_suspended' => 'getIsSuspended',
+        'suspension_reason' => 'getSuspensionReason',
+        'time_zone_id' => 'getTimeZoneId',
         'tags' => 'getTags',
         'payment_accounts' => 'getPaymentAccounts',
         'account_currencies' => 'getAccountCurrencies'
@@ -433,6 +469,12 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
         $this->setIfExists('your_role_name', $data ?? [], null);
         $this->setIfExists('logo_url_png', $data ?? [], null);
         $this->setIfExists('logo_url_svg', $data ?? [], null);
+        $this->setIfExists('notes', $data ?? [], null);
+        $this->setIfExists('is_blocked', $data ?? [], null);
+        $this->setIfExists('is_exited', $data ?? [], null);
+        $this->setIfExists('is_suspended', $data ?? [], null);
+        $this->setIfExists('suspension_reason', $data ?? [], null);
+        $this->setIfExists('time_zone_id', $data ?? [], null);
         $this->setIfExists('tags', $data ?? [], null);
         $this->setIfExists('payment_accounts', $data ?? [], null);
         $this->setIfExists('account_currencies', $data ?? [], null);
@@ -999,6 +1041,189 @@ class NoFrixionMoneyMoovModelsMerchant implements ModelInterface, ArrayAccess, \
             }
         }
         $this->container['logo_url_svg'] = $logo_url_svg;
+
+        return $this;
+    }
+
+    /**
+     * Gets notes
+     *
+     * @return string|null
+     */
+    public function getNotes()
+    {
+        return $this->container['notes'];
+    }
+
+    /**
+     * Sets notes
+     *
+     * @param string|null $notes The notes field is an optional free text field that can be used to store any additional information about the merchant.
+     *
+     * @return self
+     */
+    public function setNotes($notes)
+    {
+        if (is_null($notes)) {
+            array_push($this->openAPINullablesSetToNull, 'notes');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('notes', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['notes'] = $notes;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_blocked
+     *
+     * @return bool|null
+     */
+    public function getIsBlocked()
+    {
+        return $this->container['is_blocked'];
+    }
+
+    /**
+     * Sets is_blocked
+     *
+     * @param bool|null $is_blocked The merchant is blocked from making payments (payouts).
+     *
+     * @return self
+     */
+    public function setIsBlocked($is_blocked)
+    {
+        if (is_null($is_blocked)) {
+            throw new \InvalidArgumentException('non-nullable is_blocked cannot be null');
+        }
+        $this->container['is_blocked'] = $is_blocked;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_exited
+     *
+     * @return bool|null
+     */
+    public function getIsExited()
+    {
+        return $this->container['is_exited'];
+    }
+
+    /**
+     * Sets is_exited
+     *
+     * @param bool|null $is_exited The merchant has formally terminated their relationship  and is no longer a customer.
+     *
+     * @return self
+     */
+    public function setIsExited($is_exited)
+    {
+        if (is_null($is_exited)) {
+            throw new \InvalidArgumentException('non-nullable is_exited cannot be null');
+        }
+        $this->container['is_exited'] = $is_exited;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_suspended
+     *
+     * @return bool|null
+     */
+    public function getIsSuspended()
+    {
+        return $this->container['is_suspended'];
+    }
+
+    /**
+     * Sets is_suspended
+     *
+     * @param bool|null $is_suspended The merchant has temporarily suspended their own account.  This is a merchant-initiated action to temporarily pause services.
+     *
+     * @return self
+     */
+    public function setIsSuspended($is_suspended)
+    {
+        if (is_null($is_suspended)) {
+            throw new \InvalidArgumentException('non-nullable is_suspended cannot be null');
+        }
+        $this->container['is_suspended'] = $is_suspended;
+
+        return $this;
+    }
+
+    /**
+     * Gets suspension_reason
+     *
+     * @return string|null
+     */
+    public function getSuspensionReason()
+    {
+        return $this->container['suspension_reason'];
+    }
+
+    /**
+     * Sets suspension_reason
+     *
+     * @param string|null $suspension_reason The reason for the suspension, provided by the merchant.  This should provide a clear explanation as to why the account was suspended.
+     *
+     * @return self
+     */
+    public function setSuspensionReason($suspension_reason)
+    {
+        if (is_null($suspension_reason)) {
+            array_push($this->openAPINullablesSetToNull, 'suspension_reason');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('suspension_reason', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['suspension_reason'] = $suspension_reason;
+
+        return $this;
+    }
+
+    /**
+     * Gets time_zone_id
+     *
+     * @return string|null
+     */
+    public function getTimeZoneId()
+    {
+        return $this->container['time_zone_id'];
+    }
+
+    /**
+     * Sets time_zone_id
+     *
+     * @param string|null $time_zone_id The IANA (Internet Assigned Numbers Authority) time zone identifier of the merchant.  For example, \"Europe/Dublin\" or \"America/New_York\". This is used to ensure that timestamps  and events are displayed and processed in the merchant's local time.
+     *
+     * @return self
+     */
+    public function setTimeZoneId($time_zone_id)
+    {
+        if (is_null($time_zone_id)) {
+            array_push($this->openAPINullablesSetToNull, 'time_zone_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('time_zone_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['time_zone_id'] = $time_zone_id;
 
         return $this;
     }

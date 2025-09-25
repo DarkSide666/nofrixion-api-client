@@ -156,6 +156,18 @@ class PayoutsApiTest extends TestCase
     }
 
     /**
+     * Test case for getAllFxHeldRates
+     *
+     * Get all FX held rates..
+     *
+     */
+    public function testGetAllFxHeldRates()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getBatchPayout
      *
      * Gets a list of all the payouts contained in a batch..
@@ -174,6 +186,30 @@ class PayoutsApiTest extends TestCase
      *
      */
     public function testGetFailedPayouts()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getFxHeldRate
+     *
+     * Gets an FX held rate..
+     *
+     */
+    public function testGetFxHeldRate()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getFxQuote
+     *
+     * Gets an FX quote..
+     *
+     */
+    public function testGetFxQuote()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

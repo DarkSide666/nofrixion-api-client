@@ -84,6 +84,18 @@ class MerchantsApiTest extends TestCase
     }
 
     /**
+     * Test case for createRoles
+     *
+     * Creates roles in batch for a specific merchant..
+     *
+     */
+    public function testCreateRoles()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for deleteMerchantTag
      *
      * Deletes a tag from a merchant.
@@ -138,6 +150,18 @@ class MerchantsApiTest extends TestCase
      *
      */
     public function testGetAuthorisationSettings()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getChildMerchantsByParent
+     *
+     * Gets a paged list of child merchants for a specified parent merchant..
+     *
+     */
+    public function testGetChildMerchantsByParent()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -264,18 +288,6 @@ class MerchantsApiTest extends TestCase
     }
 
     /**
-     * Test case for getMerchantToken
-     *
-     * Gets the details of a merchant API token..
-     *
-     */
-    public function testGetMerchantToken()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test case for getMerchantTokens
      *
      * Gets a list of a merchant's issued API tokens..
@@ -294,18 +306,6 @@ class MerchantsApiTest extends TestCase
      *
      */
     public function testGetMerchantTransactionsPaged()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for getMerchantUserInvites
-     *
-     * Gets user invites associated with merchant..
-     *
-     */
-    public function testGetMerchantUserInvites()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -360,12 +360,48 @@ class MerchantsApiTest extends TestCase
     }
 
     /**
+     * Test case for getUserInvitesPaged
+     *
+     * Gets a paged list of user invites associated with merchant..
+     *
+     */
+    public function testGetUserInvitesPaged()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getWebhook
+     *
+     * Gets a webhook..
+     *
+     */
+    public function testGetWebhook()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for suspendMerchant
      *
      * Suspends a merchant.
      *
      */
     public function testSuspendMerchant()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateMerchant
+     *
+     * Updates a merchant's details..
+     *
+     */
+    public function testUpdateMerchant()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

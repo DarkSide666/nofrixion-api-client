@@ -713,7 +713,7 @@ class NoFrixionMoneyMoovModelsWebhookCreate implements ModelInterface, ArrayAcce
     /**
      * Sets notification_method
      *
-     * @param string $notification_method The type of notification that will be sent.
+     * @param string $notification_method Determines the delivery method for the notification. The default is Webhook.
      *
      * @return self
      */

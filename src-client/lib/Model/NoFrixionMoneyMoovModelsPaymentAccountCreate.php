@@ -62,7 +62,6 @@ class NoFrixionMoneyMoovModelsPaymentAccountCreate implements ModelInterface, Ar
         'account_name' => 'string',
         'supplier_physical_account_id' => 'string',
         'account_type' => 'string',
-        'tribe_account_id' => 'string',
         'physical_account_id' => 'string',
         'is_trust_account' => 'bool',
         'role_ids' => 'string[]'
@@ -81,7 +80,6 @@ class NoFrixionMoneyMoovModelsPaymentAccountCreate implements ModelInterface, Ar
         'account_name' => null,
         'supplier_physical_account_id' => 'uuid',
         'account_type' => null,
-        'tribe_account_id' => null,
         'physical_account_id' => 'uuid',
         'is_trust_account' => null,
         'role_ids' => 'uuid'
@@ -98,7 +96,6 @@ class NoFrixionMoneyMoovModelsPaymentAccountCreate implements ModelInterface, Ar
         'account_name' => true,
         'supplier_physical_account_id' => false,
         'account_type' => true,
-        'tribe_account_id' => true,
         'physical_account_id' => true,
         'is_trust_account' => false,
         'role_ids' => true
@@ -195,7 +192,6 @@ class NoFrixionMoneyMoovModelsPaymentAccountCreate implements ModelInterface, Ar
         'account_name' => 'accountName',
         'supplier_physical_account_id' => 'supplierPhysicalAccountID',
         'account_type' => 'accountType',
-        'tribe_account_id' => 'tribeAccountId',
         'physical_account_id' => 'physicalAccountID',
         'is_trust_account' => 'isTrustAccount',
         'role_ids' => 'roleIDs'
@@ -212,7 +208,6 @@ class NoFrixionMoneyMoovModelsPaymentAccountCreate implements ModelInterface, Ar
         'account_name' => 'setAccountName',
         'supplier_physical_account_id' => 'setSupplierPhysicalAccountId',
         'account_type' => 'setAccountType',
-        'tribe_account_id' => 'setTribeAccountId',
         'physical_account_id' => 'setPhysicalAccountId',
         'is_trust_account' => 'setIsTrustAccount',
         'role_ids' => 'setRoleIds'
@@ -229,7 +224,6 @@ class NoFrixionMoneyMoovModelsPaymentAccountCreate implements ModelInterface, Ar
         'account_name' => 'getAccountName',
         'supplier_physical_account_id' => 'getSupplierPhysicalAccountId',
         'account_type' => 'getAccountType',
-        'tribe_account_id' => 'getTribeAccountId',
         'physical_account_id' => 'getPhysicalAccountId',
         'is_trust_account' => 'getIsTrustAccount',
         'role_ids' => 'getRoleIds'
@@ -335,7 +329,6 @@ class NoFrixionMoneyMoovModelsPaymentAccountCreate implements ModelInterface, Ar
         $this->setIfExists('account_name', $data ?? [], null);
         $this->setIfExists('supplier_physical_account_id', $data ?? [], null);
         $this->setIfExists('account_type', $data ?? [], null);
-        $this->setIfExists('tribe_account_id', $data ?? [], null);
         $this->setIfExists('physical_account_id', $data ?? [], null);
         $this->setIfExists('is_trust_account', $data ?? [], null);
         $this->setIfExists('role_ids', $data ?? [], null);
@@ -571,40 +564,6 @@ class NoFrixionMoneyMoovModelsPaymentAccountCreate implements ModelInterface, Ar
     }
 
     /**
-     * Gets tribe_account_id
-     *
-     * @return string|null
-     */
-    public function getTribeAccountId()
-    {
-        return $this->container['tribe_account_id'];
-    }
-
-    /**
-     * Sets tribe_account_id
-     *
-     * @param string|null $tribe_account_id If creating a Tribe account type, then this is the tribe account id
-     *
-     * @return self
-     */
-    public function setTribeAccountId($tribe_account_id)
-    {
-        if (is_null($tribe_account_id)) {
-            array_push($this->openAPINullablesSetToNull, 'tribe_account_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('tribe_account_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['tribe_account_id'] = $tribe_account_id;
-
-        return $this;
-    }
-
-    /**
      * Gets physical_account_id
      *
      * @return string|null
@@ -617,7 +576,7 @@ class NoFrixionMoneyMoovModelsPaymentAccountCreate implements ModelInterface, Ar
     /**
      * Sets physical_account_id
      *
-     * @param string|null $physical_account_id For EUR accounts this can be set to the ID of another account that will act as the  backing phyiscal account. The new account will then act as a Virtual account, able to   receive funds but the transactions will be recorded aginst the backing physical account.
+     * @param string|null $physical_account_id For EUR accounts this can be set to the ID of another account that will act as the  backing physical account. The new account will then act as a Virtual account, able to   receive funds but the transactions will be recorded against the backing physical account.
      *
      * @return self
      */

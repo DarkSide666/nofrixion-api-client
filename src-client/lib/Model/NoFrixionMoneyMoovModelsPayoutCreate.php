@@ -78,7 +78,8 @@ class NoFrixionMoneyMoovModelsPayoutCreate implements ModelInterface, ArrayAcces
         'charge_bearer' => 'string',
         'fx_destination_currency' => 'string',
         'fx_destination_amount' => 'float',
-        'fx_use_destination_amount' => 'bool'
+        'fx_use_destination_amount' => 'bool',
+        'fx_quote_id' => 'string'
     ];
 
     /**
@@ -110,7 +111,8 @@ class NoFrixionMoneyMoovModelsPayoutCreate implements ModelInterface, ArrayAcces
         'charge_bearer' => null,
         'fx_destination_currency' => null,
         'fx_destination_amount' => 'double',
-        'fx_use_destination_amount' => null
+        'fx_use_destination_amount' => null,
+        'fx_quote_id' => null
     ];
 
     /**
@@ -140,7 +142,8 @@ class NoFrixionMoneyMoovModelsPayoutCreate implements ModelInterface, ArrayAcces
         'charge_bearer' => false,
         'fx_destination_currency' => true,
         'fx_destination_amount' => true,
-        'fx_use_destination_amount' => false
+        'fx_use_destination_amount' => false,
+        'fx_quote_id' => true
     ];
 
     /**
@@ -250,7 +253,8 @@ class NoFrixionMoneyMoovModelsPayoutCreate implements ModelInterface, ArrayAcces
         'charge_bearer' => 'chargeBearer',
         'fx_destination_currency' => 'fxDestinationCurrency',
         'fx_destination_amount' => 'fxDestinationAmount',
-        'fx_use_destination_amount' => 'fxUseDestinationAmount'
+        'fx_use_destination_amount' => 'fxUseDestinationAmount',
+        'fx_quote_id' => 'fxQuoteID'
     ];
 
     /**
@@ -280,7 +284,8 @@ class NoFrixionMoneyMoovModelsPayoutCreate implements ModelInterface, ArrayAcces
         'charge_bearer' => 'setChargeBearer',
         'fx_destination_currency' => 'setFxDestinationCurrency',
         'fx_destination_amount' => 'setFxDestinationAmount',
-        'fx_use_destination_amount' => 'setFxUseDestinationAmount'
+        'fx_use_destination_amount' => 'setFxUseDestinationAmount',
+        'fx_quote_id' => 'setFxQuoteId'
     ];
 
     /**
@@ -310,7 +315,8 @@ class NoFrixionMoneyMoovModelsPayoutCreate implements ModelInterface, ArrayAcces
         'charge_bearer' => 'getChargeBearer',
         'fx_destination_currency' => 'getFxDestinationCurrency',
         'fx_destination_amount' => 'getFxDestinationAmount',
-        'fx_use_destination_amount' => 'getFxUseDestinationAmount'
+        'fx_use_destination_amount' => 'getFxUseDestinationAmount',
+        'fx_quote_id' => 'getFxQuoteId'
     ];
 
     /**
@@ -495,6 +501,7 @@ class NoFrixionMoneyMoovModelsPayoutCreate implements ModelInterface, ArrayAcces
         $this->setIfExists('fx_destination_currency', $data ?? [], null);
         $this->setIfExists('fx_destination_amount', $data ?? [], null);
         $this->setIfExists('fx_use_destination_amount', $data ?? [], null);
+        $this->setIfExists('fx_quote_id', $data ?? [], null);
     }
 
     /**
@@ -551,8 +558,8 @@ class NoFrixionMoneyMoovModelsPayoutCreate implements ModelInterface, ArrayAcces
             );
         }
 
-        if (!is_null($this->container['amount']) && ($this->container['amount'] < 0.01)) {
-            $invalidProperties[] = "invalid value for 'amount', must be bigger than or equal to 0.01.";
+        if (!is_null($this->container['amount']) && ($this->container['amount'] < 0.00010)) {
+            $invalidProperties[] = "invalid value for 'amount', must be bigger than or equal to 0.00010.";
         }
 
         $allowedValues = $this->getPaymentRailAllowableValues();
@@ -580,10 +587,6 @@ class NoFrixionMoneyMoovModelsPayoutCreate implements ModelInterface, ArrayAcces
                 $this->container['fx_destination_currency'],
                 implode("', '", $allowedValues)
             );
-        }
-
-        if (!is_null($this->container['fx_destination_amount']) && ($this->container['fx_destination_amount'] < 1)) {
-            $invalidProperties[] = "invalid value for 'fx_destination_amount', must be bigger than or equal to 1.";
         }
 
         return $invalidProperties;
@@ -766,8 +769,8 @@ class NoFrixionMoneyMoovModelsPayoutCreate implements ModelInterface, ArrayAcces
             }
         }
 
-        if (!is_null($amount) && ($amount < 0.01)) {
-            throw new \InvalidArgumentException('invalid value for $amount when calling NoFrixionMoneyMoovModelsPayoutCreate., must be bigger than or equal to 0.01.');
+        if (!is_null($amount) && ($amount < 0.00010)) {
+            throw new \InvalidArgumentException('invalid value for $amount when calling NoFrixionMoneyMoovModelsPayoutCreate., must be bigger than or equal to 0.00010.');
         }
 
         $this->container['amount'] = $amount;
@@ -788,7 +791,7 @@ class NoFrixionMoneyMoovModelsPayoutCreate implements ModelInterface, ArrayAcces
     /**
      * Sets your_reference
      *
-     * @param string|null $your_reference Gets or Sets the your reference property.
+     * @param string|null $your_reference The Your reference field is an optional field that gets set locally on the payer's transaction record. It does not get   sent out through the payment network. The maximum length for the field is 256 characters. An empty value is also supported.  Supported chracters:  a b c d e f g h i j k l m n o p q r s t u v w x y z  A B C D E F G H I J K L M N O P Q R S T U V W X Y Z  0 1 2 3 4 5 6 7 8 9  / - ? : ( ) . , ' + Space  In addition the field cannot start with a : or - character.
      *
      * @return self
      */
@@ -822,7 +825,7 @@ class NoFrixionMoneyMoovModelsPayoutCreate implements ModelInterface, ArrayAcces
     /**
      * Sets their_reference
      *
-     * @param string|null $their_reference their_reference
+     * @param string|null $their_reference The Their reference field gets sent to the payee and appears on their transaction record.   The maximum length for the field varies depending on the payment network. For SEPA (Euro) it is 140 characters. For Faster Payments (GBP) it is 18 characters.  a b c d e f g h i j k l m n o p q r s t u v w x y z  A B C D E F G H I J K L M N O P Q R S T U V W X Y Z  0 1 2 3 4 5 6 7 8 9  / - ? : ( ) . , ' + Space  In addition the field cannot start with a : or - character.
      *
      * @return self
      */
@@ -1141,7 +1144,7 @@ class NoFrixionMoneyMoovModelsPayoutCreate implements ModelInterface, ArrayAcces
     /**
      * Sets payment_rail
      *
-     * @param string|null $payment_rail Optional field to indicate the payment rail to use for the payout. Currrently only  supports choosing between SEPA-CT and SEPA-INST for EUR payments. If not set, for a EUR  payment, the default behaviour is to attempt SEPA-INST and fallback to SEPA-CT if rejected.
+     * @param string|null $payment_rail Optional field to indicate the payment rail to use for the payout. Currently only  supports choosing between SEPA-CT and SEPA-INST for EUR payments. If not set, for a EUR  payment, the default behaviour is to attempt SEPA-INST and fallback to SEPA-CT if rejected.
      *
      * @return self
      */
@@ -1309,11 +1312,6 @@ class NoFrixionMoneyMoovModelsPayoutCreate implements ModelInterface, ArrayAcces
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-
-        if (!is_null($fx_destination_amount) && ($fx_destination_amount < 1)) {
-            throw new \InvalidArgumentException('invalid value for $fx_destination_amount when calling NoFrixionMoneyMoovModelsPayoutCreate., must be bigger than or equal to 1.');
-        }
-
         $this->container['fx_destination_amount'] = $fx_destination_amount;
 
         return $this;
@@ -1332,7 +1330,7 @@ class NoFrixionMoneyMoovModelsPayoutCreate implements ModelInterface, ArrayAcces
     /**
      * Sets fx_use_destination_amount
      *
-     * @param bool|null $fx_use_destination_amount For a multi-currency payout this indicates how the Amount and FxDestinaationAmount are treated.  If true the FxDestinationAmount is authoritative and the Amount is set based on the FxRate. If false then the Amount is authoritative  and the FxDestinationAmount is set based on the Amount and FxRate.
+     * @param bool|null $fx_use_destination_amount For a multi-currency payout this indicates how the Amount and FxDestinationAmount are treated.  If true the FxDestinationAmount is authoritative and the Amount is set based on the FxRate. If false then the Amount is authoritative  and the FxDestinationAmount is set based on the Amount and FxRate.
      *
      * @return self
      */
@@ -1342,6 +1340,40 @@ class NoFrixionMoneyMoovModelsPayoutCreate implements ModelInterface, ArrayAcces
             throw new \InvalidArgumentException('non-nullable fx_use_destination_amount cannot be null');
         }
         $this->container['fx_use_destination_amount'] = $fx_use_destination_amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets fx_quote_id
+     *
+     * @return string|null
+     */
+    public function getFxQuoteId()
+    {
+        return $this->container['fx_quote_id'];
+    }
+
+    /**
+     * Sets fx_quote_id
+     *
+     * @param string|null $fx_quote_id Optional. For multi-currency payouts this is the ID of a held rate that can be used for the FX conversion. If left  empty the mid-market FX rate will be used.
+     *
+     * @return self
+     */
+    public function setFxQuoteId($fx_quote_id)
+    {
+        if (is_null($fx_quote_id)) {
+            array_push($this->openAPINullablesSetToNull, 'fx_quote_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('fx_quote_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['fx_quote_id'] = $fx_quote_id;
 
         return $this;
     }

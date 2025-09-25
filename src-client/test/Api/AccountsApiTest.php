@@ -108,6 +108,18 @@ class AccountsApiTest extends TestCase
     }
 
     /**
+     * Test case for createAccountForAdditionalCurrency
+     *
+     * Creates a new payment account in a different currency, based on an existing payment account..
+     *
+     */
+    public function testCreateAccountForAdditionalCurrency()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for createVirtualAccount
      *
      * Creates a new virtual account..
@@ -210,6 +222,18 @@ class AccountsApiTest extends TestCase
      *
      */
     public function testGetAccounts()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getAccountsMinimal
+     *
+     * Get a paged list of all payment accounts minimal the user has access to for a specific merchant..
+     *
+     */
+    public function testGetAccountsMinimal()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

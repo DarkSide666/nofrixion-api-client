@@ -108,6 +108,18 @@ class PaymentRequestsApiTest extends TestCase
     }
 
     /**
+     * Test case for createPaymentRequests
+     *
+     * Creates payment requests in batch..
+     *
+     */
+    public function testCreatePaymentRequests()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for deleteAllTokenisedCards
      *
      * Deletes all the card tokens for a customer..

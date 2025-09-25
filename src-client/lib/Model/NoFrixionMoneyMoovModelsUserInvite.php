@@ -73,6 +73,8 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
         'user' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUser',
         'is_invitee_registered' => 'bool',
         'initial_role_id' => 'string',
+        'is_authorised' => 'bool',
+        'authorisation_status' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsAuthorisationStatus',
         'status' => 'string'
     ];
 
@@ -100,6 +102,8 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
         'user' => null,
         'is_invitee_registered' => null,
         'initial_role_id' => 'uuid',
+        'is_authorised' => null,
+        'authorisation_status' => null,
         'status' => null
     ];
 
@@ -125,6 +129,8 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
         'user' => false,
         'is_invitee_registered' => false,
         'initial_role_id' => true,
+        'is_authorised' => false,
+        'authorisation_status' => false,
         'status' => false
     ];
 
@@ -230,6 +236,8 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
         'user' => 'user',
         'is_invitee_registered' => 'isInviteeRegistered',
         'initial_role_id' => 'initialRoleID',
+        'is_authorised' => 'isAuthorised',
+        'authorisation_status' => 'authorisationStatus',
         'status' => 'status'
     ];
 
@@ -255,6 +263,8 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
         'user' => 'setUser',
         'is_invitee_registered' => 'setIsInviteeRegistered',
         'initial_role_id' => 'setInitialRoleId',
+        'is_authorised' => 'setIsAuthorised',
+        'authorisation_status' => 'setAuthorisationStatus',
         'status' => 'setStatus'
     ];
 
@@ -280,6 +290,8 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
         'user' => 'getUser',
         'is_invitee_registered' => 'getIsInviteeRegistered',
         'initial_role_id' => 'getInitialRoleId',
+        'is_authorised' => 'getIsAuthorised',
+        'authorisation_status' => 'getAuthorisationStatus',
         'status' => 'getStatus'
     ];
 
@@ -327,6 +339,7 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
     public const STATUS_ACTIVE = 'Active';
     public const STATUS_EXPIRED = 'Expired';
     public const STATUS_ACCEPTED = 'Accepted';
+    public const STATUS_AUTHORISATION_REQUIRED = 'AuthorisationRequired';
 
     /**
      * Gets allowable values of the enum
@@ -339,6 +352,7 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
             self::STATUS_ACTIVE,
             self::STATUS_EXPIRED,
             self::STATUS_ACCEPTED,
+            self::STATUS_AUTHORISATION_REQUIRED,
         ];
     }
 
@@ -373,6 +387,8 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
         $this->setIfExists('user', $data ?? [], null);
         $this->setIfExists('is_invitee_registered', $data ?? [], null);
         $this->setIfExists('initial_role_id', $data ?? [], null);
+        $this->setIfExists('is_authorised', $data ?? [], null);
+        $this->setIfExists('authorisation_status', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
     }
 
@@ -932,6 +948,60 @@ class NoFrixionMoneyMoovModelsUserInvite implements ModelInterface, ArrayAccess,
             }
         }
         $this->container['initial_role_id'] = $initial_role_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_authorised
+     *
+     * @return bool|null
+     */
+    public function getIsAuthorised()
+    {
+        return $this->container['is_authorised'];
+    }
+
+    /**
+     * Sets is_authorised
+     *
+     * @param bool|null $is_authorised Will be set to true once the invite has met the authorisation requirements.
+     *
+     * @return self
+     */
+    public function setIsAuthorised($is_authorised)
+    {
+        if (is_null($is_authorised)) {
+            throw new \InvalidArgumentException('non-nullable is_authorised cannot be null');
+        }
+        $this->container['is_authorised'] = $is_authorised;
+
+        return $this;
+    }
+
+    /**
+     * Gets authorisation_status
+     *
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsAuthorisationStatus|null
+     */
+    public function getAuthorisationStatus()
+    {
+        return $this->container['authorisation_status'];
+    }
+
+    /**
+     * Sets authorisation_status
+     *
+     * @param \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsAuthorisationStatus|null $authorisation_status authorisation_status
+     *
+     * @return self
+     */
+    public function setAuthorisationStatus($authorisation_status)
+    {
+        if (is_null($authorisation_status)) {
+            throw new \InvalidArgumentException('non-nullable authorisation_status cannot be null');
+        }
+        $this->container['authorisation_status'] = $authorisation_status;
 
         return $this;
     }

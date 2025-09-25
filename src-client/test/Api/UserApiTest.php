@@ -84,12 +84,12 @@ class UserApiTest extends TestCase
     }
 
     /**
-     * Test case for getUsers
+     * Test case for getUsersPaged
      *
-     * Gets all users including invitees for a merchant..
+     * Gets a paged list of users..
      *
      */
-    public function testGetUsers()
+    public function testGetUsersPaged()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

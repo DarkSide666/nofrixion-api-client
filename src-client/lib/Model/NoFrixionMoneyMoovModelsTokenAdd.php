@@ -60,7 +60,8 @@ class NoFrixionMoneyMoovModelsTokenAdd implements ModelInterface, ArrayAccess, \
         'merchant_id' => 'string',
         'description' => 'string',
         'hmac_algorithm' => 'string',
-        'permission_types' => 'string[]'
+        'permission_types' => 'string[]',
+        'ip_address_whitelist' => 'string'
     ];
 
     /**
@@ -74,7 +75,8 @@ class NoFrixionMoneyMoovModelsTokenAdd implements ModelInterface, ArrayAccess, \
         'merchant_id' => 'uuid',
         'description' => null,
         'hmac_algorithm' => null,
-        'permission_types' => null
+        'permission_types' => null,
+        'ip_address_whitelist' => null
     ];
 
     /**
@@ -86,7 +88,8 @@ class NoFrixionMoneyMoovModelsTokenAdd implements ModelInterface, ArrayAccess, \
         'merchant_id' => false,
         'description' => false,
         'hmac_algorithm' => false,
-        'permission_types' => true
+        'permission_types' => true,
+        'ip_address_whitelist' => true
     ];
 
     /**
@@ -178,7 +181,8 @@ class NoFrixionMoneyMoovModelsTokenAdd implements ModelInterface, ArrayAccess, \
         'merchant_id' => 'merchantID',
         'description' => 'description',
         'hmac_algorithm' => 'hmacAlgorithm',
-        'permission_types' => 'permissionTypes'
+        'permission_types' => 'permissionTypes',
+        'ip_address_whitelist' => 'ipAddressWhitelist'
     ];
 
     /**
@@ -190,7 +194,8 @@ class NoFrixionMoneyMoovModelsTokenAdd implements ModelInterface, ArrayAccess, \
         'merchant_id' => 'setMerchantId',
         'description' => 'setDescription',
         'hmac_algorithm' => 'setHmacAlgorithm',
-        'permission_types' => 'setPermissionTypes'
+        'permission_types' => 'setPermissionTypes',
+        'ip_address_whitelist' => 'setIpAddressWhitelist'
     ];
 
     /**
@@ -202,7 +207,8 @@ class NoFrixionMoneyMoovModelsTokenAdd implements ModelInterface, ArrayAccess, \
         'merchant_id' => 'getMerchantId',
         'description' => 'getDescription',
         'hmac_algorithm' => 'getHmacAlgorithm',
-        'permission_types' => 'getPermissionTypes'
+        'permission_types' => 'getPermissionTypes',
+        'ip_address_whitelist' => 'getIpAddressWhitelist'
     ];
 
     /**
@@ -352,6 +358,7 @@ class NoFrixionMoneyMoovModelsTokenAdd implements ModelInterface, ArrayAccess, \
         $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('hmac_algorithm', $data ?? [], null);
         $this->setIfExists('permission_types', $data ?? [], null);
+        $this->setIfExists('ip_address_whitelist', $data ?? [], null);
     }
 
     /**
@@ -550,6 +557,40 @@ class NoFrixionMoneyMoovModelsTokenAdd implements ModelInterface, ArrayAccess, \
             );
         }
         $this->container['permission_types'] = $permission_types;
+
+        return $this;
+    }
+
+    /**
+     * Gets ip_address_whitelist
+     *
+     * @return string|null
+     */
+    public function getIpAddressWhitelist()
+    {
+        return $this->container['ip_address_whitelist'];
+    }
+
+    /**
+     * Sets ip_address_whitelist
+     *
+     * @param string|null $ip_address_whitelist Optional. If set represents a comma separated list of IP addresses that this token is authorised to be used from.  Attempts to use the token from an IP address not in the list will be rejected.
+     *
+     * @return self
+     */
+    public function setIpAddressWhitelist($ip_address_whitelist)
+    {
+        if (is_null($ip_address_whitelist)) {
+            array_push($this->openAPINullablesSetToNull, 'ip_address_whitelist');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('ip_address_whitelist', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['ip_address_whitelist'] = $ip_address_whitelist;
 
         return $this;
     }

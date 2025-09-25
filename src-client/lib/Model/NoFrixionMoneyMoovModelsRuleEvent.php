@@ -283,6 +283,9 @@ class NoFrixionMoneyMoovModelsRuleEvent implements ModelInterface, ArrayAccess, 
     public const RULE_EVENT_TYPE_DISABLED = 'Disabled';
     public const RULE_EVENT_TYPE_EXECUTION_SUCCESS = 'ExecutionSuccess';
     public const RULE_EVENT_TYPE_EXECUTION_ERROR = 'ExecutionError';
+    public const RULE_EVENT_TYPE_PAYEE_VERIFICATION_INITIATED = 'PayeeVerificationInitiated';
+    public const RULE_EVENT_TYPE_PAYEE_VERIFICATION_COMPLETE = 'PayeeVerificationComplete';
+    public const RULE_EVENT_TYPE_PAYEE_VERIFICATION_FAILED = 'PayeeVerificationFailed';
 
     /**
      * Gets allowable values of the enum
@@ -299,6 +302,9 @@ class NoFrixionMoneyMoovModelsRuleEvent implements ModelInterface, ArrayAccess, 
             self::RULE_EVENT_TYPE_DISABLED,
             self::RULE_EVENT_TYPE_EXECUTION_SUCCESS,
             self::RULE_EVENT_TYPE_EXECUTION_ERROR,
+            self::RULE_EVENT_TYPE_PAYEE_VERIFICATION_INITIATED,
+            self::RULE_EVENT_TYPE_PAYEE_VERIFICATION_COMPLETE,
+            self::RULE_EVENT_TYPE_PAYEE_VERIFICATION_FAILED,
         ];
     }
 

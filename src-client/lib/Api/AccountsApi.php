@@ -80,6 +80,9 @@ class AccountsApi
         'createAccount' => [
             'application/json',
         ],
+        'createAccountForAdditionalCurrency' => [
+            'application/json',
+        ],
         'createVirtualAccount' => [
             'application/json',
         ],
@@ -108,6 +111,9 @@ class AccountsApi
             'application/json',
         ],
         'getAccounts' => [
+            'application/json',
+        ],
+        'getAccountsMinimal' => [
             'application/json',
         ],
         'getAccountsPaged' => [
@@ -865,6 +871,339 @@ class AccountsApi
                 $httpBody = $no_frixion_money_moov_models_payment_account_create;
             }
         } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation createAccountForAdditionalCurrency
+     *
+     * Creates a new payment account in a different currency, based on an existing payment account.
+     *
+     * @param  string $account_id The ID of the existing payment account. (required)
+     * @param  string $currency The currency for the new payment account (must differ from the existing account&#39;s currency). (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAccountForAdditionalCurrency'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount
+     */
+    public function createAccountForAdditionalCurrency($account_id, $currency, string $contentType = self::contentTypes['createAccountForAdditionalCurrency'][0])
+    {
+        list($response) = $this->createAccountForAdditionalCurrencyWithHttpInfo($account_id, $currency, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation createAccountForAdditionalCurrencyWithHttpInfo
+     *
+     * Creates a new payment account in a different currency, based on an existing payment account.
+     *
+     * @param  string $account_id The ID of the existing payment account. (required)
+     * @param  string $currency The currency for the new payment account (must differ from the existing account&#39;s currency). (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAccountForAdditionalCurrency'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function createAccountForAdditionalCurrencyWithHttpInfo($account_id, $currency, string $contentType = self::contentTypes['createAccountForAdditionalCurrency'][0])
+    {
+        $request = $this->createAccountForAdditionalCurrencyRequest($account_id, $currency, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation createAccountForAdditionalCurrencyAsync
+     *
+     * Creates a new payment account in a different currency, based on an existing payment account.
+     *
+     * @param  string $account_id The ID of the existing payment account. (required)
+     * @param  string $currency The currency for the new payment account (must differ from the existing account&#39;s currency). (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAccountForAdditionalCurrency'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createAccountForAdditionalCurrencyAsync($account_id, $currency, string $contentType = self::contentTypes['createAccountForAdditionalCurrency'][0])
+    {
+        return $this->createAccountForAdditionalCurrencyAsyncWithHttpInfo($account_id, $currency, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation createAccountForAdditionalCurrencyAsyncWithHttpInfo
+     *
+     * Creates a new payment account in a different currency, based on an existing payment account.
+     *
+     * @param  string $account_id The ID of the existing payment account. (required)
+     * @param  string $currency The currency for the new payment account (must differ from the existing account&#39;s currency). (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAccountForAdditionalCurrency'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createAccountForAdditionalCurrencyAsyncWithHttpInfo($account_id, $currency, string $contentType = self::contentTypes['createAccountForAdditionalCurrency'][0])
+    {
+        $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount';
+        $request = $this->createAccountForAdditionalCurrencyRequest($account_id, $currency, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'createAccountForAdditionalCurrency'
+     *
+     * @param  string $account_id The ID of the existing payment account. (required)
+     * @param  string $currency The currency for the new payment account (must differ from the existing account&#39;s currency). (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAccountForAdditionalCurrency'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function createAccountForAdditionalCurrencyRequest($account_id, $currency, string $contentType = self::contentTypes['createAccountForAdditionalCurrency'][0])
+    {
+
+        // verify the required parameter 'account_id' is set
+        if ($account_id === null || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $account_id when calling createAccountForAdditionalCurrency'
+            );
+        }
+
+        // verify the required parameter 'currency' is set
+        if ($currency === null || (is_array($currency) && count($currency) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $currency when calling createAccountForAdditionalCurrency'
+            );
+        }
+
+
+        $resourcePath = '/api/v1/accounts/{accountID}/{currency}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($account_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'accountID' . '}',
+                ObjectSerializer::toPathValue($account_id),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($currency !== null) {
+            $resourcePath = str_replace(
+                '{' . 'currency' . '}',
+                ObjectSerializer::toPathValue($currency),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['text/plain', 'application/json', 'text/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
@@ -1704,15 +2043,16 @@ class AccountsApi
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
      * @param  bool $only_archived Flag that indicates whether to fetch only archived accounts or not. (optional, default to false)
      * @param  bool $include_archived Flag that indicates whether to fetch archived accounts or not. (optional, default to false)
+     * @param  bool $include_child_merchants Flag that indicates whether to include accounts from child merchants. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportAccounts'] to see the possible values for this operation
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \SplFileObject
      */
-    public function exportAccounts($merchant_id = null, $connected_accounts = false, $page_number = null, $page_size = null, $currency = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['exportAccounts'][0])
+    public function exportAccounts($merchant_id = null, $connected_accounts = false, $page_number = null, $page_size = null, $currency = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, $include_child_merchants = false, string $contentType = self::contentTypes['exportAccounts'][0])
     {
-        list($response) = $this->exportAccountsWithHttpInfo($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $contentType);
+        list($response) = $this->exportAccountsWithHttpInfo($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $include_child_merchants, $contentType);
         return $response;
     }
 
@@ -1731,15 +2071,16 @@ class AccountsApi
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
      * @param  bool $only_archived Flag that indicates whether to fetch only archived accounts or not. (optional, default to false)
      * @param  bool $include_archived Flag that indicates whether to fetch archived accounts or not. (optional, default to false)
+     * @param  bool $include_child_merchants Flag that indicates whether to include accounts from child merchants. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportAccounts'] to see the possible values for this operation
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
      */
-    public function exportAccountsWithHttpInfo($merchant_id = null, $connected_accounts = false, $page_number = null, $page_size = null, $currency = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['exportAccounts'][0])
+    public function exportAccountsWithHttpInfo($merchant_id = null, $connected_accounts = false, $page_number = null, $page_size = null, $currency = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, $include_child_merchants = false, string $contentType = self::contentTypes['exportAccounts'][0])
     {
-        $request = $this->exportAccountsRequest($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $contentType);
+        $request = $this->exportAccountsRequest($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $include_child_merchants, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1865,14 +2206,15 @@ class AccountsApi
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
      * @param  bool $only_archived Flag that indicates whether to fetch only archived accounts or not. (optional, default to false)
      * @param  bool $include_archived Flag that indicates whether to fetch archived accounts or not. (optional, default to false)
+     * @param  bool $include_child_merchants Flag that indicates whether to include accounts from child merchants. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportAccounts'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function exportAccountsAsync($merchant_id = null, $connected_accounts = false, $page_number = null, $page_size = null, $currency = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['exportAccounts'][0])
+    public function exportAccountsAsync($merchant_id = null, $connected_accounts = false, $page_number = null, $page_size = null, $currency = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, $include_child_merchants = false, string $contentType = self::contentTypes['exportAccounts'][0])
     {
-        return $this->exportAccountsAsyncWithHttpInfo($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $contentType)
+        return $this->exportAccountsAsyncWithHttpInfo($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $include_child_merchants, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1895,15 +2237,16 @@ class AccountsApi
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
      * @param  bool $only_archived Flag that indicates whether to fetch only archived accounts or not. (optional, default to false)
      * @param  bool $include_archived Flag that indicates whether to fetch archived accounts or not. (optional, default to false)
+     * @param  bool $include_child_merchants Flag that indicates whether to include accounts from child merchants. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportAccounts'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function exportAccountsAsyncWithHttpInfo($merchant_id = null, $connected_accounts = false, $page_number = null, $page_size = null, $currency = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['exportAccounts'][0])
+    public function exportAccountsAsyncWithHttpInfo($merchant_id = null, $connected_accounts = false, $page_number = null, $page_size = null, $currency = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, $include_child_merchants = false, string $contentType = self::contentTypes['exportAccounts'][0])
     {
         $returnType = '\SplFileObject';
-        $request = $this->exportAccountsRequest($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $contentType);
+        $request = $this->exportAccountsRequest($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $include_child_merchants, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1954,13 +2297,15 @@ class AccountsApi
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
      * @param  bool $only_archived Flag that indicates whether to fetch only archived accounts or not. (optional, default to false)
      * @param  bool $include_archived Flag that indicates whether to fetch archived accounts or not. (optional, default to false)
+     * @param  bool $include_child_merchants Flag that indicates whether to include accounts from child merchants. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportAccounts'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function exportAccountsRequest($merchant_id = null, $connected_accounts = false, $page_number = null, $page_size = null, $currency = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['exportAccounts'][0])
+    public function exportAccountsRequest($merchant_id = null, $connected_accounts = false, $page_number = null, $page_size = null, $currency = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, $include_child_merchants = false, string $contentType = self::contentTypes['exportAccounts'][0])
     {
+
 
 
 
@@ -2065,6 +2410,15 @@ class AccountsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $include_archived,
             'includeArchived', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $include_child_merchants,
+            'includeChildMerchants', // param base name
             'boolean', // openApiType
             'form', // style
             true, // explode
@@ -4202,6 +4556,449 @@ class AccountsApi
     }
 
     /**
+     * Operation getAccountsMinimal
+     *
+     * Get a paged list of all payment accounts minimal the user has access to for a specific merchant.
+     *
+     * @param  string $merchant_id The merchantID of the accounts to retrieve. (optional)
+     * @param  string[] $currency Optional. Array. If specified will only return accounts for these currencies. (optional)
+     * @param  bool $connected_accounts Optional include connected accounts along with payment accounts. (optional, default to false)
+     * @param  int $page_number Optional. The page number to retrieve. (optional, default to 1)
+     * @param  int $page_size Optional. The number of accounts per page. (optional, default to 10)
+     * @param  string $search The text filter to apply to retrieve accounts with a similar account name, IBAN etc. (optional)
+     * @param  string $sort Optional expression to sort the order of the accounts. Example \&quot;AvailableBalance desc,Inserted asc\&quot;. (optional)
+     * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
+     * @param  bool $only_archived Flag that indicates whether to fetch only archived accounts or not. (optional, default to false)
+     * @param  bool $include_archived Flag that indicates whether to fetch archived accounts or not. (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountsMinimal'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountMinimalPageResponse
+     */
+    public function getAccountsMinimal($merchant_id = null, $currency = null, $connected_accounts = false, $page_number = 1, $page_size = 10, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['getAccountsMinimal'][0])
+    {
+        list($response) = $this->getAccountsMinimalWithHttpInfo($merchant_id, $currency, $connected_accounts, $page_number, $page_size, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getAccountsMinimalWithHttpInfo
+     *
+     * Get a paged list of all payment accounts minimal the user has access to for a specific merchant.
+     *
+     * @param  string $merchant_id The merchantID of the accounts to retrieve. (optional)
+     * @param  string[] $currency Optional. Array. If specified will only return accounts for these currencies. (optional)
+     * @param  bool $connected_accounts Optional include connected accounts along with payment accounts. (optional, default to false)
+     * @param  int $page_number Optional. The page number to retrieve. (optional, default to 1)
+     * @param  int $page_size Optional. The number of accounts per page. (optional, default to 10)
+     * @param  string $search The text filter to apply to retrieve accounts with a similar account name, IBAN etc. (optional)
+     * @param  string $sort Optional expression to sort the order of the accounts. Example \&quot;AvailableBalance desc,Inserted asc\&quot;. (optional)
+     * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
+     * @param  bool $only_archived Flag that indicates whether to fetch only archived accounts or not. (optional, default to false)
+     * @param  bool $include_archived Flag that indicates whether to fetch archived accounts or not. (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountsMinimal'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountMinimalPageResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getAccountsMinimalWithHttpInfo($merchant_id = null, $currency = null, $connected_accounts = false, $page_number = 1, $page_size = 10, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['getAccountsMinimal'][0])
+    {
+        $request = $this->getAccountsMinimalRequest($merchant_id, $currency, $connected_accounts, $page_number, $page_size, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountMinimalPageResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountMinimalPageResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountMinimalPageResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountMinimalPageResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountMinimalPageResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getAccountsMinimalAsync
+     *
+     * Get a paged list of all payment accounts minimal the user has access to for a specific merchant.
+     *
+     * @param  string $merchant_id The merchantID of the accounts to retrieve. (optional)
+     * @param  string[] $currency Optional. Array. If specified will only return accounts for these currencies. (optional)
+     * @param  bool $connected_accounts Optional include connected accounts along with payment accounts. (optional, default to false)
+     * @param  int $page_number Optional. The page number to retrieve. (optional, default to 1)
+     * @param  int $page_size Optional. The number of accounts per page. (optional, default to 10)
+     * @param  string $search The text filter to apply to retrieve accounts with a similar account name, IBAN etc. (optional)
+     * @param  string $sort Optional expression to sort the order of the accounts. Example \&quot;AvailableBalance desc,Inserted asc\&quot;. (optional)
+     * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
+     * @param  bool $only_archived Flag that indicates whether to fetch only archived accounts or not. (optional, default to false)
+     * @param  bool $include_archived Flag that indicates whether to fetch archived accounts or not. (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountsMinimal'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAccountsMinimalAsync($merchant_id = null, $currency = null, $connected_accounts = false, $page_number = 1, $page_size = 10, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['getAccountsMinimal'][0])
+    {
+        return $this->getAccountsMinimalAsyncWithHttpInfo($merchant_id, $currency, $connected_accounts, $page_number, $page_size, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getAccountsMinimalAsyncWithHttpInfo
+     *
+     * Get a paged list of all payment accounts minimal the user has access to for a specific merchant.
+     *
+     * @param  string $merchant_id The merchantID of the accounts to retrieve. (optional)
+     * @param  string[] $currency Optional. Array. If specified will only return accounts for these currencies. (optional)
+     * @param  bool $connected_accounts Optional include connected accounts along with payment accounts. (optional, default to false)
+     * @param  int $page_number Optional. The page number to retrieve. (optional, default to 1)
+     * @param  int $page_size Optional. The number of accounts per page. (optional, default to 10)
+     * @param  string $search The text filter to apply to retrieve accounts with a similar account name, IBAN etc. (optional)
+     * @param  string $sort Optional expression to sort the order of the accounts. Example \&quot;AvailableBalance desc,Inserted asc\&quot;. (optional)
+     * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
+     * @param  bool $only_archived Flag that indicates whether to fetch only archived accounts or not. (optional, default to false)
+     * @param  bool $include_archived Flag that indicates whether to fetch archived accounts or not. (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountsMinimal'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAccountsMinimalAsyncWithHttpInfo($merchant_id = null, $currency = null, $connected_accounts = false, $page_number = 1, $page_size = 10, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['getAccountsMinimal'][0])
+    {
+        $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountMinimalPageResponse';
+        $request = $this->getAccountsMinimalRequest($merchant_id, $currency, $connected_accounts, $page_number, $page_size, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getAccountsMinimal'
+     *
+     * @param  string $merchant_id The merchantID of the accounts to retrieve. (optional)
+     * @param  string[] $currency Optional. Array. If specified will only return accounts for these currencies. (optional)
+     * @param  bool $connected_accounts Optional include connected accounts along with payment accounts. (optional, default to false)
+     * @param  int $page_number Optional. The page number to retrieve. (optional, default to 1)
+     * @param  int $page_size Optional. The number of accounts per page. (optional, default to 10)
+     * @param  string $search The text filter to apply to retrieve accounts with a similar account name, IBAN etc. (optional)
+     * @param  string $sort Optional expression to sort the order of the accounts. Example \&quot;AvailableBalance desc,Inserted asc\&quot;. (optional)
+     * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
+     * @param  bool $only_archived Flag that indicates whether to fetch only archived accounts or not. (optional, default to false)
+     * @param  bool $include_archived Flag that indicates whether to fetch archived accounts or not. (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountsMinimal'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getAccountsMinimalRequest($merchant_id = null, $currency = null, $connected_accounts = false, $page_number = 1, $page_size = 10, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['getAccountsMinimal'][0])
+    {
+
+
+
+
+
+
+
+
+
+
+
+
+        $resourcePath = '/api/v1/accounts/minimal';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $merchant_id,
+            'merchantID', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $currency,
+            'currency', // param base name
+            'array', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $connected_accounts,
+            'connectedAccounts', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page_number,
+            'pageNumber', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page_size,
+            'pageSize', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $search,
+            'search', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sort,
+            'sort', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $only_connect_accounts,
+            'onlyConnectAccounts', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $only_archived,
+            'onlyArchived', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $include_archived,
+            'includeArchived', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['text/plain', 'application/json', 'text/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getAccountsPaged
      *
      * Get a paged list of all payment accounts the user has access to for a specific merchant.
@@ -4216,15 +5013,16 @@ class AccountsApi
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
      * @param  bool $only_archived Flag that indicates whether to fetch only archived accounts or not. (optional, default to false)
      * @param  bool $include_archived Flag that indicates whether to fetch archived accounts or not. (optional, default to false)
+     * @param  bool $include_child_merchants Flag that indicates whether to include accounts from child merchants. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountsPaged'] to see the possible values for this operation
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse
      */
-    public function getAccountsPaged($merchant_id = null, $currency = null, $connected_accounts = false, $page_number = null, $page_size = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
+    public function getAccountsPaged($merchant_id = null, $currency = null, $connected_accounts = false, $page_number = null, $page_size = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, $include_child_merchants = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
     {
-        list($response) = $this->getAccountsPagedWithHttpInfo($merchant_id, $currency, $connected_accounts, $page_number, $page_size, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $contentType);
+        list($response) = $this->getAccountsPagedWithHttpInfo($merchant_id, $currency, $connected_accounts, $page_number, $page_size, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $include_child_merchants, $contentType);
         return $response;
     }
 
@@ -4243,15 +5041,16 @@ class AccountsApi
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
      * @param  bool $only_archived Flag that indicates whether to fetch only archived accounts or not. (optional, default to false)
      * @param  bool $include_archived Flag that indicates whether to fetch archived accounts or not. (optional, default to false)
+     * @param  bool $include_child_merchants Flag that indicates whether to include accounts from child merchants. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountsPaged'] to see the possible values for this operation
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getAccountsPagedWithHttpInfo($merchant_id = null, $currency = null, $connected_accounts = false, $page_number = null, $page_size = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
+    public function getAccountsPagedWithHttpInfo($merchant_id = null, $currency = null, $connected_accounts = false, $page_number = null, $page_size = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, $include_child_merchants = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
     {
-        $request = $this->getAccountsPagedRequest($merchant_id, $currency, $connected_accounts, $page_number, $page_size, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $contentType);
+        $request = $this->getAccountsPagedRequest($merchant_id, $currency, $connected_accounts, $page_number, $page_size, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $include_child_merchants, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -4377,14 +5176,15 @@ class AccountsApi
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
      * @param  bool $only_archived Flag that indicates whether to fetch only archived accounts or not. (optional, default to false)
      * @param  bool $include_archived Flag that indicates whether to fetch archived accounts or not. (optional, default to false)
+     * @param  bool $include_child_merchants Flag that indicates whether to include accounts from child merchants. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountsPaged'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAccountsPagedAsync($merchant_id = null, $currency = null, $connected_accounts = false, $page_number = null, $page_size = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
+    public function getAccountsPagedAsync($merchant_id = null, $currency = null, $connected_accounts = false, $page_number = null, $page_size = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, $include_child_merchants = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
     {
-        return $this->getAccountsPagedAsyncWithHttpInfo($merchant_id, $currency, $connected_accounts, $page_number, $page_size, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $contentType)
+        return $this->getAccountsPagedAsyncWithHttpInfo($merchant_id, $currency, $connected_accounts, $page_number, $page_size, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $include_child_merchants, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -4407,15 +5207,16 @@ class AccountsApi
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
      * @param  bool $only_archived Flag that indicates whether to fetch only archived accounts or not. (optional, default to false)
      * @param  bool $include_archived Flag that indicates whether to fetch archived accounts or not. (optional, default to false)
+     * @param  bool $include_child_merchants Flag that indicates whether to include accounts from child merchants. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountsPaged'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAccountsPagedAsyncWithHttpInfo($merchant_id = null, $currency = null, $connected_accounts = false, $page_number = null, $page_size = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
+    public function getAccountsPagedAsyncWithHttpInfo($merchant_id = null, $currency = null, $connected_accounts = false, $page_number = null, $page_size = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, $include_child_merchants = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
     {
         $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse';
-        $request = $this->getAccountsPagedRequest($merchant_id, $currency, $connected_accounts, $page_number, $page_size, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $contentType);
+        $request = $this->getAccountsPagedRequest($merchant_id, $currency, $connected_accounts, $page_number, $page_size, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $include_child_merchants, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -4466,13 +5267,15 @@ class AccountsApi
      * @param  bool $only_connect_accounts Only return connected accounts (optional, default to false)
      * @param  bool $only_archived Flag that indicates whether to fetch only archived accounts or not. (optional, default to false)
      * @param  bool $include_archived Flag that indicates whether to fetch archived accounts or not. (optional, default to false)
+     * @param  bool $include_child_merchants Flag that indicates whether to include accounts from child merchants. (optional, default to false)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountsPaged'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getAccountsPagedRequest($merchant_id = null, $currency = null, $connected_accounts = false, $page_number = null, $page_size = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
+    public function getAccountsPagedRequest($merchant_id = null, $currency = null, $connected_accounts = false, $page_number = null, $page_size = null, $search = null, $sort = null, $only_connect_accounts = false, $only_archived = false, $include_archived = false, $include_child_merchants = false, string $contentType = self::contentTypes['getAccountsPaged'][0])
     {
+
 
 
 
@@ -4577,6 +5380,15 @@ class AccountsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $include_archived,
             'includeArchived', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $include_child_merchants,
+            'includeChildMerchants', // param base name
             'boolean', // openApiType
             'form', // style
             true, // explode

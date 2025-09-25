@@ -141,4 +141,22 @@ class NoFrixionMoneyMoovModelsPayoutEventTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "supplier_payee_verification_result"
+     */
+    public function testPropertySupplierPayeeVerificationResult()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "payee_verified_account_name"
+     */
+    public function testPropertyPayeeVerifiedAccountName()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

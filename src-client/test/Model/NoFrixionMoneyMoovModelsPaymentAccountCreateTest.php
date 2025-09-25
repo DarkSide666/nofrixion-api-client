@@ -125,15 +125,6 @@ class NoFrixionMoneyMoovModelsPaymentAccountCreateTest extends TestCase
     }
 
     /**
-     * Test attribute "tribe_account_id"
-     */
-    public function testPropertyTribeAccountId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "physical_account_id"
      */
     public function testPropertyPhysicalAccountId()

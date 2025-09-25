@@ -116,15 +116,6 @@ class NoFrixionMoneyMoovModelsUserInviteCreateTest extends TestCase
     }
 
     /**
-     * Test attribute "registration_url"
-     */
-    public function testPropertyRegistrationUrl()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "send_invite_email"
      */
     public function testPropertySendInviteEmail()

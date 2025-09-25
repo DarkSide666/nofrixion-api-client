@@ -72,12 +72,36 @@ class UserInvitesApiTest extends TestCase
     }
 
     /**
+     * Test case for authoriseUserInvite
+     *
+     * Authorises a user invite..
+     *
+     */
+    public function testAuthoriseUserInvite()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for createUserInvite
      *
      * Creates a new user invite and optionally sends the invitee an email with the details..
      *
      */
     public function testCreateUserInvite()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for createUserInvites
+     *
+     * Creates user invites in batch..
+     *
+     */
+    public function testCreateUserInvites()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -102,6 +126,18 @@ class UserInvitesApiTest extends TestCase
      *
      */
     public function testGetUserInvite()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getUserInviteDetails
+     *
+     * Gets a user invite detailss by ID..
+     *
+     */
+    public function testGetUserInviteDetails()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

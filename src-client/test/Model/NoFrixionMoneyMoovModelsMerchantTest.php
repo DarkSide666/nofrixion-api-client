@@ -224,6 +224,60 @@ class NoFrixionMoneyMoovModelsMerchantTest extends TestCase
     }
 
     /**
+     * Test attribute "notes"
+     */
+    public function testPropertyNotes()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "is_blocked"
+     */
+    public function testPropertyIsBlocked()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "is_exited"
+     */
+    public function testPropertyIsExited()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "is_suspended"
+     */
+    public function testPropertyIsSuspended()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "suspension_reason"
+     */
+    public function testPropertySuspensionReason()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "time_zone_id"
+     */
+    public function testPropertyTimeZoneId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "tags"
      */
     public function testPropertyTags()

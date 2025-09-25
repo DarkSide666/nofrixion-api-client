@@ -423,6 +423,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
     public const PAYMENT_PROCESSOR_LIGHTNING = 'Lightning';
     public const PAYMENT_PROCESSOR_LIGHTNING_TESTNET = 'LightningTestnet';
     public const PAYMENT_PROCESSOR_BANKING_CIRCLE_DIRECT_DEBIT = 'BankingCircleDirectDebit';
+    public const PAYMENT_PROCESSOR_TECHNOXANDER = 'Technoxander';
     public const PAYMENT_METHODS_LIST_NONE = 'None';
     public const PAYMENT_METHODS_LIST_CARD = 'card';
     public const PAYMENT_METHODS_LIST_PISP = 'pisp';
@@ -480,6 +481,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestMinimal implements ModelInterface, A
             self::PAYMENT_PROCESSOR_LIGHTNING,
             self::PAYMENT_PROCESSOR_LIGHTNING_TESTNET,
             self::PAYMENT_PROCESSOR_BANKING_CIRCLE_DIRECT_DEBIT,
+            self::PAYMENT_PROCESSOR_TECHNOXANDER,
         ];
     }
 

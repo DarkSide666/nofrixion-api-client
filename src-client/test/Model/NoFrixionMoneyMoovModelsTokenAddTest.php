@@ -114,4 +114,13 @@ class NoFrixionMoneyMoovModelsTokenAddTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "ip_address_whitelist"
+     */
+    public function testPropertyIpAddressWhitelist()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

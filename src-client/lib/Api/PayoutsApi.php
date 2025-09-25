@@ -95,10 +95,19 @@ class PayoutsApi
         'exportPayouts' => [
             'application/json',
         ],
+        'getAllFxHeldRates' => [
+            'application/json',
+        ],
         'getBatchPayout' => [
             'application/json',
         ],
         'getFailedPayouts' => [
+            'application/json',
+        ],
+        'getFxHeldRate' => [
+            'application/json',
+        ],
+        'getFxQuote' => [
             'application/json',
         ],
         'getPayout' => [
@@ -2321,6 +2330,339 @@ class PayoutsApi
     }
 
     /**
+     * Operation getAllFxHeldRates
+     *
+     * Get all FX held rates.
+     *
+     * @param  string $source The source currency to get the the FX held rates for. (required)
+     * @param  string $destination The destination currency to get the FX held rates for. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAllFxHeldRates'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsFxRate[]
+     */
+    public function getAllFxHeldRates($source, $destination, string $contentType = self::contentTypes['getAllFxHeldRates'][0])
+    {
+        list($response) = $this->getAllFxHeldRatesWithHttpInfo($source, $destination, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getAllFxHeldRatesWithHttpInfo
+     *
+     * Get all FX held rates.
+     *
+     * @param  string $source The source currency to get the the FX held rates for. (required)
+     * @param  string $destination The destination currency to get the FX held rates for. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAllFxHeldRates'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsFxRate[], HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getAllFxHeldRatesWithHttpInfo($source, $destination, string $contentType = self::contentTypes['getAllFxHeldRates'][0])
+    {
+        $request = $this->getAllFxHeldRatesRequest($source, $destination, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsFxRate[]' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsFxRate[]' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsFxRate[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsFxRate[]';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsFxRate[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getAllFxHeldRatesAsync
+     *
+     * Get all FX held rates.
+     *
+     * @param  string $source The source currency to get the the FX held rates for. (required)
+     * @param  string $destination The destination currency to get the FX held rates for. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAllFxHeldRates'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAllFxHeldRatesAsync($source, $destination, string $contentType = self::contentTypes['getAllFxHeldRates'][0])
+    {
+        return $this->getAllFxHeldRatesAsyncWithHttpInfo($source, $destination, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getAllFxHeldRatesAsyncWithHttpInfo
+     *
+     * Get all FX held rates.
+     *
+     * @param  string $source The source currency to get the the FX held rates for. (required)
+     * @param  string $destination The destination currency to get the FX held rates for. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAllFxHeldRates'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAllFxHeldRatesAsyncWithHttpInfo($source, $destination, string $contentType = self::contentTypes['getAllFxHeldRates'][0])
+    {
+        $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsFxRate[]';
+        $request = $this->getAllFxHeldRatesRequest($source, $destination, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getAllFxHeldRates'
+     *
+     * @param  string $source The source currency to get the the FX held rates for. (required)
+     * @param  string $destination The destination currency to get the FX held rates for. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAllFxHeldRates'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getAllFxHeldRatesRequest($source, $destination, string $contentType = self::contentTypes['getAllFxHeldRates'][0])
+    {
+
+        // verify the required parameter 'source' is set
+        if ($source === null || (is_array($source) && count($source) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $source when calling getAllFxHeldRates'
+            );
+        }
+
+        // verify the required parameter 'destination' is set
+        if ($destination === null || (is_array($destination) && count($destination) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $destination when calling getAllFxHeldRates'
+            );
+        }
+
+
+        $resourcePath = '/api/v1/payouts/fxallheldrates/{source}/{destination}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($source !== null) {
+            $resourcePath = str_replace(
+                '{' . 'source' . '}',
+                ObjectSerializer::toPathValue($source),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($destination !== null) {
+            $resourcePath = str_replace(
+                '{' . 'destination' . '}',
+                ObjectSerializer::toPathValue($destination),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['text/plain', 'application/json', 'text/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getBatchPayout
      *
      * Gets a list of all the payouts contained in a batch.
@@ -2913,6 +3255,712 @@ class PayoutsApi
             $resourcePath = str_replace(
                 '{' . 'merchantID' . '}',
                 ObjectSerializer::toPathValue($merchant_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['text/plain', 'application/json', 'text/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getFxHeldRate
+     *
+     * Gets an FX held rate.
+     *
+     * @param  string $source The source currency for the FX held rate. (required)
+     * @param  string $destination The destination currency for the FX held rate. (required)
+     * @param  int $valid_for_minutes The number of minutes the held rate is being requested for. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFxHeldRate'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsFxRate
+     */
+    public function getFxHeldRate($source, $destination, $valid_for_minutes, string $contentType = self::contentTypes['getFxHeldRate'][0])
+    {
+        list($response) = $this->getFxHeldRateWithHttpInfo($source, $destination, $valid_for_minutes, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getFxHeldRateWithHttpInfo
+     *
+     * Gets an FX held rate.
+     *
+     * @param  string $source The source currency for the FX held rate. (required)
+     * @param  string $destination The destination currency for the FX held rate. (required)
+     * @param  int $valid_for_minutes The number of minutes the held rate is being requested for. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFxHeldRate'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsFxRate, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getFxHeldRateWithHttpInfo($source, $destination, $valid_for_minutes, string $contentType = self::contentTypes['getFxHeldRate'][0])
+    {
+        $request = $this->getFxHeldRateRequest($source, $destination, $valid_for_minutes, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsFxRate' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsFxRate' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsFxRate', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsFxRate';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsFxRate',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getFxHeldRateAsync
+     *
+     * Gets an FX held rate.
+     *
+     * @param  string $source The source currency for the FX held rate. (required)
+     * @param  string $destination The destination currency for the FX held rate. (required)
+     * @param  int $valid_for_minutes The number of minutes the held rate is being requested for. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFxHeldRate'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getFxHeldRateAsync($source, $destination, $valid_for_minutes, string $contentType = self::contentTypes['getFxHeldRate'][0])
+    {
+        return $this->getFxHeldRateAsyncWithHttpInfo($source, $destination, $valid_for_minutes, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getFxHeldRateAsyncWithHttpInfo
+     *
+     * Gets an FX held rate.
+     *
+     * @param  string $source The source currency for the FX held rate. (required)
+     * @param  string $destination The destination currency for the FX held rate. (required)
+     * @param  int $valid_for_minutes The number of minutes the held rate is being requested for. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFxHeldRate'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getFxHeldRateAsyncWithHttpInfo($source, $destination, $valid_for_minutes, string $contentType = self::contentTypes['getFxHeldRate'][0])
+    {
+        $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsFxRate';
+        $request = $this->getFxHeldRateRequest($source, $destination, $valid_for_minutes, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getFxHeldRate'
+     *
+     * @param  string $source The source currency for the FX held rate. (required)
+     * @param  string $destination The destination currency for the FX held rate. (required)
+     * @param  int $valid_for_minutes The number of minutes the held rate is being requested for. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFxHeldRate'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getFxHeldRateRequest($source, $destination, $valid_for_minutes, string $contentType = self::contentTypes['getFxHeldRate'][0])
+    {
+
+        // verify the required parameter 'source' is set
+        if ($source === null || (is_array($source) && count($source) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $source when calling getFxHeldRate'
+            );
+        }
+
+        // verify the required parameter 'destination' is set
+        if ($destination === null || (is_array($destination) && count($destination) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $destination when calling getFxHeldRate'
+            );
+        }
+
+        // verify the required parameter 'valid_for_minutes' is set
+        if ($valid_for_minutes === null || (is_array($valid_for_minutes) && count($valid_for_minutes) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $valid_for_minutes when calling getFxHeldRate'
+            );
+        }
+
+
+        $resourcePath = '/api/v1/payouts/fxheldrate/{source}/{destination}/{validForMinutes}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($source !== null) {
+            $resourcePath = str_replace(
+                '{' . 'source' . '}',
+                ObjectSerializer::toPathValue($source),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($destination !== null) {
+            $resourcePath = str_replace(
+                '{' . 'destination' . '}',
+                ObjectSerializer::toPathValue($destination),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($valid_for_minutes !== null) {
+            $resourcePath = str_replace(
+                '{' . 'validForMinutes' . '}',
+                ObjectSerializer::toPathValue($valid_for_minutes),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['text/plain', 'application/json', 'text/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getFxQuote
+     *
+     * Gets an FX quote.
+     *
+     * @param  string $source The source currency for the FX quote. (required)
+     * @param  string $destination The destination currency for the FX quote. (required)
+     * @param  float $amount The amount to convert from the source to the destination currency. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFxQuote'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return float
+     */
+    public function getFxQuote($source, $destination, $amount, string $contentType = self::contentTypes['getFxQuote'][0])
+    {
+        list($response) = $this->getFxQuoteWithHttpInfo($source, $destination, $amount, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getFxQuoteWithHttpInfo
+     *
+     * Gets an FX quote.
+     *
+     * @param  string $source The source currency for the FX quote. (required)
+     * @param  string $destination The destination currency for the FX quote. (required)
+     * @param  float $amount The amount to convert from the source to the destination currency. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFxQuote'] to see the possible values for this operation
+     *
+     * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of float, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getFxQuoteWithHttpInfo($source, $destination, $amount, string $contentType = self::contentTypes['getFxQuote'][0])
+    {
+        $request = $this->getFxQuoteRequest($source, $destination, $amount, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('float' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('float' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'float', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = 'float';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'float',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getFxQuoteAsync
+     *
+     * Gets an FX quote.
+     *
+     * @param  string $source The source currency for the FX quote. (required)
+     * @param  string $destination The destination currency for the FX quote. (required)
+     * @param  float $amount The amount to convert from the source to the destination currency. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFxQuote'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getFxQuoteAsync($source, $destination, $amount, string $contentType = self::contentTypes['getFxQuote'][0])
+    {
+        return $this->getFxQuoteAsyncWithHttpInfo($source, $destination, $amount, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getFxQuoteAsyncWithHttpInfo
+     *
+     * Gets an FX quote.
+     *
+     * @param  string $source The source currency for the FX quote. (required)
+     * @param  string $destination The destination currency for the FX quote. (required)
+     * @param  float $amount The amount to convert from the source to the destination currency. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFxQuote'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getFxQuoteAsyncWithHttpInfo($source, $destination, $amount, string $contentType = self::contentTypes['getFxQuote'][0])
+    {
+        $returnType = 'float';
+        $request = $this->getFxQuoteRequest($source, $destination, $amount, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getFxQuote'
+     *
+     * @param  string $source The source currency for the FX quote. (required)
+     * @param  string $destination The destination currency for the FX quote. (required)
+     * @param  float $amount The amount to convert from the source to the destination currency. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFxQuote'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getFxQuoteRequest($source, $destination, $amount, string $contentType = self::contentTypes['getFxQuote'][0])
+    {
+
+        // verify the required parameter 'source' is set
+        if ($source === null || (is_array($source) && count($source) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $source when calling getFxQuote'
+            );
+        }
+
+        // verify the required parameter 'destination' is set
+        if ($destination === null || (is_array($destination) && count($destination) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $destination when calling getFxQuote'
+            );
+        }
+
+        // verify the required parameter 'amount' is set
+        if ($amount === null || (is_array($amount) && count($amount) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $amount when calling getFxQuote'
+            );
+        }
+
+
+        $resourcePath = '/api/v1/payouts/fxquote/{source}/{destination}/{amount}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($source !== null) {
+            $resourcePath = str_replace(
+                '{' . 'source' . '}',
+                ObjectSerializer::toPathValue($source),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($destination !== null) {
+            $resourcePath = str_replace(
+                '{' . 'destination' . '}',
+                ObjectSerializer::toPathValue($destination),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($amount !== null) {
+            $resourcePath = str_replace(
+                '{' . 'amount' . '}',
+                ObjectSerializer::toPathValue($amount),
                 $resourcePath
             );
         }

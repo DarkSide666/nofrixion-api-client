@@ -5,7 +5,7 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**getUser()**](UserApi.md#getUser) | **GET** /api/v1/user | Get the profile for the authenticated user. |
-| [**getUsers()**](UserApi.md#getUsers) | **GET** /api/v1/user/{merchantID}/users | Gets all users including invitees for a merchant. |
+| [**getUsersPaged()**](UserApi.md#getUsersPaged) | **GET** /api/v1/user/{merchantID}/userspaged | Gets a paged list of users. |
 | [**updateUser()**](UserApi.md#updateUser) | **PUT** /api/v1/user/{id} | Updates a user record and optionally accepts an invite to join a merchant. |
 
 
@@ -68,13 +68,13 @@ This endpoint does not need any parameter.
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `getUsers()`
+## `getUsersPaged()`
 
 ```php
-getUsers($merchant_id): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUser
+getUsersPaged($merchant_id, $page_number, $page_size, $search, $sort): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserPageResponse
 ```
 
-Gets all users including invitees for a merchant.
+Gets a paged list of users.
 
 <b>Authorization</b>: End user token is required.  <b>User permissions required</b>: CanViewUsers
 
@@ -97,13 +97,17 @@ $apiInstance = new Nofrixion\Client\Api\UserApi(
     new GuzzleHttp\Client(),
     $config
 );
-$merchant_id = 'merchant_id_example'; // string | The ID of the merchant to get the user roles for.
+$merchant_id = 'merchant_id_example'; // string | The ID of the merchant to get the users for.
+$page_number = 1; // int | The page number
+$page_size = 20; // int | The page size
+$search = 'search_example'; // string | A search filter to apply to the user list. Typically searches against first name, last name and email address.
+$sort = 'sort_example'; // string | The sort expression for the result set, e.g., \"FirstName asc\".
 
 try {
-    $result = $apiInstance->getUsers($merchant_id);
+    $result = $apiInstance->getUsersPaged($merchant_id, $page_number, $page_size, $search, $sort);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling UserApi->getUsers: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling UserApi->getUsersPaged: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -111,11 +115,15 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **merchant_id** | **string**| The ID of the merchant to get the user roles for. | |
+| **merchant_id** | **string**| The ID of the merchant to get the users for. | |
+| **page_number** | **int**| The page number | [optional] [default to 1] |
+| **page_size** | **int**| The page size | [optional] [default to 20] |
+| **search** | **string**| A search filter to apply to the user list. Typically searches against first name, last name and email address. | [optional] |
+| **sort** | **string**| The sort expression for the result set, e.g., \&quot;FirstName asc\&quot;. | [optional] |
 
 ### Return type
 
-[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUser**](../Model/NoFrixionMoneyMoovModelsUser.md)
+[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUserPageResponse**](../Model/NoFrixionMoneyMoovModelsUserPageResponse.md)
 
 ### Authorization
 

@@ -72,11 +72,14 @@ class NoFrixionMoneyMoovModelsBeneficiaryEvent implements ModelInterface, ArrayA
         'iban' => 'string',
         'account_number' => 'string',
         'sort_code' => 'string',
+        'bic' => 'string',
         'bitcoin_address' => 'string',
         'inserted' => '\DateTime',
         'source_accounts_hash' => 'string',
         'is_enabled' => 'bool',
         'is_archived' => 'bool',
+        'supplier_payee_verification_result' => 'string',
+        'payee_verified_account_name' => 'string',
         'user' => '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsUser'
     ];
 
@@ -103,11 +106,14 @@ class NoFrixionMoneyMoovModelsBeneficiaryEvent implements ModelInterface, ArrayA
         'iban' => null,
         'account_number' => null,
         'sort_code' => null,
+        'bic' => null,
         'bitcoin_address' => null,
         'inserted' => 'date-time',
         'source_accounts_hash' => null,
         'is_enabled' => null,
         'is_archived' => null,
+        'supplier_payee_verification_result' => null,
+        'payee_verified_account_name' => null,
         'user' => null
     ];
 
@@ -132,11 +138,14 @@ class NoFrixionMoneyMoovModelsBeneficiaryEvent implements ModelInterface, ArrayA
         'iban' => true,
         'account_number' => true,
         'sort_code' => true,
+        'bic' => true,
         'bitcoin_address' => true,
         'inserted' => false,
         'source_accounts_hash' => true,
         'is_enabled' => false,
         'is_archived' => false,
+        'supplier_payee_verification_result' => true,
+        'payee_verified_account_name' => true,
         'user' => false
     ];
 
@@ -241,11 +250,14 @@ class NoFrixionMoneyMoovModelsBeneficiaryEvent implements ModelInterface, ArrayA
         'iban' => 'iban',
         'account_number' => 'accountNumber',
         'sort_code' => 'sortCode',
+        'bic' => 'bic',
         'bitcoin_address' => 'bitcoinAddress',
         'inserted' => 'inserted',
         'source_accounts_hash' => 'sourceAccountsHash',
         'is_enabled' => 'isEnabled',
         'is_archived' => 'isArchived',
+        'supplier_payee_verification_result' => 'supplierPayeeVerificationResult',
+        'payee_verified_account_name' => 'payeeVerifiedAccountName',
         'user' => 'user'
     ];
 
@@ -270,11 +282,14 @@ class NoFrixionMoneyMoovModelsBeneficiaryEvent implements ModelInterface, ArrayA
         'iban' => 'setIban',
         'account_number' => 'setAccountNumber',
         'sort_code' => 'setSortCode',
+        'bic' => 'setBic',
         'bitcoin_address' => 'setBitcoinAddress',
         'inserted' => 'setInserted',
         'source_accounts_hash' => 'setSourceAccountsHash',
         'is_enabled' => 'setIsEnabled',
         'is_archived' => 'setIsArchived',
+        'supplier_payee_verification_result' => 'setSupplierPayeeVerificationResult',
+        'payee_verified_account_name' => 'setPayeeVerifiedAccountName',
         'user' => 'setUser'
     ];
 
@@ -299,11 +314,14 @@ class NoFrixionMoneyMoovModelsBeneficiaryEvent implements ModelInterface, ArrayA
         'iban' => 'getIban',
         'account_number' => 'getAccountNumber',
         'sort_code' => 'getSortCode',
+        'bic' => 'getBic',
         'bitcoin_address' => 'getBitcoinAddress',
         'inserted' => 'getInserted',
         'source_accounts_hash' => 'getSourceAccountsHash',
         'is_enabled' => 'getIsEnabled',
         'is_archived' => 'getIsArchived',
+        'supplier_payee_verification_result' => 'getSupplierPayeeVerificationResult',
+        'payee_verified_account_name' => 'getPayeeVerifiedAccountName',
         'user' => 'getUser'
     ];
 
@@ -355,6 +373,9 @@ class NoFrixionMoneyMoovModelsBeneficiaryEvent implements ModelInterface, ArrayA
     public const EVENT_TYPE_DISABLE = 'Disable';
     public const EVENT_TYPE_ENABLE = 'Enable';
     public const EVENT_TYPE_ARCHIVE = 'Archive';
+    public const EVENT_TYPE_PAYEE_VERIFICATION_INITIATED = 'PayeeVerificationInitiated';
+    public const EVENT_TYPE_PAYEE_VERIFICATION_COMPLETE = 'PayeeVerificationComplete';
+    public const EVENT_TYPE_PAYEE_VERIFICATION_FAILED = 'PayeeVerificationFailed';
     public const CURRENCY_NONE = 'NONE';
     public const CURRENCY_GBP = 'GBP';
     public const CURRENCY_EUR = 'EUR';
@@ -376,6 +397,9 @@ class NoFrixionMoneyMoovModelsBeneficiaryEvent implements ModelInterface, ArrayA
             self::EVENT_TYPE_DISABLE,
             self::EVENT_TYPE_ENABLE,
             self::EVENT_TYPE_ARCHIVE,
+            self::EVENT_TYPE_PAYEE_VERIFICATION_INITIATED,
+            self::EVENT_TYPE_PAYEE_VERIFICATION_COMPLETE,
+            self::EVENT_TYPE_PAYEE_VERIFICATION_FAILED,
         ];
     }
 
@@ -425,11 +449,14 @@ class NoFrixionMoneyMoovModelsBeneficiaryEvent implements ModelInterface, ArrayA
         $this->setIfExists('iban', $data ?? [], null);
         $this->setIfExists('account_number', $data ?? [], null);
         $this->setIfExists('sort_code', $data ?? [], null);
+        $this->setIfExists('bic', $data ?? [], null);
         $this->setIfExists('bitcoin_address', $data ?? [], null);
         $this->setIfExists('inserted', $data ?? [], null);
         $this->setIfExists('source_accounts_hash', $data ?? [], null);
         $this->setIfExists('is_enabled', $data ?? [], null);
         $this->setIfExists('is_archived', $data ?? [], null);
+        $this->setIfExists('supplier_payee_verification_result', $data ?? [], null);
+        $this->setIfExists('payee_verified_account_name', $data ?? [], null);
         $this->setIfExists('user', $data ?? [], null);
     }
 
@@ -1003,6 +1030,40 @@ class NoFrixionMoneyMoovModelsBeneficiaryEvent implements ModelInterface, ArrayA
     }
 
     /**
+     * Gets bic
+     *
+     * @return string|null
+     */
+    public function getBic()
+    {
+        return $this->container['bic'];
+    }
+
+    /**
+     * Sets bic
+     *
+     * @param string|null $bic bic
+     *
+     * @return self
+     */
+    public function setBic($bic)
+    {
+        if (is_null($bic)) {
+            array_push($this->openAPINullablesSetToNull, 'bic');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('bic', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['bic'] = $bic;
+
+        return $this;
+    }
+
+    /**
      * Gets bitcoin_address
      *
      * @return string|null
@@ -1147,6 +1208,74 @@ class NoFrixionMoneyMoovModelsBeneficiaryEvent implements ModelInterface, ArrayA
             throw new \InvalidArgumentException('non-nullable is_archived cannot be null');
         }
         $this->container['is_archived'] = $is_archived;
+
+        return $this;
+    }
+
+    /**
+     * Gets supplier_payee_verification_result
+     *
+     * @return string|null
+     */
+    public function getSupplierPayeeVerificationResult()
+    {
+        return $this->container['supplier_payee_verification_result'];
+    }
+
+    /**
+     * Sets supplier_payee_verification_result
+     *
+     * @param string|null $supplier_payee_verification_result supplier_payee_verification_result
+     *
+     * @return self
+     */
+    public function setSupplierPayeeVerificationResult($supplier_payee_verification_result)
+    {
+        if (is_null($supplier_payee_verification_result)) {
+            array_push($this->openAPINullablesSetToNull, 'supplier_payee_verification_result');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('supplier_payee_verification_result', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['supplier_payee_verification_result'] = $supplier_payee_verification_result;
+
+        return $this;
+    }
+
+    /**
+     * Gets payee_verified_account_name
+     *
+     * @return string|null
+     */
+    public function getPayeeVerifiedAccountName()
+    {
+        return $this->container['payee_verified_account_name'];
+    }
+
+    /**
+     * Sets payee_verified_account_name
+     *
+     * @param string|null $payee_verified_account_name If this event is a payee verification complete event and the result is a close match,  this contains the actual verified name returned by the payee verification supplier.
+     *
+     * @return self
+     */
+    public function setPayeeVerifiedAccountName($payee_verified_account_name)
+    {
+        if (is_null($payee_verified_account_name)) {
+            array_push($this->openAPINullablesSetToNull, 'payee_verified_account_name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('payee_verified_account_name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['payee_verified_account_name'] = $payee_verified_account_name;
 
         return $this;
     }

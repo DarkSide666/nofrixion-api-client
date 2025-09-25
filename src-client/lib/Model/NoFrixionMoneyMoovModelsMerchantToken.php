@@ -77,7 +77,8 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         'authentication_methods' => 'string[]',
         'last_authorised' => '\DateTime',
         'ip_address_whitelist' => 'string',
-        'is_archived' => 'bool'
+        'is_archived' => 'bool',
+        'nonce' => 'string'
     ];
 
     /**
@@ -108,7 +109,8 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         'authentication_methods' => null,
         'last_authorised' => 'date-time',
         'ip_address_whitelist' => null,
-        'is_archived' => null
+        'is_archived' => null,
+        'nonce' => null
     ];
 
     /**
@@ -137,7 +139,8 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         'authentication_methods' => true,
         'last_authorised' => true,
         'ip_address_whitelist' => true,
-        'is_archived' => false
+        'is_archived' => false,
+        'nonce' => true
     ];
 
     /**
@@ -246,7 +249,8 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         'authentication_methods' => 'authenticationMethods',
         'last_authorised' => 'lastAuthorised',
         'ip_address_whitelist' => 'ipAddressWhitelist',
-        'is_archived' => 'isArchived'
+        'is_archived' => 'isArchived',
+        'nonce' => 'nonce'
     ];
 
     /**
@@ -275,7 +279,8 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         'authentication_methods' => 'setAuthenticationMethods',
         'last_authorised' => 'setLastAuthorised',
         'ip_address_whitelist' => 'setIpAddressWhitelist',
-        'is_archived' => 'setIsArchived'
+        'is_archived' => 'setIsArchived',
+        'nonce' => 'setNonce'
     ];
 
     /**
@@ -304,7 +309,8 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         'authentication_methods' => 'getAuthenticationMethods',
         'last_authorised' => 'getLastAuthorised',
         'ip_address_whitelist' => 'getIpAddressWhitelist',
-        'is_archived' => 'getIsArchived'
+        'is_archived' => 'getIsArchived',
+        'nonce' => 'getNonce'
     ];
 
     /**
@@ -488,6 +494,7 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
         $this->setIfExists('last_authorised', $data ?? [], null);
         $this->setIfExists('ip_address_whitelist', $data ?? [], null);
         $this->setIfExists('is_archived', $data ?? [], null);
+        $this->setIfExists('nonce', $data ?? [], null);
     }
 
     /**
@@ -526,6 +533,9 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
             );
         }
 
+        if ($this->container['nonce'] === null) {
+            $invalidProperties[] = "'nonce' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -1195,6 +1205,40 @@ class NoFrixionMoneyMoovModelsMerchantToken implements ModelInterface, ArrayAcce
             throw new \InvalidArgumentException('non-nullable is_archived cannot be null');
         }
         $this->container['is_archived'] = $is_archived;
+
+        return $this;
+    }
+
+    /**
+     * Gets nonce
+     *
+     * @return string
+     */
+    public function getNonce()
+    {
+        return $this->container['nonce'];
+    }
+
+    /**
+     * Sets nonce
+     *
+     * @param string $nonce nonce
+     *
+     * @return self
+     */
+    public function setNonce($nonce)
+    {
+        if (is_null($nonce)) {
+            array_push($this->openAPINullablesSetToNull, 'nonce');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('nonce', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['nonce'] = $nonce;
 
         return $this;
     }

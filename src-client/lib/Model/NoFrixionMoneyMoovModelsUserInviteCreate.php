@@ -61,7 +61,6 @@ class NoFrixionMoneyMoovModelsUserInviteCreate implements ModelInterface, ArrayA
         'invitee_email_address' => 'string',
         'invitee_first_name' => 'string',
         'invitee_last_name' => 'string',
-        'registration_url' => 'string',
         'send_invite_email' => 'bool',
         'initial_role_id' => 'string'
     ];
@@ -78,7 +77,6 @@ class NoFrixionMoneyMoovModelsUserInviteCreate implements ModelInterface, ArrayA
         'invitee_email_address' => 'email',
         'invitee_first_name' => null,
         'invitee_last_name' => null,
-        'registration_url' => null,
         'send_invite_email' => null,
         'initial_role_id' => 'uuid'
     ];
@@ -93,7 +91,6 @@ class NoFrixionMoneyMoovModelsUserInviteCreate implements ModelInterface, ArrayA
         'invitee_email_address' => false,
         'invitee_first_name' => true,
         'invitee_last_name' => true,
-        'registration_url' => true,
         'send_invite_email' => false,
         'initial_role_id' => true
     ];
@@ -188,7 +185,6 @@ class NoFrixionMoneyMoovModelsUserInviteCreate implements ModelInterface, ArrayA
         'invitee_email_address' => 'inviteeEmailAddress',
         'invitee_first_name' => 'inviteeFirstName',
         'invitee_last_name' => 'inviteeLastName',
-        'registration_url' => 'registrationUrl',
         'send_invite_email' => 'sendInviteEmail',
         'initial_role_id' => 'initialRoleID'
     ];
@@ -203,7 +199,6 @@ class NoFrixionMoneyMoovModelsUserInviteCreate implements ModelInterface, ArrayA
         'invitee_email_address' => 'setInviteeEmailAddress',
         'invitee_first_name' => 'setInviteeFirstName',
         'invitee_last_name' => 'setInviteeLastName',
-        'registration_url' => 'setRegistrationUrl',
         'send_invite_email' => 'setSendInviteEmail',
         'initial_role_id' => 'setInitialRoleId'
     ];
@@ -218,7 +213,6 @@ class NoFrixionMoneyMoovModelsUserInviteCreate implements ModelInterface, ArrayA
         'invitee_email_address' => 'getInviteeEmailAddress',
         'invitee_first_name' => 'getInviteeFirstName',
         'invitee_last_name' => 'getInviteeLastName',
-        'registration_url' => 'getRegistrationUrl',
         'send_invite_email' => 'getSendInviteEmail',
         'initial_role_id' => 'getInitialRoleId'
     ];
@@ -284,7 +278,6 @@ class NoFrixionMoneyMoovModelsUserInviteCreate implements ModelInterface, ArrayA
         $this->setIfExists('invitee_email_address', $data ?? [], null);
         $this->setIfExists('invitee_first_name', $data ?? [], null);
         $this->setIfExists('invitee_last_name', $data ?? [], null);
-        $this->setIfExists('registration_url', $data ?? [], null);
         $this->setIfExists('send_invite_email', $data ?? [], null);
         $this->setIfExists('initial_role_id', $data ?? [], null);
     }
@@ -461,40 +454,6 @@ class NoFrixionMoneyMoovModelsUserInviteCreate implements ModelInterface, ArrayA
             }
         }
         $this->container['invitee_last_name'] = $invitee_last_name;
-
-        return $this;
-    }
-
-    /**
-     * Gets registration_url
-     *
-     * @return string|null
-     */
-    public function getRegistrationUrl()
-    {
-        return $this->container['registration_url'];
-    }
-
-    /**
-     * Sets registration_url
-     *
-     * @param string|null $registration_url Optional URL to provide to the invited user to inform them where to  visit to accept the invite.
-     *
-     * @return self
-     */
-    public function setRegistrationUrl($registration_url)
-    {
-        if (is_null($registration_url)) {
-            array_push($this->openAPINullablesSetToNull, 'registration_url');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('registration_url', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['registration_url'] = $registration_url;
 
         return $this;
     }

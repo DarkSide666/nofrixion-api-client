@@ -7,6 +7,7 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 | [**captureCardPayment()**](PaymentRequestsApi.md#captureCardPayment) | **POST** /api/v1/paymentrequests/{id}/card/capture | Submits a request to capture a previously authorised card payment. |
 | [**createAndPayPaymentRequest()**](PaymentRequestsApi.md#createAndPayPaymentRequest) | **POST** /api/v1/paymentrequests/payondemand | Creates a payment request record and processes the payment. |
 | [**createPaymentRequest()**](PaymentRequestsApi.md#createPaymentRequest) | **POST** /api/v1/paymentrequests | Creates a payment request record. |
+| [**createPaymentRequests()**](PaymentRequestsApi.md#createPaymentRequests) | **POST** /api/v1/paymentrequests/batchcreate | Creates payment requests in batch. |
 | [**deleteAllTokenisedCards()**](PaymentRequestsApi.md#deleteAllTokenisedCards) | **DELETE** /api/v1/paymentrequests/card/customertokens/removeall/{customerEmailAddress} | Deletes all the card tokens for a customer. |
 | [**deleteAllTokenisedCardsForMerchant()**](PaymentRequestsApi.md#deleteAllTokenisedCardsForMerchant) | **DELETE** /api/v1/paymentrequests/card/customertokens/removeall/{merchantID}/{customerEmailAddress} | Deletes all the card tokens for a customer. |
 | [**deletePaymentRequest()**](PaymentRequestsApi.md#deletePaymentRequest) | **DELETE** /api/v1/paymentrequests/{id} | Deletes a payment request, along with its keys and addresses, if there&#39;s  no payment event associated with it. |
@@ -406,6 +407,68 @@ try {
 ### Return type
 
 [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequest**](../Model/NoFrixionMoneyMoovModelsPaymentRequest.md)
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `text/plain`, `application/json`, `text/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `createPaymentRequests()`
+
+```php
+createPaymentRequests($no_frixion_money_moov_models_payment_request_create): \Nofrixion\Client\Model\NoFrixionMoneyMoovApiFeaturesPaymentRequestsPaymentRequestsCreateResponse
+```
+
+Creates payment requests in batch.
+
+<b>Authorization</b>: End user or Merchant token is required.  <b>User permissions required</b>: CanCreatePaymentRequests
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\PaymentRequestsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$no_frixion_money_moov_models_payment_request_create = array(new \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestCreate()); // \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestCreate[] | A list of objects containing the details of the payment requests to create.
+
+try {
+    $result = $apiInstance->createPaymentRequests($no_frixion_money_moov_models_payment_request_create);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PaymentRequestsApi->createPaymentRequests: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **no_frixion_money_moov_models_payment_request_create** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentRequestCreate[]**](../Model/NoFrixionMoneyMoovModelsPaymentRequestCreate.md)| A list of objects containing the details of the payment requests to create. | [optional] |
+
+### Return type
+
+[**\Nofrixion\Client\Model\NoFrixionMoneyMoovApiFeaturesPaymentRequestsPaymentRequestsCreateResponse**](../Model/NoFrixionMoneyMoovApiFeaturesPaymentRequestsPaymentRequestsCreateResponse.md)
 
 ### Authorization
 

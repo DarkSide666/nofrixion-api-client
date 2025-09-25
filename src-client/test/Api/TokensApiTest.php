@@ -86,7 +86,7 @@ class TokensApiTest extends TestCase
     /**
      * Test case for authoriseMerchantToken
      *
-     * Authorises a beneficiary..
+     * Authorises a merchant token..
      *
      */
     public function testAuthoriseMerchantToken()
@@ -102,6 +102,30 @@ class TokensApiTest extends TestCase
      *
      */
     public function testCreateMerchantToken()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getToken
+     *
+     * Gets the details of a merchant API token..
+     *
+     */
+    public function testGetToken()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateMerchantToken
+     *
+     * Updates an existing merchant token..
+     *
+     */
+    public function testUpdateMerchantToken()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

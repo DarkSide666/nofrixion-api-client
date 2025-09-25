@@ -317,6 +317,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestPayment implements ModelInterface, A
     public const PAYMENT_PROCESSOR_LIGHTNING = 'Lightning';
     public const PAYMENT_PROCESSOR_LIGHTNING_TESTNET = 'LightningTestnet';
     public const PAYMENT_PROCESSOR_BANKING_CIRCLE_DIRECT_DEBIT = 'BankingCircleDirectDebit';
+    public const PAYMENT_PROCESSOR_TECHNOXANDER = 'Technoxander';
 
     /**
      * Gets allowable values of the enum
@@ -377,6 +378,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestPayment implements ModelInterface, A
             self::PAYMENT_PROCESSOR_LIGHTNING,
             self::PAYMENT_PROCESSOR_LIGHTNING_TESTNET,
             self::PAYMENT_PROCESSOR_BANKING_CIRCLE_DIRECT_DEBIT,
+            self::PAYMENT_PROCESSOR_TECHNOXANDER,
         ];
     }
 

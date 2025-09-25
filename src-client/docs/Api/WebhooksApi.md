@@ -198,7 +198,7 @@ try {
 ## `updateWebhook()`
 
 ```php
-updateWebhook($id, $no_frixion_money_moov_models_webhook_create): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsWebhook
+updateWebhook($id, $no_frixion_money_moov_models_webhook_update): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsWebhook
 ```
 
 Updates a webhook for the given merchant.
@@ -225,10 +225,10 @@ $apiInstance = new Nofrixion\Client\Api\WebhooksApi(
     $config
 );
 $id = 'id_example'; // string | The id of the webhook to update.
-$no_frixion_money_moov_models_webhook_create = new \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsWebhookCreate(); // \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsWebhookCreate | The WebHookRequest to be updated.
+$no_frixion_money_moov_models_webhook_update = new \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsWebhookUpdate(); // \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsWebhookUpdate | The WebHookRequest to be updated.
 
 try {
-    $result = $apiInstance->updateWebhook($id, $no_frixion_money_moov_models_webhook_create);
+    $result = $apiInstance->updateWebhook($id, $no_frixion_money_moov_models_webhook_update);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling WebhooksApi->updateWebhook: ', $e->getMessage(), PHP_EOL;
@@ -240,7 +240,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | **string**| The id of the webhook to update. | |
-| **no_frixion_money_moov_models_webhook_create** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsWebhookCreate**](../Model/NoFrixionMoneyMoovModelsWebhookCreate.md)| The WebHookRequest to be updated. | [optional] |
+| **no_frixion_money_moov_models_webhook_update** | [**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsWebhookUpdate**](../Model/NoFrixionMoneyMoovModelsWebhookUpdate.md)| The WebHookRequest to be updated. | [optional] |
 
 ### Return type
 

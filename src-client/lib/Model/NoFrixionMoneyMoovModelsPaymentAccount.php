@@ -471,6 +471,7 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
     public const ACCOUNT_SUPPLIER_NAME_LIGHTNING = 'Lightning';
     public const ACCOUNT_SUPPLIER_NAME_LIGHTNING_TESTNET = 'LightningTestnet';
     public const ACCOUNT_SUPPLIER_NAME_BANKING_CIRCLE_DIRECT_DEBIT = 'BankingCircleDirectDebit';
+    public const ACCOUNT_SUPPLIER_NAME_TECHNOXANDER = 'Technoxander';
     public const XERO_BANK_FEED_CONNECTION_STATUS_NONE = 'None';
     public const XERO_BANK_FEED_CONNECTION_STATUS_PENDING = 'Pending';
     public const XERO_BANK_FEED_CONNECTION_STATUS_ACTIVE = 'Active';
@@ -531,6 +532,7 @@ class NoFrixionMoneyMoovModelsPaymentAccount implements ModelInterface, ArrayAcc
             self::ACCOUNT_SUPPLIER_NAME_LIGHTNING,
             self::ACCOUNT_SUPPLIER_NAME_LIGHTNING_TESTNET,
             self::ACCOUNT_SUPPLIER_NAME_BANKING_CIRCLE_DIRECT_DEBIT,
+            self::ACCOUNT_SUPPLIER_NAME_TECHNOXANDER,
         ];
     }
 

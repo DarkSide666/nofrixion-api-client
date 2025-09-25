@@ -80,6 +80,7 @@ Class | Method | HTTP request | Description
 *AccountsApi* | [**archiveAccount**](docs/Api/AccountsApi.md#archiveaccount) | **DELETE** /api/v1/accounts/archive/{id} | Sets the specified account as archived.
 *AccountsApi* | [**clearAccountStatements**](docs/Api/AccountsApi.md#clearaccountstatements) | **DELETE** /api/v1/accounts/statements | Clears the cached user statements for a user.
 *AccountsApi* | [**createAccount**](docs/Api/AccountsApi.md#createaccount) | **POST** /api/v1/accounts | Creates a new merchant payment account.
+*AccountsApi* | [**createAccountForAdditionalCurrency**](docs/Api/AccountsApi.md#createaccountforadditionalcurrency) | **POST** /api/v1/accounts/{accountID}/{currency} | Creates a new payment account in a different currency, based on an existing payment account.
 *AccountsApi* | [**createVirtualAccount**](docs/Api/AccountsApi.md#createvirtualaccount) | **POST** /api/v1/accounts/{accountID}/virtual | Creates a new virtual account.
 *AccountsApi* | [**exportAccountTransactions**](docs/Api/AccountsApi.md#exportaccounttransactions) | **GET** /api/v1/accounts/{accountID}/transactions/export | Exports a list of all transactions for a specific account in CSV format.
 *AccountsApi* | [**exportAccounts**](docs/Api/AccountsApi.md#exportaccounts) | **GET** /api/v1/accounts/export | Exports a list of all payment accounts the user has access to for a specific merchant.
@@ -89,6 +90,7 @@ Class | Method | HTTP request | Description
 *AccountsApi* | [**getAccountStatement**](docs/Api/AccountsApi.md#getaccountstatement) | **GET** /api/v1/accounts/{accountID}/statements/{id} | Gets the specified statement from the user&#39;s cache.
 *AccountsApi* | [**getAccountTransactionsPaged**](docs/Api/AccountsApi.md#getaccounttransactionspaged) | **GET** /api/v1/accounts/{accountID}/transactions | Get a list of the transactions for a single payment account.
 *AccountsApi* | [**getAccounts**](docs/Api/AccountsApi.md#getaccounts) | **GET** /api/v1/accounts | Get a list of all payment accounts the user has access to.
+*AccountsApi* | [**getAccountsMinimal**](docs/Api/AccountsApi.md#getaccountsminimal) | **GET** /api/v1/accounts/minimal | Get a paged list of all payment accounts minimal the user has access to for a specific merchant.
 *AccountsApi* | [**getAccountsPaged**](docs/Api/AccountsApi.md#getaccountspaged) | **GET** /api/v1/accounts/paged | Get a paged list of all payment accounts the user has access to for a specific merchant.
 *AccountsApi* | [**getAllAccountStatements**](docs/Api/AccountsApi.md#getallaccountstatements) | **GET** /api/v1/accounts/statements | Gets all active statement generation requests for the user.
 *AccountsApi* | [**getFailedPayoutsForAccount**](docs/Api/AccountsApi.md#getfailedpayoutsforaccount) | **GET** /api/v1/accounts/{accountID}/payouts/failed | Get failed payouts for a specific account.
@@ -99,6 +101,7 @@ Class | Method | HTTP request | Description
 *AccountsApi* | [**updateAccount**](docs/Api/AccountsApi.md#updateaccount) | **PUT** /api/v1/accounts/{id} | Updates an account record.
 *AccountsApi* | [**updateVirtualAccount**](docs/Api/AccountsApi.md#updatevirtualaccount) | **PUT** /api/v1/accounts/{accountID}/virtual/{virtualAccountID} | Updates a virtual account record.
 *BeneficiariesApi* | [**authoriseBeneficiary**](docs/Api/BeneficiariesApi.md#authorisebeneficiary) | **POST** /api/v1/beneficiaries/authorise/{id} | Authorises a beneficiary.
+*BeneficiariesApi* | [**createBeneficiaries**](docs/Api/BeneficiariesApi.md#createbeneficiaries) | **POST** /api/v1/beneficiaries/batchcreate | Creates beneficiaries in batch.
 *BeneficiariesApi* | [**createBeneficiary**](docs/Api/BeneficiariesApi.md#createbeneficiary) | **POST** /api/v1/beneficiaries | Creates a new beneficiary.
 *BeneficiariesApi* | [**deleteBeneficiary**](docs/Api/BeneficiariesApi.md#deletebeneficiary) | **DELETE** /api/v1/beneficiaries/{id} | Deletes a beneficiary
 *BeneficiariesApi* | [**disableBeneficiary**](docs/Api/BeneficiariesApi.md#disablebeneficiary) | **PUT** /api/v1/beneficiaries/disable/{id} | Attempts to disable a beneficiary. If successful the beneficiary will be disabled.
@@ -111,11 +114,13 @@ Class | Method | HTTP request | Description
 *MandatesApi* | [**getMandate**](docs/Api/MandatesApi.md#getmandate) | **GET** /api/v1/mandates/{id} | Gets a specific mandate&#39;s information.
 *MandatesApi* | [**getMandatesPaged**](docs/Api/MandatesApi.md#getmandatespaged) | **GET** /api/v1/mandates | Gets all mandates from a specific merchant with the supplied parameters.
 *MerchantsApi* | [**createMerchantTag**](docs/Api/MerchantsApi.md#createmerchanttag) | **POST** /api/v1/merchants/{merchantID}/tags | Adds a tag to a merchant.
+*MerchantsApi* | [**createRoles**](docs/Api/MerchantsApi.md#createroles) | **POST** /api/v1/merchants/{merchantID}/roles/batchcreate | Creates roles in batch for a specific merchant.
 *MerchantsApi* | [**deleteMerchantTag**](docs/Api/MerchantsApi.md#deletemerchanttag) | **DELETE** /api/v1/merchants/{merchantID}/tags/{tagID} | Deletes a tag from a merchant
 *MerchantsApi* | [**deleteUserFromMerchant**](docs/Api/MerchantsApi.md#deleteuserfrommerchant) | **DELETE** /api/v1/merchants/{merchantId}/users/{userId} | Deletes all roles for a user in a merchant.
 *MerchantsApi* | [**exportMerchantBeneficiaries**](docs/Api/MerchantsApi.md#exportmerchantbeneficiaries) | **GET** /api/v1/merchants/{merchantID}/beneficiaries/export | Exports a list of all beneficiaries.
 *MerchantsApi* | [**exportMerchantPayouts**](docs/Api/MerchantsApi.md#exportmerchantpayouts) | **GET** /api/v1/merchants/{merchantID}/payouts/export | Exports a list of all payouts for a specific merchant as a CSV file.
 *MerchantsApi* | [**getAuthorisationSettings**](docs/Api/MerchantsApi.md#getauthorisationsettings) | **GET** /api/v1/merchants/{merchantID}/authorisationsettings | Gets a list of merchant authorisation settings for a merchant
+*MerchantsApi* | [**getChildMerchantsByParent**](docs/Api/MerchantsApi.md#getchildmerchantsbyparent) | **GET** /api/v1/merchants/{merchantID}/childmerchants | Gets a paged list of child merchants for a specified parent merchant.
 *MerchantsApi* | [**getFailedPayoutsForMerchant**](docs/Api/MerchantsApi.md#getfailedpayoutsformerchant) | **GET** /api/v1/merchants/{merchantID}/payouts/failed | Get failed payouts for a specific merchant.
 *MerchantsApi* | [**getMerchant**](docs/Api/MerchantsApi.md#getmerchant) | **GET** /api/v1/merchants/{merchantID} | Get&#39;s a merchant.
 *MerchantsApi* | [**getMerchantAccount**](docs/Api/MerchantsApi.md#getmerchantaccount) | **GET** /api/v1/merchants/{merchantID}/accounts/{accountID} | Get an account.
@@ -126,15 +131,16 @@ Class | Method | HTTP request | Description
 *MerchantsApi* | [**getMerchantBeneficiaryGroups**](docs/Api/MerchantsApi.md#getmerchantbeneficiarygroups) | **GET** /api/v1/merchants/{merchantID}/beneficiarygroups | Gets a list of all beneficiary groups.
 *MerchantsApi* | [**getMerchantPayoutsPaged**](docs/Api/MerchantsApi.md#getmerchantpayoutspaged) | **GET** /api/v1/merchants/{merchantID}/payouts | Gets a list of all payouts for a specific merchant.
 *MerchantsApi* | [**getMerchantTags**](docs/Api/MerchantsApi.md#getmerchanttags) | **GET** /api/v1/merchants/{merchantID}/tags | Get a list of merchant tags
-*MerchantsApi* | [**getMerchantToken**](docs/Api/MerchantsApi.md#getmerchanttoken) | **GET** /api/v1/merchants/tokens/{id} | Gets the details of a merchant API token.
 *MerchantsApi* | [**getMerchantTokens**](docs/Api/MerchantsApi.md#getmerchanttokens) | **GET** /api/v1/merchants/{merchantID}/tokens | Gets a list of a merchant&#39;s issued API tokens.
 *MerchantsApi* | [**getMerchantTransactionsPaged**](docs/Api/MerchantsApi.md#getmerchanttransactionspaged) | **GET** /api/v1/merchants/{merchantID}/transactions | Gets a list of transactions for all a merchant&#39;s accounts.
-*MerchantsApi* | [**getMerchantUserInvites**](docs/Api/MerchantsApi.md#getmerchantuserinvites) | **GET** /api/v1/merchants/{merchantID}/userinvites | Gets user invites associated with merchant.
 *MerchantsApi* | [**getMerchantUsers**](docs/Api/MerchantsApi.md#getmerchantusers) | **GET** /api/v1/merchants/{merchantID}/users | Gets all users including invitees for a merchant.
 *MerchantsApi* | [**getMerchantWebhooks**](docs/Api/MerchantsApi.md#getmerchantwebhooks) | **GET** /api/v1/merchants/{merchantID}/webhooks | Get all configured webhooks for a merchant.
 *MerchantsApi* | [**getMerchants**](docs/Api/MerchantsApi.md#getmerchants) | **GET** /api/v1/merchants | Get&#39;s a list of merchants the caller has access to.
 *MerchantsApi* | [**getMerchantsPaged**](docs/Api/MerchantsApi.md#getmerchantspaged) | **GET** /api/v1/merchants/paged | Get a paged list of all the merchants the caller has access to.
+*MerchantsApi* | [**getUserInvitesPaged**](docs/Api/MerchantsApi.md#getuserinvitespaged) | **GET** /api/v1/merchants/{merchantID}/userinvitespaged | Gets a paged list of user invites associated with merchant.
+*MerchantsApi* | [**getWebhook**](docs/Api/MerchantsApi.md#getwebhook) | **GET** /api/v1/merchants/{merchantID}/webhooks/{id} | Gets a webhook.
 *MerchantsApi* | [**suspendMerchant**](docs/Api/MerchantsApi.md#suspendmerchant) | **PUT** /api/v1/merchants/{merchantId}/suspend | Suspends a merchant
+*MerchantsApi* | [**updateMerchant**](docs/Api/MerchantsApi.md#updatemerchant) | **PUT** /api/v1/merchants/{merchantID} | Updates a merchant&#39;s details.
 *MetadataApi* | [**problem**](docs/Api/MetadataApi.md#problem) | **GET** /api/v1/metadata/problem | Returns an example problem response.
 *MetadataApi* | [**problemNotification**](docs/Api/MetadataApi.md#problemnotification) | **GET** /api/v1/metadata/problemnotification | Triggers a webhook with the problem details in the payload.
 *MetadataApi* | [**version**](docs/Api/MetadataApi.md#version) | **GET** /api/v1/metadata/version | Gets the current version of the MoneyMoov API.
@@ -156,6 +162,7 @@ Class | Method | HTTP request | Description
 *PaymentRequestsApi* | [**captureCardPayment**](docs/Api/PaymentRequestsApi.md#capturecardpayment) | **POST** /api/v1/paymentrequests/{id}/card/capture | Submits a request to capture a previously authorised card payment.
 *PaymentRequestsApi* | [**createAndPayPaymentRequest**](docs/Api/PaymentRequestsApi.md#createandpaypaymentrequest) | **POST** /api/v1/paymentrequests/payondemand | Creates a payment request record and processes the payment.
 *PaymentRequestsApi* | [**createPaymentRequest**](docs/Api/PaymentRequestsApi.md#createpaymentrequest) | **POST** /api/v1/paymentrequests | Creates a payment request record.
+*PaymentRequestsApi* | [**createPaymentRequests**](docs/Api/PaymentRequestsApi.md#createpaymentrequests) | **POST** /api/v1/paymentrequests/batchcreate | Creates payment requests in batch.
 *PaymentRequestsApi* | [**deleteAllTokenisedCards**](docs/Api/PaymentRequestsApi.md#deletealltokenisedcards) | **DELETE** /api/v1/paymentrequests/card/customertokens/removeall/{customerEmailAddress} | Deletes all the card tokens for a customer.
 *PaymentRequestsApi* | [**deleteAllTokenisedCardsForMerchant**](docs/Api/PaymentRequestsApi.md#deletealltokenisedcardsformerchant) | **DELETE** /api/v1/paymentrequests/card/customertokens/removeall/{merchantID}/{customerEmailAddress} | Deletes all the card tokens for a customer.
 *PaymentRequestsApi* | [**deletePaymentRequest**](docs/Api/PaymentRequestsApi.md#deletepaymentrequest) | **DELETE** /api/v1/paymentrequests/{id} | Deletes a payment request, along with its keys and addresses, if there&#39;s  no payment event associated with it.
@@ -192,8 +199,11 @@ Class | Method | HTTP request | Description
 *PayoutsApi* | [**deletePayout**](docs/Api/PayoutsApi.md#deletepayout) | **DELETE** /api/v1/payouts/{id} | Deletes a payout record.
 *PayoutsApi* | [**deletePayouts**](docs/Api/PayoutsApi.md#deletepayouts) | **DELETE** /api/v1/payouts/batchdelete | Deletes a list of payout records.
 *PayoutsApi* | [**exportPayouts**](docs/Api/PayoutsApi.md#exportpayouts) | **GET** /api/v1/payouts/export | Exports a list of all payouts for a specific merchant to a CSV file.
+*PayoutsApi* | [**getAllFxHeldRates**](docs/Api/PayoutsApi.md#getallfxheldrates) | **GET** /api/v1/payouts/fxallheldrates/{source}/{destination} | Get all FX held rates.
 *PayoutsApi* | [**getBatchPayout**](docs/Api/PayoutsApi.md#getbatchpayout) | **GET** /api/v1/payouts/batch/{id} | Gets a list of all the payouts contained in a batch.
 *PayoutsApi* | [**getFailedPayouts**](docs/Api/PayoutsApi.md#getfailedpayouts) | **GET** /api/v1/payouts/{merchantID}/failed | Get failed payouts for a specific merchant.
+*PayoutsApi* | [**getFxHeldRate**](docs/Api/PayoutsApi.md#getfxheldrate) | **GET** /api/v1/payouts/fxheldrate/{source}/{destination}/{validForMinutes} | Gets an FX held rate.
+*PayoutsApi* | [**getFxQuote**](docs/Api/PayoutsApi.md#getfxquote) | **GET** /api/v1/payouts/fxquote/{source}/{destination}/{amount} | Gets an FX quote.
 *PayoutsApi* | [**getPayout**](docs/Api/PayoutsApi.md#getpayout) | **GET** /api/v1/payouts/{id} | Gets a single payout.
 *PayoutsApi* | [**getPayoutMetrics**](docs/Api/PayoutsApi.md#getpayoutmetrics) | **GET** /api/v1/payouts/metrics | Gets a list of all payout metrics for a specific merchant.
 *PayoutsApi* | [**getPayoutProof**](docs/Api/PayoutsApi.md#getpayoutproof) | **GET** /api/v1/payouts/{id}/proof | Generates a proof of payment PDF document with the details of a payout.
@@ -225,8 +235,10 @@ Class | Method | HTTP request | Description
 *RulesApi* | [**getRulesPaged**](docs/Api/RulesApi.md#getrulespaged) | **GET** /api/v1/rules | Gets all the rules for a merchant.
 *RulesApi* | [**updateRule**](docs/Api/RulesApi.md#updaterule) | **PUT** /api/v1/rules/{id} | Update an existing rule.
 *TokensApi* | [**archiveToken**](docs/Api/TokensApi.md#archivetoken) | **DELETE** /api/v1/tokens/{id} | Archives a merchant API token.
-*TokensApi* | [**authoriseMerchantToken**](docs/Api/TokensApi.md#authorisemerchanttoken) | **POST** /api/v1/tokens/authorise/{id} | Authorises a beneficiary.
+*TokensApi* | [**authoriseMerchantToken**](docs/Api/TokensApi.md#authorisemerchanttoken) | **POST** /api/v1/tokens/authorise/{id} | Authorises a merchant token.
 *TokensApi* | [**createMerchantToken**](docs/Api/TokensApi.md#createmerchanttoken) | **POST** /api/v1/tokens | Creates a new merchant API token.
+*TokensApi* | [**getToken**](docs/Api/TokensApi.md#gettoken) | **GET** /api/v1/tokens/{id} | Gets the details of a merchant API token.
+*TokensApi* | [**updateMerchantToken**](docs/Api/TokensApi.md#updatemerchanttoken) | **PUT** /api/v1/tokens/{id} | Updates an existing merchant token.
 *TransactionsApi* | [**addTags**](docs/Api/TransactionsApi.md#addtags) | **POST** /api/v1/transactions/{id}/tags | Adds merchant tags to a transaction.
 *TransactionsApi* | [**exportTransactionsForAccount**](docs/Api/TransactionsApi.md#exporttransactionsforaccount) | **GET** /api/v1/transactions/{accountID}/export | Exports a list of the transactions for a single payment account to a CSV file.
 *TransactionsApi* | [**getTransactionProof**](docs/Api/TransactionsApi.md#gettransactionproof) | **GET** /api/v1/transactions/{id}/proof | Generates a proof of payment PDF document with the details of a transaction.
@@ -235,11 +247,14 @@ Class | Method | HTTP request | Description
 *TransactionsApi* | [**getTransactionsPaged**](docs/Api/TransactionsApi.md#gettransactionspaged) | **GET** /api/v1/transactions | Get a list of the transactions for all payment accounts a user has access to.
 *TransactionsApi* | [**removeTag**](docs/Api/TransactionsApi.md#removetag) | **DELETE** /api/v1/transactions/{id}/tag | Removes a tag from the transaction using the tag ID.
 *UserApi* | [**getUser**](docs/Api/UserApi.md#getuser) | **GET** /api/v1/user | Get the profile for the authenticated user.
-*UserApi* | [**getUsers**](docs/Api/UserApi.md#getusers) | **GET** /api/v1/user/{merchantID}/users | Gets all users including invitees for a merchant.
+*UserApi* | [**getUsersPaged**](docs/Api/UserApi.md#getuserspaged) | **GET** /api/v1/user/{merchantID}/userspaged | Gets a paged list of users.
 *UserApi* | [**updateUser**](docs/Api/UserApi.md#updateuser) | **PUT** /api/v1/user/{id} | Updates a user record and optionally accepts an invite to join a merchant.
+*UserInvitesApi* | [**authoriseUserInvite**](docs/Api/UserInvitesApi.md#authoriseuserinvite) | **POST** /api/v1/userinvites/authorise/{id} | Authorises a user invite.
 *UserInvitesApi* | [**createUserInvite**](docs/Api/UserInvitesApi.md#createuserinvite) | **POST** /api/v1/userinvites | Creates a new user invite and optionally sends the invitee an email with the details.
+*UserInvitesApi* | [**createUserInvites**](docs/Api/UserInvitesApi.md#createuserinvites) | **POST** /api/v1/userinvites/batchcreate | Creates user invites in batch.
 *UserInvitesApi* | [**deleteUserInvite**](docs/Api/UserInvitesApi.md#deleteuserinvite) | **DELETE** /api/v1/userinvites/{id} | Deletes user invite.
 *UserInvitesApi* | [**getUserInvite**](docs/Api/UserInvitesApi.md#getuserinvite) | **GET** /api/v1/userinvites/{id} | Gets a user invite by ID.
+*UserInvitesApi* | [**getUserInviteDetails**](docs/Api/UserInvitesApi.md#getuserinvitedetails) | **GET** /api/v1/userinvites/{id}/details | Gets a user invite detailss by ID.
 *UserInvitesApi* | [**resendUserInvite**](docs/Api/UserInvitesApi.md#resenduserinvite) | **PUT** /api/v1/userinvites/{id} | Resend, or request a resend, of a user invite.
 *WebhooksApi* | [**createWebhook**](docs/Api/WebhooksApi.md#createwebhook) | **POST** /api/v1/webhooks | Creates a webhook for the given merchant.
 *WebhooksApi* | [**deleteWebhook**](docs/Api/WebhooksApi.md#deletewebhook) | **DELETE** /api/v1/webhooks/{id} | Deletes a webhook.
@@ -257,13 +272,22 @@ Class | Method | HTTP request | Description
 - [NoFrixionBizBizModelsPagingRulesPageResponse](docs/Model/NoFrixionBizBizModelsPagingRulesPageResponse.md)
 - [NoFrixionBizBizModelsPaymentsCardPaymentResponse](docs/Model/NoFrixionBizBizModelsPaymentsCardPaymentResponse.md)
 - [NoFrixionBizBizModelsPaymentsCardPublicKey](docs/Model/NoFrixionBizBizModelsPaymentsCardPublicKey.md)
+- [NoFrixionMoneyMoovApiFeaturesBeneficiariesBeneficiariesCreateResponse](docs/Model/NoFrixionMoneyMoovApiFeaturesBeneficiariesBeneficiariesCreateResponse.md)
+- [NoFrixionMoneyMoovApiFeaturesBeneficiariesFailedBeneficiary](docs/Model/NoFrixionMoneyMoovApiFeaturesBeneficiariesFailedBeneficiary.md)
+- [NoFrixionMoneyMoovApiFeaturesFailedUserInvite](docs/Model/NoFrixionMoneyMoovApiFeaturesFailedUserInvite.md)
+- [NoFrixionMoneyMoovApiFeaturesPaymentRequestsFailedPaymentRequest](docs/Model/NoFrixionMoneyMoovApiFeaturesPaymentRequestsFailedPaymentRequest.md)
+- [NoFrixionMoneyMoovApiFeaturesPaymentRequestsPaymentRequestsCreateResponse](docs/Model/NoFrixionMoneyMoovApiFeaturesPaymentRequestsPaymentRequestsCreateResponse.md)
 - [NoFrixionMoneyMoovApiFeaturesPayoutsFailedPayout](docs/Model/NoFrixionMoneyMoovApiFeaturesPayoutsFailedPayout.md)
+- [NoFrixionMoneyMoovApiFeaturesPermissionsFailedRole](docs/Model/NoFrixionMoneyMoovApiFeaturesPermissionsFailedRole.md)
+- [NoFrixionMoneyMoovApiFeaturesPermissionsRolesCreateResponse](docs/Model/NoFrixionMoneyMoovApiFeaturesPermissionsRolesCreateResponse.md)
+- [NoFrixionMoneyMoovApiFeaturesUserInvitesCreateResponse](docs/Model/NoFrixionMoneyMoovApiFeaturesUserInvitesCreateResponse.md)
 - [NoFrixionMoneyMoovModelsAccountIdentifier](docs/Model/NoFrixionMoneyMoovModelsAccountIdentifier.md)
 - [NoFrixionMoneyMoovModelsAccountIdentifierCreate](docs/Model/NoFrixionMoneyMoovModelsAccountIdentifierCreate.md)
 - [NoFrixionMoneyMoovModelsAccountUpdate](docs/Model/NoFrixionMoneyMoovModelsAccountUpdate.md)
 - [NoFrixionMoneyMoovModelsApproveAuthorisation](docs/Model/NoFrixionMoneyMoovModelsApproveAuthorisation.md)
 - [NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationRoleSetting](docs/Model/NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationRoleSetting.md)
 - [NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationSetting](docs/Model/NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationSetting.md)
+- [NoFrixionMoneyMoovModelsAuthorisationStatus](docs/Model/NoFrixionMoneyMoovModelsAuthorisationStatus.md)
 - [NoFrixionMoneyMoovModelsBatchPayout](docs/Model/NoFrixionMoneyMoovModelsBatchPayout.md)
 - [NoFrixionMoneyMoovModelsBeneficiary](docs/Model/NoFrixionMoneyMoovModelsBeneficiary.md)
 - [NoFrixionMoneyMoovModelsBeneficiaryCreate](docs/Model/NoFrixionMoneyMoovModelsBeneficiaryCreate.md)
@@ -277,6 +301,7 @@ Class | Method | HTTP request | Description
 - [NoFrixionMoneyMoovModelsClientSessionTimeout](docs/Model/NoFrixionMoneyMoovModelsClientSessionTimeout.md)
 - [NoFrixionMoneyMoovModelsCounterparty](docs/Model/NoFrixionMoneyMoovModelsCounterparty.md)
 - [NoFrixionMoneyMoovModelsCounterpartyCreate](docs/Model/NoFrixionMoneyMoovModelsCounterpartyCreate.md)
+- [NoFrixionMoneyMoovModelsFxRate](docs/Model/NoFrixionMoneyMoovModelsFxRate.md)
 - [NoFrixionMoneyMoovModelsGenerateStatementRequest](docs/Model/NoFrixionMoneyMoovModelsGenerateStatementRequest.md)
 - [NoFrixionMoneyMoovModelsIPaymentResponse](docs/Model/NoFrixionMoneyMoovModelsIPaymentResponse.md)
 - [NoFrixionMoneyMoovModelsInvoicesInvoicePayment](docs/Model/NoFrixionMoneyMoovModelsInvoicesInvoicePayment.md)
@@ -292,6 +317,7 @@ Class | Method | HTTP request | Description
 - [NoFrixionMoneyMoovModelsMerchantSuspend](docs/Model/NoFrixionMoneyMoovModelsMerchantSuspend.md)
 - [NoFrixionMoneyMoovModelsMerchantToken](docs/Model/NoFrixionMoneyMoovModelsMerchantToken.md)
 - [NoFrixionMoneyMoovModelsMerchantTokenPageResponse](docs/Model/NoFrixionMoneyMoovModelsMerchantTokenPageResponse.md)
+- [NoFrixionMoneyMoovModelsMerchantUpdate](docs/Model/NoFrixionMoneyMoovModelsMerchantUpdate.md)
 - [NoFrixionMoneyMoovModelsNoFrixionVersion](docs/Model/NoFrixionMoneyMoovModelsNoFrixionVersion.md)
 - [NoFrixionMoneyMoovModelsOpenBankingAccount](docs/Model/NoFrixionMoneyMoovModelsOpenBankingAccount.md)
 - [NoFrixionMoneyMoovModelsOpenBankingAccountBalance](docs/Model/NoFrixionMoneyMoovModelsOpenBankingAccountBalance.md)
@@ -322,6 +348,8 @@ Class | Method | HTTP request | Description
 - [NoFrixionMoneyMoovModelsOpenBankingTransactionHash](docs/Model/NoFrixionMoneyMoovModelsOpenBankingTransactionHash.md)
 - [NoFrixionMoneyMoovModelsPaymentAccount](docs/Model/NoFrixionMoneyMoovModelsPaymentAccount.md)
 - [NoFrixionMoneyMoovModelsPaymentAccountCreate](docs/Model/NoFrixionMoneyMoovModelsPaymentAccountCreate.md)
+- [NoFrixionMoneyMoovModelsPaymentAccountMinimal](docs/Model/NoFrixionMoneyMoovModelsPaymentAccountMinimal.md)
+- [NoFrixionMoneyMoovModelsPaymentAccountMinimalPageResponse](docs/Model/NoFrixionMoneyMoovModelsPaymentAccountMinimalPageResponse.md)
 - [NoFrixionMoneyMoovModelsPaymentAccountPageResponse](docs/Model/NoFrixionMoneyMoovModelsPaymentAccountPageResponse.md)
 - [NoFrixionMoneyMoovModelsPaymentInitiationResponse](docs/Model/NoFrixionMoneyMoovModelsPaymentInitiationResponse.md)
 - [NoFrixionMoneyMoovModelsPaymentRequest](docs/Model/NoFrixionMoneyMoovModelsPaymentRequest.md)
@@ -375,6 +403,12 @@ Class | Method | HTTP request | Description
 - [NoFrixionMoneyMoovModelsPayrunUpdate](docs/Model/NoFrixionMoneyMoovModelsPayrunUpdate.md)
 - [NoFrixionMoneyMoovModelsReport](docs/Model/NoFrixionMoneyMoovModelsReport.md)
 - [NoFrixionMoneyMoovModelsReportResult](docs/Model/NoFrixionMoneyMoovModelsReportResult.md)
+- [NoFrixionMoneyMoovModelsRoleEvent](docs/Model/NoFrixionMoneyMoovModelsRoleEvent.md)
+- [NoFrixionMoneyMoovModelsRolesRole](docs/Model/NoFrixionMoneyMoovModelsRolesRole.md)
+- [NoFrixionMoneyMoovModelsRolesRoleCreate](docs/Model/NoFrixionMoneyMoovModelsRolesRoleCreate.md)
+- [NoFrixionMoneyMoovModelsRolesRoleUser](docs/Model/NoFrixionMoneyMoovModelsRolesRoleUser.md)
+- [NoFrixionMoneyMoovModelsRolesRoleUserAccount](docs/Model/NoFrixionMoneyMoovModelsRolesRoleUserAccount.md)
+- [NoFrixionMoneyMoovModelsRolesRoleUserCreate](docs/Model/NoFrixionMoneyMoovModelsRolesRoleUserCreate.md)
 - [NoFrixionMoneyMoovModelsRolesUserRoleWithScope](docs/Model/NoFrixionMoneyMoovModelsRolesUserRoleWithScope.md)
 - [NoFrixionMoneyMoovModelsRule](docs/Model/NoFrixionMoneyMoovModelsRule.md)
 - [NoFrixionMoneyMoovModelsRuleCreate](docs/Model/NoFrixionMoneyMoovModelsRuleCreate.md)
@@ -385,17 +419,21 @@ Class | Method | HTTP request | Description
 - [NoFrixionMoneyMoovModelsSweepDestination](docs/Model/NoFrixionMoneyMoovModelsSweepDestination.md)
 - [NoFrixionMoneyMoovModelsTag](docs/Model/NoFrixionMoneyMoovModelsTag.md)
 - [NoFrixionMoneyMoovModelsTokenAdd](docs/Model/NoFrixionMoneyMoovModelsTokenAdd.md)
+- [NoFrixionMoneyMoovModelsTokenUpdate](docs/Model/NoFrixionMoneyMoovModelsTokenUpdate.md)
 - [NoFrixionMoneyMoovModelsTransaction](docs/Model/NoFrixionMoneyMoovModelsTransaction.md)
 - [NoFrixionMoneyMoovModelsTransactionPageResponse](docs/Model/NoFrixionMoneyMoovModelsTransactionPageResponse.md)
 - [NoFrixionMoneyMoovModelsUser](docs/Model/NoFrixionMoneyMoovModelsUser.md)
 - [NoFrixionMoneyMoovModelsUserInvite](docs/Model/NoFrixionMoneyMoovModelsUserInvite.md)
 - [NoFrixionMoneyMoovModelsUserInviteCreate](docs/Model/NoFrixionMoneyMoovModelsUserInviteCreate.md)
+- [NoFrixionMoneyMoovModelsUserInvitePageResponse](docs/Model/NoFrixionMoneyMoovModelsUserInvitePageResponse.md)
+- [NoFrixionMoneyMoovModelsUserPageResponse](docs/Model/NoFrixionMoneyMoovModelsUserPageResponse.md)
 - [NoFrixionMoneyMoovModelsUserPermissions](docs/Model/NoFrixionMoneyMoovModelsUserPermissions.md)
 - [NoFrixionMoneyMoovModelsUserUpdate](docs/Model/NoFrixionMoneyMoovModelsUserUpdate.md)
 - [NoFrixionMoneyMoovModelsVirtualAccountCreate](docs/Model/NoFrixionMoneyMoovModelsVirtualAccountCreate.md)
 - [NoFrixionMoneyMoovModelsVirtualAccountUpdate](docs/Model/NoFrixionMoneyMoovModelsVirtualAccountUpdate.md)
 - [NoFrixionMoneyMoovModelsWebhook](docs/Model/NoFrixionMoneyMoovModelsWebhook.md)
 - [NoFrixionMoneyMoovModelsWebhookCreate](docs/Model/NoFrixionMoneyMoovModelsWebhookCreate.md)
+- [NoFrixionMoneyMoovModelsWebhookUpdate](docs/Model/NoFrixionMoneyMoovModelsWebhookUpdate.md)
 
 ## Authorization
 

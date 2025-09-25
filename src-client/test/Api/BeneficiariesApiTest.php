@@ -84,6 +84,18 @@ class BeneficiariesApiTest extends TestCase
     }
 
     /**
+     * Test case for createBeneficiaries
+     *
+     * Creates beneficiaries in batch..
+     *
+     */
+    public function testCreateBeneficiaries()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for createBeneficiary
      *
      * Creates a new beneficiary..

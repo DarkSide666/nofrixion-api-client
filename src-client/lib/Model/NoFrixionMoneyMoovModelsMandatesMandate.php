@@ -377,6 +377,7 @@ class NoFrixionMoneyMoovModelsMandatesMandate implements ModelInterface, ArrayAc
     public const SUPPLIER_NAME_LIGHTNING = 'Lightning';
     public const SUPPLIER_NAME_LIGHTNING_TESTNET = 'LightningTestnet';
     public const SUPPLIER_NAME_BANKING_CIRCLE_DIRECT_DEBIT = 'BankingCircleDirectDebit';
+    public const SUPPLIER_NAME_TECHNOXANDER = 'Technoxander';
     public const CURRENCY_NONE = 'NONE';
     public const CURRENCY_GBP = 'GBP';
     public const CURRENCY_EUR = 'EUR';
@@ -412,6 +413,7 @@ class NoFrixionMoneyMoovModelsMandatesMandate implements ModelInterface, ArrayAc
             self::SUPPLIER_NAME_LIGHTNING,
             self::SUPPLIER_NAME_LIGHTNING_TESTNET,
             self::SUPPLIER_NAME_BANKING_CIRCLE_DIRECT_DEBIT,
+            self::SUPPLIER_NAME_TECHNOXANDER,
         ];
     }
 

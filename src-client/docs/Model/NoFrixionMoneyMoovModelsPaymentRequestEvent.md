@@ -39,5 +39,6 @@ Name | Type | Description | Notes
 **card_last_four_digits** | **string** | For card payment events this field holds the payer&#39;s card last four digits. | [optional]
 **card_issuer** | **string** | For card payment events this field holds the payer&#39;s card issuer. | [optional]
 **card_issuer_country** | **string** | For card payment events this field holds the payer&#39;s card issuer country of origin. | [optional]
+**payment_method_type** | **string** | The type of payment method the event relates to, e.g. card, pisp, etc. | [optional] [readonly]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

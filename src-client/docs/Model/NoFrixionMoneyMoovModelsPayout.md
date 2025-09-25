@@ -71,5 +71,7 @@ Name | Type | Description | Notes
 **fx_use_destination_amount** | **bool** | For a multi-currency payout this indicates how the Amount and FxDestinationAmount are treated.  If true the FxDestinationAmount is authoritative and the Amount is set based on the FxRate. If false then the Amount is authoritative  and the FxDestinationAmount is set based on the Amount and FxRate. | [optional]
 **fx_destination_amount_minor_units** | **int** | The payout FxDestinationAmount expressed in the currency’s minor units (e.g. cents, pence). | [optional] [readonly]
 **formatted_fx_destination_amount** | **string** | FX destination currency and amount formatted string. | [optional] [readonly]
+**fx_quote_id** | **string** | Optional. For multi-currency payouts this is the ID of the held rate that was set for the FX conversion. If  empty it indicates the mid-market FX rate is being be used. | [optional]
+**fx_quote_expires_at** | **\DateTime** | If an FX held rate quote ID is being used this is the time the quote expires. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

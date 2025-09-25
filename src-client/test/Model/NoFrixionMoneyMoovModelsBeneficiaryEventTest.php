@@ -215,6 +215,15 @@ class NoFrixionMoneyMoovModelsBeneficiaryEventTest extends TestCase
     }
 
     /**
+     * Test attribute "bic"
+     */
+    public function testPropertyBic()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "bitcoin_address"
      */
     public function testPropertyBitcoinAddress()
@@ -254,6 +263,24 @@ class NoFrixionMoneyMoovModelsBeneficiaryEventTest extends TestCase
      * Test attribute "is_archived"
      */
     public function testPropertyIsArchived()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "supplier_payee_verification_result"
+     */
+    public function testPropertySupplierPayeeVerificationResult()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "payee_verified_account_name"
+     */
+    public function testPropertyPayeeVerifiedAccountName()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

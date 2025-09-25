@@ -978,16 +978,16 @@ class WebhooksApi
      * Updates a webhook for the given merchant.
      *
      * @param  string $id The id of the webhook to update. (required)
-     * @param  \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsWebhookCreate $no_frixion_money_moov_models_webhook_create The WebHookRequest to be updated. (optional)
+     * @param  \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsWebhookUpdate $no_frixion_money_moov_models_webhook_update The WebHookRequest to be updated. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateWebhook'] to see the possible values for this operation
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsWebhook
      */
-    public function updateWebhook($id, $no_frixion_money_moov_models_webhook_create = null, string $contentType = self::contentTypes['updateWebhook'][0])
+    public function updateWebhook($id, $no_frixion_money_moov_models_webhook_update = null, string $contentType = self::contentTypes['updateWebhook'][0])
     {
-        list($response) = $this->updateWebhookWithHttpInfo($id, $no_frixion_money_moov_models_webhook_create, $contentType);
+        list($response) = $this->updateWebhookWithHttpInfo($id, $no_frixion_money_moov_models_webhook_update, $contentType);
         return $response;
     }
 
@@ -997,16 +997,16 @@ class WebhooksApi
      * Updates a webhook for the given merchant.
      *
      * @param  string $id The id of the webhook to update. (required)
-     * @param  \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsWebhookCreate $no_frixion_money_moov_models_webhook_create The WebHookRequest to be updated. (optional)
+     * @param  \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsWebhookUpdate $no_frixion_money_moov_models_webhook_update The WebHookRequest to be updated. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateWebhook'] to see the possible values for this operation
      *
      * @throws \Nofrixion\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsWebhook, HTTP status code, HTTP response headers (array of strings)
      */
-    public function updateWebhookWithHttpInfo($id, $no_frixion_money_moov_models_webhook_create = null, string $contentType = self::contentTypes['updateWebhook'][0])
+    public function updateWebhookWithHttpInfo($id, $no_frixion_money_moov_models_webhook_update = null, string $contentType = self::contentTypes['updateWebhook'][0])
     {
-        $request = $this->updateWebhookRequest($id, $no_frixion_money_moov_models_webhook_create, $contentType);
+        $request = $this->updateWebhookRequest($id, $no_frixion_money_moov_models_webhook_update, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1123,15 +1123,15 @@ class WebhooksApi
      * Updates a webhook for the given merchant.
      *
      * @param  string $id The id of the webhook to update. (required)
-     * @param  \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsWebhookCreate $no_frixion_money_moov_models_webhook_create The WebHookRequest to be updated. (optional)
+     * @param  \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsWebhookUpdate $no_frixion_money_moov_models_webhook_update The WebHookRequest to be updated. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateWebhook'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateWebhookAsync($id, $no_frixion_money_moov_models_webhook_create = null, string $contentType = self::contentTypes['updateWebhook'][0])
+    public function updateWebhookAsync($id, $no_frixion_money_moov_models_webhook_update = null, string $contentType = self::contentTypes['updateWebhook'][0])
     {
-        return $this->updateWebhookAsyncWithHttpInfo($id, $no_frixion_money_moov_models_webhook_create, $contentType)
+        return $this->updateWebhookAsyncWithHttpInfo($id, $no_frixion_money_moov_models_webhook_update, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1145,16 +1145,16 @@ class WebhooksApi
      * Updates a webhook for the given merchant.
      *
      * @param  string $id The id of the webhook to update. (required)
-     * @param  \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsWebhookCreate $no_frixion_money_moov_models_webhook_create The WebHookRequest to be updated. (optional)
+     * @param  \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsWebhookUpdate $no_frixion_money_moov_models_webhook_update The WebHookRequest to be updated. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateWebhook'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateWebhookAsyncWithHttpInfo($id, $no_frixion_money_moov_models_webhook_create = null, string $contentType = self::contentTypes['updateWebhook'][0])
+    public function updateWebhookAsyncWithHttpInfo($id, $no_frixion_money_moov_models_webhook_update = null, string $contentType = self::contentTypes['updateWebhook'][0])
     {
         $returnType = '\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsWebhook';
-        $request = $this->updateWebhookRequest($id, $no_frixion_money_moov_models_webhook_create, $contentType);
+        $request = $this->updateWebhookRequest($id, $no_frixion_money_moov_models_webhook_update, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1196,13 +1196,13 @@ class WebhooksApi
      * Create request for operation 'updateWebhook'
      *
      * @param  string $id The id of the webhook to update. (required)
-     * @param  \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsWebhookCreate $no_frixion_money_moov_models_webhook_create The WebHookRequest to be updated. (optional)
+     * @param  \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsWebhookUpdate $no_frixion_money_moov_models_webhook_update The WebHookRequest to be updated. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateWebhook'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function updateWebhookRequest($id, $no_frixion_money_moov_models_webhook_create = null, string $contentType = self::contentTypes['updateWebhook'][0])
+    public function updateWebhookRequest($id, $no_frixion_money_moov_models_webhook_update = null, string $contentType = self::contentTypes['updateWebhook'][0])
     {
 
         // verify the required parameter 'id' is set
@@ -1240,12 +1240,12 @@ class WebhooksApi
         );
 
         // for model (json/xml)
-        if (isset($no_frixion_money_moov_models_webhook_create)) {
+        if (isset($no_frixion_money_moov_models_webhook_update)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($no_frixion_money_moov_models_webhook_create));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($no_frixion_money_moov_models_webhook_update));
             } else {
-                $httpBody = $no_frixion_money_moov_models_webhook_create;
+                $httpBody = $no_frixion_money_moov_models_webhook_update;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

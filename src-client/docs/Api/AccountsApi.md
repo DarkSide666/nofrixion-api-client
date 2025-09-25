@@ -7,6 +7,7 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 | [**archiveAccount()**](AccountsApi.md#archiveAccount) | **DELETE** /api/v1/accounts/archive/{id} | Sets the specified account as archived. |
 | [**clearAccountStatements()**](AccountsApi.md#clearAccountStatements) | **DELETE** /api/v1/accounts/statements | Clears the cached user statements for a user. |
 | [**createAccount()**](AccountsApi.md#createAccount) | **POST** /api/v1/accounts | Creates a new merchant payment account. |
+| [**createAccountForAdditionalCurrency()**](AccountsApi.md#createAccountForAdditionalCurrency) | **POST** /api/v1/accounts/{accountID}/{currency} | Creates a new payment account in a different currency, based on an existing payment account. |
 | [**createVirtualAccount()**](AccountsApi.md#createVirtualAccount) | **POST** /api/v1/accounts/{accountID}/virtual | Creates a new virtual account. |
 | [**exportAccountTransactions()**](AccountsApi.md#exportAccountTransactions) | **GET** /api/v1/accounts/{accountID}/transactions/export | Exports a list of all transactions for a specific account in CSV format. |
 | [**exportAccounts()**](AccountsApi.md#exportAccounts) | **GET** /api/v1/accounts/export | Exports a list of all payment accounts the user has access to for a specific merchant. |
@@ -16,6 +17,7 @@ All URIs are relative to https://api-sandbox.nofrixion.com, except if the operat
 | [**getAccountStatement()**](AccountsApi.md#getAccountStatement) | **GET** /api/v1/accounts/{accountID}/statements/{id} | Gets the specified statement from the user&#39;s cache. |
 | [**getAccountTransactionsPaged()**](AccountsApi.md#getAccountTransactionsPaged) | **GET** /api/v1/accounts/{accountID}/transactions | Get a list of the transactions for a single payment account. |
 | [**getAccounts()**](AccountsApi.md#getAccounts) | **GET** /api/v1/accounts | Get a list of all payment accounts the user has access to. |
+| [**getAccountsMinimal()**](AccountsApi.md#getAccountsMinimal) | **GET** /api/v1/accounts/minimal | Get a paged list of all payment accounts minimal the user has access to for a specific merchant. |
 | [**getAccountsPaged()**](AccountsApi.md#getAccountsPaged) | **GET** /api/v1/accounts/paged | Get a paged list of all payment accounts the user has access to for a specific merchant. |
 | [**getAllAccountStatements()**](AccountsApi.md#getAllAccountStatements) | **GET** /api/v1/accounts/statements | Gets all active statement generation requests for the user. |
 | [**getFailedPayoutsForAccount()**](AccountsApi.md#getFailedPayoutsForAccount) | **GET** /api/v1/accounts/{accountID}/payouts/failed | Get failed payouts for a specific account. |
@@ -208,6 +210,70 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `createAccountForAdditionalCurrency()`
+
+```php
+createAccountForAdditionalCurrency($account_id, $currency): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount
+```
+
+Creates a new payment account in a different currency, based on an existing payment account.
+
+<b>Authorization</b>: End user or Merchant token is required.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\AccountsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$account_id = 'account_id_example'; // string | The ID of the existing payment account.
+$currency = 'currency_example'; // string | The currency for the new payment account (must differ from the existing account's currency).
+
+try {
+    $result = $apiInstance->createAccountForAdditionalCurrency($account_id, $currency);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AccountsApi->createAccountForAdditionalCurrency: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **account_id** | **string**| The ID of the existing payment account. | |
+| **currency** | **string**| The currency for the new payment account (must differ from the existing account&#39;s currency). | |
+
+### Return type
+
+[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccount**](../Model/NoFrixionMoneyMoovModelsPaymentAccount.md)
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `text/plain`, `application/json`, `text/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `createVirtualAccount()`
 
 ```php
@@ -355,7 +421,7 @@ try {
 ## `exportAccounts()`
 
 ```php
-exportAccounts($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $include_archived): \SplFileObject
+exportAccounts($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $include_child_merchants): \SplFileObject
 ```
 
 Exports a list of all payment accounts the user has access to for a specific merchant.
@@ -391,9 +457,10 @@ $sort = 'sort_example'; // string | Optional expression to sort the order of the
 $only_connect_accounts = false; // bool | Only return connected accounts
 $only_archived = false; // bool | Flag that indicates whether to fetch only archived accounts or not.
 $include_archived = false; // bool | Flag that indicates whether to fetch archived accounts or not.
+$include_child_merchants = false; // bool | Flag that indicates whether to include accounts from child merchants.
 
 try {
-    $result = $apiInstance->exportAccounts($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $include_archived);
+    $result = $apiInstance->exportAccounts($merchant_id, $connected_accounts, $page_number, $page_size, $currency, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $include_child_merchants);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AccountsApi->exportAccounts: ', $e->getMessage(), PHP_EOL;
@@ -414,6 +481,7 @@ try {
 | **only_connect_accounts** | **bool**| Only return connected accounts | [optional] [default to false] |
 | **only_archived** | **bool**| Flag that indicates whether to fetch only archived accounts or not. | [optional] [default to false] |
 | **include_archived** | **bool**| Flag that indicates whether to fetch archived accounts or not. | [optional] [default to false] |
+| **include_child_merchants** | **bool**| Flag that indicates whether to include accounts from child merchants. | [optional] [default to false] |
 
 ### Return type
 
@@ -852,10 +920,90 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `getAccountsMinimal()`
+
+```php
+getAccountsMinimal($merchant_id, $currency, $connected_accounts, $page_number, $page_size, $search, $sort, $only_connect_accounts, $only_archived, $include_archived): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountMinimalPageResponse
+```
+
+Get a paged list of all payment accounts minimal the user has access to for a specific merchant.
+
+<b>Authorization</b>: End user or Merchant token (IP address whitelisted) is required.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: Bearer
+$config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Nofrixion\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new Nofrixion\Client\Api\AccountsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$merchant_id = 'merchant_id_example'; // string | The merchantID of the accounts to retrieve.
+$currency = array('currency_example'); // string[] | Optional. Array. If specified will only return accounts for these currencies.
+$connected_accounts = false; // bool | Optional include connected accounts along with payment accounts.
+$page_number = 1; // int | Optional. The page number to retrieve.
+$page_size = 10; // int | Optional. The number of accounts per page.
+$search = 'search_example'; // string | The text filter to apply to retrieve accounts with a similar account name, IBAN etc.
+$sort = 'sort_example'; // string | Optional expression to sort the order of the accounts. Example \"AvailableBalance desc,Inserted asc\".
+$only_connect_accounts = false; // bool | Only return connected accounts
+$only_archived = false; // bool | Flag that indicates whether to fetch only archived accounts or not.
+$include_archived = false; // bool | Flag that indicates whether to fetch archived accounts or not.
+
+try {
+    $result = $apiInstance->getAccountsMinimal($merchant_id, $currency, $connected_accounts, $page_number, $page_size, $search, $sort, $only_connect_accounts, $only_archived, $include_archived);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AccountsApi->getAccountsMinimal: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **merchant_id** | **string**| The merchantID of the accounts to retrieve. | [optional] |
+| **currency** | [**string[]**](../Model/string.md)| Optional. Array. If specified will only return accounts for these currencies. | [optional] |
+| **connected_accounts** | **bool**| Optional include connected accounts along with payment accounts. | [optional] [default to false] |
+| **page_number** | **int**| Optional. The page number to retrieve. | [optional] [default to 1] |
+| **page_size** | **int**| Optional. The number of accounts per page. | [optional] [default to 10] |
+| **search** | **string**| The text filter to apply to retrieve accounts with a similar account name, IBAN etc. | [optional] |
+| **sort** | **string**| Optional expression to sort the order of the accounts. Example \&quot;AvailableBalance desc,Inserted asc\&quot;. | [optional] |
+| **only_connect_accounts** | **bool**| Only return connected accounts | [optional] [default to false] |
+| **only_archived** | **bool**| Flag that indicates whether to fetch only archived accounts or not. | [optional] [default to false] |
+| **include_archived** | **bool**| Flag that indicates whether to fetch archived accounts or not. | [optional] [default to false] |
+
+### Return type
+
+[**\Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountMinimalPageResponse**](../Model/NoFrixionMoneyMoovModelsPaymentAccountMinimalPageResponse.md)
+
+### Authorization
+
+[Bearer](../../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `text/plain`, `application/json`, `text/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `getAccountsPaged()`
 
 ```php
-getAccountsPaged($merchant_id, $currency, $connected_accounts, $page_number, $page_size, $search, $sort, $only_connect_accounts, $only_archived, $include_archived): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse
+getAccountsPaged($merchant_id, $currency, $connected_accounts, $page_number, $page_size, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $include_child_merchants): \Nofrixion\Client\Model\NoFrixionMoneyMoovModelsPaymentAccountPageResponse
 ```
 
 Get a paged list of all payment accounts the user has access to for a specific merchant.
@@ -891,9 +1039,10 @@ $sort = 'sort_example'; // string | Optional expression to sort the order of the
 $only_connect_accounts = false; // bool | Only return connected accounts
 $only_archived = false; // bool | Flag that indicates whether to fetch only archived accounts or not.
 $include_archived = false; // bool | Flag that indicates whether to fetch archived accounts or not.
+$include_child_merchants = false; // bool | Flag that indicates whether to include accounts from child merchants.
 
 try {
-    $result = $apiInstance->getAccountsPaged($merchant_id, $currency, $connected_accounts, $page_number, $page_size, $search, $sort, $only_connect_accounts, $only_archived, $include_archived);
+    $result = $apiInstance->getAccountsPaged($merchant_id, $currency, $connected_accounts, $page_number, $page_size, $search, $sort, $only_connect_accounts, $only_archived, $include_archived, $include_child_merchants);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AccountsApi->getAccountsPaged: ', $e->getMessage(), PHP_EOL;
@@ -914,6 +1063,7 @@ try {
 | **only_connect_accounts** | **bool**| Only return connected accounts | [optional] [default to false] |
 | **only_archived** | **bool**| Flag that indicates whether to fetch only archived accounts or not. | [optional] [default to false] |
 | **include_archived** | **bool**| Flag that indicates whether to fetch archived accounts or not. | [optional] [default to false] |
+| **include_child_merchants** | **bool**| Flag that indicates whether to include accounts from child merchants. | [optional] [default to false] |
 
 ### Return type
 

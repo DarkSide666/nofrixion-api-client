@@ -294,6 +294,8 @@ class NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationSetting 
     public const AUTHORISATION_TYPE_BENEFICIARY = 'Beneficiary';
     public const AUTHORISATION_TYPE_PAYRUN = 'Payrun';
     public const AUTHORISATION_TYPE_MERCHANT_TOKEN = 'MerchantToken';
+    public const AUTHORISATION_TYPE_USER_INVITE = 'UserInvite';
+    public const AUTHORISATION_TYPE_ROLE_USER = 'RoleUser';
 
     /**
      * Gets allowable values of the enum
@@ -309,6 +311,8 @@ class NoFrixionMoneyMoovModelsAuthorisationSettingsMerchantAuthorisationSetting 
             self::AUTHORISATION_TYPE_BENEFICIARY,
             self::AUTHORISATION_TYPE_PAYRUN,
             self::AUTHORISATION_TYPE_MERCHANT_TOKEN,
+            self::AUTHORISATION_TYPE_USER_INVITE,
+            self::AUTHORISATION_TYPE_ROLE_USER,
         ];
     }
 

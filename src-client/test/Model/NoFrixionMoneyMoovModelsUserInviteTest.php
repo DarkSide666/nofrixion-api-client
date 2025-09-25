@@ -224,6 +224,24 @@ class NoFrixionMoneyMoovModelsUserInviteTest extends TestCase
     }
 
     /**
+     * Test attribute "is_authorised"
+     */
+    public function testPropertyIsAuthorised()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "authorisation_status"
+     */
+    public function testPropertyAuthorisationStatus()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "status"
      */
     public function testPropertyStatus()

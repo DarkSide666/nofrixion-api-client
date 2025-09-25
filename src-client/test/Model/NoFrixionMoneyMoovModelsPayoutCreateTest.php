@@ -276,4 +276,13 @@ class NoFrixionMoneyMoovModelsPayoutCreateTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "fx_quote_id"
+     */
+    public function testPropertyFxQuoteId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

@@ -393,4 +393,13 @@ class NoFrixionMoneyMoovModelsPaymentRequestEventTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "payment_method_type"
+     */
+    public function testPropertyPaymentMethodType()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

@@ -419,6 +419,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestPaymentAttempt implements ModelInter
     public const PAYMENT_PROCESSOR_LIGHTNING = 'Lightning';
     public const PAYMENT_PROCESSOR_LIGHTNING_TESTNET = 'LightningTestnet';
     public const PAYMENT_PROCESSOR_BANKING_CIRCLE_DIRECT_DEBIT = 'BankingCircleDirectDebit';
+    public const PAYMENT_PROCESSOR_TECHNOXANDER = 'Technoxander';
     public const WALLET_NAME_APPLE_PAY = 'ApplePay';
     public const WALLET_NAME_GOOGLE_PAY = 'GooglePay';
     public const STATUS_NONE = 'None';
@@ -487,6 +488,7 @@ class NoFrixionMoneyMoovModelsPaymentRequestPaymentAttempt implements ModelInter
             self::PAYMENT_PROCESSOR_LIGHTNING,
             self::PAYMENT_PROCESSOR_LIGHTNING_TESTNET,
             self::PAYMENT_PROCESSOR_BANKING_CIRCLE_DIRECT_DEBIT,
+            self::PAYMENT_PROCESSOR_TECHNOXANDER,
         ];
     }
 
